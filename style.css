@@ -112,6 +112,19 @@ header::before {
     font-size: 0.8rem;
 }
 
+.author a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.author a:hover {
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
 .affiliations {
     display: flex;
     justify-content: center;
