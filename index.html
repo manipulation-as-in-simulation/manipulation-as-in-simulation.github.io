@@ -58,27 +58,33 @@
             </div>
             
             <div class="contributions-compact">
-                <div class="contribution-compact">
-                    <div class="contribution-icon">📊</div>
-                    <div class="contribution-text">
-                        <h4>ByteDepth Dataset</h4>
-                        <p>170K+ RGB-depth pairs from 7 cameras</p>
+                <a href="#dataset" class="contribution-link">
+                    <div class="contribution-compact">
+                        <div class="contribution-icon">📊</div>
+                        <div class="contribution-text">
+                            <h4>ByteDepth Dataset</h4>
+                            <p>170K+ RGB-depth pairs from 7 cameras</p>
+                        </div>
                     </div>
-                </div>
-                <div class="contribution-compact">
-                    <div class="contribution-icon">🔧</div>
-                    <div class="contribution-text">
-                        <h4>Camera Depth Models</h4>
-                        <p>Plug-in solution for accurate depth perception</p>
+                </a>
+                <a href="#models" class="contribution-link">
+                    <div class="contribution-compact">
+                        <div class="contribution-icon">🔧</div>
+                        <div class="contribution-text">
+                            <h4>Camera Depth Models</h4>
+                            <p>Plug-in solution for accurate depth perception</p>
+                        </div>
                     </div>
-                </div>
-                <div class="contribution-compact">
-                    <div class="contribution-icon">🚀</div>
-                    <div class="contribution-text">
-                        <h4>Sim-to-Real Transfer</h4>
-                        <p>First depth-only policy with seamless transfer</p>
+                </a>
+                <a href="#quantitative-results" class="contribution-link">
+                    <div class="contribution-compact">
+                        <div class="contribution-icon">🚀</div>
+                        <div class="contribution-text">
+                            <h4>Sim-to-Real Transfer</h4>
+                            <p>First depth-only policy with seamless transfer</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             
             <div class="links">
@@ -171,6 +177,17 @@
             
             <div class="dataset-images">
                 <img src="figs/dataset_depth.png" alt="Dataset Examples">
+            </div>
+            
+            <div class="dataset-download">
+                <a href="#" class="btn-dataset-download">
+                    <i class="fas fa-download"></i>
+                    <span class="download-text">
+                        <strong>Download ByteDepth Dataset</strong>
+                        <small>170K+ RGB-Depth Pairs | Multi-Camera | 10 Configurations</small>
+                    </span>
+                    <i class="fas fa-arrow-right arrow-icon"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -277,16 +294,15 @@
             <div class="accuracy-insights">
                 <h3>Key Insights</h3>
                 <ul>
-                    <li>CDMs maintain high accuracy within the camera's optimal working range (1-4 meters for most sensors)</li>
+                    <li>CDMs maintain high accuracy within the camera's optimal working range</li>
                     <li>Raw depth often shows larger errors than manufacturer specifications, which CDMs effectively correct</li>
-                    <li>CDMs achieve nearly simulation-level accuracy, enabling reliable sim-to-real transfer</li>
                     <li>Performance trends follow the original camera capabilities while significantly reducing noise</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section class="quantitative-results">
+    <section id="quantitative-results" class="quantitative-results">
         <div class="container">
             <h2>Quantitative Results</h2>
             
