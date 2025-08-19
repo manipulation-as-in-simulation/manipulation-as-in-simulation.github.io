@@ -72,10 +72,21 @@ header::before {
     z-index: 2;
 }
 
+.logo-link {
+    display: inline-block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
 .bytedance-seed-logo {
     width: 300px;
     opacity: 0.95;
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+    display: block;
 }
 
 .title {
