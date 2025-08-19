@@ -744,8 +744,11 @@ header::before {
 .accuracy-charts {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-bottom: 50px;
+    gap: 20px;
+    margin-bottom: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .accuracy-charts .chart-item {
@@ -760,6 +763,17 @@ header::before {
 .accuracy-charts .chart-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.chart-container {
+    position: relative;
+    height: 280px;
+    width: 100%;
+}
+
+.chart-container canvas {
+    max-width: 100%;
+    height: 100%;
 }
 
 @media (max-width: 968px) {
@@ -777,7 +791,7 @@ header::before {
 }
 
 .chart-item h4 {
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin-bottom: 10px;
     color: #555;
 }
