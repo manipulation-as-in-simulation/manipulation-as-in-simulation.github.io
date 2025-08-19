@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulation as in Simulation: Enabling Accurate Geometry Perception in Robots</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="seed/seed_logo.png" alt="ByteDance Seed" class="bytedance-seed-logo">
+        </div>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="title">Manipulation as in Simulation:<br>Enabling Accurate Geometry Perception in Robots</h1>
+            
+            <div class="authors">
+                <div class="author-row">
+                    <span class="author">Minghuan Liu<sup>1,*,†</sup></span>
+                    <span class="author">Zhengbang Zhu<sup>1,2,*</sup></span>
+                    <span class="author">Xiaoshen Han<sup>1,2,*</sup></span>
+                    <span class="author">Peng Hu<sup>1,*</sup></span>
+                    <span class="author">Haotong Lin<sup>1</sup></span>
+                    <span class="author">Xinyao Li<sup>2</sup></span>
+                </div>
+                <div class="author-row">
+                    <span class="author">Jingxiao Chen<sup>1,2</sup></span>
+                    <span class="author">Jiafeng Xu<sup>1</sup></span>
+                    <span class="author">Yichu Yang<sup>1</sup></span>
+                    <span class="author">Yunfeng Lin<sup>2</sup></span>
+                    <span class="author">Xinghang Li<sup>3</sup></span>
+                </div>
+                <div class="author-row">
+                    <span class="author">Yong Yu<sup>2</sup></span>
+                    <span class="author">Weinan Zhang<sup>2</sup></span>
+                    <span class="author">Tao Kong<sup>1</sup></span>
+                    <span class="author">Bingyi Kang<sup>1,†</sup></span>
+                </div>
+            </div>
+            
+            <div class="affiliations">
+                <div class="affiliation"><sup>1</sup>ByteDance Seed</div>
+                <div class="affiliation"><sup>2</sup>Shanghai Jiao Tong University</div>
+                <div class="affiliation"><sup>3</sup>Tsinghua University</div>
+            </div>
+            
+            <div class="notes">
+                <p><sup>*</sup>Equal Contribution &nbsp;&nbsp; <sup>†</sup>Corresponding Authors</p>
+            </div>
+            
+            <div class="contributions-compact">
+                <div class="contribution-compact">
+                    <div class="contribution-icon">📊</div>
+                    <div class="contribution-text">
+                        <h4>ByteDepth Dataset</h4>
+                        <p>170K+ RGB-depth pairs from 7 cameras</p>
+                    </div>
+                </div>
+                <div class="contribution-compact">
+                    <div class="contribution-icon">🔧</div>
+                    <div class="contribution-text">
+                        <h4>Camera Depth Models</h4>
+                        <p>Plug-in solution for accurate depth perception</p>
+                    </div>
+                </div>
+                <div class="contribution-compact">
+                    <div class="contribution-icon">🚀</div>
+                    <div class="contribution-text">
+                        <h4>Sim-to-Real Transfer</h4>
+                        <p>First depth-only policy with seamless transfer</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="links">
+                <a href="#" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
+                <a href="https://github.com/manipulation-as-in-simulation" class="btn"><i class="fab fa-github"></i> Code</a>
+                <a href="#dataset" class="btn"><i class="fas fa-database"></i> Dataset</a>
+                <a href="#models" class="btn"><i class="fas fa-cube"></i> Models</a>
+            </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="models" class="models">
+        <div class="container">
+            <h2>Available Camera Depth Models</h2>
+            <p>We release camera depth models for various widely-used depth cameras:</p>
+            
+            <div class="model-grid">
+                <div class="model-card">
+                    <h3>CDM-435</h3>
+                    <p>For RealSense D435 camera</p>
+                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                </div>
+                <div class="model-card">
+                    <h3>CDM-L515</h3>
+                    <p>For RealSense L515 camera</p>
+                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                </div>
+                <div class="model-card">
+                    <h3>CDM-Kinect</h3>
+                    <p>For Azure Kinect camera</p>
+                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                </div>
+                <div class="model-card">
+                    <h3>CDM-Zed2i Neural</h3>
+                    <p>For Zed2i camera, Neural mode</p>
+                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                </div>
+                <div class="model-card">
+                    <h3>CDM-Zed2i Performance</h3>
+                    <p>For Zed2i camera, Performance mode</p>
+                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video">
+        <div class="container">
+            <h2>Video Overview</h2>
+            <div class="video-container">
+                <iframe width="100%" height="500" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="abstract">
+        <div class="container">
+            <h2>Abstract</h2>
+            <img src="figs/teaser.png" alt="Teaser Figure" class="teaser-image">
+            <p>
+                Modern robotic manipulation primarily relies on visual observations in a 2D color space for skill learning, but suffers from poor generalization. In contrast, humans, living in a 3D world, depend more on physical properties—such as distance, size, and shape—than on texture when interacting with objects. Since such 3D geometric information can be acquired from widely available depth cameras, it appears feasible to endow robots with similar perceptual capabilities.
+                Our pilot study found that using depth cameras for manipulation is challenging, primarily due to their limited accuracy and susceptibility to various types of noise. In this work, we propose <strong>Camera Depth Models (CDMs)</strong> as a simple plugin on daily-use depth cameras, which take RGB images and raw depth signals as input and output denoised, accurate metric depth.
+                To achieve this, we develop a neural data engine that generates high-quality paired data from simulation by modeling a depth camera's noise pattern. Our results show that CDMs achieve nearly simulation-level accuracy in depth prediction, effectively bridging the sim-to-real gap for manipulation tasks. Notably, our experiments demonstrate, <strong>for the first time</strong>, that a depth-only policy trained exclusively in simulation generalizes seamlessly to real robots on two long-horizon tasks, with little to no performance degradation.
+                Further analysis reveals that sim-to-real success rates are strongly correlated with the quality of depth perception. We hope our findings will inspire future research in utilizing simulation data and 3D information in general robot policies.
+            </p>
+        </div>
+    </section>
+
+
+    <section id="dataset" class="dataset">
+        <div class="container">
+            <h2>ByteDepth Dataset</h2>
+            <p>We introduce ByteDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
+            
+            <div class="dataset-stats">
+                <div class="stat-item">
+                    <h3>170K+</h3>
+                    <p>RGB-Depth Pairs</p>
+                </div>
+                <div class="stat-item">
+                    <h3>7</h3>
+                    <p>Depth Cameras</p>
+                </div>
+                <div class="stat-item">
+                    <h3>10</h3>
+                    <p>Configurations</p>
+                </div>
+            </div>
+            
+            <div class="dataset-images">
+                <img src="figs/dataset_depth.png" alt="Dataset Examples">
+            </div>
+        </div>
+    </section>
+
+    <section class="results">
+        <div class="container">
+            <h2>Key Results</h2>
+            
+            <div class="result-section">
+                <h3>Depth Quality Comparison</h3>
+                <div class="comparison-full">
+                    <h4>Kitchen Scene</h4>
+                    <div class="image-row-6">
+                        <div class="image-item">
+                            <img src="figs/compare_depths/microwave_435/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
+                            <p>RGB Image</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/microwave_435/output_ep000_camera_0_depth_frame10.png" alt="Raw Depth">
+                            <p>Raw Depth</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/microwave_435/output_ep000_camera_0_model_depth_frame10.png" alt="CDM Depth">
+                            <p>CDM-435 Output</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/microwave_515/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
+                            <p>RGB Image</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/microwave_515/output_ep000_camera_0_depth_frame10.png" alt="Raw Depth">
+                            <p>Raw Depth</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/microwave_515/output_ep000_camera_0_model_depth_frame10.png" alt="CDM Depth">
+                            <p>CDM-L515 Output</p>
+                        </div>
+                    </div>
+                    
+                    <h4>Canteen Scene</h4>
+                    <div class="image-row-6">
+                        <div class="image-item">
+                            <img src="figs/compare_depths/canteen_435/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
+                            <p>RGB Image (D435)</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/canteen_435/output_ep000_camera_0_depth_frame10.png" alt="Raw Depth">
+                            <p>Raw Depth (D435)</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/canteen_435/output_ep000_camera_0_model_depth_frame10.png" alt="CDM Depth">
+                            <p>CDM-435 Output</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/canteen_515/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
+                            <p>RGB Image (L515)</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/canteen_515/output_ep000_camera_0_depth_frame10.png" alt="Raw Depth">
+                            <p>Raw Depth (L515)</p>
+                        </div>
+                        <div class="image-item">
+                            <img src="figs/compare_depths/canteen_515/output_ep000_camera_0_model_depth_frame10.png" alt="CDM Depth">
+                            <p>CDM-L515 Output</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3>Point Cloud Quality</h3>
+                <div class="pcd-grid">
+                    <div class="pcd-item">
+                        <img src="figs/pcds/canteen_raw_depth.png" alt="Raw Depth PCD">
+                        <p>Raw Depth Point Cloud</p>
+                    </div>
+                    <div class="pcd-item">
+                        <img src="figs/pcds/canteen_model_depth.png" alt="CDM Depth PCD">
+                        <p>CDM Output Point Cloud</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="depth-accuracy">
+        <div class="container">
+            <h2>Depth Accuracy w.r.t Distance</h2>
+            <p>To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
+            
+            <div class="accuracy-charts">
+                <div class="chart-item">
+                    <img src="figs/error_plot_dataloader_0.png" alt="D435 Accuracy">
+                    <h4>CDM-D435 Accuracy</h4>
+                    <p>Depth accuracy evaluation on RealSense D435 data, showing absolute error, relative error, and L1 error across different distances.</p>
+                </div>
+                <div class="chart-item">
+                    <img src="figs/error_plot_dataloader_1.png" alt="L515 Accuracy">
+                    <h4>CDM-L515 Accuracy</h4>
+                    <p>Depth accuracy evaluation on RealSense L515 data, demonstrating consistent performance improvements over raw depth.</p>
+                </div>
+            </div>
+            
+            <div class="accuracy-insights">
+                <h3>Key Insights</h3>
+                <ul>
+                    <li>CDMs maintain high accuracy within the camera's optimal working range (1-4 meters for most sensors)</li>
+                    <li>Raw depth often shows larger errors than manufacturer specifications, which CDMs effectively correct</li>
+                    <li>CDMs achieve nearly simulation-level accuracy, enabling reliable sim-to-real transfer</li>
+                    <li>Performance trends follow the original camera capabilities while significantly reducing noise</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="quantitative-results">
+        <div class="container">
+            <h2>Quantitative Results</h2>
+            
+            <div class="table-section">
+                <h3>Depth Evaluation on Hammer Dataset (Zero-shot)</h3>
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Split</th>
+                                <th rowspan="2">Depth Model</th>
+                                <th>L1 ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>AbsRel ↓</th>
+                                <th>δ₀.₅ ↑</th>
+                                <th>δ₁ ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="header-row">
+                                <td rowspan="7">D435<br>(IR Stereo)</td>
+                                <td class="best-result"><strong>CDM-D435 (Ours)</strong></td>
+                                <td><strong>0.0258</strong></td>
+                                <td><strong>0.0404</strong></td>
+                                <td><strong>0.0312</strong></td>
+                                <td><strong>0.9842</strong></td>
+                                <td><strong>0.9951</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="best-result"><strong>CDM-L515 (Ours)</strong></td>
+                                <td><strong>0.0182</strong></td>
+                                <td><strong>0.0338</strong></td>
+                                <td><strong>0.0217</strong></td>
+                                <td><strong>0.9877</strong></td>
+                                <td><strong>0.9956</strong></td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA*(435)</td>
+                                <td>0.0434</td>
+                                <td>0.0666</td>
+                                <td>0.0599</td>
+                                <td>0.9459</td>
+                                <td>0.9770</td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA*(515)</td>
+                                <td>0.1830</td>
+                                <td>0.2387</td>
+                                <td>0.2750</td>
+                                <td>0.8802</td>
+                                <td>0.9186</td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA</td>
+                                <td>0.0396</td>
+                                <td>0.0691</td>
+                                <td>0.0484</td>
+                                <td>0.9503</td>
+                                <td>0.9772</td>
+                            </tr>
+                            <tr>
+                                <td>PriorDA</td>
+                                <td>0.0388</td>
+                                <td>0.0754</td>
+                                <td>0.0461</td>
+                                <td>0.9632</td>
+                                <td>0.9880</td>
+                            </tr>
+                            <tr>
+                                <td>Raw Depth</td>
+                                <td>0.0550</td>
+                                <td>0.1458</td>
+                                <td>0.0708</td>
+                                <td>0.9179</td>
+                                <td>0.9543</td>
+                            </tr>
+                            
+                            <tr class="header-row">
+                                <td rowspan="7">L515<br>(D-ToF)</td>
+                                <td class="best-result"><strong>CDM-L515 (Ours)</strong></td>
+                                <td><strong>0.0156</strong></td>
+                                <td><strong>0.0297</strong></td>
+                                <td><strong>0.0229</strong></td>
+                                <td><strong>0.9754</strong></td>
+                                <td><strong>0.9919</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="best-result"><strong>CDM-D435 (Ours)</strong></td>
+                                <td><strong>0.0165</strong></td>
+                                <td><strong>0.0349</strong></td>
+                                <td><strong>0.0246</strong></td>
+                                <td><strong>0.9613</strong></td>
+                                <td><strong>0.9855</strong></td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA*(515)</td>
+                                <td>0.0235</td>
+                                <td>0.0666</td>
+                                <td>0.0349</td>
+                                <td>0.9291</td>
+                                <td>0.9730</td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA*(435)</td>
+                                <td>0.0254</td>
+                                <td>0.0438</td>
+                                <td>0.0379</td>
+                                <td>0.9234</td>
+                                <td>0.9640</td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA</td>
+                                <td>0.0207</td>
+                                <td>0.0515</td>
+                                <td>0.0304</td>
+                                <td>0.9480</td>
+                                <td>0.9699</td>
+                            </tr>
+                            <tr>
+                                <td>PriorDA</td>
+                                <td>0.0177</td>
+                                <td>0.0385</td>
+                                <td>0.0274</td>
+                                <td>0.9502</td>
+                                <td>0.9763</td>
+                            </tr>
+                            <tr>
+                                <td>Raw Depth</td>
+                                <td>0.0312</td>
+                                <td>0.0813</td>
+                                <td>0.0475</td>
+                                <td>0.9098</td>
+                                <td>0.9429</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="table-section">
+                <h3>Sim-to-Real Transfer Results</h3>
+                <p>Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline</p>
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="3">Camera</th>
+                                <th rowspan="3">Depth Model</th>
+                                <th colspan="4">Kitchen Task</th>
+                                <th colspan="6">Canteen Task</th>
+                            </tr>
+                            <tr>
+                                <th>Pick Bowl</th>
+                                <th>Put Bowl into Microwave</th>
+                                <th>Close Microwave</th>
+                                <th>Total</th>
+                                <th>Pick Fork</th>
+                                <th>Place Fork</th>
+                                <th>Pick Plate</th>
+                                <th>Dump Plate</th>
+                                <th>Place Plate</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
+                            <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
+                            <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="figure-section">
+                <h3>Real-World Depth-Only Imitation Learning</h3>
+                <div class="imitation-results-grid">
+                    <div class="table-item">
+                        <div class="imitation-table-container">
+                            <table class="imitation-table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="3">Depth Model</th>
+                                        <th colspan="2">Toothpaste-and-Cup</th>
+                                        <th colspan="2">Stack-Bowls</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Pick Toothpaste</th>
+                                        <th>Put Toothpaste into Cup</th>
+                                        <th>Pick Bowl</th>
+                                        <th>Stack Bowl</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>None</td>
+                                        <td>0/15</td>
+                                        <td>0/15</td>
+                                        <td>6/15</td>
+                                        <td>3/15</td>
+                                    </tr>
+                                    <tr class="best-result">
+                                        <td><strong>CDM-D435</strong></td>
+                                        <td><strong>10/15</strong></td>
+                                        <td><strong>6/15</strong></td>
+                                        <td><strong>11/15</strong></td>
+                                        <td><strong>9/15</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>Results w/w.o CDM</h4>
+                        <p>50 demonstrations for each task, collected by teleoperation</p>
+                    </div>
+                    <div class="figure-item">
+                        <h4>Generalization Over Different Object Sizes</h4>
+                        <p>The policy trained without CDM cannot generalize to unseen sizes, while CDM-enhanced policies show better generalization.</p>
+                        <img src="figs/success-rate-hist.png" alt="Success Rate Histogram">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="setup">
+        <div class="container">
+            <h2>UR5 Manipulation Experiment Setup</h2>
+            <p class="setup-description">Complete experimental setup for simulation and real-world experiments with two different cameras (D435 and L515) and training environments for kitchen and canteen tasks.</p>
+            
+            <div class="setup-row">
+                <div class="setup-item-exp">
+                    <img src="figs/ur5-setup-sim.png" alt="Overall setup (sim)">
+                    <h4>Overall Setup (Simulation)</h4>
+                    <p>Simulation environment with camera pose randomization for demonstration generation</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/ur5-setup.png" alt="Overall setup (real)">
+                    <h4>Overall Setup (Real)</h4>
+                    <p>Real-world UR5 robot setup with third-view depth camera for manipulation tasks</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/sim-range-microwave.png" alt="Kitchen task randomization (sim)">
+                    <h4>Kitchen Task Randomization (Sim)</h4>
+                    <p>Training environment with randomization boundaries for bowl and microwave positions</p>
+                </div>
+            </div>
+            
+            <div class="setup-row">
+                <div class="setup-item-exp">
+                    <img src="figs/kitchen-distribution.png" alt="Kitchen task distribution (real)">
+                    <h4>Kitchen Task Distribution (Real)</h4>
+                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/sim-range-plate.png" alt="Canteen task randomization (sim)">
+                    <h4>Canteen Task Randomization (Sim)</h4>
+                    <p>Simulation environment for canteen task with object placement randomization</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/canteen-distribution.png" alt="Canteen task distribution (real)">
+                    <h4>Canteen Task Distribution (Real)</h4>
+                    <p>Real-world test distribution matching simulation randomization for canteen experiments</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="method">
+        <div class="container">
+            <h2>Method Overview</h2>
+            <div class="method-grid">
+                <div class="method-item">
+                    <img src="figs/camera_depth_model.png" alt="Camera Depth Model">
+                    <h3>Camera Depth Models (CDMs)</h3>
+                    <p>CDMs process RGB images and noisy depth signals from specific depth cameras to produce high-quality, denoised metric depth.</p>
+                </div>
+                <div class="method-item">
+                    <img src="figs/noise-model.png" alt="Noise Model">
+                    <h3>Neural Data Engine</h3>
+                    <p>We model depth camera noise patterns to generate high-quality paired data from simulation for training CDMs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="citation">
+        <div class="container">
+            <h2>Citation</h2>
+            <pre><code>@article{liu2024manipulation,
+  title={Manipulation as in Simulation: Enabling Accurate Geometry Perception in Robots},
+  author={Liu, Minghuan and Zhu, Zhengbang and Han, Xiaoshen and Hu, Peng and Lin, Haotong and 
+          Li, Xinyao and Chen, Jingxiao and Xu, Jiafeng and Yang, Yichu and Lin, Yunfeng and 
+          Li, Xinghang and Yu, Yong and Zhang, Weinan and Kong, Tao and Kang, Bingyi},
+  journal={arXiv preprint},
+  year={2024}
+}</code></pre>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 ByteDance Seed. All rights reserved.</p>
+            <p>Correspondence: <a href="mailto:ericliuof97@gmail.com">Minghuan Liu</a>, <a href="mailto:bingyikang@bytedance.com">Bingyi Kang</a></p>
+        </div>
+    </footer>
+</body>
+</html>
