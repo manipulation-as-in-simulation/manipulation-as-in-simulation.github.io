@@ -695,13 +695,29 @@ header::before {
 
 .accuracy-charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
     margin-bottom: 50px;
 }
 
-.chart-item {
+.accuracy-charts .chart-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
+}
+
+.accuracy-charts .chart-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+@media (max-width: 968px) {
+    .accuracy-charts {
+        grid-template-columns: 1fr;
+    }
 }
 
 .chart-item img {
