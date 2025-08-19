@@ -1488,6 +1488,8 @@ footer a:hover {
     }
     
     .accuracy-selector-container {
+        flex-direction: column;
+        gap: 20px;
         padding: 15px;
     }
 }
