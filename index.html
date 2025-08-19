@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Optimized Three.js for point cloud visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PLYLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stats.js@0.17.0/build/stats.min.js"></script>
+    
+    <!-- Chart.js for lightweight, fast interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/depth-charts.js" defer></script>
 </head>
 <body>
     <header>
@@ -258,15 +268,110 @@
             </div>
 
             <div class="result-section">
-                <h3>Point Cloud Quality</h3>
+                <h3>Point Cloud Quality Comparison</h3>
+                <p style="text-align: center; margin-bottom: 20px; color: #666;">Interactive 3D visualization - Use mouse to rotate, scroll to zoom</p>
+                <!-- Camera tracking panel - uncomment to enable camera position tracking -->
+                <!--
+                <div class="camera-info" id="camera-info" style="text-align: center; margin-bottom: 10px; font-family: monospace; font-size: 12px; background: #f0f0f0; padding: 5px; border-radius: 4px;">
+                    <span style="color: #d32f2f; font-weight: bold;">Tracking: Kitchen L515 Raw</span> | 
+                    Position: <span id="cam-pos">--</span> | Target: <span id="cam-target">--</span>
+                </div>
+                -->
+                <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Kitchen Scene</h4>
+                <p style="text-align: center; margin: 0 0 10px 0; color: #888; font-size: 1.2rem;">D435 Camera</p>
                 <div class="pcd-grid">
                     <div class="pcd-item">
-                        <img src="figs/pcds/canteen_raw_depth.png" alt="Raw Depth PCD">
+                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-435-raw" data-ply-path="pcds/microwave_435_raw_depth.ply" data-is-l515="false">
+                            <img class="pcd-placeholder" src="screenshots/microwave_435_raw_depth.png" alt="Loading...">
+                            <button class="load-interactive-btn">Load Interactive View</button>
+                            <div id="pcd-viewer-microwave-435-raw" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
                         <p>Raw Depth Point Cloud</p>
                     </div>
                     <div class="pcd-item">
-                        <img src="figs/pcds/canteen_model_depth.png" alt="CDM Depth PCD">
-                        <p>CDM Output Point Cloud</p>
+                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-435-model" data-ply-path="pcds/microwave_435_model_depth.ply" data-is-l515="false">
+                            <img class="pcd-placeholder" src="screenshots/microwave_435_model_depth.png" alt="Loading...">
+                            <button class="load-interactive-btn">Load Interactive View</button>
+                            <div id="pcd-viewer-microwave-435-model" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>CDM-D435 Output Point Cloud</p>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin: 15px 0 10px 0; color: #888; font-size: 1.2rem;">L515 Camera</p>
+                <div class="pcd-grid">
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-raw" data-ply-path="pcds/microwave_515_raw_depth.ply" data-is-l515="true">
+                            <img class="pcd-placeholder" src="screenshots/microwave_515_raw_depth.png" alt="Loading...">
+                            <button class="load-interactive-btn">Load Interactive View</button>
+                            <div id="pcd-viewer-microwave-515-raw" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>Raw Depth Point Cloud</p>
+                    </div>
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-model" data-ply-path="pcds/microwave_515_model_depth.ply" data-is-l515="true">
+                            <img class="pcd-placeholder" src="screenshots/microwave_515_model_depth.png" alt="Loading...">
+                            <button class="load-interactive-btn">Load Interactive View</button>
+                            <div id="pcd-viewer-microwave-515-model" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>CDM-L515 Output Point Cloud</p>
+                    </div>
+                </div>
+                
+                <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Canteen Scene</h4>
+                <p style="text-align: center; margin: 0 0 10px 0; color: #888; font-size: 1.2rem;">D435 Camera</p>
+                <div class="pcd-grid">
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-435-raw" data-ply-path="pcds/canteen_435_raw_depth.ply" data-is-l515="false">
+                            <img class="pcd-placeholder" src="screenshots/canteen_435_raw_depth.png" alt="Loading...">
+                            <button class="load-interactive-btn">Load Interactive View</button>
+                            <div id="pcd-viewer-canteen-435-raw" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>Raw Depth Point Cloud</p>
+                    </div>
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-435-model" data-ply-path="pcds/canteen_435_model_depth.ply" data-is-l515="false">
+                            <img class="pcd-placeholder" src="screenshots/canteen_435_model_depth.png" alt="Loading...">
+                            <button class="load-interactive-btn">Load Interactive View</button>
+                            <div id="pcd-viewer-canteen-435-model" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>CDM-D435 Output Point Cloud</p>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin: 15px 0 10px 0; color: #888; font-size: 1.2rem;">L515 Camera</p>
+                <div class="pcd-grid">
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-515-raw" data-ply-path="pcds/canteen_515_raw_depth.ply" data-is-l515="true">
+                            <img class="pcd-placeholder" src="screenshots/canteen_515_raw_depth.png" alt="Loading...">
+                            <button class="load-interactive-btn">Load Interactive View</button>
+                            <div id="pcd-viewer-canteen-515-raw" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>Raw Depth Point Cloud</p>
+                    </div>
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-515-model" data-ply-path="pcds/canteen_515_model_depth.ply" data-is-l515="true">
+                            <img class="pcd-placeholder" src="screenshots/canteen_515_model_depth.png" alt="Loading...">
+                            <button class="load-interactive-btn">Load Interactive View</button>
+                            <div id="pcd-viewer-canteen-515-model" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>CDM-L515 Output Point Cloud</p>
                     </div>
                 </div>
             </div>
@@ -279,15 +384,46 @@
             <p>To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
             
             <div class="accuracy-charts">
+                <!-- D435 Dataset Row -->
                 <div class="chart-item">
-                    <img src="figs/error_plot_dataloader_0.png" alt="D435 Accuracy">
-                    <h4>CDM-D435 Accuracy</h4>
-                    <p>Depth accuracy evaluation on RealSense D435 data, showing absolute error, relative error, and L1 error across different distances.</p>
+                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - Absolute Relative Error</h4>
+                    <div class="chart-container">
+                        <canvas id="d435-absrel-chart"></canvas>
+                    </div>
                 </div>
                 <div class="chart-item">
-                    <img src="figs/error_plot_dataloader_1.png" alt="L515 Accuracy">
-                    <h4>CDM-L515 Accuracy</h4>
-                    <p>Depth accuracy evaluation on RealSense L515 data, demonstrating consistent performance improvements over raw depth.</p>
+                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - L1 Error</h4>
+                    <div class="chart-container">
+                        <canvas id="d435-l1-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- L515 Dataset Row -->
+                <div class="chart-item">
+                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - Absolute Relative Error</h4>
+                    <div class="chart-container">
+                        <canvas id="l515-absrel-chart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-item">
+                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - L1 Error</h4>
+                    <div class="chart-container">
+                        <canvas id="l515-l1-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Helios Dataset Row -->
+                <div class="chart-item">
+                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - Absolute Relative Error</h4>
+                    <div class="chart-container">
+                        <canvas id="helios-absrel-chart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-item">
+                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - L1 Error</h4>
+                    <div class="chart-container">
+                        <canvas id="helios-l1-chart"></canvas>
+                    </div>
                 </div>
             </div>
             
@@ -541,27 +677,27 @@
                     <p>Simulation environment with camera pose randomization for demonstration generation</p>
                 </div>
                 <div class="setup-item-exp">
-                    <img src="figs/ur5-setup.png" alt="Overall setup (real)">
-                    <h4>Overall Setup (Real)</h4>
-                    <p>Real-world UR5 robot setup with third-view depth camera for manipulation tasks</p>
-                </div>
-                <div class="setup-item-exp">
                     <img src="figs/sim-range-microwave.png" alt="Kitchen task randomization (sim)">
                     <h4>Kitchen Task Randomization (Sim)</h4>
                     <p>Training environment with randomization boundaries for bowl and microwave positions</p>
-                </div>
-            </div>
-            
-            <div class="setup-row">
-                <div class="setup-item-exp">
-                    <img src="figs/kitchen-distribution.png" alt="Kitchen task distribution (real)">
-                    <h4>Kitchen Task Distribution (Real)</h4>
-                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
                 </div>
                 <div class="setup-item-exp">
                     <img src="figs/sim-range-plate.png" alt="Canteen task randomization (sim)">
                     <h4>Canteen Task Randomization (Sim)</h4>
                     <p>Simulation environment for canteen task with object placement randomization</p>
+                </div>
+            </div>
+            
+            <div class="setup-row">
+                <div class="setup-item-exp">
+                    <img src="figs/ur5-setup.png" alt="Overall setup (real)">
+                    <h4>Overall Setup (Real)</h4>
+                    <p>Real-world UR5 robot setup with third-view depth camera for manipulation tasks</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/kitchen-distribution.png" alt="Kitchen task distribution (real)">
+                    <h4>Kitchen Task Distribution (Real)</h4>
+                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
                 </div>
                 <div class="setup-item-exp">
                     <img src="figs/canteen-distribution.png" alt="Canteen task distribution (real)">
@@ -611,5 +747,369 @@
             <p>Correspondence: <a href="mailto:ericliuof97@gmail.com">Minghuan Liu</a>, <a href="mailto:bingyikang@bytedance.com">Bingyi Kang</a></p>
         </div>
     </footer>
+
+    <script>
+        // Optimized Point Cloud Viewer for 90k+ points
+        class OptimizedPointCloudViewer {
+            constructor(containerId, plyPath, isL515 = false, captureMode = false) {
+                this.container = document.getElementById(containerId);
+                this.plyPath = plyPath;
+                this.currentLOD = null;
+                this.isLoading = true;
+                this.isL515 = isL515; // Flag to use different camera settings for L515
+                this.captureMode = captureMode; // Flag for screenshot capture mode
+                
+                // Point cloud visualization settings
+                this.pointSize = 0.02; // Adjust this value to change point size
+                
+                this.init();
+            }
+            
+            captureScreenshot() {
+                // Force update controls
+                this.controls.update();
+                
+                // Ensure the scene is rendered one more time
+                this.renderer.render(this.scene, this.camera);
+                
+                // Get the canvas
+                const canvas = this.renderer.domElement;
+                
+                // Check if canvas has content
+                if (canvas.width === 0 || canvas.height === 0) {
+                    console.error('Canvas has no dimensions');
+                    return null;
+                }
+                
+                // Capture the canvas as data URL with preserveDrawingBuffer
+                const dataURL = canvas.toDataURL('image/png', 1.0);
+                
+                // Extract filename from ply path
+                const filename = this.plyPath.split('/').pop().replace('.ply', '.png');
+                
+                if (this.captureMode) {
+                    // Check if the image is not empty
+                    if (dataURL && dataURL.length > 100) {
+                        // Auto-download in capture mode
+                        const link = document.createElement('a');
+                        link.download = filename;
+                        link.href = dataURL;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        console.log(`Screenshot captured: ${filename} (${dataURL.length} bytes)`);
+                    } else {
+                        console.error(`Failed to capture screenshot for ${filename}`);
+                    }
+                }
+                
+                return dataURL;
+            }
+
+            init() {
+                if (!this.container) return;
+
+                // Scene setup
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0xf5f5f5);
+
+                // Camera setup
+                this.camera = new THREE.PerspectiveCamera(
+                    45,
+                    this.container.clientWidth / this.container.clientHeight,
+                    0.1,
+                    1000
+                );
+                
+                // Set camera position based on camera type
+                if (this.isL515) {
+                    // L515 camera position
+                    this.camera.position.set(0.550, 0.760, 2.161);
+                } else {
+                    // D435 camera position (original)
+                    this.camera.position.set(-0.041, 1.196, 1.983);
+                }
+                
+                // Set the up vector to ensure correct orientation
+                this.camera.up.set(0, 1, 0);
+
+                // Optimized renderer
+                this.renderer = new THREE.WebGLRenderer({ 
+                    antialias: false, // Disable for better performance
+                    powerPreference: "high-performance",
+                    preserveDrawingBuffer: true // Required for screenshot capture
+                });
+                this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Limit pixel ratio
+                this.container.appendChild(this.renderer.domElement);
+
+                // Controls with free rotation
+                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.05;
+                this.controls.screenSpacePanning = false;
+                this.controls.minDistance = 0.5;
+                this.controls.maxDistance = 10;
+                
+                // Set target based on camera type
+                if (this.isL515) {
+                    // L515 target
+                    this.controls.target.set(-0.027, -0.351, -0.020);
+                } else {
+                    // D435 target (original)
+                    this.controls.target.set(-0.034, -0.351, 0);
+                }
+                this.controls.update();
+
+                // Simple lighting
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+                this.scene.add(ambientLight);
+
+                // Load point cloud with LOD
+                this.loadPointCloud();
+
+                // Start render loop
+                this.animate();
+
+                // Handle resize
+                window.addEventListener('resize', () => this.handleResize());
+            }
+
+            loadPointCloud() {
+                const loadingDiv = this.container.querySelector('.pcd-loading');
+                if (loadingDiv) {
+                    loadingDiv.textContent = 'Loading point cloud...';
+                }
+
+                const loader = new THREE.PLYLoader();
+                
+                loader.load(
+                    this.plyPath,
+                    (geometry) => this.onGeometryLoaded(geometry),
+                    (xhr) => {
+                        if (xhr.lengthComputable && loadingDiv) {
+                            const percentComplete = (xhr.loaded / xhr.total) * 100;
+                            loadingDiv.textContent = `Loading: ${Math.round(percentComplete)}%`;
+                        }
+                    },
+                    (error) => {
+                        console.error('Error loading PLY:', error);
+                        if (loadingDiv) {
+                            loadingDiv.textContent = 'Failed to load. Please run a local server.';
+                        }
+                    }
+                );
+            }
+
+            onGeometryLoaded(geometry) {
+                const loadingDiv = this.container.querySelector('.pcd-loading');
+                if (loadingDiv) {
+                    loadingDiv.style.display = 'none';
+                }
+
+                // Convert from Blender's Z-up to Three.js Y-up coordinate system
+                // Rotate -90 degrees around X axis to swap Y and Z
+                geometry.rotateX(-Math.PI / 2);
+
+                // Center and scale
+                geometry.computeBoundingBox();
+                geometry.center();
+                const size = new THREE.Vector3();
+                geometry.boundingBox.getSize(size);
+                const scale = 2 / Math.max(size.x, size.y, size.z);
+                geometry.scale(scale, scale, scale);
+
+                // Create point cloud with all points (highest quality)
+                this.currentLOD = this.createPointCloud(geometry, 1.0);
+                this.scene.add(this.currentLOD);
+                
+                this.isLoading = false;
+                
+                // Capture screenshot if in capture mode
+                if (this.captureMode) {
+                    console.log(`Point cloud loaded for ${this.plyPath}, preparing to capture...`);
+                    // Need to wait for several animation frames to ensure proper rendering
+                    let frameCount = 0;
+                    const captureAfterFrames = () => {
+                        frameCount++;
+                        if (frameCount < 10) {
+                            // Ensure we render a few frames first
+                            this.renderer.render(this.scene, this.camera);
+                            requestAnimationFrame(captureAfterFrames);
+                        } else {
+                            // Now capture the screenshot
+                            console.log(`Capturing screenshot for ${this.plyPath}...`);
+                            this.captureScreenshot();
+                        }
+                    };
+                    requestAnimationFrame(captureAfterFrames);
+                }
+            }
+
+
+            createPointCloud(geometry, pointSize) {
+                // Add colors if not present
+                if (!geometry.attributes.color) {
+                    const positions = geometry.attributes.position.array;
+                    const pointCount = positions.length / 3;
+                    const colors = new Float32Array(pointCount * 3);
+                    
+                    for (let i = 0; i < pointCount; i++) {
+                        const y = positions[i * 3 + 1];
+                        const t = (y + 1) * 0.5;
+                        colors[i * 3] = 0.1 + t * 0.3;
+                        colors[i * 3 + 1] = 0.4 + t * 0.4;
+                        colors[i * 3 + 2] = 0.8;
+                    }
+                    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                }
+
+                const material = new THREE.PointsMaterial({
+                    size: this.pointSize,
+                    vertexColors: true,
+                    sizeAttenuation: true
+                });
+
+                return new THREE.Points(geometry, material);
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+
+                // Always render for smooth interaction
+                this.renderer.render(this.scene, this.camera);
+                
+                // Update camera info display (comment out for performance when not tracking)
+                // this.updateCameraInfo();
+            }
+            
+            updateCameraInfo() {
+                // Only update camera info if this is the tracked viewer
+                if (window.trackedViewer === this) {
+                    const pos = this.camera.position;
+                    const target = this.controls.target;
+                    
+                    const posElement = document.getElementById('cam-pos');
+                    const targetElement = document.getElementById('cam-target');
+                    
+                    if (posElement) {
+                        posElement.textContent = `(${pos.x.toFixed(3)}, ${pos.y.toFixed(3)}, ${pos.z.toFixed(3)})`;
+                    }
+                    if (targetElement) {
+                        targetElement.textContent = `(${target.x.toFixed(3)}, ${target.y.toFixed(3)}, ${target.z.toFixed(3)})`;
+                    }
+                }
+            }
+
+            handleResize() {
+                this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+            }
+        }
+
+        // Initialize viewers when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            // Check URL parameters for capture mode
+            const urlParams = new URLSearchParams(window.location.search);
+            const captureMode = urlParams.get('capture') === 'true';
+            
+            // Check if running locally
+            const isLocal = window.location.protocol === 'file:';
+            
+            if (isLocal && !captureMode) {
+                document.querySelectorAll('.pcd-loading').forEach(div => {
+                    div.innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <p>To view interactive point clouds:</p>
+                            <p style="font-size: 12px;">Run: <code>python3 -m http.server 8000</code></p>
+                            <p style="font-size: 12px;">Visit: <code>http://localhost:8000</code></p>
+                        </div>
+                    `;
+                });
+                // Still set up lazy loading for local mode
+            }
+            
+            // Track loaded viewers
+            const loadedViewers = {};
+            
+            // Function to load a viewer on demand
+            function loadViewer(container) {
+                const viewerId = container.dataset.viewerId;
+                const plyPath = container.dataset.plyPath;
+                const isL515 = container.dataset.isL515 === 'true';
+                
+                // Prevent duplicate loading
+                if (loadedViewers[viewerId]) return;
+                
+                // Hide placeholder and button
+                const placeholder = container.querySelector('.pcd-placeholder');
+                const button = container.querySelector('.load-interactive-btn');
+                const viewerDiv = container.querySelector('.pcd-viewer-optimized');
+                
+                if (placeholder) placeholder.style.display = 'none';
+                if (button) button.style.display = 'none';
+                if (viewerDiv) viewerDiv.style.display = 'block';
+                
+                // Create the viewer
+                loadedViewers[viewerId] = new OptimizedPointCloudViewer(viewerId, plyPath, isL515, false);
+            }
+            
+            // Set up lazy loading buttons
+            document.querySelectorAll('.load-interactive-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const container = this.closest('.pcd-lazy-container');
+                    if (container) {
+                        loadViewer(container);
+                    }
+                });
+            });
+            
+            // If in capture mode, load all viewers immediately to capture screenshots
+            if (captureMode) {
+                console.log('Screenshot capture mode enabled');
+                alert('Screenshot capture mode enabled. The page will automatically download screenshots of all point clouds.');
+                
+                // First, make all viewer containers visible
+                document.querySelectorAll('.pcd-lazy-container').forEach(container => {
+                    const placeholder = container.querySelector('.pcd-placeholder');
+                    const button = container.querySelector('.load-interactive-btn');
+                    const viewerDiv = container.querySelector('.pcd-viewer-optimized');
+                    
+                    if (placeholder) placeholder.style.display = 'none';
+                    if (button) button.style.display = 'none';
+                    if (viewerDiv) viewerDiv.style.display = 'block';
+                });
+                
+                // Load all viewers with capture mode enabled
+                const viewers = [
+                    new OptimizedPointCloudViewer('pcd-viewer-microwave-435-raw', 'pcds/microwave_435_raw_depth.ply', false, true),
+                    new OptimizedPointCloudViewer('pcd-viewer-microwave-435-model', 'pcds/microwave_435_model_depth.ply', false, true),
+                    new OptimizedPointCloudViewer('pcd-viewer-microwave-515-raw', 'pcds/microwave_515_raw_depth.ply', true, true),
+                    new OptimizedPointCloudViewer('pcd-viewer-microwave-515-model', 'pcds/microwave_515_model_depth.ply', true, true),
+                    new OptimizedPointCloudViewer('pcd-viewer-canteen-435-raw', 'pcds/canteen_435_raw_depth.ply', false, true),
+                    new OptimizedPointCloudViewer('pcd-viewer-canteen-435-model', 'pcds/canteen_435_model_depth.ply', false, true),
+                    new OptimizedPointCloudViewer('pcd-viewer-canteen-515-raw', 'pcds/canteen_515_raw_depth.ply', true, true),
+                    new OptimizedPointCloudViewer('pcd-viewer-canteen-515-model', 'pcds/canteen_515_model_depth.ply', true, true)
+                ];
+            }
+            
+            // Camera tracking - uncomment to track a specific viewer
+            // window.trackedViewer = viewer3; // Track L515 viewer (microwave_515_raw)
+            
+            // Initialize charts after Chart.js and depth-charts.js are loaded
+            if (typeof Chart !== 'undefined' && typeof initDepthAccuracyCharts !== 'undefined') {
+                initDepthAccuracyCharts();
+            } else {
+                // Wait for scripts to load
+                const checkScripts = setInterval(() => {
+                    if (typeof Chart !== 'undefined' && typeof initDepthAccuracyCharts !== 'undefined') {
+                        clearInterval(checkScripts);
+                        initDepthAccuracyCharts();
+                    }
+                }, 100);
+            }
+        });
+    </script>
 </body>
 </html>
