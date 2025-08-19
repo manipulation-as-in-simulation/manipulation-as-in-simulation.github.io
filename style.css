@@ -891,6 +891,21 @@ header::before {
     padding: 40px 0;
 }
 
+/* Accuracy Selector Styles */
+.accuracy-selector-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.accuracy-dataset-group {
+    animation: fadeIn 0.3s ease;
+}
+
 .depth-accuracy h2 {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -1468,5 +1483,9 @@ footer a:hover {
         padding: 8px 15px;
         font-size: 0.9rem;
         min-width: 70px;
+    }
+    
+    .accuracy-selector-container {
+        padding: 15px;
     }
 }

@@ -408,46 +408,70 @@
             <h2>Depth Accuracy w.r.t Distance</h2>
             <p>To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
             
-            <div class="accuracy-charts">
-                <!-- D435 Dataset Row -->
-                <div class="chart-item">
-                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - Absolute Relative Error</h4>
-                    <div class="chart-container">
-                        <canvas id="d435-absrel-chart"></canvas>
+            <!-- Dataset Selector Buttons -->
+            <div class="accuracy-selector-container">
+                <div class="selector-group">
+                    <span class="selector-label">Dataset:</span>
+                    <div class="selector-buttons" id="dataset-selector">
+                        <button class="selector-btn active" data-dataset="d435">D435</button>
+                        <button class="selector-btn" data-dataset="l515">L515</button>
+                        <button class="selector-btn" data-dataset="helios">Helios</button>
                     </div>
                 </div>
-                <div class="chart-item">
-                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - L1 Error</h4>
-                    <div class="chart-container">
-                        <canvas id="d435-l1-chart"></canvas>
+            </div>
+            
+            <div id="accuracy-charts-container">
+                <!-- D435 Dataset Charts -->
+                <div class="accuracy-dataset-group" data-dataset="d435">
+                    <div class="accuracy-charts">
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - Absolute Relative Error</h4>
+                            <div class="chart-container">
+                                <canvas id="d435-absrel-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - L1 Error</h4>
+                            <div class="chart-container">
+                                <canvas id="d435-l1-chart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- L515 Dataset Row -->
-                <div class="chart-item">
-                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - Absolute Relative Error</h4>
-                    <div class="chart-container">
-                        <canvas id="l515-absrel-chart"></canvas>
-                    </div>
-                </div>
-                <div class="chart-item">
-                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - L1 Error</h4>
-                    <div class="chart-container">
-                        <canvas id="l515-l1-chart"></canvas>
+                <!-- L515 Dataset Charts -->
+                <div class="accuracy-dataset-group" data-dataset="l515" style="display: none;">
+                    <div class="accuracy-charts">
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - Absolute Relative Error</h4>
+                            <div class="chart-container">
+                                <canvas id="l515-absrel-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - L1 Error</h4>
+                            <div class="chart-container">
+                                <canvas id="l515-l1-chart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Helios Dataset Row -->
-                <div class="chart-item">
-                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - Absolute Relative Error</h4>
-                    <div class="chart-container">
-                        <canvas id="helios-absrel-chart"></canvas>
-                    </div>
-                </div>
-                <div class="chart-item">
-                    <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - L1 Error</h4>
-                    <div class="chart-container">
-                        <canvas id="helios-l1-chart"></canvas>
+                <!-- Helios Dataset Charts -->
+                <div class="accuracy-dataset-group" data-dataset="helios" style="display: none;">
+                    <div class="accuracy-charts">
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - Absolute Relative Error</h4>
+                            <div class="chart-container">
+                                <canvas id="helios-absrel-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - L1 Error</h4>
+                            <div class="chart-container">
+                                <canvas id="helios-l1-chart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -693,7 +717,7 @@
     <section class="setup">
         <div class="container">
             <h2>UR5 Manipulation Experiment Setup</h2>
-            <p class="setup-description">Complete experimental setup for simulation and real-world experiments with two different cameras (D435 and L515) and training environments for kitchen and canteen tasks.</p>
+            <p class="setup-description">Experimental setup for simulation and real-world experiments with two different cameras (D435 and L515) for kitchen and canteen tasks.</p>
             
             <div class="setup-row">
                 <div class="setup-item-exp">
@@ -704,12 +728,12 @@
                 <div class="setup-item-exp">
                     <img src="figs/sim-range-microwave.png" alt="Kitchen task randomization (sim)">
                     <h4>Kitchen Task Randomization (Sim)</h4>
-                    <p>Training environment with randomization boundaries for bowl and microwave positions</p>
+                    <p>Training environment with randomization for bowl and microwave positions</p>
                 </div>
                 <div class="setup-item-exp">
                     <img src="figs/sim-range-plate.png" alt="Canteen task randomization (sim)">
                     <h4>Canteen Task Randomization (Sim)</h4>
-                    <p>Simulation environment for canteen task with object placement randomization</p>
+                    <p>Simulation environment with randomization for plate and box positions</p>
                 </div>
             </div>
             
@@ -727,7 +751,7 @@
                 <div class="setup-item-exp">
                     <img src="figs/canteen-distribution.png" alt="Canteen task distribution (real)">
                     <h4>Canteen Task Distribution (Real)</h4>
-                    <p>Real-world test distribution matching simulation randomization for canteen experiments</p>
+                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
                 </div>
             </div>
         </div>
@@ -817,6 +841,49 @@
             
             // Initialize display
             updatePointCloudDisplay();
+            
+            // Depth Accuracy Dataset Selector
+            const datasetButtons = document.querySelectorAll('#dataset-selector .selector-btn');
+            const datasetGroups = document.querySelectorAll('.accuracy-dataset-group');
+            
+            function updateAccuracyDisplay() {
+                // Get active dataset
+                const activeDataset = document.querySelector('#dataset-selector .selector-btn.active')?.dataset.dataset;
+                
+                if (!activeDataset) return;
+                
+                // Hide all groups
+                datasetGroups.forEach(group => {
+                    group.style.display = 'none';
+                });
+                
+                // Show the selected group
+                const selectedGroup = document.querySelector(`.accuracy-dataset-group[data-dataset="${activeDataset}"]`);
+                if (selectedGroup) {
+                    selectedGroup.style.display = 'block';
+                    
+                    // Trigger chart redraw if needed (Chart.js specific)
+                    const charts = selectedGroup.querySelectorAll('canvas');
+                    charts.forEach(canvas => {
+                        const chartInstance = Chart.getChart(canvas.id);
+                        if (chartInstance) {
+                            chartInstance.resize();
+                        }
+                    });
+                }
+            }
+            
+            // Add click handlers for dataset buttons
+            datasetButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    datasetButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updateAccuracyDisplay();
+                });
+            });
+            
+            // Initialize accuracy display
+            updateAccuracyDisplay();
         });
         
         // Optimized Point Cloud Viewer for 90k+ points
