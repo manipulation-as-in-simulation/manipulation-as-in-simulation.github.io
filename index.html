@@ -270,16 +270,31 @@
             <div class="result-section">
                 <h3>Point Cloud Quality Comparison</h3>
                 <p style="text-align: center; margin-bottom: 20px; color: #666;">Interactive 3D visualization - Use mouse to rotate, scroll to zoom</p>
-                <!-- Camera tracking panel - uncomment to enable camera position tracking -->
-                <!--
-                <div class="camera-info" id="camera-info" style="text-align: center; margin-bottom: 10px; font-family: monospace; font-size: 12px; background: #f0f0f0; padding: 5px; border-radius: 4px;">
-                    <span style="color: #d32f2f; font-weight: bold;">Tracking: Kitchen L515 Raw</span> | 
-                    Position: <span id="cam-pos">--</span> | Target: <span id="cam-target">--</span>
+                
+                <!-- Scene and Camera Selection Buttons -->
+                <div class="pcd-selector-container">
+                    <div class="selector-group">
+                        <span class="selector-label">Scene:</span>
+                        <div class="selector-buttons" id="scene-selector">
+                            <button class="selector-btn active" data-scene="kitchen">Kitchen</button>
+                            <button class="selector-btn" data-scene="canteen">Canteen</button>
+                        </div>
+                    </div>
+                    <div class="selector-group">
+                        <span class="selector-label">Camera:</span>
+                        <div class="selector-buttons" id="camera-selector">
+                            <button class="selector-btn active" data-camera="435">D435</button>
+                            <button class="selector-btn" data-camera="515">L515</button>
+                        </div>
+                    </div>
                 </div>
-                -->
-                <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Kitchen Scene</h4>
-                <p style="text-align: center; margin: 0 0 10px 0; color: #888; font-size: 1.2rem;">D435 Camera</p>
-                <div class="pcd-grid">
+                
+                <!-- Dynamic Point Cloud Display Area -->
+                <div id="pcd-dynamic-display">
+                    <!-- Kitchen D435 (default view) -->
+                    <div class="pcd-scene-camera-group" data-scene="kitchen" data-camera="435">
+                        <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Kitchen Scene - D435 Camera</h4>
+                        <div class="pcd-grid">
                     <div class="pcd-item">
                         <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-435-raw" data-ply-path="pcds/microwave_435_raw_depth.ply" data-is-l515="false">
                             <img class="pcd-placeholder" src="screenshots/microwave_435_raw_depth.png" alt="Loading...">
@@ -301,8 +316,11 @@
                         <p>CDM-D435 Output Point Cloud</p>
                     </div>
                 </div>
-                
-                <p style="text-align: center; margin: 15px 0 10px 0; color: #888; font-size: 1.2rem;">L515 Camera</p>
+                    </div>
+                    
+                    <!-- Kitchen L515 -->
+                    <div class="pcd-scene-camera-group" data-scene="kitchen" data-camera="515" style="display: none;">
+                        <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Kitchen Scene - L515 Camera</h4>
                 <div class="pcd-grid">
                     <div class="pcd-item">
                         <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-raw" data-ply-path="pcds/microwave_515_raw_depth.ply" data-is-l515="true">
@@ -325,9 +343,11 @@
                         <p>CDM-L515 Output Point Cloud</p>
                     </div>
                 </div>
-                
-                <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Canteen Scene</h4>
-                <p style="text-align: center; margin: 0 0 10px 0; color: #888; font-size: 1.2rem;">D435 Camera</p>
+                    </div>
+                    
+                    <!-- Canteen D435 -->
+                    <div class="pcd-scene-camera-group" data-scene="canteen" data-camera="435" style="display: none;">
+                        <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Canteen Scene - D435 Camera</h4>
                 <div class="pcd-grid">
                     <div class="pcd-item">
                         <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-435-raw" data-ply-path="pcds/canteen_435_raw_depth.ply" data-is-l515="false">
@@ -350,8 +370,11 @@
                         <p>CDM-D435 Output Point Cloud</p>
                     </div>
                 </div>
-                
-                <p style="text-align: center; margin: 15px 0 10px 0; color: #888; font-size: 1.2rem;">L515 Camera</p>
+                    </div>
+                    
+                    <!-- Canteen L515 -->
+                    <div class="pcd-scene-camera-group" data-scene="canteen" data-camera="515" style="display: none;">
+                        <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Canteen Scene - L515 Camera</h4>
                 <div class="pcd-grid">
                     <div class="pcd-item">
                         <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-515-raw" data-ply-path="pcds/canteen_515_raw_depth.ply" data-is-l515="true">
@@ -374,6 +397,8 @@
                         <p>CDM-L515 Output Point Cloud</p>
                     </div>
                 </div>
+                    </div>
+                </div> <!-- End of pcd-dynamic-display -->
             </div>
         </div>
     </section>
@@ -749,6 +774,51 @@
     </footer>
 
     <script>
+        // Point Cloud Scene and Camera Selector
+        document.addEventListener('DOMContentLoaded', function() {
+            const sceneButtons = document.querySelectorAll('#scene-selector .selector-btn');
+            const cameraButtons = document.querySelectorAll('#camera-selector .selector-btn');
+            const pcdGroups = document.querySelectorAll('.pcd-scene-camera-group');
+            
+            function updatePointCloudDisplay() {
+                // Get active selections
+                const activeScene = document.querySelector('#scene-selector .selector-btn.active').dataset.scene;
+                const activeCamera = document.querySelector('#camera-selector .selector-btn.active').dataset.camera;
+                
+                // Hide all groups
+                pcdGroups.forEach(group => {
+                    group.style.display = 'none';
+                });
+                
+                // Show the selected group
+                const selectedGroup = document.querySelector(`.pcd-scene-camera-group[data-scene="${activeScene}"][data-camera="${activeCamera}"]`);
+                if (selectedGroup) {
+                    selectedGroup.style.display = 'block';
+                }
+            }
+            
+            // Add click handlers for scene buttons
+            sceneButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    sceneButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updatePointCloudDisplay();
+                });
+            });
+            
+            // Add click handlers for camera buttons
+            cameraButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    cameraButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updatePointCloudDisplay();
+                });
+            });
+            
+            // Initialize display
+            updatePointCloudDisplay();
+        });
+        
         // Optimized Point Cloud Viewer for 90k+ points
         class OptimizedPointCloudViewer {
             constructor(containerId, plyPath, isL515 = false, captureMode = false) {
