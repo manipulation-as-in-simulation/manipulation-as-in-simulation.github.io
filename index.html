@@ -330,6 +330,22 @@
                             <button class="selector-btn" data-camera="515">L515</button>
                         </div>
                     </div>
+                    <div class="selector-group">
+                        <span class="selector-label">Model A:</span>
+                        <div class="selector-buttons" id="model-a-selector">
+                            <button class="selector-btn active" data-model="435">CDM-D435</button>
+                            <button class="selector-btn" data-model="515">CDM-L515</button>
+                            <button class="selector-btn" data-model="priorda">PriorDA</button>
+                        </div>
+                    </div>
+                    <div class="selector-group">
+                        <span class="selector-label">Model B:</span>
+                        <div class="selector-buttons" id="model-b-selector">
+                            <button class="selector-btn" data-model="435">CDM-D435</button>
+                            <button class="selector-btn active" data-model="515">CDM-L515</button>
+                            <button class="selector-btn" data-model="priorda">PriorDA</button>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Debug Info Panel (only visible in debug mode) -->
@@ -361,115 +377,155 @@
                     <!-- Kitchen D435 (default view) -->
                     <div class="pcd-scene-camera-group" data-scene="kitchen" data-camera="435">
                         <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Kitchen Scene - D435 Camera</h4>
-                        <div class="pcd-grid">
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-435-raw" data-ply-path="pcds/microwave_435_raw_depth.ply" data-is-l515="false">
-                            <img class="pcd-placeholder" src="screenshots/microwave_435_raw_depth.png" alt="Loading...">
-                            <button class="load-interactive-btn">Load Interactive View</button>
-                            <div id="pcd-viewer-microwave-435-raw" class="pcd-viewer-optimized" style="display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
+                        <div class="pcd-grid" id="pcd-grid-kitchen-435">
+                            <div class="pcd-item">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-435-raw" data-ply-path="pcds/microwave_435_raw_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/microwave_435_raw_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-microwave-435-raw" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Raw Depth Point Cloud</p>
+                            </div>
+                            <div class="pcd-item model-a-viewer" data-scene="kitchen" data-camera="435">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-435-model-a" data-ply-path="pcds/microwave_435_model_435_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/microwave_435_model_435_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-microwave-435-model-a" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model A: CDM-D435</p>
+                            </div>
+                            <div class="pcd-item model-b-viewer" data-scene="kitchen" data-camera="435">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-435-model-b" data-ply-path="pcds/microwave_435_model_515_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/microwave_435_model_515_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-microwave-435-model-b" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model B: CDM-L515</p>
                             </div>
                         </div>
-                        <p>Raw Depth Point Cloud</p>
-                    </div>
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-435-model" data-ply-path="pcds/microwave_435_model_depth.ply" data-is-l515="false">
-                            <img class="pcd-placeholder" src="screenshots/microwave_435_model_depth.png" alt="Loading...">
-                            <button class="load-interactive-btn">Load Interactive View</button>
-                            <div id="pcd-viewer-microwave-435-model" class="pcd-viewer-optimized" style="display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
-                            </div>
-                        </div>
-                        <p>CDM-D435 Output Point Cloud</p>
-                    </div>
-                </div>
                     </div>
                     
                     <!-- Kitchen L515 -->
                     <div class="pcd-scene-camera-group" data-scene="kitchen" data-camera="515" style="display: none;">
                         <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Kitchen Scene - L515 Camera</h4>
-                <div class="pcd-grid">
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-raw" data-ply-path="pcds/microwave_515_raw_depth.ply" data-is-l515="true">
-                            <img class="pcd-placeholder" src="screenshots/microwave_515_raw_depth.png" alt="Loading...">
-                            <button class="load-interactive-btn">Load Interactive View</button>
-                            <div id="pcd-viewer-microwave-515-raw" class="pcd-viewer-optimized" style="display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
+                        <div class="pcd-grid" id="pcd-grid-kitchen-515">
+                            <div class="pcd-item">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-raw" data-ply-path="pcds/microwave_515_raw_depth.ply" data-is-l515="true">
+                                    <img class="pcd-placeholder" src="screenshots/microwave_515_raw_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-microwave-515-raw" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Raw Depth Point Cloud</p>
+                            </div>
+                            <div class="pcd-item model-a-viewer" data-scene="kitchen" data-camera="515">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-model-a" data-ply-path="pcds/microwave_515_model_435_depth.ply" data-is-l515="true">
+                                    <img class="pcd-placeholder" src="screenshots/microwave_515_model_435_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-microwave-515-model-a" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model A: CDM-D435</p>
+                            </div>
+                            <div class="pcd-item model-b-viewer" data-scene="kitchen" data-camera="515">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-model-b" data-ply-path="pcds/microwave_515_model_depth.ply" data-is-l515="true">
+                                    <img class="pcd-placeholder" src="screenshots/microwave_515_model_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-microwave-515-model-b" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model B: CDM-L515</p>
                             </div>
                         </div>
-                        <p>Raw Depth Point Cloud</p>
-                    </div>
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-model" data-ply-path="pcds/microwave_515_model_depth.ply" data-is-l515="true">
-                            <img class="pcd-placeholder" src="screenshots/microwave_515_model_depth.png" alt="Loading...">
-                            <button class="load-interactive-btn">Load Interactive View</button>
-                            <div id="pcd-viewer-microwave-515-model" class="pcd-viewer-optimized" style="display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
-                            </div>
-                        </div>
-                        <p>CDM-L515 Output Point Cloud</p>
-                    </div>
-                </div>
                     </div>
                     
                     <!-- Canteen D435 -->
                     <div class="pcd-scene-camera-group" data-scene="canteen" data-camera="435" style="display: none;">
                         <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Canteen Scene - D435 Camera</h4>
-                <div class="pcd-grid">
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-435-raw" data-ply-path="pcds/canteen_435_raw_depth.ply" data-is-l515="false">
-                            <img class="pcd-placeholder" src="screenshots/canteen_435_raw_depth.png" alt="Loading...">
-                            <button class="load-interactive-btn">Load Interactive View</button>
-                            <div id="pcd-viewer-canteen-435-raw" class="pcd-viewer-optimized" style="display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
+                        <div class="pcd-grid" id="pcd-grid-canteen-435">
+                            <div class="pcd-item">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-435-raw" data-ply-path="pcds/canteen_435_raw_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/canteen_435_raw_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-canteen-435-raw" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Raw Depth Point Cloud</p>
+                            </div>
+                            <div class="pcd-item model-a-viewer" data-scene="canteen" data-camera="435">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-435-model-a" data-ply-path="pcds/canteen_435_model_435_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/canteen_435_model_435_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-canteen-435-model-a" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model A: CDM-D435</p>
+                            </div>
+                            <div class="pcd-item model-b-viewer" data-scene="canteen" data-camera="435">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-435-model-b" data-ply-path="pcds/canteen_435_model_515_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/canteen_435_model_515_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-canteen-435-model-b" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model B: CDM-L515</p>
                             </div>
                         </div>
-                        <p>Raw Depth Point Cloud</p>
-                    </div>
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-435-model" data-ply-path="pcds/canteen_435_model_depth.ply" data-is-l515="false">
-                            <img class="pcd-placeholder" src="screenshots/canteen_435_model_depth.png" alt="Loading...">
-                            <button class="load-interactive-btn">Load Interactive View</button>
-                            <div id="pcd-viewer-canteen-435-model" class="pcd-viewer-optimized" style="display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
-                            </div>
-                        </div>
-                        <p>CDM-D435 Output Point Cloud</p>
-                    </div>
-                </div>
                     </div>
                     
                     <!-- Canteen L515 -->
                     <div class="pcd-scene-camera-group" data-scene="canteen" data-camera="515" style="display: none;">
                         <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Canteen Scene - L515 Camera</h4>
-                <div class="pcd-grid">
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-515-raw" data-ply-path="pcds/canteen_515_raw_depth.ply" data-is-l515="true">
-                            <img class="pcd-placeholder" src="screenshots/canteen_515_raw_depth.png" alt="Loading...">
-                            <button class="load-interactive-btn">Load Interactive View</button>
-                            <div id="pcd-viewer-canteen-515-raw" class="pcd-viewer-optimized" style="display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
+                        <div class="pcd-grid" id="pcd-grid-canteen-515">
+                            <div class="pcd-item">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-515-raw" data-ply-path="pcds/canteen_515_raw_depth.ply" data-is-l515="true">
+                                    <img class="pcd-placeholder" src="screenshots/canteen_515_raw_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-canteen-515-raw" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Raw Depth Point Cloud</p>
+                            </div>
+                            <div class="pcd-item model-a-viewer" data-scene="canteen" data-camera="515">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-515-model-a" data-ply-path="pcds/canteen_515_model_435_depth.ply" data-is-l515="true">
+                                    <img class="pcd-placeholder" src="screenshots/canteen_515_model_435_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-canteen-515-model-a" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model A: CDM-D435</p>
+                            </div>
+                            <div class="pcd-item model-b-viewer" data-scene="canteen" data-camera="515">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-515-model-b" data-ply-path="pcds/canteen_515_model_515_depth.ply" data-is-l515="true">
+                                    <img class="pcd-placeholder" src="screenshots/canteen_515_model_515_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-canteen-515-model-b" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model B: CDM-L515</p>
                             </div>
                         </div>
-                        <p>Raw Depth Point Cloud</p>
-                    </div>
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-canteen-515-model" data-ply-path="pcds/canteen_515_model_depth.ply" data-is-l515="true">
-                            <img class="pcd-placeholder" src="screenshots/canteen_515_model_depth.png" alt="Loading...">
-                            <button class="load-interactive-btn">Load Interactive View</button>
-                            <div id="pcd-viewer-canteen-515-model" class="pcd-viewer-optimized" style="display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
-                            </div>
-                        </div>
-                        <p>CDM-L515 Output Point Cloud</p>
-                    </div>
-                </div>
                     </div>
                     
                     <!-- Stack Bowl D435 -->
                     <div class="pcd-scene-camera-group" data-scene="stackbowl" data-camera="435" style="display: none;">
                         <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Stack Bowl Scene - D435 Camera</h4>
-                        <div class="pcd-grid">
+                        <div class="pcd-grid" id="pcd-grid-stackbowl-435">
                             <div class="pcd-item">
                                 <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-stackbowl-435-raw" data-ply-path="pcds/stackbowl_435_raw_depth.ply" data-is-l515="false">
                                     <img class="pcd-placeholder" src="screenshots/stackbowl_435_raw_depth.png" alt="Loading...">
@@ -480,15 +536,25 @@
                                 </div>
                                 <p>Raw Depth Point Cloud</p>
                             </div>
-                            <div class="pcd-item">
-                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-stackbowl-435-model" data-ply-path="pcds/stackbowl_435_model_depth.ply" data-is-l515="false">
-                                    <img class="pcd-placeholder" src="screenshots/stackbowl_435_model_depth.png" alt="Loading...">
+                            <div class="pcd-item model-a-viewer" data-scene="stackbowl" data-camera="435">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-stackbowl-435-model-a" data-ply-path="pcds/stackbowl_435_model_435_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/stackbowl_435_model_435_depth.png" alt="Loading...">
                                     <button class="load-interactive-btn">Load Interactive View</button>
-                                    <div id="pcd-viewer-stackbowl-435-model" class="pcd-viewer-optimized" style="display: none;">
+                                    <div id="pcd-viewer-stackbowl-435-model-a" class="pcd-viewer-optimized" style="display: none;">
                                         <div class="pcd-loading">Initializing viewer...</div>
                                     </div>
                                 </div>
-                                <p>CDM-D435 Output Point Cloud</p>
+                                <p>Model A: CDM-D435</p>
+                            </div>
+                            <div class="pcd-item model-b-viewer" data-scene="stackbowl" data-camera="435">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-stackbowl-435-model-b" data-ply-path="pcds/stackbowl_435_model_435_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/stackbowl_435_model_435_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-stackbowl-435-model-b" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model B: CDM-D435</p>
                             </div>
                         </div>
                     </div>
@@ -496,7 +562,7 @@
                     <!-- Place Toothpaste D435 -->
                     <div class="pcd-scene-camera-group" data-scene="toothpaste" data-camera="435" style="display: none;">
                         <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Place Toothpaste Scene - D435 Camera</h4>
-                        <div class="pcd-grid">
+                        <div class="pcd-grid" id="pcd-grid-toothpaste-435">
                             <div class="pcd-item">
                                 <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-toothpaste-435-raw" data-ply-path="pcds/toothpaste_435_raw_depth.ply" data-is-l515="false">
                                     <img class="pcd-placeholder" src="screenshots/toothpaste_435_raw_depth.png" alt="Loading...">
@@ -507,15 +573,25 @@
                                 </div>
                                 <p>Raw Depth Point Cloud</p>
                             </div>
-                            <div class="pcd-item">
-                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-toothpaste-435-model" data-ply-path="pcds/toothpaste_435_model_depth.ply" data-is-l515="false">
-                                    <img class="pcd-placeholder" src="screenshots/toothpaste_435_model_depth.png" alt="Loading...">
+                            <div class="pcd-item model-a-viewer" data-scene="toothpaste" data-camera="435">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-toothpaste-435-model-a" data-ply-path="pcds/toothpaste_435_model_435_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/toothpaste_435_model_435_depth.png" alt="Loading...">
                                     <button class="load-interactive-btn">Load Interactive View</button>
-                                    <div id="pcd-viewer-toothpaste-435-model" class="pcd-viewer-optimized" style="display: none;">
+                                    <div id="pcd-viewer-toothpaste-435-model-a" class="pcd-viewer-optimized" style="display: none;">
                                         <div class="pcd-loading">Initializing viewer...</div>
                                     </div>
                                 </div>
-                                <p>CDM-D435 Output Point Cloud</p>
+                                <p>Model A: CDM-D435</p>
+                            </div>
+                            <div class="pcd-item model-b-viewer" data-scene="toothpaste" data-camera="435">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-toothpaste-435-model-b" data-ply-path="pcds/toothpaste_435_model_435_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/toothpaste_435_model_435_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-toothpaste-435-model-b" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Model B: CDM-D435</p>
                             </div>
                         </div>
                     </div>
@@ -923,12 +999,61 @@
         document.addEventListener('DOMContentLoaded', function() {
             const sceneButtons = document.querySelectorAll('#scene-selector .selector-btn');
             const cameraButtons = document.querySelectorAll('#camera-selector .selector-btn');
+            const modelAButtons = document.querySelectorAll('#model-a-selector .selector-btn');
+            const modelBButtons = document.querySelectorAll('#model-b-selector .selector-btn');
             const pcdGroups = document.querySelectorAll('.pcd-scene-camera-group');
+            
+            // Model path mapping
+            const modelPathMap = {
+                'kitchen': {
+                    '435': {
+                        '435': 'pcds/microwave_435_model_depth.ply',
+                        '515': 'pcds/microwave_435_model_515_depth.ply', 
+                        'priorda': 'pcds/microwave_435_model_priorda_depth.ply'
+                    },
+                    '515': {
+                        '435': 'pcds/microwave_515_model_435_depth.ply',
+                        '515': 'pcds/microwave_515_model_depth.ply',
+                        'priorda': 'pcds/microwave_515_model_priorda_depth.ply'
+                    }
+                },
+                'canteen': {
+                    '435': {
+                        '435': 'pcds/canteen_435_model_435_depth.ply',
+                        '515': 'pcds/canteen_435_model_515_depth.ply',
+                        'priorda': 'pcds/canteen_435_model_priorda_depth.ply'
+                    },
+                    '515': {
+                        '435': 'pcds/canteen_515_model_435_depth.ply',
+                        '515': 'pcds/canteen_515_model_515_depth.ply',
+                        'priorda': 'pcds/canteen_515_model_priorda_depth.ply'
+                    }
+                },
+                'stackbowl': {
+                    '435': {
+                        '435': 'pcds/stackbowl_435_model_435_depth.ply'
+                    }
+                },
+                'toothpaste': {
+                    '435': {
+                        '435': 'pcds/toothpaste_435_model_435_depth.ply'
+                    }
+                }
+            };
+            
+            // Model display names
+            const modelNames = {
+                '435': 'CDM-D435',
+                '515': 'CDM-L515',
+                'priorda': 'PriorDA'
+            };
             
             function updatePointCloudDisplay() {
                 // Get active selections
                 const activeScene = document.querySelector('#scene-selector .selector-btn.active').dataset.scene;
                 const activeCamera = document.querySelector('#camera-selector .selector-btn.active').dataset.camera;
+                const activeModelA = document.querySelector('#model-a-selector .selector-btn.active').dataset.model;
+                const activeModelB = document.querySelector('#model-b-selector .selector-btn.active').dataset.model;
                 
                 // Hide all groups
                 pcdGroups.forEach(group => {
@@ -939,6 +1064,44 @@
                 const selectedGroup = document.querySelector(`.pcd-scene-camera-group[data-scene="${activeScene}"][data-camera="${activeCamera}"]`);
                 if (selectedGroup) {
                     selectedGroup.style.display = 'block';
+                    
+                    // Update Model A viewer
+                    const modelAViewer = selectedGroup.querySelector('.model-a-viewer');
+                    if (modelAViewer) {
+                        const modelAContainer = modelAViewer.querySelector('.pcd-lazy-container');
+                        const modelALabel = modelAViewer.querySelector('p');
+                        
+                        if (modelPathMap[activeScene] && modelPathMap[activeScene][activeCamera] && modelPathMap[activeScene][activeCamera][activeModelA]) {
+                            modelAContainer.dataset.plyPath = modelPathMap[activeScene][activeCamera][activeModelA];
+                            modelALabel.textContent = `Model A: ${modelNames[activeModelA]}`;
+                            
+                            // Update placeholder image path
+                            const placeholder = modelAContainer.querySelector('.pcd-placeholder');
+                            if (placeholder) {
+                                const imagePath = modelPathMap[activeScene][activeCamera][activeModelA].replace('pcds/', 'screenshots/').replace('.ply', '.png');
+                                placeholder.src = imagePath;
+                            }
+                        }
+                    }
+                    
+                    // Update Model B viewer
+                    const modelBViewer = selectedGroup.querySelector('.model-b-viewer');
+                    if (modelBViewer) {
+                        const modelBContainer = modelBViewer.querySelector('.pcd-lazy-container');
+                        const modelBLabel = modelBViewer.querySelector('p');
+                        
+                        if (modelPathMap[activeScene] && modelPathMap[activeScene][activeCamera] && modelPathMap[activeScene][activeCamera][activeModelB]) {
+                            modelBContainer.dataset.plyPath = modelPathMap[activeScene][activeCamera][activeModelB];
+                            modelBLabel.textContent = `Model B: ${modelNames[activeModelB]}`;
+                            
+                            // Update placeholder image path
+                            const placeholder = modelBContainer.querySelector('.pcd-placeholder');
+                            if (placeholder) {
+                                const imagePath = modelPathMap[activeScene][activeCamera][activeModelB].replace('pcds/', 'screenshots/').replace('.ply', '.png');
+                                placeholder.src = imagePath;
+                            }
+                        }
+                    }
                 }
             }
             
@@ -999,6 +1162,60 @@
                 }
             }
             
+            function updateModelAvailability() {
+                const activeScene = document.querySelector('#scene-selector .selector-btn.active').dataset.scene;
+                const activeCamera = document.querySelector('#camera-selector .selector-btn.active')?.dataset.camera;
+                
+                // Get all model buttons
+                const modelA515 = document.querySelector('#model-a-selector .selector-btn[data-model="515"]');
+                const modelAPriorDA = document.querySelector('#model-a-selector .selector-btn[data-model="priorda"]');
+                const modelA435 = document.querySelector('#model-a-selector .selector-btn[data-model="435"]');
+                
+                const modelB515 = document.querySelector('#model-b-selector .selector-btn[data-model="515"]');
+                const modelBPriorDA = document.querySelector('#model-b-selector .selector-btn[data-model="priorda"]');
+                const modelB435 = document.querySelector('#model-b-selector .selector-btn[data-model="435"]');
+                
+                // For stackbowl and toothpaste, only CDM-D435 is available
+                if (activeScene === 'stackbowl' || activeScene === 'toothpaste') {
+                    // Disable L515 and PriorDA for both Model A and Model B
+                    [modelA515, modelAPriorDA, modelB515, modelBPriorDA].forEach(btn => {
+                        if (btn) {
+                            btn.disabled = true;
+                            btn.style.opacity = '0.5';
+                            btn.style.cursor = 'not-allowed';
+                        }
+                    });
+                    
+                    // Enable CDM-D435
+                    [modelA435, modelB435].forEach(btn => {
+                        if (btn) {
+                            btn.disabled = false;
+                            btn.style.opacity = '1';
+                            btn.style.cursor = 'pointer';
+                        }
+                    });
+                    
+                    // If currently selected model is not available, switch to CDM-D435
+                    if (modelA515?.classList.contains('active') || modelAPriorDA?.classList.contains('active')) {
+                        document.querySelector('#model-a-selector .selector-btn.active').classList.remove('active');
+                        modelA435.classList.add('active');
+                    }
+                    if (modelB515?.classList.contains('active') || modelBPriorDA?.classList.contains('active')) {
+                        document.querySelector('#model-b-selector .selector-btn.active').classList.remove('active');
+                        modelB435.classList.add('active');
+                    }
+                } else {
+                    // Enable all models for kitchen and canteen
+                    [modelA515, modelAPriorDA, modelA435, modelB515, modelBPriorDA, modelB435].forEach(btn => {
+                        if (btn) {
+                            btn.disabled = false;
+                            btn.style.opacity = '1';
+                            btn.style.cursor = 'pointer';
+                        }
+                    });
+                }
+            }
+            
             // Add click handlers for scene buttons
             sceneButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1008,6 +1225,7 @@
                     sceneButtons.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     updateCameraAvailability();
+                    updateModelAvailability();
                     updatePointCloudDisplay();
                     // Update debug info if in debug mode
                     if (typeof updateDebugSceneInfo === 'function') {
@@ -1025,6 +1243,7 @@
                     cameraButtons.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     updateSceneAvailability();
+                    updateModelAvailability();
                     updatePointCloudDisplay();
                     // Update debug info if in debug mode
                     if (typeof updateDebugSceneInfo === 'function') {
@@ -1033,9 +1252,34 @@
                 });
             });
             
+            // Add click handlers for Model A buttons
+            modelAButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Don't do anything if button is disabled
+                    if (this.disabled) return;
+                    
+                    modelAButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updatePointCloudDisplay();
+                });
+            });
+            
+            // Add click handlers for Model B buttons
+            modelBButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Don't do anything if button is disabled
+                    if (this.disabled) return;
+                    
+                    modelBButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updatePointCloudDisplay();
+                });
+            });
+            
             // Initialize display
             updateCameraAvailability();
             updateSceneAvailability();
+            updateModelAvailability();
             updatePointCloudDisplay();
             
             // Function to update debug scene info
@@ -1545,30 +1789,62 @@
                     if (viewerDiv) viewerDiv.style.display = 'block';
                 });
                 
+                // Create a hidden container for capture mode viewers
+                const captureContainer = document.createElement('div');
+                captureContainer.id = 'capture-container';
+                captureContainer.style.position = 'absolute';
+                captureContainer.style.left = '-9999px';
+                captureContainer.style.width = '800px';
+                captureContainer.style.height = '600px';
+                document.body.appendChild(captureContainer);
+                
                 // Load all viewers with capture mode enabled
                 // Note: Using setTimeout to stagger the loading slightly to prevent browser overload
                 const viewerConfigs = [
-                    { id: 'pcd-viewer-microwave-435-raw', path: 'pcds/microwave_435_raw_depth.ply', isL515: false },
-                    { id: 'pcd-viewer-microwave-435-model', path: 'pcds/microwave_435_model_depth.ply', isL515: false },
-                    { id: 'pcd-viewer-microwave-515-raw', path: 'pcds/microwave_515_raw_depth.ply', isL515: true },
-                    { id: 'pcd-viewer-microwave-515-model', path: 'pcds/microwave_515_model_depth.ply', isL515: true },
-                    { id: 'pcd-viewer-canteen-435-raw', path: 'pcds/canteen_435_raw_depth.ply', isL515: false },
-                    { id: 'pcd-viewer-canteen-435-model', path: 'pcds/canteen_435_model_depth.ply', isL515: false },
-                    { id: 'pcd-viewer-canteen-515-raw', path: 'pcds/canteen_515_raw_depth.ply', isL515: true },
-                    { id: 'pcd-viewer-canteen-515-model', path: 'pcds/canteen_515_model_depth.ply', isL515: true },
-                    { id: 'pcd-viewer-stackbowl-435-raw', path: 'pcds/stackbowl_435_raw_depth.ply', isL515: false },
-                    { id: 'pcd-viewer-stackbowl-435-model', path: 'pcds/stackbowl_435_model_depth.ply', isL515: false },
-                    { id: 'pcd-viewer-toothpaste-435-raw', path: 'pcds/toothpaste_435_raw_depth.ply', isL515: false },
-                    { id: 'pcd-viewer-toothpaste-435-model', path: 'pcds/toothpaste_435_model_depth.ply', isL515: false }
+                    // Kitchen (microwave) scenes
+                    { id: 'capture-microwave-435-raw', path: 'pcds/microwave_435_raw_depth.ply', isL515: false },
+                    { id: 'capture-microwave-435-model', path: 'pcds/microwave_435_model_depth.ply', isL515: false },
+                    { id: 'capture-microwave-435-model-435', path: 'pcds/microwave_435_model_435_depth.ply', isL515: false },
+                    { id: 'capture-microwave-435-model-515', path: 'pcds/microwave_435_model_515_depth.ply', isL515: false },
+                    { id: 'capture-microwave-435-model-priorda', path: 'pcds/microwave_435_model_priorda_depth.ply', isL515: false },
+                    { id: 'capture-microwave-515-raw', path: 'pcds/microwave_515_raw_depth.ply', isL515: true },
+                    { id: 'capture-microwave-515-model', path: 'pcds/microwave_515_model_depth.ply', isL515: true },
+                    { id: 'capture-microwave-515-model-435', path: 'pcds/microwave_515_model_435_depth.ply', isL515: true },
+                    { id: 'capture-microwave-515-model-priorda', path: 'pcds/microwave_515_model_priorda_depth.ply', isL515: true },
+                    
+                    // Canteen scenes
+                    { id: 'capture-canteen-435-raw', path: 'pcds/canteen_435_raw_depth.ply', isL515: false },
+                    { id: 'capture-canteen-435-model-435', path: 'pcds/canteen_435_model_435_depth.ply', isL515: false },
+                    { id: 'capture-canteen-435-model-515', path: 'pcds/canteen_435_model_515_depth.ply', isL515: false },
+                    { id: 'capture-canteen-435-model-priorda', path: 'pcds/canteen_435_model_priorda_depth.ply', isL515: false },
+                    { id: 'capture-canteen-515-raw', path: 'pcds/canteen_515_raw_depth.ply', isL515: true },
+                    { id: 'capture-canteen-515-model-435', path: 'pcds/canteen_515_model_435_depth.ply', isL515: true },
+                    { id: 'capture-canteen-515-model-515', path: 'pcds/canteen_515_model_515_depth.ply', isL515: true },
+                    { id: 'capture-canteen-515-model-priorda', path: 'pcds/canteen_515_model_priorda_depth.ply', isL515: true },
+                    
+                    // Stack Bowl scenes
+                    { id: 'capture-stackbowl-435-raw', path: 'pcds/stackbowl_435_raw_depth.ply', isL515: false },
+                    { id: 'capture-stackbowl-435-model-435', path: 'pcds/stackbowl_435_model_435_depth.ply', isL515: false },
+                    
+                    // Toothpaste scenes
+                    { id: 'capture-toothpaste-435-raw', path: 'pcds/toothpaste_435_raw_depth.ply', isL515: false },
+                    { id: 'capture-toothpaste-435-model-435', path: 'pcds/toothpaste_435_model_435_depth.ply', isL515: false }
                 ];
                 
-                // Load all viewers
+                // Create viewer divs and load all viewers
                 viewerConfigs.forEach((config, index) => {
-                    // Stagger loading by 100ms each to prevent browser overload
+                    // Create a div for each viewer
+                    const viewerDiv = document.createElement('div');
+                    viewerDiv.id = config.id;
+                    viewerDiv.style.width = '800px';
+                    viewerDiv.style.height = '600px';
+                    captureContainer.appendChild(viewerDiv);
+                    
+                    // Stagger loading by 200ms each to prevent browser overload
                     setTimeout(() => {
-                        console.log(`Loading viewer ${index + 1}/${viewerConfigs.length}: ${config.id}`);
+                        console.log(`Loading viewer ${index + 1}/${viewerConfigs.length}: ${config.path}`);
                         new OptimizedPointCloudViewer(config.id, config.path, config.isL515, true);
-                    }, index * 100);
+                    }, index * 200);
                 });
             }
             
