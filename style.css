@@ -262,7 +262,7 @@ header::before {
     color: #2c3e50;
     font-weight: 600;
     letter-spacing: 0.5px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .teaser-image {
