@@ -1059,8 +1059,34 @@
                 const activeModelA = document.querySelector('#model-a-selector .selector-btn.active').dataset.model;
                 const activeModelB = document.querySelector('#model-b-selector .selector-btn.active').dataset.model;
                 
-                // Hide all groups
+                // Before hiding groups, dispose any active viewers in the groups being hidden
                 pcdGroups.forEach(group => {
+                    // If this group is currently visible and will be hidden
+                    if (group.style.display !== 'none' && 
+                        (group.dataset.scene !== activeScene || group.dataset.camera !== activeCamera)) {
+                        // Find all loaded viewers in this group
+                        const containers = group.querySelectorAll('.pcd-lazy-container');
+                        containers.forEach(container => {
+                            const viewerId = container.dataset.viewerId;
+                            // Check if viewer exists in global loadedViewers object
+                            if (window.loadedViewers && window.loadedViewers[viewerId]) {
+                                // Dispose the viewer
+                                if (window.loadedViewers[viewerId].dispose) {
+                                    window.loadedViewers[viewerId].dispose();
+                                }
+                                delete window.loadedViewers[viewerId];
+                                
+                                // Reset the container to show placeholder
+                                const placeholder = container.querySelector('.pcd-placeholder');
+                                const button = container.querySelector('.load-interactive-btn');
+                                const viewerDiv = container.querySelector('.pcd-viewer-optimized');
+                                
+                                if (placeholder) placeholder.style.display = 'block';
+                                if (button) button.style.display = 'block';
+                                if (viewerDiv) viewerDiv.style.display = 'none';
+                            }
+                        });
+                    }
                     group.style.display = 'none';
                 });
                 
@@ -1104,11 +1130,11 @@
                                     }
                                     
                                     // If a viewer is currently loaded, dispose it and reset
-                                    if (loadedViewers[viewerId]) {
-                                        if (loadedViewers[viewerId].dispose) {
-                                            loadedViewers[viewerId].dispose();
+                                    if (window.loadedViewers[viewerId]) {
+                                        if (window.loadedViewers[viewerId].dispose) {
+                                            window.loadedViewers[viewerId].dispose();
                                         }
-                                        delete loadedViewers[viewerId];
+                                        delete window.loadedViewers[viewerId];
                                         
                                         // Reset to show placeholder and button
                                         if (placeholder) placeholder.style.display = 'block';
@@ -1152,11 +1178,11 @@
                                     }
                                     
                                     // If a viewer is currently loaded, dispose it and reset
-                                    if (loadedViewers[viewerId]) {
-                                        if (loadedViewers[viewerId].dispose) {
-                                            loadedViewers[viewerId].dispose();
+                                    if (window.loadedViewers[viewerId]) {
+                                        if (window.loadedViewers[viewerId].dispose) {
+                                            window.loadedViewers[viewerId].dispose();
                                         }
-                                        delete loadedViewers[viewerId];
+                                        delete window.loadedViewers[viewerId];
                                         
                                         // Reset to show placeholder and button
                                         if (placeholder) placeholder.style.display = 'block';
@@ -1812,8 +1838,8 @@
                 // Still set up lazy loading for local mode
             }
             
-            // Track loaded viewers
-            const loadedViewers = {};
+            // Track loaded viewers (make it global for access from other functions)
+            window.loadedViewers = window.loadedViewers || {};
             
             // Function to load a viewer on demand
             function loadViewer(container) {
@@ -1822,7 +1848,7 @@
                 const isL515 = container.dataset.isL515 === 'true';
                 
                 // Prevent duplicate loading
-                if (loadedViewers[viewerId]) return;
+                if (window.loadedViewers[viewerId]) return;
                 
                 // Hide placeholder and button
                 const placeholder = container.querySelector('.pcd-placeholder');
@@ -1834,7 +1860,7 @@
                 if (viewerDiv) viewerDiv.style.display = 'block';
                 
                 // Create the viewer with debug mode
-                loadedViewers[viewerId] = new OptimizedPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
+                window.loadedViewers[viewerId] = new OptimizedPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
                 
                 // Update debug info with current scene and camera
                 if (debugMode) {
