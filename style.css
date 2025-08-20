@@ -542,17 +542,17 @@ header::before {
 }
 
 .selector-btn {
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: none;
     background: transparent;
     color: #666;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     border-radius: 20px;
     transition: all 0.3s ease;
     font-family: 'ByteSans', 'Roboto', sans-serif;
-    min-width: 80px;
+    min-width: 70px;
 }
 
 .selector-btn:hover {
@@ -683,6 +683,67 @@ header::before {
     padding: 40px 0;
 }
 
+/* Dataset Selector Styles */
+.dataset-selector-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    max-width: 1200px;
+}
+
+.dataset-selector-container .selector-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+}
+
+.dataset-selector-container .selector-buttons {
+    display: flex;
+    gap: 6px;
+    background: white;
+    padding: 4px;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex-wrap: nowrap;
+}
+
+.rgb-depth-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.rgb-depth-item {
+    text-align: center;
+}
+
+.rgb-depth-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.rgb-depth-item img:hover {
+    transform: scale(1.02);
+}
+
+.rgb-depth-item p {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 600;
+}
+
 .dataset h2 {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -722,14 +783,7 @@ header::before {
     font-size: 1rem;
 }
 
-.dataset-images img {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    display: block;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
+/* Removed old static dataset-images img styling - now using rgb-depth-pair */
 
 .dataset-download {
     text-align: center;
@@ -1491,5 +1545,20 @@ footer a:hover {
         flex-direction: column;
         gap: 20px;
         padding: 15px;
+    }
+    
+    .dataset-selector-container {
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .dataset-selector-container .selector-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .rgb-depth-pair {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }

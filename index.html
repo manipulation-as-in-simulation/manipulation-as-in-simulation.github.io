@@ -169,7 +169,7 @@
         <div class="container">
             <h2>ByteDepth Dataset</h2>
             <p>We introduce ByteDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
-            
+            <p>
             <div class="dataset-stats">
                 <div class="stat-item">
                     <h3>170K+</h3>
@@ -185,8 +185,48 @@
                 </div>
             </div>
             
-            <div class="dataset-images">
-                <img src="figs/dataset_depth.png" alt="Dataset Examples">
+            <!-- Dataset Image Selector -->
+            <div class="dataset-selector-container">
+                <div class="selector-group">
+                    <span class="selector-label">Camera:</span>
+                    <div class="selector-buttons" id="camera-dataset-selector">
+                        <button class="selector-btn active" data-camera="d435">D435</button>
+                        <button class="selector-btn" data-camera="d415">D415</button>
+                        <button class="selector-btn" data-camera="d455">D455</button>
+                        <button class="selector-btn" data-camera="d405">D405</button>
+                        <button class="selector-btn" data-camera="l515">L515</button>
+                        <button class="selector-btn" data-camera="kinect">Kinect</button>
+                        <button class="selector-btn" data-camera="zed2i_neural">ZED2i-N.</button>
+                        <button class="selector-btn" data-camera="zed2i_ultra">ZED2i-U.</button>
+                        <button class="selector-btn" data-camera="zed2i_quality">ZED2i-Q.</button>
+                        <button class="selector-btn" data-camera="zed2i_performance">ZED2i-P.</button>
+                    </div>
+                </div>
+                <div class="selector-group">
+                    <span class="selector-label">Scene:</span>
+                    <div class="selector-buttons" id="scene-dataset-selector">
+                        <button class="selector-btn active" data-scene="living">Living Room</button>
+                        <button class="selector-btn" data-scene="kichen">Kitchen</button>
+                        <button class="selector-btn" data-scene="bedroom">Bedroom</button>
+                        <button class="selector-btn" data-scene="bathroom">Bathroom</button>
+                        <button class="selector-btn" data-scene="office">Office</button>
+                        <button class="selector-btn" data-scene="market">Market</button>
+                        <button class="selector-btn" data-scene="break_room">Break Room</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dataset-images" id="dataset-images-container">
+                <div class="rgb-depth-pair">
+                    <div class="rgb-depth-item">
+                        <img id="dataset-rgb-image" src="figs/rgb_depth/camera_d435/living_rgb.png" alt="RGB Image">
+                        <p>RGB Image</p>
+                    </div>
+                    <div class="rgb-depth-item">
+                        <img id="dataset-depth-image" src="figs/rgb_depth/camera_d435/living_depth.png" alt="Depth Image">
+                        <p>Depth Image</p>
+                    </div>
+                </div>
             </div>
             
             <div class="dataset-download">
@@ -884,6 +924,83 @@
             
             // Initialize accuracy display
             updateAccuracyDisplay();
+            
+            // ByteDepth Dataset Image Selector
+            const cameraDatasetButtons = document.querySelectorAll('#camera-dataset-selector .selector-btn');
+            const sceneDatasetButtons = document.querySelectorAll('#scene-dataset-selector .selector-btn');
+            const rgbImage = document.getElementById('dataset-rgb-image');
+            const depthImage = document.getElementById('dataset-depth-image');
+            
+            // Camera folder mappings
+            const cameraFolderMap = {
+                'd435': 'camera_d435',
+                'd415': 'camera_d415',
+                'd455': 'camera_d455',
+                'd405': 'camera_d405',
+                'l515': 'camera_l515',
+                'kinect': 'camera_kinect',
+                'zed2i_neural': 'camera_zed2i_neural',
+                'zed2i_ultra': 'camera_zed2i_ultra',
+                'zed2i_quality': 'camera_zed2i_quality',
+                'zed2i_performance': 'camera_zed2i_performance'
+            };
+            
+            // Scene file mappings (note: "kichen" is spelled that way in the files)
+            const sceneFileMap = {
+                'living': 'living',
+                'kichen': 'kichen',
+                'bedroom': 'bedroom',
+                'bathroom': 'bathroom',
+                'office': 'office',
+                'market': 'market',
+                'break_room': 'Break Room'
+            };
+            
+            function updateDatasetImages() {
+                const activeCamera = document.querySelector('#camera-dataset-selector .selector-btn.active')?.dataset.camera;
+                const activeScene = document.querySelector('#scene-dataset-selector .selector-btn.active')?.dataset.scene;
+                
+                if (!activeCamera || !activeScene) return;
+                
+                const cameraFolder = cameraFolderMap[activeCamera];
+                const sceneFile = sceneFileMap[activeScene];
+                
+                if (cameraFolder && sceneFile) {
+                    const basePath = `figs/rgb_depth/${cameraFolder}/`;
+                    rgbImage.src = `${basePath}${sceneFile}_rgb.png`;
+                    depthImage.src = `${basePath}${sceneFile}_depth.png`;
+                    
+                    // Add fade effect
+                    rgbImage.style.opacity = '0';
+                    depthImage.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        rgbImage.style.opacity = '1';
+                        depthImage.style.opacity = '1';
+                    }, 50);
+                }
+            }
+            
+            // Add click handlers for camera dataset buttons
+            cameraDatasetButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    cameraDatasetButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updateDatasetImages();
+                });
+            });
+            
+            // Add click handlers for scene dataset buttons
+            sceneDatasetButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    sceneDatasetButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updateDatasetImages();
+                });
+            });
+            
+            // Initialize dataset images
+            updateDatasetImages();
         });
         
         // Optimized Point Cloud Viewer for 90k+ points
