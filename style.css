@@ -1665,9 +1665,15 @@ footer a:hover {
         padding: 15px;
     }
     
+    .dataset-selector-container .selector-group {
+        width: 100%;
+        justify-content: center;
+    }
+    
     .dataset-selector-container .selector-buttons {
         flex-wrap: wrap;
         justify-content: center;
+        max-width: 100%;
     }
     
     .rgb-depth-pair {

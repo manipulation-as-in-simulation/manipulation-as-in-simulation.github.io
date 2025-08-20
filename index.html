@@ -202,13 +202,24 @@
                 <div class="selector-group">
                     <span class="selector-label">Scene:</span>
                     <div class="selector-buttons" id="scene-dataset-selector">
-                        <button class="selector-btn active" data-scene="living">Living Room</button>
+                        <button class="selector-btn active" data-scene="living">Living</button>
                         <button class="selector-btn" data-scene="kichen">Kitchen</button>
                         <button class="selector-btn" data-scene="bedroom">Bedroom</button>
                         <button class="selector-btn" data-scene="bathroom">Bathroom</button>
                         <button class="selector-btn" data-scene="office">Office</button>
                         <button class="selector-btn" data-scene="market">Market</button>
-                        <button class="selector-btn" data-scene="break_room">Break Room</button>
+                        <button class="selector-btn" data-scene="BreakRoom">Break Room</button>
+                    </div>
+                </div>
+                <div class="selector-group">
+                    <span class="selector-label">Example Pairs:</span>
+                    <div class="selector-buttons" id="pair-dataset-selector">
+                        <button class="selector-btn active" data-pair="0">1</button>
+                        <button class="selector-btn" data-pair="1">2</button>
+                        <button class="selector-btn" data-pair="2">3</button>
+                        <button class="selector-btn" data-pair="3">4</button>
+                        <button class="selector-btn" data-pair="4">5</button>
+                        <button class="selector-btn" data-pair="5">6</button>
                     </div>
                 </div>
             </div>
@@ -216,11 +227,11 @@
             <div class="dataset-images" id="dataset-images-container">
                 <div class="rgb-depth-pair">
                     <div class="rgb-depth-item">
-                        <img id="dataset-rgb-image" src="figs/rgb_depth/camera_d435/living_rgb.png" alt="RGB Image">
+                        <img id="dataset-rgb-image" src="figs/rgb_depth/camera_d435/living_rgb_0.png" alt="RGB Image">
                         <p>RGB Image</p>
                     </div>
                     <div class="rgb-depth-item">
-                        <img id="dataset-depth-image" src="figs/rgb_depth/camera_d435/living_depth.png" alt="Depth Image">
+                        <img id="dataset-depth-image" src="figs/rgb_depth/camera_d435/living_depth_0.png" alt="Depth Image">
                         <p>Depth Image</p>
                     </div>
                 </div>
@@ -1408,6 +1419,7 @@
             // ByteDepth Dataset Image Selector
             const cameraDatasetButtons = document.querySelectorAll('#camera-dataset-selector .selector-btn');
             const sceneDatasetButtons = document.querySelectorAll('#scene-dataset-selector .selector-btn');
+            const pairDatasetButtons = document.querySelectorAll('#pair-dataset-selector .selector-btn');
             const rgbImage = document.getElementById('dataset-rgb-image');
             const depthImage = document.getElementById('dataset-depth-image');
             
@@ -1425,7 +1437,7 @@
                 'zed2i_performance': 'camera_zed2i_performance'
             };
             
-            // Scene file mappings (note: "kichen" is spelled that way in the files)
+            // Scene file mappings
             const sceneFileMap = {
                 'living': 'living',
                 'kichen': 'kichen',
@@ -1433,22 +1445,23 @@
                 'bathroom': 'bathroom',
                 'office': 'office',
                 'market': 'market',
-                'break_room': 'Break Room'
+                'BreakRoom': 'BreakRoom'
             };
             
             function updateDatasetImages() {
                 const activeCamera = document.querySelector('#camera-dataset-selector .selector-btn.active')?.dataset.camera;
                 const activeScene = document.querySelector('#scene-dataset-selector .selector-btn.active')?.dataset.scene;
+                const activePair = document.querySelector('#pair-dataset-selector .selector-btn.active')?.dataset.pair;
                 
-                if (!activeCamera || !activeScene) return;
+                if (!activeCamera || !activeScene || activePair === undefined) return;
                 
                 const cameraFolder = cameraFolderMap[activeCamera];
                 const sceneFile = sceneFileMap[activeScene];
                 
                 if (cameraFolder && sceneFile) {
                     const basePath = `figs/rgb_depth/${cameraFolder}/`;
-                    rgbImage.src = `${basePath}${sceneFile}_rgb.png`;
-                    depthImage.src = `${basePath}${sceneFile}_depth.png`;
+                    rgbImage.src = `${basePath}${sceneFile}_rgb_${activePair}.png`;
+                    depthImage.src = `${basePath}${sceneFile}_depth_${activePair}.png`;
                     
                     // Add fade effect
                     rgbImage.style.opacity = '0';
@@ -1474,6 +1487,15 @@
             sceneDatasetButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     sceneDatasetButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    updateDatasetImages();
+                });
+            });
+            
+            // Add click handlers for pair dataset buttons
+            pairDatasetButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    pairDatasetButtons.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     updateDatasetImages();
                 });
