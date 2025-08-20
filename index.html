@@ -318,6 +318,8 @@
                         <div class="selector-buttons" id="scene-selector">
                             <button class="selector-btn active" data-scene="kitchen">Kitchen</button>
                             <button class="selector-btn" data-scene="canteen">Canteen</button>
+                            <button class="selector-btn" data-scene="stackbowl">Stack Bowl</button>
+                            <button class="selector-btn" data-scene="toothpaste">Place Toothpaste</button>
                         </div>
                     </div>
                     <div class="selector-group">
@@ -462,6 +464,61 @@
                     </div>
                 </div>
                     </div>
+                    
+                    <!-- Stack Bowl D435 -->
+                    <div class="pcd-scene-camera-group" data-scene="stackbowl" data-camera="435" style="display: none;">
+                        <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Stack Bowl Scene - D435 Camera</h4>
+                        <div class="pcd-grid">
+                            <div class="pcd-item">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-stackbowl-435-raw" data-ply-path="pcds/stackbowl_435_raw_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/stackbowl_435_raw_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-stackbowl-435-raw" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Raw Depth Point Cloud</p>
+                            </div>
+                            <div class="pcd-item">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-stackbowl-435-model" data-ply-path="pcds/stackbowl_435_model_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/stackbowl_435_model_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-stackbowl-435-model" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>CDM-D435 Output Point Cloud</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Place Toothpaste D435 -->
+                    <div class="pcd-scene-camera-group" data-scene="toothpaste" data-camera="435" style="display: none;">
+                        <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Place Toothpaste Scene - D435 Camera</h4>
+                        <div class="pcd-grid">
+                            <div class="pcd-item">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-toothpaste-435-raw" data-ply-path="pcds/toothpaste_435_raw_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/toothpaste_435_raw_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-toothpaste-435-raw" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>Raw Depth Point Cloud</p>
+                            </div>
+                            <div class="pcd-item">
+                                <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-toothpaste-435-model" data-ply-path="pcds/toothpaste_435_model_depth.ply" data-is-l515="false">
+                                    <img class="pcd-placeholder" src="screenshots/toothpaste_435_model_depth.png" alt="Loading...">
+                                    <button class="load-interactive-btn">Load Interactive View</button>
+                                    <div id="pcd-viewer-toothpaste-435-model" class="pcd-viewer-optimized" style="display: none;">
+                                        <div class="pcd-loading">Initializing viewer...</div>
+                                    </div>
+                                </div>
+                                <p>CDM-D435 Output Point Cloud</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div> <!-- End of pcd-dynamic-display -->
             </div>
         </div>
@@ -885,11 +942,72 @@
                 }
             }
             
+            function updateCameraAvailability() {
+                const activeScene = document.querySelector('#scene-selector .selector-btn.active').dataset.scene;
+                const l515Button = document.querySelector('#camera-selector .selector-btn[data-camera="515"]');
+                const d435Button = document.querySelector('#camera-selector .selector-btn[data-camera="435"]');
+                
+                // Disable L515 for Stack Bowl and Place Toothpaste scenes
+                if (activeScene === 'stackbowl' || activeScene === 'toothpaste') {
+                    l515Button.disabled = true;
+                    l515Button.style.opacity = '0.5';
+                    l515Button.style.cursor = 'not-allowed';
+                    
+                    // If L515 is currently selected, switch to D435
+                    if (l515Button.classList.contains('active')) {
+                        l515Button.classList.remove('active');
+                        d435Button.classList.add('active');
+                    }
+                } else {
+                    l515Button.disabled = false;
+                    l515Button.style.opacity = '1';
+                    l515Button.style.cursor = 'pointer';
+                }
+            }
+            
+            function updateSceneAvailability() {
+                const activeCamera = document.querySelector('#camera-selector .selector-btn.active').dataset.camera;
+                const stackBowlButton = document.querySelector('#scene-selector .selector-btn[data-scene="stackbowl"]');
+                const toothpasteButton = document.querySelector('#scene-selector .selector-btn[data-scene="toothpaste"]');
+                const kitchenButton = document.querySelector('#scene-selector .selector-btn[data-scene="kitchen"]');
+                const canteenButton = document.querySelector('#scene-selector .selector-btn[data-scene="canteen"]');
+                
+                // Disable Stack Bowl and Place Toothpaste scenes when L515 is selected
+                if (activeCamera === '515') {
+                    stackBowlButton.disabled = true;
+                    stackBowlButton.style.opacity = '0.5';
+                    stackBowlButton.style.cursor = 'not-allowed';
+                    
+                    toothpasteButton.disabled = true;
+                    toothpasteButton.style.opacity = '0.5';
+                    toothpasteButton.style.cursor = 'not-allowed';
+                    
+                    // If Stack Bowl or Toothpaste is currently selected, switch to Kitchen
+                    const activeScene = document.querySelector('#scene-selector .selector-btn.active').dataset.scene;
+                    if (activeScene === 'stackbowl' || activeScene === 'toothpaste') {
+                        document.querySelector('#scene-selector .selector-btn.active').classList.remove('active');
+                        kitchenButton.classList.add('active');
+                    }
+                } else {
+                    stackBowlButton.disabled = false;
+                    stackBowlButton.style.opacity = '1';
+                    stackBowlButton.style.cursor = 'pointer';
+                    
+                    toothpasteButton.disabled = false;
+                    toothpasteButton.style.opacity = '1';
+                    toothpasteButton.style.cursor = 'pointer';
+                }
+            }
+            
             // Add click handlers for scene buttons
             sceneButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
+                    // Don't do anything if button is disabled
+                    if (this.disabled) return;
+                    
                     sceneButtons.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
+                    updateCameraAvailability();
                     updatePointCloudDisplay();
                     // Update debug info if in debug mode
                     if (typeof updateDebugSceneInfo === 'function') {
@@ -901,8 +1019,12 @@
             // Add click handlers for camera buttons
             cameraButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
+                    // Don't do anything if button is disabled
+                    if (this.disabled) return;
+                    
                     cameraButtons.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
+                    updateSceneAvailability();
                     updatePointCloudDisplay();
                     // Update debug info if in debug mode
                     if (typeof updateDebugSceneInfo === 'function') {
@@ -912,6 +1034,8 @@
             });
             
             // Initialize display
+            updateCameraAvailability();
+            updateSceneAvailability();
             updatePointCloudDisplay();
             
             // Function to update debug scene info
@@ -1130,8 +1254,8 @@
                     // L515 camera position
                     this.camera.position.set(0.278, 1.856, 1.286);
                 } else {
-                    // D435 camera position (original)
-                    this.camera.position.set(-0.041, 1.196, 1.983);
+                    // D435 camera position (updated)
+                    this.camera.position.set(-0.169, 1.908, 1.173);
                 }
                 
                 // Set the up vector to ensure correct orientation
@@ -1160,8 +1284,8 @@
                     // L515 target
                     this.controls.target.set(-0.002, -0.351, 0.113);
                 } else {
-                    // D435 target (original)
-                    this.controls.target.set(-0.034, -0.351, 0);
+                    // D435 target (updated)
+                    this.controls.target.set(-0.107, -0.351, 0.068);
                 }
                 this.controls.update();
 
@@ -1431,7 +1555,11 @@
                     { id: 'pcd-viewer-canteen-435-raw', path: 'pcds/canteen_435_raw_depth.ply', isL515: false },
                     { id: 'pcd-viewer-canteen-435-model', path: 'pcds/canteen_435_model_depth.ply', isL515: false },
                     { id: 'pcd-viewer-canteen-515-raw', path: 'pcds/canteen_515_raw_depth.ply', isL515: true },
-                    { id: 'pcd-viewer-canteen-515-model', path: 'pcds/canteen_515_model_depth.ply', isL515: true }
+                    { id: 'pcd-viewer-canteen-515-model', path: 'pcds/canteen_515_model_depth.ply', isL515: true },
+                    { id: 'pcd-viewer-stackbowl-435-raw', path: 'pcds/stackbowl_435_raw_depth.ply', isL515: false },
+                    { id: 'pcd-viewer-stackbowl-435-model', path: 'pcds/stackbowl_435_model_depth.ply', isL515: false },
+                    { id: 'pcd-viewer-toothpaste-435-raw', path: 'pcds/toothpaste_435_raw_depth.ply', isL515: false },
+                    { id: 'pcd-viewer-toothpaste-435-model', path: 'pcds/toothpaste_435_model_depth.ply', isL515: false }
                 ];
                 
                 // Load all viewers
