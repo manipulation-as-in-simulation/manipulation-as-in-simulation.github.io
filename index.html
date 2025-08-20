@@ -329,6 +329,30 @@
                     </div>
                 </div>
                 
+                <!-- Debug Info Panel (only visible in debug mode) -->
+                <div id="debug-panel" class="debug-panel" style="display: none;">
+                    <h4>Camera View Parameters (Debug Mode)</h4>
+                    <div class="debug-content">
+                        <div class="debug-viewer-info">
+                            <h5>Left Viewer (Raw Depth)</h5>
+                            <div class="debug-params">
+                                <div>Position: <span id="debug-left-pos">(0, 0, 0)</span></div>
+                                <div>Target: <span id="debug-left-target">(0, 0, 0)</span></div>
+                            </div>
+                        </div>
+                        <div class="debug-viewer-info">
+                            <h5>Right Viewer (CDM Output)</h5>
+                            <div class="debug-params">
+                                <div>Position: <span id="debug-right-pos">(0, 0, 0)</span></div>
+                                <div>Target: <span id="debug-right-target">(0, 0, 0)</span></div>
+                            </div>
+                        </div>
+                        <div class="debug-scene-info">
+                            <small>Scene: <span id="debug-scene">-</span> | Camera: <span id="debug-camera">-</span></small>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Dynamic Point Cloud Display Area -->
                 <div id="pcd-dynamic-display">
                     <!-- Kitchen D435 (default view) -->
@@ -867,6 +891,10 @@
                     sceneButtons.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     updatePointCloudDisplay();
+                    // Update debug info if in debug mode
+                    if (typeof updateDebugSceneInfo === 'function') {
+                        updateDebugSceneInfo();
+                    }
                 });
             });
             
@@ -876,11 +904,31 @@
                     cameraButtons.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     updatePointCloudDisplay();
+                    // Update debug info if in debug mode
+                    if (typeof updateDebugSceneInfo === 'function') {
+                        updateDebugSceneInfo();
+                    }
                 });
             });
             
             // Initialize display
             updatePointCloudDisplay();
+            
+            // Function to update debug scene info
+            function updateDebugSceneInfo() {
+                const activeScene = document.querySelector('#scene-selector .selector-btn.active')?.dataset.scene;
+                const activeCamera = document.querySelector('#camera-selector .selector-btn.active')?.dataset.camera;
+                
+                const sceneElement = document.getElementById('debug-scene');
+                const cameraElement = document.getElementById('debug-camera');
+                
+                if (sceneElement) {
+                    sceneElement.textContent = activeScene ? activeScene.charAt(0).toUpperCase() + activeScene.slice(1) : '-';
+                }
+                if (cameraElement) {
+                    cameraElement.textContent = activeCamera ? `D${activeCamera}` : '-';
+                }
+            }
             
             // Depth Accuracy Dataset Selector
             const datasetButtons = document.querySelectorAll('#dataset-selector .selector-btn');
@@ -1005,13 +1053,15 @@
         
         // Optimized Point Cloud Viewer for 90k+ points
         class OptimizedPointCloudViewer {
-            constructor(containerId, plyPath, isL515 = false, captureMode = false) {
+            constructor(containerId, plyPath, isL515 = false, captureMode = false, debugMode = false) {
                 this.container = document.getElementById(containerId);
                 this.plyPath = plyPath;
                 this.currentLOD = null;
                 this.isLoading = true;
                 this.isL515 = isL515; // Flag to use different camera settings for L515
                 this.captureMode = captureMode; // Flag for screenshot capture mode
+                this.debugMode = debugMode; // Flag for debug mode
+                this.viewerId = containerId; // Store viewer ID for tracking
                 
                 // Point cloud visualization settings
                 this.pointSize = 0.02; // Adjust this value to change point size
@@ -1078,7 +1128,7 @@
                 // Set camera position based on camera type
                 if (this.isL515) {
                     // L515 camera position
-                    this.camera.position.set(0.550, 0.760, 2.161);
+                    this.camera.position.set(0.278, 1.856, 1.286);
                 } else {
                     // D435 camera position (original)
                     this.camera.position.set(-0.041, 1.196, 1.983);
@@ -1108,7 +1158,7 @@
                 // Set target based on camera type
                 if (this.isL515) {
                     // L515 target
-                    this.controls.target.set(-0.027, -0.351, -0.020);
+                    this.controls.target.set(-0.002, -0.351, 0.113);
                 } else {
                     // D435 target (original)
                     this.controls.target.set(-0.034, -0.351, 0);
@@ -1233,18 +1283,35 @@
                 // Always render for smooth interaction
                 this.renderer.render(this.scene, this.camera);
                 
-                // Update camera info display (comment out for performance when not tracking)
-                // this.updateCameraInfo();
+                // Update camera info display in debug mode
+                if (this.debugMode) {
+                    this.updateCameraInfo();
+                }
             }
             
             updateCameraInfo() {
-                // Only update camera info if this is the tracked viewer
-                if (window.trackedViewer === this) {
-                    const pos = this.camera.position;
-                    const target = this.controls.target;
+                const pos = this.camera.position;
+                const target = this.controls.target;
+                
+                // Determine which viewer this is based on the viewer ID
+                const isRawViewer = this.viewerId.includes('raw');
+                const isModelViewer = this.viewerId.includes('model');
+                
+                if (isRawViewer) {
+                    // Update left viewer (raw depth) info
+                    const posElement = document.getElementById('debug-left-pos');
+                    const targetElement = document.getElementById('debug-left-target');
                     
-                    const posElement = document.getElementById('cam-pos');
-                    const targetElement = document.getElementById('cam-target');
+                    if (posElement) {
+                        posElement.textContent = `(${pos.x.toFixed(3)}, ${pos.y.toFixed(3)}, ${pos.z.toFixed(3)})`;
+                    }
+                    if (targetElement) {
+                        targetElement.textContent = `(${target.x.toFixed(3)}, ${target.y.toFixed(3)}, ${target.z.toFixed(3)})`;
+                    }
+                } else if (isModelViewer) {
+                    // Update right viewer (CDM output) info
+                    const posElement = document.getElementById('debug-right-pos');
+                    const targetElement = document.getElementById('debug-right-target');
                     
                     if (posElement) {
                         posElement.textContent = `(${pos.x.toFixed(3)}, ${pos.y.toFixed(3)}, ${pos.z.toFixed(3)})`;
@@ -1264,9 +1331,18 @@
 
         // Initialize viewers when page loads
         window.addEventListener('DOMContentLoaded', function() {
-            // Check URL parameters for capture mode
+            // Check URL parameters for capture mode and debug mode
             const urlParams = new URLSearchParams(window.location.search);
             const captureMode = urlParams.get('capture') === 'true';
+            const debugMode = urlParams.get('debug') === 'true';
+            
+            // Show debug panel if in debug mode
+            if (debugMode) {
+                const debugPanel = document.getElementById('debug-panel');
+                if (debugPanel) {
+                    debugPanel.style.display = 'block';
+                }
+            }
             
             // Check if running locally
             const isLocal = window.location.protocol === 'file:';
@@ -1305,8 +1381,13 @@
                 if (button) button.style.display = 'none';
                 if (viewerDiv) viewerDiv.style.display = 'block';
                 
-                // Create the viewer
-                loadedViewers[viewerId] = new OptimizedPointCloudViewer(viewerId, plyPath, isL515, false);
+                // Create the viewer with debug mode
+                loadedViewers[viewerId] = new OptimizedPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
+                
+                // Update debug info with current scene and camera
+                if (debugMode) {
+                    updateDebugSceneInfo();
+                }
             }
             
             // Set up lazy loading buttons
@@ -1324,7 +1405,12 @@
                 console.log('Screenshot capture mode enabled');
                 alert('Screenshot capture mode enabled. The page will automatically download screenshots of all point clouds.');
                 
-                // First, make all viewer containers visible
+                // First, make ALL scene-camera groups visible so all viewers can be loaded
+                document.querySelectorAll('.pcd-scene-camera-group').forEach(group => {
+                    group.style.display = 'block';
+                });
+                
+                // Then make all viewer containers visible
                 document.querySelectorAll('.pcd-lazy-container').forEach(container => {
                     const placeholder = container.querySelector('.pcd-placeholder');
                     const button = container.querySelector('.load-interactive-btn');
@@ -1336,16 +1422,26 @@
                 });
                 
                 // Load all viewers with capture mode enabled
-                const viewers = [
-                    new OptimizedPointCloudViewer('pcd-viewer-microwave-435-raw', 'pcds/microwave_435_raw_depth.ply', false, true),
-                    new OptimizedPointCloudViewer('pcd-viewer-microwave-435-model', 'pcds/microwave_435_model_depth.ply', false, true),
-                    new OptimizedPointCloudViewer('pcd-viewer-microwave-515-raw', 'pcds/microwave_515_raw_depth.ply', true, true),
-                    new OptimizedPointCloudViewer('pcd-viewer-microwave-515-model', 'pcds/microwave_515_model_depth.ply', true, true),
-                    new OptimizedPointCloudViewer('pcd-viewer-canteen-435-raw', 'pcds/canteen_435_raw_depth.ply', false, true),
-                    new OptimizedPointCloudViewer('pcd-viewer-canteen-435-model', 'pcds/canteen_435_model_depth.ply', false, true),
-                    new OptimizedPointCloudViewer('pcd-viewer-canteen-515-raw', 'pcds/canteen_515_raw_depth.ply', true, true),
-                    new OptimizedPointCloudViewer('pcd-viewer-canteen-515-model', 'pcds/canteen_515_model_depth.ply', true, true)
+                // Note: Using setTimeout to stagger the loading slightly to prevent browser overload
+                const viewerConfigs = [
+                    { id: 'pcd-viewer-microwave-435-raw', path: 'pcds/microwave_435_raw_depth.ply', isL515: false },
+                    { id: 'pcd-viewer-microwave-435-model', path: 'pcds/microwave_435_model_depth.ply', isL515: false },
+                    { id: 'pcd-viewer-microwave-515-raw', path: 'pcds/microwave_515_raw_depth.ply', isL515: true },
+                    { id: 'pcd-viewer-microwave-515-model', path: 'pcds/microwave_515_model_depth.ply', isL515: true },
+                    { id: 'pcd-viewer-canteen-435-raw', path: 'pcds/canteen_435_raw_depth.ply', isL515: false },
+                    { id: 'pcd-viewer-canteen-435-model', path: 'pcds/canteen_435_model_depth.ply', isL515: false },
+                    { id: 'pcd-viewer-canteen-515-raw', path: 'pcds/canteen_515_raw_depth.ply', isL515: true },
+                    { id: 'pcd-viewer-canteen-515-model', path: 'pcds/canteen_515_model_depth.ply', isL515: true }
                 ];
+                
+                // Load all viewers
+                viewerConfigs.forEach((config, index) => {
+                    // Stagger loading by 100ms each to prevent browser overload
+                    setTimeout(() => {
+                        console.log(`Loading viewer ${index + 1}/${viewerConfigs.length}: ${config.id}`);
+                        new OptimizedPointCloudViewer(config.id, config.path, config.isL515, true);
+                    }, index * 100);
+                });
             }
             
             // Camera tracking - uncomment to track a specific viewer
