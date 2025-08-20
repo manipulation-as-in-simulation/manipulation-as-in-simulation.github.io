@@ -86,7 +86,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="#quantitative-results" class="contribution-link">
+                <a href="#setup" class="contribution-link">
                     <div class="contribution-compact">
                         <div class="contribution-icon">🚀</div>
                         <div class="contribution-text">
@@ -598,12 +598,55 @@
             </div>
             
             <div class="accuracy-insights">
-                <h3>Key Insights</h3>
-                <ul>
+                <h3>Observations</h3>
+                <ul></ul>
+                    <li>Raw depth shows larger errors than manufacturer specifications (may be dataset bias)</li>
                     <li>CDMs maintain high accuracy within the camera's optimal working range</li>
-                    <li>Raw depth often shows larger errors than manufacturer specifications, which CDMs effectively correct</li>
                     <li>Performance trends follow the original camera capabilities while significantly reducing noise</li>
                 </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="setup" id="setup">
+        <div class="container">
+            <h2>UR5 Manipulation Experiment Setup</h2>
+            <p class="setup-description">Experimental setup for simulation and real-world experiments with two different cameras (D435 and L515) for kitchen and canteen tasks.</p>
+            
+            <div class="setup-row">
+                <div class="setup-item-exp">
+                    <img src="figs/ur5-setup-sim.png" alt="Overall setup (sim)">
+                    <h4>Overall Setup (Simulation)</h4>
+                    <p>Simulation environment with camera pose randomization for demonstration generation</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/sim-range-microwave.png" alt="Kitchen task randomization (sim)">
+                    <h4>Kitchen Task Randomization (Sim)</h4>
+                    <p>Training environment with randomization for bowl and microwave positions</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/sim-range-plate.png" alt="Canteen task randomization (sim)">
+                    <h4>Canteen Task Randomization (Sim)</h4>
+                    <p>Simulation environment with randomization for plate and box positions</p>
+                </div>
+            </div>
+            
+            <div class="setup-row">
+                <div class="setup-item-exp">
+                    <img src="figs/ur5-setup.png" alt="Overall setup (real)">
+                    <h4>Overall Setup (Real)</h4>
+                    <p>Real-world UR5 robot setup with third-view depth camera for manipulation tasks</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/kitchen-distribution.png" alt="Kitchen task distribution (real)">
+                    <h4>Kitchen Task Distribution (Real)</h4>
+                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
+                </div>
+                <div class="setup-item-exp">
+                    <img src="figs/canteen-distribution.png" alt="Canteen task distribution (real)">
+                    <h4>Canteen Task Distribution (Real)</h4>
+                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
+                </div>
             </div>
         </div>
     </section>
@@ -829,50 +872,6 @@
                         <p>The policy trained without CDM cannot generalize to unseen sizes, while CDM-enhanced policies show better generalization.</p>
                         <img src="figs/success-rate-hist.png" alt="Success Rate Histogram">
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="setup">
-        <div class="container">
-            <h2>UR5 Manipulation Experiment Setup</h2>
-            <p class="setup-description">Experimental setup for simulation and real-world experiments with two different cameras (D435 and L515) for kitchen and canteen tasks.</p>
-            
-            <div class="setup-row">
-                <div class="setup-item-exp">
-                    <img src="figs/ur5-setup-sim.png" alt="Overall setup (sim)">
-                    <h4>Overall Setup (Simulation)</h4>
-                    <p>Simulation environment with camera pose randomization for demonstration generation</p>
-                </div>
-                <div class="setup-item-exp">
-                    <img src="figs/sim-range-microwave.png" alt="Kitchen task randomization (sim)">
-                    <h4>Kitchen Task Randomization (Sim)</h4>
-                    <p>Training environment with randomization for bowl and microwave positions</p>
-                </div>
-                <div class="setup-item-exp">
-                    <img src="figs/sim-range-plate.png" alt="Canteen task randomization (sim)">
-                    <h4>Canteen Task Randomization (Sim)</h4>
-                    <p>Simulation environment with randomization for plate and box positions</p>
-                </div>
-            </div>
-            
-            <div class="setup-row">
-                <div class="setup-item-exp">
-                    <img src="figs/ur5-setup.png" alt="Overall setup (real)">
-                    <h4>Overall Setup (Real)</h4>
-                    <p>Real-world UR5 robot setup with third-view depth camera for manipulation tasks</p>
-                </div>
-                <div class="setup-item-exp">
-                    <img src="figs/kitchen-distribution.png" alt="Kitchen task distribution (real)">
-                    <h4>Kitchen Task Distribution (Real)</h4>
-                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
-                </div>
-                <div class="setup-item-exp">
-                    <img src="figs/canteen-distribution.png" alt="Canteen task distribution (real)">
-                    <h4>Canteen Task Distribution (Real)</h4>
-                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
                 </div>
             </div>
         </div>
