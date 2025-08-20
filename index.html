@@ -1031,12 +1031,16 @@
                 },
                 'stackbowl': {
                     '435': {
-                        '435': 'pcds/stackbowl_435_model_435_depth.ply'
+                        '435': 'pcds/stackbowl_435_model_435_depth.ply',
+                        '515': 'pcds/stackbowl_435_model_515_depth.ply',
+                        'priorda': 'pcds/stackbowl_435_model_priorda_depth.ply'
                     }
                 },
                 'toothpaste': {
                     '435': {
-                        '435': 'pcds/toothpaste_435_model_435_depth.ply'
+                        '435': 'pcds/toothpaste_435_model_435_depth.ply',
+                        '515': 'pcds/toothpaste_435_model_515_depth.ply',
+                        'priorda': 'pcds/toothpaste_435_model_priorda_depth.ply'
                     }
                 }
             };
@@ -1241,45 +1245,14 @@
                 const modelBPriorDA = document.querySelector('#model-b-selector .selector-btn[data-model="priorda"]');
                 const modelB435 = document.querySelector('#model-b-selector .selector-btn[data-model="435"]');
                 
-                // For stackbowl and toothpaste, only CDM-D435 is available
-                if (activeScene === 'stackbowl' || activeScene === 'toothpaste') {
-                    // Disable L515 and PriorDA for both Model A and Model B
-                    [modelA515, modelAPriorDA, modelB515, modelBPriorDA].forEach(btn => {
-                        if (btn) {
-                            btn.disabled = true;
-                            btn.style.opacity = '0.5';
-                            btn.style.cursor = 'not-allowed';
-                        }
-                    });
-                    
-                    // Enable CDM-D435
-                    [modelA435, modelB435].forEach(btn => {
-                        if (btn) {
-                            btn.disabled = false;
-                            btn.style.opacity = '1';
-                            btn.style.cursor = 'pointer';
-                        }
-                    });
-                    
-                    // If currently selected model is not available, switch to CDM-D435
-                    if (modelA515?.classList.contains('active') || modelAPriorDA?.classList.contains('active')) {
-                        document.querySelector('#model-a-selector .selector-btn.active').classList.remove('active');
-                        modelA435.classList.add('active');
+                // Enable all models for all scenes now that stackbowl and toothpaste have all models
+                [modelA515, modelAPriorDA, modelA435, modelB515, modelBPriorDA, modelB435].forEach(btn => {
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                        btn.style.cursor = 'pointer';
                     }
-                    if (modelB515?.classList.contains('active') || modelBPriorDA?.classList.contains('active')) {
-                        document.querySelector('#model-b-selector .selector-btn.active').classList.remove('active');
-                        modelB435.classList.add('active');
-                    }
-                } else {
-                    // Enable all models for kitchen and canteen
-                    [modelA515, modelAPriorDA, modelA435, modelB515, modelBPriorDA, modelB435].forEach(btn => {
-                        if (btn) {
-                            btn.disabled = false;
-                            btn.style.opacity = '1';
-                            btn.style.cursor = 'pointer';
-                        }
-                    });
-                }
+                });
             }
             
             // Add click handlers for scene buttons
@@ -1914,13 +1887,12 @@
                 const viewerConfigs = [
                     // Kitchen (microwave) scenes
                     { id: 'capture-microwave-435-raw', path: 'pcds/microwave_435_raw_depth.ply', isL515: false },
-                    { id: 'capture-microwave-435-model', path: 'pcds/microwave_435_model_depth.ply', isL515: false },
                     { id: 'capture-microwave-435-model-435', path: 'pcds/microwave_435_model_435_depth.ply', isL515: false },
                     { id: 'capture-microwave-435-model-515', path: 'pcds/microwave_435_model_515_depth.ply', isL515: false },
                     { id: 'capture-microwave-435-model-priorda', path: 'pcds/microwave_435_model_priorda_depth.ply', isL515: false },
                     { id: 'capture-microwave-515-raw', path: 'pcds/microwave_515_raw_depth.ply', isL515: true },
-                    { id: 'capture-microwave-515-model', path: 'pcds/microwave_515_model_depth.ply', isL515: true },
                     { id: 'capture-microwave-515-model-435', path: 'pcds/microwave_515_model_435_depth.ply', isL515: true },
+                    { id: 'capture-microwave-515-model-515', path: 'pcds/microwave_515_model_515_depth.ply', isL515: true },
                     { id: 'capture-microwave-515-model-priorda', path: 'pcds/microwave_515_model_priorda_depth.ply', isL515: true },
                     
                     // Canteen scenes
@@ -1936,10 +1908,14 @@
                     // Stack Bowl scenes
                     { id: 'capture-stackbowl-435-raw', path: 'pcds/stackbowl_435_raw_depth.ply', isL515: false },
                     { id: 'capture-stackbowl-435-model-435', path: 'pcds/stackbowl_435_model_435_depth.ply', isL515: false },
+                    { id: 'capture-stackbowl-435-model-515', path: 'pcds/stackbowl_435_model_515_depth.ply', isL515: false },
+                    { id: 'capture-stackbowl-435-model-priorda', path: 'pcds/stackbowl_435_model_priorda_depth.ply', isL515: false },
                     
                     // Toothpaste scenes
                     { id: 'capture-toothpaste-435-raw', path: 'pcds/toothpaste_435_raw_depth.ply', isL515: false },
-                    { id: 'capture-toothpaste-435-model-435', path: 'pcds/toothpaste_435_model_435_depth.ply', isL515: false }
+                    { id: 'capture-toothpaste-435-model-435', path: 'pcds/toothpaste_435_model_435_depth.ply', isL515: false },
+                    { id: 'capture-toothpaste-435-model-515', path: 'pcds/toothpaste_435_model_515_depth.ply', isL515: false },
+                    { id: 'capture-toothpaste-435-model-priorda', path: 'pcds/toothpaste_435_model_priorda_depth.ply', isL515: false }
                 ];
                 
                 // Create viewer divs and load all viewers
