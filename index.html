@@ -435,6 +435,7 @@
                             <button class="selector-btn active" data-model="435">CDM-D435</button>
                             <button class="selector-btn" data-model="515">CDM-L515</button>
                             <button class="selector-btn" data-model="priorda">PriorDA</button>
+                            <button class="selector-btn" data-model="promptda">PromptDA</button>
                         </div>
                     </div>
                     <div class="selector-group">
@@ -443,6 +444,7 @@
                             <button class="selector-btn" data-model="435">CDM-D435</button>
                             <button class="selector-btn active" data-model="515">CDM-L515</button>
                             <button class="selector-btn" data-model="priorda">PriorDA</button>
+                            <button class="selector-btn" data-model="promptda">PromptDA</button>
                         </div>
                     </div>
                 </div>
@@ -1064,38 +1066,44 @@
                     '435': {
                         '435': 'pcds/microwave_435_model_435_depth.ply',
                         '515': 'pcds/microwave_435_model_515_depth.ply', 
-                        'priorda': 'pcds/microwave_435_model_priorda_depth.ply'
+                        'priorda': 'pcds/microwave_435_model_priorda_depth.ply',
+                        'promptda': 'pcds/microwave_435_model_promptda_depth.ply'
                     },
                     '515': {
                         '435': 'pcds/microwave_515_model_435_depth.ply',
                         '515': 'pcds/microwave_515_model_depth.ply',
-                        'priorda': 'pcds/microwave_515_model_priorda_depth.ply'
+                        'priorda': 'pcds/microwave_515_model_priorda_depth.ply',
+                        'promptda': 'pcds/microwave_515_model_promptda_depth.ply'
                     }
                 },
                 'canteen': {
                     '435': {
                         '435': 'pcds/canteen_435_model_435_depth.ply',
                         '515': 'pcds/canteen_435_model_515_depth.ply',
-                        'priorda': 'pcds/canteen_435_model_priorda_depth.ply'
+                        'priorda': 'pcds/canteen_435_model_priorda_depth.ply',
+                        'promptda': 'pcds/canteen_435_model_promptda_depth.ply'
                     },
                     '515': {
                         '435': 'pcds/canteen_515_model_435_depth.ply',
                         '515': 'pcds/canteen_515_model_515_depth.ply',
-                        'priorda': 'pcds/canteen_515_model_priorda_depth.ply'
+                        'priorda': 'pcds/canteen_515_model_priorda_depth.ply',
+                        'promptda': 'pcds/canteen_515_model_promptda_depth.ply'
                     }
                 },
                 'stackbowl': {
                     '435': {
                         '435': 'pcds/stackbowl_435_model_435_depth.ply',
                         '515': 'pcds/stackbowl_435_model_515_depth.ply',
-                        'priorda': 'pcds/stackbowl_435_model_priorda_depth.ply'
+                        'priorda': 'pcds/stackbowl_435_model_priorda_depth.ply',
+                        'promptda': 'pcds/stackbowl_435_model_promptda_depth.ply'
                     }
                 },
                 'toothpaste': {
                     '435': {
                         '435': 'pcds/toothpaste_435_model_435_depth.ply',
                         '515': 'pcds/toothpaste_435_model_515_depth.ply',
-                        'priorda': 'pcds/toothpaste_435_model_priorda_depth.ply'
+                        'priorda': 'pcds/toothpaste_435_model_priorda_depth.ply',
+                        'promptda': 'pcds/toothpaste_435_model_promptda_depth.ply'
                     }
                 }
             };
@@ -1104,7 +1112,8 @@
             const modelNames = {
                 '435': 'CDM-D435',
                 '515': 'CDM-L515',
-                'priorda': 'PriorDA'
+                'priorda': 'PriorDA',
+                'promptda': 'PromptDA'
             };
             
             function updatePointCloudDisplay() {
@@ -1320,14 +1329,16 @@
                 // Get all model buttons
                 const modelA515 = document.querySelector('#model-a-selector .selector-btn[data-model="515"]');
                 const modelAPriorDA = document.querySelector('#model-a-selector .selector-btn[data-model="priorda"]');
+                const modelAPromptDA = document.querySelector('#model-a-selector .selector-btn[data-model="promptda"]');
                 const modelA435 = document.querySelector('#model-a-selector .selector-btn[data-model="435"]');
                 
                 const modelB515 = document.querySelector('#model-b-selector .selector-btn[data-model="515"]');
                 const modelBPriorDA = document.querySelector('#model-b-selector .selector-btn[data-model="priorda"]');
+                const modelBPromptDA = document.querySelector('#model-b-selector .selector-btn[data-model="promptda"]');
                 const modelB435 = document.querySelector('#model-b-selector .selector-btn[data-model="435"]');
                 
                 // Enable all models for all scenes now that stackbowl and toothpaste have all models
-                [modelA515, modelAPriorDA, modelA435, modelB515, modelBPriorDA, modelB435].forEach(btn => {
+                [modelA515, modelAPriorDA, modelAPromptDA, modelA435, modelB515, modelBPriorDA, modelBPromptDA, modelB435].forEach(btn => {
                     if (btn) {
                         btn.disabled = false;
                         btn.style.opacity = '1';
@@ -2016,32 +2027,38 @@
                     { id: 'capture-microwave-435-model-435', path: 'pcds/microwave_435_model_435_depth.ply', isL515: false },
                     { id: 'capture-microwave-435-model-515', path: 'pcds/microwave_435_model_515_depth.ply', isL515: false },
                     { id: 'capture-microwave-435-model-priorda', path: 'pcds/microwave_435_model_priorda_depth.ply', isL515: false },
+                    { id: 'capture-microwave-435-model-promptda', path: 'pcds/microwave_435_model_promptda_depth.ply', isL515: false },
                     { id: 'capture-microwave-515-raw', path: 'pcds/microwave_515_raw_depth.ply', isL515: true },
                     { id: 'capture-microwave-515-model-435', path: 'pcds/microwave_515_model_435_depth.ply', isL515: true },
                     { id: 'capture-microwave-515-model-515', path: 'pcds/microwave_515_model_515_depth.ply', isL515: true },
                     { id: 'capture-microwave-515-model-priorda', path: 'pcds/microwave_515_model_priorda_depth.ply', isL515: true },
+                    { id: 'capture-microwave-515-model-promptda', path: 'pcds/microwave_515_model_promptda_depth.ply', isL515: true },
                     
                     // Canteen scenes
                     { id: 'capture-canteen-435-raw', path: 'pcds/canteen_435_raw_depth.ply', isL515: false },
                     { id: 'capture-canteen-435-model-435', path: 'pcds/canteen_435_model_435_depth.ply', isL515: false },
                     { id: 'capture-canteen-435-model-515', path: 'pcds/canteen_435_model_515_depth.ply', isL515: false },
                     { id: 'capture-canteen-435-model-priorda', path: 'pcds/canteen_435_model_priorda_depth.ply', isL515: false },
+                    { id: 'capture-canteen-435-model-promptda', path: 'pcds/canteen_435_model_promptda_depth.ply', isL515: false },
                     { id: 'capture-canteen-515-raw', path: 'pcds/canteen_515_raw_depth.ply', isL515: true },
                     { id: 'capture-canteen-515-model-435', path: 'pcds/canteen_515_model_435_depth.ply', isL515: true },
                     { id: 'capture-canteen-515-model-515', path: 'pcds/canteen_515_model_515_depth.ply', isL515: true },
                     { id: 'capture-canteen-515-model-priorda', path: 'pcds/canteen_515_model_priorda_depth.ply', isL515: true },
+                    { id: 'capture-canteen-515-model-promptda', path: 'pcds/canteen_515_model_promptda_depth.ply', isL515: true },
                     
                     // Stack Bowl scenes
                     { id: 'capture-stackbowl-435-raw', path: 'pcds/stackbowl_435_raw_depth.ply', isL515: false },
                     { id: 'capture-stackbowl-435-model-435', path: 'pcds/stackbowl_435_model_435_depth.ply', isL515: false },
                     { id: 'capture-stackbowl-435-model-515', path: 'pcds/stackbowl_435_model_515_depth.ply', isL515: false },
                     { id: 'capture-stackbowl-435-model-priorda', path: 'pcds/stackbowl_435_model_priorda_depth.ply', isL515: false },
+                    { id: 'capture-stackbowl-435-model-promptda', path: 'pcds/stackbowl_435_model_promptda_depth.ply', isL515: false },
                     
                     // Toothpaste scenes
                     { id: 'capture-toothpaste-435-raw', path: 'pcds/toothpaste_435_raw_depth.ply', isL515: false },
                     { id: 'capture-toothpaste-435-model-435', path: 'pcds/toothpaste_435_model_435_depth.ply', isL515: false },
                     { id: 'capture-toothpaste-435-model-515', path: 'pcds/toothpaste_435_model_515_depth.ply', isL515: false },
-                    { id: 'capture-toothpaste-435-model-priorda', path: 'pcds/toothpaste_435_model_priorda_depth.ply', isL515: false }
+                    { id: 'capture-toothpaste-435-model-priorda', path: 'pcds/toothpaste_435_model_priorda_depth.ply', isL515: false },
+                    { id: 'capture-toothpaste-435-model-promptda', path: 'pcds/toothpaste_435_model_promptda_depth.ply', isL515: false }
                 ];
                 
                 // Create viewer divs and load all viewers
