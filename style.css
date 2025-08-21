@@ -272,6 +272,13 @@ header::before {
     display: block;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.teaser-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .abstract p {
@@ -374,6 +381,16 @@ header::before {
     margin-bottom: 20px;
     background: linear-gradient(to bottom, #fafbfc, #f6f7f9);
     padding: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.method-item img:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 4px 12px rgba(0,0,0,0.12),
+        0 12px 32px rgba(0,0,0,0.18),
+        inset 0 0 0 1px rgba(0,0,0,0.06);
 }
 
 .method-item h3 {
@@ -451,6 +468,13 @@ header::before {
     width: 100%;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.image-item img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 
 .image-item p {
@@ -475,6 +499,13 @@ header::before {
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     margin-bottom: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.performance-item img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .performance-item h4 {
@@ -523,6 +554,7 @@ header::before {
 .pcd-gif:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    cursor: pointer;
 }
 
 .pcd-viewer-optimized {
@@ -639,6 +671,13 @@ header::before {
     object-fit: cover;
     display: block;
     border-radius: 8px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.pcd-placeholder:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
 }
 
 .load-interactive-btn {
@@ -774,12 +813,46 @@ header::before {
 
 .rgb-depth-item img:hover {
     transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .rgb-depth-item p {
     font-size: 1rem;
     color: #555;
     font-weight: 600;
+}
+
+/* Colormap Styles */
+.colormap-container {
+    max-width: 800px;
+    margin: 20px auto 30px;
+    padding: 0 20px;
+}
+
+.colormap-bar {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.colormap-bar canvas {
+    width: 100%;
+    height: 40px;
+    display: block;
+}
+
+.colormap-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.colormap-label {
+    padding: 0 5px;
 }
 
 .dataset h2 {
@@ -819,6 +892,17 @@ header::before {
 
 .stat-item p {
     font-size: 1rem;
+}
+
+/* Global image hover effects for any images not covered by specific selectors */
+img:not(.bytedance-seed-logo):not(.pcd-placeholder) {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:not(.bytedance-seed-logo):not(.pcd-placeholder):hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    cursor: pointer;
 }
 
 /* Removed old static dataset-images img styling - now using rgb-depth-pair */
@@ -1064,6 +1148,13 @@ header::before {
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     margin-bottom: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.chart-item img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .chart-item h4 {
@@ -1202,6 +1293,13 @@ header::before {
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     margin-bottom: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.figure-item img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .figure-item h4 {
@@ -1318,6 +1416,13 @@ header::before {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     margin-bottom: 15px;
     object-fit: contain;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.setup-item-exp img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .setup-item-exp h4 {
@@ -1679,6 +1784,14 @@ footer a:hover {
     .rgb-depth-pair {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+    
+    .colormap-container {
+        padding: 0 10px;
+    }
+    
+    .colormap-bar canvas {
+        height: 30px;
     }
     
     .abstract-content {

@@ -69,21 +69,21 @@
             </div>
             
             <div class="contributions-compact">
-                <a href="#dataset" class="contribution-link">
-                    <div class="contribution-compact">
-                        <div class="contribution-icon">📊</div>
-                        <div class="contribution-text">
-                            <h4>ByteDepth Dataset</h4>
-                            <p>170K+ RGB-depth pairs from 7 cameras</p>
-                        </div>
-                    </div>
-                </a>
                 <a href="#models" class="contribution-link">
                     <div class="contribution-compact">
                         <div class="contribution-icon">🔧</div>
                         <div class="contribution-text">
                             <h4>Camera Depth Models</h4>
                             <p>Plug-in solution for accurate depth perception</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="#dataset" class="contribution-link">
+                    <div class="contribution-compact">
+                        <div class="contribution-icon">📊</div>
+                        <div class="contribution-text">
+                            <h4>ByteDepth Dataset</h4>
+                            <p>170K+ RGB-depth pairs from 7 cameras</p>
                         </div>
                     </div>
                 </a>
@@ -233,6 +233,18 @@
                     <div class="rgb-depth-item">
                         <img id="dataset-depth-image" src="figs/rgb_depth/camera_d435/living_depth_0.png" alt="Depth Image">
                         <p>Depth Image</p>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 0.95rem; margin: 20px 0 15px 0;">Each Scene is Visualized in a Different Fixed Min-Max Range</p>
+                
+                <!-- Spectral Colormap Bar -->
+                <div class="colormap-container">
+                    <div class="colormap-bar">
+                        <canvas id="spectral-colormap" width="800" height="40"></canvas>
+                    </div>
+                    <div class="colormap-labels">
+                        <span class="colormap-label">Near</span>
+                        <span class="colormap-label">Far</span>
                     </div>
                 </div>
             </div>
@@ -1503,6 +1515,40 @@
             
             // Initialize dataset images
             updateDatasetImages();
+            
+            // Draw Spectral colormap
+            function drawSpectralColormap() {
+                const canvas = document.getElementById('spectral-colormap');
+                if (!canvas) return;
+                
+                const ctx = canvas.getContext('2d');
+                const width = canvas.width;
+                const height = canvas.height;
+                
+                // Create gradient matching matplotlib's Spectral colormap
+                const gradient = ctx.createLinearGradient(0, 0, width, 0);
+                
+                // Spectral colormap colors (from matplotlib)
+                // Goes from red (near) to purple (far)
+                gradient.addColorStop(0.0, '#9e0142');    // Dark red
+                gradient.addColorStop(0.1, '#d53e4f');    // Red
+                gradient.addColorStop(0.2, '#f46d43');    // Orange-red
+                gradient.addColorStop(0.3, '#fdae61');    // Orange
+                gradient.addColorStop(0.4, '#fee08b');    // Yellow-orange
+                gradient.addColorStop(0.5, '#ffffbf');    // Yellow
+                gradient.addColorStop(0.6, '#e6f598');    // Yellow-green
+                gradient.addColorStop(0.7, '#abdda4');    // Green
+                gradient.addColorStop(0.8, '#66c2a5');    // Cyan-green
+                gradient.addColorStop(0.9, '#3288bd');    // Blue
+                gradient.addColorStop(1.0, '#5e4fa2');    // Purple
+                
+                // Fill the canvas with the gradient
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            }
+            
+            // Draw colormap on page load
+            drawSpectralColormap();
         });
         
         // Optimized Point Cloud Viewer for 90k+ points
