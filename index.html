@@ -765,19 +765,19 @@
                             <tr class="header-row">
                                 <td rowspan="7">D435<br>(IR Stereo)</td>
                                 <td class="best-result"><strong>CDM-D435 (Ours)</strong></td>
-                                <td><strong>0.0258</strong></td>
-                                <td><strong>0.0404</strong></td>
-                                <td><strong>0.0312</strong></td>
-                                <td><strong>0.9842</strong></td>
-                                <td><strong>0.9951</strong></td>
+                                <td class="best-result"><strong>0.0258</strong></td>
+                                <td class="best-result"><strong>0.0404</strong></td>
+                                <td class="best-result"><strong>0.0312</strong></td>
+                                <td class="best-result"><strong>0.9842</strong></td>
+                                <td class="best-result"><strong>0.9951</strong></td>
                             </tr>
                             <tr>
                                 <td class="best-result"><strong>CDM-L515 (Ours)</strong></td>
-                                <td><strong>0.0182</strong></td>
-                                <td><strong>0.0338</strong></td>
-                                <td><strong>0.0217</strong></td>
-                                <td><strong>0.9877</strong></td>
-                                <td><strong>0.9956</strong></td>
+                                <td class="best-result"><strong>0.0182</strong></td>
+                                <td class="best-result"><strong>0.0338</strong></td>
+                                <td class="best-result"><strong>0.0217</strong></td>
+                                <td class="best-result"><strong>0.9877</strong></td>
+                                <td class="best-result"><strong>0.9956</strong></td>
                             </tr>
                             <tr>
                                 <td>PromptDA*(435)</td>
@@ -823,19 +823,19 @@
                             <tr class="header-row">
                                 <td rowspan="7">L515<br>(D-ToF)</td>
                                 <td class="best-result"><strong>CDM-L515 (Ours)</strong></td>
-                                <td><strong>0.0156</strong></td>
-                                <td><strong>0.0297</strong></td>
-                                <td><strong>0.0229</strong></td>
-                                <td><strong>0.9754</strong></td>
-                                <td><strong>0.9919</strong></td>
+                                <td class="best-result"><strong>0.0156</strong></td>
+                                <td class="best-result"><strong>0.0297</strong></td>
+                                <td class="best-result"><strong>0.0229</strong></td>
+                                <td class="best-result"><strong>0.9754</strong></td>
+                                <td class="best-result"><strong>0.9919</strong></td>
                             </tr>
                             <tr>
                                 <td class="best-result"><strong>CDM-D435 (Ours)</strong></td>
-                                <td><strong>0.0165</strong></td>
-                                <td><strong>0.0349</strong></td>
-                                <td><strong>0.0246</strong></td>
-                                <td><strong>0.9613</strong></td>
-                                <td><strong>0.9855</strong></td>
+                                <td class="best-result"><strong>0.0165</strong></td>
+                                <td class="best-result"><strong>0.0349</strong></td>
+                                <td class="best-result"><strong>0.0246</strong></td>
+                                <td class="best-result"><strong>0.9613</strong></td>
+                                <td class="best-result"><strong>0.9855</strong></td>
                             </tr>
                             <tr>
                                 <td>PromptDA*(515)</td>
@@ -882,41 +882,6 @@
                 </div>
             </div>
             
-            <div class="table-section">
-                <h3>Sim-to-Real Transfer Results</h3>
-                <p>Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline</p>
-                <div class="table-container">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="3">Camera</th>
-                                <th rowspan="3">Depth Model</th>
-                                <th colspan="4">Kitchen Task</th>
-                                <th colspan="6">Canteen Task</th>
-                            </tr>
-                            <tr>
-                                <th>Pick Bowl</th>
-                                <th>Put Bowl into Microwave</th>
-                                <th>Close Microwave</th>
-                                <th>Total</th>
-                                <th>Pick Fork</th>
-                                <th>Place Fork</th>
-                                <th>Pick Plate</th>
-                                <th>Dump Plate</th>
-                                <th>Place Plate</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
-                            <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
-                            <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
             
             <div class="figure-section">
                 <h3>Real-World Depth-Only Imitation Learning</h3>
@@ -963,6 +928,42 @@
                         <p>The policy trained without CDM cannot generalize to unseen sizes, while CDM-enhanced policies show better generalization.</p>
                         <img src="figs/success-rate-hist.png" alt="Success Rate Histogram">
                     </div>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <h3>Sim-to-Real Transfer Results</h3>
+                <p>Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline</p>
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="3">Camera</th>
+                                <th rowspan="3">Depth Model</th>
+                                <th colspan="4">Kitchen Task</th>
+                                <th colspan="6">Canteen Task</th>
+                            </tr>
+                            <tr>
+                                <th>Pick Bowl</th>
+                                <th>Put Bowl into Microwave</th>
+                                <th>Close Microwave</th>
+                                <th>Total</th>
+                                <th>Pick Fork</th>
+                                <th>Place Fork</th>
+                                <th>Pick Plate</th>
+                                <th>Dump Plate</th>
+                                <th>Place Plate</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
+                            <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
+                            <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
