@@ -329,10 +329,12 @@
 
     <section id="quantitative-results" class="quantitative-results">
         <div class="container">
-            <h2>Quantitative Results</h2>
+            <h2>Manipulation Results</h2>
+            
+            <p style="margin-bottom: 20px; color: #666;">** Note that our goal is not to identify if depth is a better visual modality than color, but to validate whether accurate geometry information contained in a more precise depth image can benefit manipulation. Therefore, the policies designed in our experiments are depth-only to exclude the effect of color information.</p>
             
             <div class="table-section">
-                <h3>Real-World Depth-Only Imitation Learning</h3>
+                <h3>A Pilot Study on Real-World Depth-Only Imitation Learning</h3>
                 <div class="imitation-results-grid">
                     <div class="table-item">
                         <div class="imitation-table-container">
@@ -377,9 +379,28 @@
                         <img src="figs/success-rate-hist.png" alt="Success Rate Histogram">
                     </div>
                 </div>
+                
+                <!-- Video demonstrations for Depth-Only IL -->
+                <div class="demo-videos" style="margin-top: 30px;">
+                    <h4 style="text-align: center; margin-bottom: 20px;">Demo Videos</h4>
+                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/iphone-demos/toothpaste_demo_iphone.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Toothpaste-and-Cup Task</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/iphone-demos/stackbowl_demo_iphone.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Stack-Bowls Task</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <p style="margin-bottom: 20px; color: #666;">** Note that our goal is not to identify if depth is a better visual modality than color, but to validate whether accurate geometry information contained in a more precise depth image can benefit manipulation. Therefore, the policies designed in our experiments are depth-only to exclude the effect of color information.</p>
 
             <div class="table-section">
                 <h3>Sim-to-Real Transfer Results</h3>
@@ -423,6 +444,27 @@
                             <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
                         </tbody>
                     </table>
+                </div>
+                
+                <!-- Video demonstrations for Sim-to-Real Transfer -->
+                <div class="demo-videos" style="margin-top: 30px;">
+                    <h4 style="text-align: center; margin-bottom: 20px;">Demo Videos</h4>
+                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/iphone-demos/kitchen_demo_iphone.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/iphone-demos/canteen_demo_iphone.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2131,6 +2173,34 @@
                     }
                 }, 100);
             }
+        });
+        
+        // Video autoplay with Intersection Observer
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('.demo-video');
+            
+            const videoObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    
+                    if (entry.isIntersecting) {
+                        // Play video when it comes into view
+                        video.play().catch(err => {
+                            console.log('Video autoplay was blocked:', err);
+                        });
+                    } else {
+                        // Pause video when it goes out of view
+                        video.pause();
+                    }
+                });
+            }, {
+                threshold: 0.5 // Video needs to be 50% visible to start playing
+            });
+            
+            // Observe all demo videos
+            videos.forEach(video => {
+                videoObserver.observe(video);
+            });
         });
     </script>
 </body>
