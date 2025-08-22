@@ -171,7 +171,7 @@ header::before {
     border-radius: 15px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    max-width: 280px;
+    max-width: 290px;
 }
 
 .contribution-icon {
@@ -403,6 +403,131 @@ header::before {
     font-size: 1rem;
     color: #666;
     line-height: 1.6;
+}
+
+/* Section Header with Inline Button */
+.section-header-with-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 15px;
+    position: relative;
+}
+
+.section-header-with-button h2 {
+    margin: 0;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.btn-inline-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 18px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1.rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(26, 26, 46, 0.2);
+    white-space: nowrap;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.btn-inline-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 26, 46, 0.3);
+    background: linear-gradient(135deg, #16213e 0%, #1a5490 100%);
+}
+
+.btn-inline-download i {
+    font-size: 1.rem;
+    line-height: 1;
+}
+
+.btn-inline-download span {
+    font-size: 1.rem;
+    line-height: 1;
+}
+
+/* Old Method Download Button (keeping for compatibility) */
+.method-download {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-cdm-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(26, 26, 46, 0.3);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-cdm-download::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s;
+}
+
+.btn-cdm-download:hover::before {
+    left: 100%;
+}
+
+.btn-cdm-download:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(26, 26, 46, 0.4);
+    background: linear-gradient(135deg, #16213e 0%, #1a5490 100%);
+}
+
+.btn-cdm-download i.fas.fa-download {
+    font-size: 1.4rem;
+}
+
+.btn-cdm-download .download-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.btn-cdm-download .download-text strong {
+    font-size: 1.05rem;
+    margin-bottom: 3px;
+}
+
+.btn-cdm-download .download-text small {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.btn-cdm-download .arrow-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-cdm-download:hover .arrow-icon {
+    transform: translateY(3px);
 }
 
 /* Results Section */
@@ -1381,6 +1506,36 @@ img:not(.bytedance-seed-logo):not(.pcd-placeholder):hover {
     padding: 40px 0;
 }
 
+.setup-subsection {
+    margin-bottom: 60px;
+}
+
+.setup-subsection:last-child {
+    margin-bottom: 0;
+}
+
+.setup-subtitle {
+    font-size: 1.6rem;
+    color: #444;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.setup-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    border-radius: 2px;
+}
+
 .setup h2 {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -1403,6 +1558,16 @@ img:not(.bytedance-seed-logo):not(.pcd-placeholder):hover {
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-bottom: 40px;
+}
+
+.setup-row-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .setup-item-exp {
@@ -1436,6 +1601,44 @@ img:not(.bytedance-seed-logo):not(.pcd-placeholder):hover {
     color: #666;
     font-size: 0.9rem;
     line-height: 1.5;
+}
+
+.setup-item-large {
+    text-align: center;
+}
+
+.setup-item-large img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    margin: 0 auto 15px;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.setup-item-large img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+}
+
+.setup-item-large h4 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: #444;
+    font-weight: 600;
+}
+
+.setup-item-large p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 90%;
+    margin: 0 auto;
 }
 
 /* Legacy setup styles for backwards compatibility */
@@ -1732,6 +1935,11 @@ footer a:hover {
         margin-bottom: 30px;
     }
     
+    .setup-row-2col {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
     .imitation-results-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -1806,5 +2014,16 @@ footer a:hover {
     .abstract p {
         font-size: 0.9rem;
         line-height: 1.6;
+    }
+    
+    .section-header-with-button {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .btn-inline-download {
+        width: auto;
+        justify-content: center;
     }
 }
