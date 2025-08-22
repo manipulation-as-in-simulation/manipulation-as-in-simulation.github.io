@@ -82,7 +82,7 @@
                     <div class="contribution-compact">
                         <div class="contribution-icon">📊</div>
                         <div class="contribution-text">
-                            <h4>ByteDepth Dataset</h4>
+                            <h4>ByteCamDepth Dataset</h4>
                             <p>170K+ RGB-depth pairs from 7 cameras</p>
                         </div>
                     </div>
@@ -164,8 +164,8 @@
 
     <section id="dataset" class="dataset">
         <div class="container">
-            <h2>ByteDepth Dataset</h2>
-            <p>We introduce ByteDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
+            <h2>ByteCamDepth Dataset</h2>
+            <p>We introduce ByteCamDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
             <p>
             <div class="dataset-stats">
                 <div class="stat-item">
@@ -253,7 +253,7 @@
                 <a href="#" class="btn-dataset-download">
                     <i class="fas fa-download"></i>
                     <span class="download-text">
-                        <strong>Download ByteDepth Dataset</strong>
+                        <strong>Download ByteCamDepth Dataset</strong>
                         <small>170K+ RGB-Depth Pairs | Multi-Camera | 10 Configurations</small>
                     </span>
                     <i class="fas fa-arrow-right arrow-icon"></i>
@@ -696,16 +696,16 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div> <!-- End of pcd-dynamic-display -->
             </div>
-            <h3>Depth Accuracy w.r.t Distance</h3>
-            <p>To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
             
+            <div class="result-section">
+            <h3>Depth Accuracy w.r.t Distance</h3>
+            <p style="text-align: center; margin-bottom: 20px; color: #666;">To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
             <!-- Dataset Selector Buttons -->
             <div class="accuracy-selector-container">
                 <div class="selector-group">
-                    <span class="selector-label">Dataset:</span>
+                    <span class="selector-label">Dataset Split:</span>
                     <div class="selector-buttons" id="dataset-selector">
                         <button class="selector-btn active" data-dataset="d435">D435</button>
                         <button class="selector-btn" data-dataset="l515">L515</button>
@@ -719,13 +719,13 @@
                 <div class="accuracy-dataset-group" data-dataset="d435">
                     <div class="accuracy-charts">
                         <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - Absolute Relative Error</h4>
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Split - Absolute Relative Error</h4>
                             <div class="chart-container">
                                 <canvas id="d435-absrel-chart"></canvas>
                             </div>
                         </div>
                         <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - L1 Error</h4>
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Split - L1 Error</h4>
                             <div class="chart-container">
                                 <canvas id="d435-l1-chart"></canvas>
                             </div>
@@ -737,13 +737,13 @@
                 <div class="accuracy-dataset-group" data-dataset="l515" style="display: none;">
                     <div class="accuracy-charts">
                         <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - Absolute Relative Error</h4>
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Split - Absolute Relative Error</h4>
                             <div class="chart-container">
                                 <canvas id="l515-absrel-chart"></canvas>
                             </div>
                         </div>
                         <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - L1 Error</h4>
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Split - L1 Error</h4>
                             <div class="chart-container">
                                 <canvas id="l515-l1-chart"></canvas>
                             </div>
@@ -755,13 +755,13 @@
                 <div class="accuracy-dataset-group" data-dataset="helios" style="display: none;">
                     <div class="accuracy-charts">
                         <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - Absolute Relative Error</h4>
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Split - Absolute Relative Error</h4>
                             <div class="chart-container">
                                 <canvas id="helios-absrel-chart"></canvas>
                             </div>
                         </div>
                         <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - L1 Error</h4>
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Split - L1 Error</h4>
                             <div class="chart-container">
                                 <canvas id="helios-l1-chart"></canvas>
                             </div>
@@ -779,6 +779,7 @@
                 </ul>
             </div>
         </div>
+    </div>
     </section>
 
     <section id="quantitative-results" class="quantitative-results">
@@ -786,7 +787,7 @@
             <h2>Quantitative Results</h2>
             
             <div class="table-section">
-                <h3>Depth Evaluation on Hammer Dataset (Zero-shot)</h3>
+                <h3>Depth Evaluation on the <a href="https://github.com/Junggy/HAMMER-dataset" style="color: #103961;" target="_blank">Hammer Dataset</a> (Zero-shot)</h3>
                 <div class="table-container">
                     <table class="results-table">
                         <thead>
@@ -921,7 +922,6 @@
                 </div>
             </div>
             
-            
             <div class="table-section">
                 <h3>Real-World Depth-Only Imitation Learning</h3>
                 <div class="imitation-results-grid">
@@ -969,6 +969,8 @@
                     </div>
                 </div>
             </div>
+            
+            <p style="margin-bottom: 20px; color: #666;">** Note that our goal is not to identify if depth is a better visual modality than color, but to validate whether accurate geometry information contained in a more precise depth image can benefit manipulation. Therefore, the policies designed in our experiments are depth-only to exclude the effect of color information.</p>
 
             <div class="table-section">
                 <h3>Sim-to-Real Transfer Results</h3>
@@ -996,11 +998,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr><td>Sim (D435-View)</td><td>None</td><td>43/50</td><td>33/50</td><td>32/50</td><td>30/50</td><td>40/50</td><td>28/50</td><td>47/50</td><td>45/50</td><td>33/50</td><td>21/50</td></tr>
                             <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
                             <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
                             <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
                             <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
                             <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        </tbody>
+                        <tbody>
+                            <tr><td>Sim (L515-View)</td><td>None</td><td>43/50</td><td>34/50</td><td>37/50</td><td>32/50</td><td>40/50</td><td>26/50</td><td>46/50</td><td>43/50</td><td>31/50</td><td>20/50</td></tr>
+                            <tr><td rowspan="5">L515</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr><td>PromptDA</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr><td>PriorDA</td><td>17/30</td><td>3/30</td><td>2/30</td><td>2/30</td><td>10/30</td><td>8/30</td><td>3/30</td><td>3/30</td><td>3/30</td><td>3/30</td></tr>
+                            <tr class="best-result"><td>CDM-D435</td><td>22/30</td><td>11/30</td><td>9/30</td><td>9/30</td><td>13/30</td><td>11/30</td><td>11/30</td><td>10/30</td><td>9/30</td><td>9/30</td></tr>
+                            <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1472,7 +1483,7 @@
             // Initialize accuracy display
             updateAccuracyDisplay();
             
-            // ByteDepth Dataset Image Selector
+            // ByteCamDepth Dataset Image Selector
             const cameraDatasetButtons = document.querySelectorAll('#camera-dataset-selector .selector-btn');
             const sceneDatasetButtons = document.querySelectorAll('#scene-dataset-selector .selector-btn');
             const pairDatasetButtons = document.querySelectorAll('#pair-dataset-selector .selector-btn');
