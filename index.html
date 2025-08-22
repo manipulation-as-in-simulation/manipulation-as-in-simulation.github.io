@@ -166,7 +166,6 @@
         <div class="container">
             <h2>ByteCamDepth Dataset</h2>
             <p>We introduce ByteCamDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
-            <p>
             <div class="dataset-stats">
                 <div class="stat-item">
                     <h3>170K+</h3>
@@ -404,8 +403,34 @@
 
             <div class="table-section">
                 <h3>Sim-to-Real Transfer Results</h3>
-                <p>Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline</p>
-                <div class="table-container">
+                
+                <!-- Simulation Data Generation Subsection -->
+                <div class="subsection" style="margin-bottom: 40px;">
+                    <h4>Simulation Data Generation with WBCMimicGen</h4>
+                    <p style="margin-bottom: 20px; color: #666;">Generating high-quality simulation demonstrations for training manipulation policies with proposed WBCMimicGen.</p>
+                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/wbcmimicgen/kitchen_wbc_mimicgen.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/wbcmimicgen/canteen_wbc_mimicgen.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Zero-Shot Transfer Results Subsection -->
+                <div class="subsection">
+                    <h4>Zero-Shot Transfer Results</h4>
+                    <p style="margin-bottom: 20px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipelin.</p>
+                    <div class="table-container">
                     <table class="results-table">
                         <thead>
                             <tr>
@@ -443,26 +468,27 @@
                             <tr class="best-result"><td>CDM-D435</td><td>22/30</td><td>11/30</td><td>9/30</td><td>9/30</td><td>13/30</td><td>11/30</td><td>11/30</td><td>10/30</td><td>9/30</td><td>9/30</td></tr>
                             <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
                         </tbody>
-                    </table>
-                </div>
-                
-                <!-- Video demonstrations for Sim-to-Real Transfer -->
-                <div class="demo-videos" style="margin-top: 30px;">
-                    <h4 style="text-align: center; margin-bottom: 20px;">Demo Videos</h4>
-                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
-                        <div class="video-item">
-                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                <source src="vids/iphone-demos/kitchen_demo_iphone.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task</p>
-                        </div>
-                        <div class="video-item">
-                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                <source src="vids/iphone-demos/canteen_demo_iphone.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task</p>
+                        </table>
+                    </div>
+                    
+                    <!-- Real-world demo videos -->
+                    <div class="demo-videos" style="margin-top: 30px;">
+                        <h5 style="text-align: center; margin-bottom: 20px;">Real-World Execution</h5>
+                        <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/iphone-demos/kitchen_demo_iphone.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - Real Robot</p>
+                            </div>
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/iphone-demos/canteen_demo_iphone.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - Real Robot</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1007,7 +1033,7 @@
             
             <div class="result-section">
             <h3>Depth Accuracy w.r.t Distance</h3>
-            <p style="text-align: center; margin-bottom: 20px; color: #666;">To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
+            <p style="margin-bottom: 20px; color: #666;">To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
             <!-- Dataset Selector Buttons -->
             <div class="accuracy-selector-container">
                 <div class="selector-group">
