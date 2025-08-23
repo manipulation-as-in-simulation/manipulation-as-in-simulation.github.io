@@ -111,7 +111,8 @@
     <section id="models" class="models">
         <div class="container">
             <h2>Available Camera Depth Models</h2>
-            <p>We release camera depth models for various widely-used depth cameras:</p>
+            <p style="margin-bottom: 15px;">We release camera depth models for various widely-used depth cameras.</p>
+            <p>Try to plug them into your existing robot pipeline to improve the depth perception accuracy!</p>
             
             <div class="model-grid">
                 <div class="model-card">
@@ -407,21 +408,45 @@
                 <!-- Simulation Data Generation Subsection -->
                 <div class="subsection" style="margin-bottom: 40px;">
                     <h4>Simulation Data Generation with WBCMimicGen</h4>
-                    <p style="margin-bottom: 20px; color: #666;">Generating high-quality simulation demonstrations for training manipulation policies with proposed WBCMimicGen.</p>
+                    <p style="margin-bottom: 20px; color: #666;">Generating high-quality simulation demonstrations in IssacLab for training manipulation policies with proposed WBCMimicGen.</p>
                     <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
-                        <div class="video-item">
-                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                <source src="vids/wbcmimicgen/kitchen_wbc_mimicgen.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task</p>
+                        <div class="video-pair">
+                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Kitchen Task</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="video-item">
+                                    <video class="demo-video sync-video" data-sync-group="microwave" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/wbcmimicgen/rgb/microwave_wbc.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">RGB</p>
+                                </div>
+                                <div class="video-item">
+                                    <video class="demo-video sync-video" data-sync-group="microwave" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/wbcmimicgen/depth/microwave_wbc.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">Depth</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="video-item">
-                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                <source src="vids/wbcmimicgen/canteen_wbc_mimicgen.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                            <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task</p>
+                        <div class="video-pair">
+                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Canteen Task</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="video-item">
+                                    <video class="demo-video sync-video" data-sync-group="plate" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/wbcmimicgen/rgb/plate_wbc.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">RGB</p>
+                                </div>
+                                <div class="video-item">
+                                    <video class="demo-video sync-video" data-sync-group="plate" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/wbcmimicgen/depth/plate_wbc.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">Depth</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -429,7 +454,7 @@
                 <!-- Zero-Shot Transfer Results Subsection -->
                 <div class="subsection">
                     <h4>Zero-Shot Transfer Results</h4>
-                    <p style="margin-bottom: 20px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipelin.</p>
+                    <p style="margin-bottom: 20px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
                     <div class="table-container">
                     <table class="results-table">
                         <thead>
@@ -2226,6 +2251,47 @@
             // Observe all demo videos
             videos.forEach(video => {
                 videoObserver.observe(video);
+            });
+            
+            // Video synchronization for paired videos
+            const syncVideos = document.querySelectorAll('.sync-video');
+            
+            syncVideos.forEach(video => {
+                // Sync play/pause events
+                video.addEventListener('play', function() {
+                    const group = this.dataset.syncGroup;
+                    const pairedVideos = document.querySelectorAll(`[data-sync-group="${group}"]`);
+                    
+                    pairedVideos.forEach(pairedVideo => {
+                        if (pairedVideo !== this && pairedVideo.paused) {
+                            pairedVideo.currentTime = this.currentTime;
+                            pairedVideo.play();
+                        }
+                    });
+                });
+                
+                video.addEventListener('pause', function() {
+                    const group = this.dataset.syncGroup;
+                    const pairedVideos = document.querySelectorAll(`[data-sync-group="${group}"]`);
+                    
+                    pairedVideos.forEach(pairedVideo => {
+                        if (pairedVideo !== this && !pairedVideo.paused) {
+                            pairedVideo.pause();
+                        }
+                    });
+                });
+                
+                // Sync seeking
+                video.addEventListener('seeking', function() {
+                    const group = this.dataset.syncGroup;
+                    const pairedVideos = document.querySelectorAll(`[data-sync-group="${group}"]`);
+                    
+                    pairedVideos.forEach(pairedVideo => {
+                        if (pairedVideo !== this) {
+                            pairedVideo.currentTime = this.currentTime;
+                        }
+                    });
+                });
             });
         });
     </script>
