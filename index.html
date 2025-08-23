@@ -158,7 +158,7 @@
             <h2>Abstract</h2>
             <img src="figs/teaser.png" alt="Teaser Figure" class="teaser-image">
             <p>
-                Modern robotic manipulation primarily relies on visual observations in a 2D color space for skill learning, but suffers from poor generalization. In contrast, humans, living in a 3D world, depend more on physical properties—such as distance, size, and shape—than on texture when interacting with objects. Since such 3D geometric information can be acquired from widely available depth cameras, it appears feasible to endow robots with similar perceptual capabilities. Our pilot study found that using depth cameras for manipulation is challenging, primarily due to their limited accuracy and susceptibility to various types of noise. In this work, we propose <strong>Camera Depth Models (CDMs)</strong> as a simple plugin on daily-use depth cameras, which take RGB images and raw depth signals as input and output denoised, accurate metric depth. To achieve this, we develop a neural data engine that generates high-quality paired data from simulation by modeling a depth camera's noise pattern. Our results show that CDMs achieve nearly simulation-level accuracy in depth prediction, effectively bridging the sim-to-real gap for manipulation tasks. Notably, our experiments demonstrate, <strong>for the first time</strong>, that a depth-only policy trained exclusively in simulation generalizes seamlessly to real robots on two <strong> challenging long-horizon tasks (including articulation and slim objects)</strong>, with little to no performance degradation. Further analysis reveals that sim-to-real success rates are strongly correlated with the quality of depth perception. We hope our findings will inspire future research in utilizing simulation data and 3D information in general robot policies.
+                Modern robotic manipulation primarily relies on visual observations in a 2D color space for skill learning, but suffers from poor generalization. In contrast, humans, living in a 3D world, depend more on physical properties—such as distance, size, and shape—than on texture when interacting with objects. Since such 3D geometric information can be acquired from widely available depth cameras, it appears feasible to endow robots with similar perceptual capabilities. Our pilot study found that using depth cameras for manipulation is challenging, primarily due to their limited accuracy and susceptibility to various types of noise. In this work, we propose <strong>Camera Depth Models (CDMs)</strong> as a simple plugin on daily-use depth cameras, which take RGB images and raw depth signals as input and output denoised, accurate metric depth. To achieve this, we develop a neural data engine that generates high-quality paired data from simulation by modeling a depth camera's noise pattern. Our results show that CDMs achieve nearly simulation-level accuracy in depth prediction, effectively bridging the sim-to-real gap for manipulation tasks. Notably, our experiments demonstrate, <strong>for the first time</strong>, that a depth-only policy, trained solely in simulation, generalizes seamlessly to real-world robots on <strong> two challenging long-horizon tasks involving articulated and slender objects</strong>, with little to no performance degradation. Further analysis reveals that sim-to-real success rates are strongly correlated with the quality of depth perception. We hope our findings will inspire future research in utilizing simulation data and 3D information in general robot policies.
             </p>
         </div>
     </section>
@@ -268,7 +268,7 @@
             
             <!-- Depth-Only Imitation Learning Section -->
             <div class="setup-subsection">
-                <h3 class="setup-subtitle">Depth-Only Imitation Learning</h3>
+                <h3 class="setup-subtitle">Imitation Learning with Only Depth</h3>
                 <p class="setup-description">A pilot study on real-world imitation learning with only geometric information for manipulation.</p>
                 
                 <div class="setup-row-2col">
@@ -297,12 +297,12 @@
                     <div class="setup-item-exp">
                         <img src="figs/sim-range-microwave.png" alt="Kitchen task randomization (sim)">
                         <h4>Kitchen Task Randomization (Sim)</h4>
-                        <p>Randomization for bowl and microwave <strong>(articulation objects with transparent glass)</strong> positions</p>
+                        <p>Randomization for bowl and microwave <strong>(articulated objects with transparent glass)</strong> positions</p>
                     </div>
                     <div class="setup-item-exp">
                         <img src="figs/sim-range-plate.png" alt="Canteen task randomization (sim)">
                         <h4>Canteen Task Randomization (Sim)</h4>
-                        <p>Randomization for fork <strong></strong>(reflective and slim)</strong>, plate <strong>(thin)</strong> and box positions</p>
+                        <p>Randomization for fork <strong></strong>(reflective and slender)</strong>, plate <strong>(thin)</strong> and box positions</p>
                     </div>
                 </div>
                 
@@ -334,7 +334,7 @@
             <p style="margin-bottom: 20px; color: #666;">** Note that our goal is not to identify if depth is a better visual modality than color, but to validate whether accurate geometry information contained in a more precise depth image can benefit manipulation. Therefore, the policies designed in our experiments are depth-only to exclude the effect of color information.</p>
             
             <div class="table-section">
-                <h3>A Pilot Study on Real-World Depth-Only Imitation Learning</h3>
+                <h3>A Pilot Study on Imitation Learning with Only Depth</h3>
                 <div class="imitation-results-grid">
                     <div class="table-item">
                         <div class="imitation-table-container">
