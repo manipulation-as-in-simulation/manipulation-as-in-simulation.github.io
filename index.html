@@ -69,7 +69,16 @@
             </div>
             
             <div class="contributions-compact">
-                <a href="#models" class="contribution-link">
+                <a href="#dataset" class="contribution-link">
+                    <div class="contribution-compact">
+                        <div class="contribution-icon">📊</div>
+                        <div class="contribution-text">
+                            <h4>ByteCamDepth Dataset</h4>
+                            <p>170K+ RGB-depth pairs from 7 cameras</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="#cdm-results" class="contribution-link">
                     <div class="contribution-compact">
                         <div class="contribution-icon">🔧</div>
                         <div class="contribution-text">
@@ -78,21 +87,12 @@
                         </div>
                     </div>
                 </a>
-                <a href="#dataset" class="contribution-link">
-                    <div class="contribution-compact">
-                        <div class="contribution-icon">📊</div>
-                        <div class="contribution-text">
-                            <h4>ByteDepth Dataset</h4>
-                            <p>170K+ RGB-depth pairs from 7 cameras</p>
-                        </div>
-                    </div>
-                </a>
                 <a href="#setup" class="contribution-link">
                     <div class="contribution-compact">
                         <div class="contribution-icon">🚀</div>
                         <div class="contribution-text">
                             <h4>Sim-to-Real Transfer</h4>
-                            <p>First depth-only policy with seamless transfer</p>
+                            <p>CDMs make depth-only policies seamless transfer</p>
                         </div>
                     </div>
                 </a>
@@ -111,7 +111,8 @@
     <section id="models" class="models">
         <div class="container">
             <h2>Available Camera Depth Models</h2>
-            <p>We release camera depth models for various widely-used depth cameras:</p>
+            <p style="margin-bottom: 15px;">We release camera depth models for various widely-used depth cameras.</p>
+            <p>Try to plug them into your existing robot pipeline to improve the depth perception accuracy!</p>
             
             <div class="model-grid">
                 <div class="model-card">
@@ -157,16 +158,15 @@
             <h2>Abstract</h2>
             <img src="figs/teaser.png" alt="Teaser Figure" class="teaser-image">
             <p>
-                Modern robotic manipulation primarily relies on visual observations in a 2D color space for skill learning, but suffers from poor generalization. In contrast, humans, living in a 3D world, depend more on physical properties—such as distance, size, and shape—than on texture when interacting with objects. Since such 3D geometric information can be acquired from widely available depth cameras, it appears feasible to endow robots with similar perceptual capabilities. Our pilot study found that using depth cameras for manipulation is challenging, primarily due to their limited accuracy and susceptibility to various types of noise. In this work, we propose <strong>Camera Depth Models (CDMs)</strong> as a simple plugin on daily-use depth cameras, which take RGB images and raw depth signals as input and output denoised, accurate metric depth. To achieve this, we develop a neural data engine that generates high-quality paired data from simulation by modeling a depth camera's noise pattern. Our results show that CDMs achieve nearly simulation-level accuracy in depth prediction, effectively bridging the sim-to-real gap for manipulation tasks. Notably, our experiments demonstrate, <strong>for the first time</strong>, that a depth-only policy trained exclusively in simulation generalizes seamlessly to real robots on two long-horizon tasks, with little to no performance degradation. Further analysis reveals that sim-to-real success rates are strongly correlated with the quality of depth perception. We hope our findings will inspire future research in utilizing simulation data and 3D information in general robot policies.
+                Modern robotic manipulation primarily relies on visual observations in a 2D color space for skill learning, but suffers from poor generalization. In contrast, humans, living in a 3D world, depend more on physical properties—such as distance, size, and shape—than on texture when interacting with objects. Since such 3D geometric information can be acquired from widely available depth cameras, it appears feasible to endow robots with similar perceptual capabilities. Our pilot study found that using depth cameras for manipulation is challenging, primarily due to their limited accuracy and susceptibility to various types of noise. In this work, we propose <strong>Camera Depth Models (CDMs)</strong> as a simple plugin on daily-use depth cameras, which take RGB images and raw depth signals as input and output denoised, accurate metric depth. To achieve this, we develop a neural data engine that generates high-quality paired data from simulation by modeling a depth camera's noise pattern. Our results show that CDMs achieve nearly simulation-level accuracy in depth prediction, effectively bridging the sim-to-real gap for manipulation tasks. Notably, our experiments demonstrate, <strong>for the first time</strong>, that a depth-only policy, trained solely in simulation, generalizes seamlessly to real-world robots on <strong> two challenging long-horizon tasks involving articulated and slender objects</strong>, with little to no performance degradation. Further analysis reveals that sim-to-real success rates are strongly correlated with the quality of depth perception. We hope our findings will inspire future research in utilizing simulation data and 3D information in general robot policies.
             </p>
         </div>
     </section>
 
     <section id="dataset" class="dataset">
         <div class="container">
-            <h2>ByteDepth Dataset</h2>
-            <p>We introduce ByteDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
-            <p>
+            <h2>ByteCamDepth Dataset</h2>
+            <p>We introduce ByteCamDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
             <div class="dataset-stats">
                 <div class="stat-item">
                     <h3>170K+</h3>
@@ -253,7 +253,7 @@
                 <a href="#" class="btn-dataset-download">
                     <i class="fas fa-download"></i>
                     <span class="download-text">
-                        <strong>Download ByteDepth Dataset</strong>
+                        <strong>Download ByteCamDepth Dataset</strong>
                         <small>170K+ RGB-Depth Pairs | Multi-Camera | 10 Configurations</small>
                     </span>
                     <i class="fas fa-arrow-right arrow-icon"></i>
@@ -265,50 +265,272 @@
     <section class="setup" id="setup">
         <div class="container">
             <h2>UR5 Manipulation Experiment Setup</h2>
-            <p class="setup-description">Experimental setup for simulation and real-world experiments with two different cameras (D435 and L515) for kitchen and canteen tasks.</p>
             
-            <div class="setup-row">
-                <div class="setup-item-exp">
-                    <img src="figs/ur5-setup-sim.png" alt="Overall setup (sim)">
-                    <h4>Overall Setup (Simulation)</h4>
-                    <p>Simulation environment with camera pose randomization for demonstration generation</p>
-                </div>
-                <div class="setup-item-exp">
-                    <img src="figs/sim-range-microwave.png" alt="Kitchen task randomization (sim)">
-                    <h4>Kitchen Task Randomization (Sim)</h4>
-                    <p>Training environment with randomization for bowl and microwave positions</p>
-                </div>
-                <div class="setup-item-exp">
-                    <img src="figs/sim-range-plate.png" alt="Canteen task randomization (sim)">
-                    <h4>Canteen Task Randomization (Sim)</h4>
-                    <p>Simulation environment with randomization for plate and box positions</p>
+            <!-- Depth-Only Imitation Learning Section -->
+            <div class="setup-subsection">
+                <h3 class="setup-subtitle">Imitation Learning with Only Depth</h3>
+                <p class="setup-description">A pilot study on real-world imitation learning with only geometric information for manipulation.</p>
+                
+                <div class="setup-row-2col">
+                    <div class="setup-item-large">
+                        <img src="figs/toothpaste_setup.jpg" alt="Place Toothpaste Task Setup">
+                        <h4>Toothpaste-and-Cup Task</h4>
+                    </div>
+                    <div class="setup-item-large">
+                        <img src="figs/stackbowl_setup.jpg" alt="Stack Bowl Task Setup">
+                        <h4>Stack-Bowls Task</h4>
+                    </div>
                 </div>
             </div>
             
-            <div class="setup-row">
-                <div class="setup-item-exp">
-                    <img src="figs/ur5-setup.png" alt="Overall setup (real)">
-                    <h4>Overall Setup (Real)</h4>
-                    <p>Real-world UR5 robot setup with third-view depth camera for manipulation tasks</p>
+            <!-- Sim-to-Real Transfer Section -->
+            <div class="setup-subsection">
+                <h3 class="setup-subtitle">Sim-to-Real Transfer</h3>
+                <p class="setup-description">Simulation training and real-world deployment with D435 and L515 cameras (zero-shot transfer).</p>
+                
+                <div class="setup-row">
+                    <div class="setup-item-exp">
+                        <img src="figs/ur5-setup-sim.png" alt="Overall setup (sim)">
+                        <h4>Overall Setup (Simulation)</h4>
+                        <p>Simulation environment with camera pose randomization for demonstration generation</p>
+                    </div>
+                    <div class="setup-item-exp">
+                        <img src="figs/sim-range-microwave.png" alt="Kitchen task randomization (sim)">
+                        <h4>Kitchen Task Randomization (Sim)</h4>
+                        <p>Randomization for bowl and microwave <strong>(articulated objects with transparent glass)</strong> positions</p>
+                    </div>
+                    <div class="setup-item-exp">
+                        <img src="figs/sim-range-plate.png" alt="Canteen task randomization (sim)">
+                        <h4>Canteen Task Randomization (Sim)</h4>
+                        <p>Randomization for fork <strong></strong>(reflective and slender)</strong>, plate <strong>(thin)</strong> and box positions</p>
+                    </div>
                 </div>
-                <div class="setup-item-exp">
-                    <img src="figs/kitchen-distribution.png" alt="Kitchen task distribution (real)">
-                    <h4>Kitchen Task Distribution (Real)</h4>
-                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
-                </div>
-                <div class="setup-item-exp">
-                    <img src="figs/canteen-distribution.png" alt="Canteen task distribution (real)">
-                    <h4>Canteen Task Distribution (Real)</h4>
-                    <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
+                
+                <div class="setup-row">
+                    <div class="setup-item-exp">
+                        <img src="figs/ur5-setup.png" alt="Overall setup (real)">
+                        <h4>Overall Setup (Real)</h4>
+                        <p>Real-world UR5 robot setup with third-view depth camera for manipulation tasks</p>
+                    </div>
+                    <div class="setup-item-exp">
+                        <img src="figs/kitchen-distribution.png" alt="Kitchen task distribution (real)">
+                        <h4>Kitchen Task Distribution (Real)</h4>
+                        <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
+                    </div>
+                    <div class="setup-item-exp">
+                        <img src="figs/canteen-distribution.png" alt="Canteen task distribution (real)">
+                        <h4>Canteen Task Distribution (Real)</h4>
+                        <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <section class="results">
+    <section id="quantitative-results" class="quantitative-results">
         <div class="container">
-            <h2>CDM Visualization in Real-World Manipulation</h2>
+            <h2>Manipulation Results</h2>
+            
+            <p style="margin-bottom: 20px; color: #666;">** Note that our goal is not to identify if depth is a better visual modality than color, but to validate whether accurate geometry information contained in a more precise depth image can benefit manipulation. Therefore, the policies designed in our experiments are depth-only to exclude the effect of color information.</p>
+            
+            <div class="table-section">
+                <h3>A Pilot Study on Imitation Learning with Only Depth</h3>
+                <div class="imitation-results-grid">
+                    <div class="table-item">
+                        <div class="imitation-table-container">
+                            <table class="imitation-table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="3">Depth Model</th>
+                                        <th colspan="2">Toothpaste-and-Cup</th>
+                                        <th colspan="2">Stack-Bowls</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Pick Toothpaste</th>
+                                        <th>Put Toothpaste into Cup</th>
+                                        <th>Pick Bowl</th>
+                                        <th>Stack Bowl</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>None</td>
+                                        <td>0/15</td>
+                                        <td>0/15</td>
+                                        <td>6/15</td>
+                                        <td>3/15</td>
+                                    </tr>
+                                    <tr class="best-result">
+                                        <td><strong>CDM-D435</strong></td>
+                                        <td><strong>10/15</strong></td>
+                                        <td><strong>6/15</strong></td>
+                                        <td><strong>11/15</strong></td>
+                                        <td><strong>9/15</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h4>Results w/w.o CDM</h4>
+                        <p>50 demonstrations for each task, collected by teleoperation</p>
+                    </div>
+                    <div class="figure-item">
+                        <h4>Generalization Over Different Object Sizes</h4>
+                        <p>Policies trained without CDM cannot generalize to unseen sizes (0 SR), while CDM-enhanced policies show better generalization.</p>
+                        <img src="figs/success-rate-hist.png" alt="Success Rate Histogram">
+                    </div>
+                </div>
+                
+                <!-- Video demonstrations for Depth-Only IL -->
+                <div class="demo-videos" style="margin-top: 30px;">
+                    <h4 style="text-align: center; margin-bottom: 20px;">Demo Videos</h4>
+                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/iphone-demos/toothpaste_demo_iphone.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Toothpaste-and-Cup Task</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/iphone-demos/stackbowl_demo_iphone.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Stack-Bowls Task</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <h3>Sim-to-Real Transfer Results</h3>
+                
+                <!-- Simulation Data Generation Subsection -->
+                <div class="subsection" style="margin-bottom: 40px;">
+                    <h4>Simulation Data Generation with WBCMimicGen</h4>
+                    <p style="margin-bottom: 20px; color: #666;">Generating high-quality simulation demonstrations in IssacLab for training manipulation policies with proposed WBCMimicGen.</p>
+                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                        <div class="video-pair">
+                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Kitchen Task</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="video-item">
+                                    <video class="demo-video sync-video" data-sync-group="microwave" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/wbcmimicgen/rgb/microwave_wbc.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">RGB</p>
+                                </div>
+                                <div class="video-item">
+                                    <video class="demo-video sync-video" data-sync-group="microwave" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/wbcmimicgen/depth/microwave_wbc.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">Depth</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-pair">
+                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Canteen Task</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="video-item">
+                                    <video class="demo-video sync-video" data-sync-group="plate" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/wbcmimicgen/rgb/plate_wbc.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">RGB</p>
+                                </div>
+                                <div class="video-item">
+                                    <video class="demo-video sync-video" data-sync-group="plate" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/wbcmimicgen/depth/plate_wbc.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">Depth</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Zero-Shot Transfer Results Subsection -->
+                <div class="subsection">
+                    <h4>Zero-Shot Transfer Results</h4>
+                    <p style="margin-bottom: 20px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
+                    
+                    <!-- Real-world demo videos -->
+                    <div class="demo-videos" style="margin-top: 30px;">
+                        <h5 style="text-align: center; margin-bottom: 20px;">Real-World Execution</h5>
+                        <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/iphone-demos/kitchen_demo_iphone.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - Real Robot</p>
+                            </div>
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/iphone-demos/canteen_demo_iphone.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - Real Robot</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="3">Camera</th>
+                                <th rowspan="3">Depth Model</th>
+                                <th colspan="4">Kitchen Task</th>
+                                <th colspan="6">Canteen Task</th>
+                            </tr>
+                            <tr>
+                                <th>Pick Bowl</th>
+                                <th>Put Bowl into Microwave</th>
+                                <th>Close Microwave</th>
+                                <th>Total</th>
+                                <th>Pick Fork</th>
+                                <th>Place Fork</th>
+                                <th>Pick Plate</th>
+                                <th>Dump Plate</th>
+                                <th>Place Plate</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Sim (D435-View)</td><td>None</td><td>43/50</td><td>33/50</td><td>32/50</td><td>30/50</td><td>40/50</td><td>28/50</td><td>47/50</td><td>45/50</td><td>33/50</td><td>21/50</td></tr>
+                            <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
+                            <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
+                            <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        </tbody>
+                        <tbody>
+                            <tr><td>Sim (L515-View)</td><td>None</td><td>43/50</td><td>34/50</td><td>37/50</td><td>32/50</td><td>40/50</td><td>26/50</td><td>46/50</td><td>43/50</td><td>31/50</td><td>20/50</td></tr>
+                            <tr><td rowspan="5">L515</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr><td>PromptDA</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                            <tr><td>PriorDA</td><td>17/30</td><td>3/30</td><td>2/30</td><td>2/30</td><td>10/30</td><td>8/30</td><td>3/30</td><td>3/30</td><td>3/30</td><td>3/30</td></tr>
+                            <tr class="best-result"><td>CDM-D435</td><td>22/30</td><td>11/30</td><td>9/30</td><td>9/30</td><td>13/30</td><td>11/30</td><td>11/30</td><td>10/30</td><td>9/30</td><td>9/30</td></tr>
+                            <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="results" id="cdm-results">
+        <div class="container">
+            <div class="section-header-with-button">
+                <h2 style="margin-block-end: 0;">How do CDMs work?</h2>
+                <a href="#models" class="btn-inline-download">
+                    <i class="fas fa-download"></i>
+                    <span>Download CDMs</span>
+                </a>
+            </div>
             <div class="result-section">
                 <h3>Depth Quality Comparison</h3>
                 <div class="comparison-full">
@@ -538,7 +760,7 @@
                             </div>
                             <div class="pcd-item model-b-viewer" data-scene="kitchen" data-camera="515">
                                 <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-model-b" data-ply-path="pcds/microwave_515_model_depth.ply" data-is-l515="true">
-                                    <img class="pcd-placeholder" src="screenshots/microwave_515_model_depth.png" alt="Loading...">
+                                    <img class="pcd-placeholder" src="screenshots/microwave_515_model_515_depth.png" alt="Loading...">
                                     <button class="load-interactive-btn">Interactive View</button>
                                     <div id="pcd-viewer-microwave-515-model-b" class="pcd-viewer-optimized" style="display: none;">
                                         <div class="pcd-loading">Initializing viewer...</div>
@@ -696,97 +918,13 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div> <!-- End of pcd-dynamic-display -->
             </div>
-            <h3>Depth Accuracy w.r.t Distance</h3>
-            <p>To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
             
-            <!-- Dataset Selector Buttons -->
-            <div class="accuracy-selector-container">
-                <div class="selector-group">
-                    <span class="selector-label">Dataset:</span>
-                    <div class="selector-buttons" id="dataset-selector">
-                        <button class="selector-btn active" data-dataset="d435">D435</button>
-                        <button class="selector-btn" data-dataset="l515">L515</button>
-                        <button class="selector-btn" data-dataset="helios">Helios</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="accuracy-charts-container">
-                <!-- D435 Dataset Charts -->
-                <div class="accuracy-dataset-group" data-dataset="d435">
-                    <div class="accuracy-charts">
-                        <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - Absolute Relative Error</h4>
-                            <div class="chart-container">
-                                <canvas id="d435-absrel-chart"></canvas>
-                            </div>
-                        </div>
-                        <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Dataset - L1 Error</h4>
-                            <div class="chart-container">
-                                <canvas id="d435-l1-chart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- L515 Dataset Charts -->
-                <div class="accuracy-dataset-group" data-dataset="l515" style="display: none;">
-                    <div class="accuracy-charts">
-                        <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - Absolute Relative Error</h4>
-                            <div class="chart-container">
-                                <canvas id="l515-absrel-chart"></canvas>
-                            </div>
-                        </div>
-                        <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Dataset - L1 Error</h4>
-                            <div class="chart-container">
-                                <canvas id="l515-l1-chart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Helios Dataset Charts -->
-                <div class="accuracy-dataset-group" data-dataset="helios" style="display: none;">
-                    <div class="accuracy-charts">
-                        <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - Absolute Relative Error</h4>
-                            <div class="chart-container">
-                                <canvas id="helios-absrel-chart"></canvas>
-                            </div>
-                        </div>
-                        <div class="chart-item">
-                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Dataset - L1 Error</h4>
-                            <div class="chart-container">
-                                <canvas id="helios-l1-chart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="accuracy-insights">
-                <h3>Observations</h3>
-                <ul></ul>
-                    <li>Raw depth shows larger errors than manufacturer specifications (may be dataset bias)</li>
-                    <li>CDMs maintain high accuracy within the camera's optimal working range</li>
-                    <li>Performance trends follow the original camera capabilities while significantly reducing noise</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="quantitative-results" class="quantitative-results">
-        <div class="container">
-            <h2>Quantitative Results</h2>
             
             <div class="table-section">
-                <h3>Depth Evaluation on Hammer Dataset (Zero-shot)</h3>
+                <h3>Depth Evaluation on the <a href="https://github.com/Junggy/HAMMER-dataset" style="color: #103961;" target="_blank">Hammer Dataset</a> (Zero-shot)</h3>
+                <p>* denotes the model fine-tuning on the same synthesized data as CDMs.</p>
                 <div class="table-container">
                     <table class="results-table">
                         <thead>
@@ -920,92 +1058,88 @@
                     </table>
                 </div>
             </div>
-            
-            
-            <div class="table-section">
-                <h3>Real-World Depth-Only Imitation Learning</h3>
-                <div class="imitation-results-grid">
-                    <div class="table-item">
-                        <div class="imitation-table-container">
-                            <table class="imitation-table">
-                                <thead>
-                                    <tr>
-                                        <th rowspan="3">Depth Model</th>
-                                        <th colspan="2">Toothpaste-and-Cup</th>
-                                        <th colspan="2">Stack-Bowls</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Pick Toothpaste</th>
-                                        <th>Put Toothpaste into Cup</th>
-                                        <th>Pick Bowl</th>
-                                        <th>Stack Bowl</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>None</td>
-                                        <td>0/15</td>
-                                        <td>0/15</td>
-                                        <td>6/15</td>
-                                        <td>3/15</td>
-                                    </tr>
-                                    <tr class="best-result">
-                                        <td><strong>CDM-D435</strong></td>
-                                        <td><strong>10/15</strong></td>
-                                        <td><strong>6/15</strong></td>
-                                        <td><strong>11/15</strong></td>
-                                        <td><strong>9/15</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <h4>Results w/w.o CDM</h4>
-                        <p>50 demonstrations for each task, collected by teleoperation</p>
-                    </div>
-                    <div class="figure-item">
-                        <h4>Generalization Over Different Object Sizes</h4>
-                        <p>The policy trained without CDM cannot generalize to unseen sizes, while CDM-enhanced policies show better generalization.</p>
-                        <img src="figs/success-rate-hist.png" alt="Success Rate Histogram">
+
+            <div class="result-section">
+            <h3>Depth Accuracy w.r.t Distance</h3>
+            <p style="margin-bottom: 20px; color: #666;">To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
+            <!-- Dataset Selector Buttons -->
+            <div class="accuracy-selector-container">
+                <div class="selector-group">
+                    <span class="selector-label">Dataset Split:</span>
+                    <div class="selector-buttons" id="dataset-selector">
+                        <button class="selector-btn active" data-dataset="d435">D435</button>
+                        <button class="selector-btn" data-dataset="l515">L515</button>
+                        <button class="selector-btn" data-dataset="helios">Helios</button>
                     </div>
                 </div>
             </div>
-
-            <div class="table-section">
-                <h3>Sim-to-Real Transfer Results</h3>
-                <p>Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline</p>
-                <div class="table-container">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="3">Camera</th>
-                                <th rowspan="3">Depth Model</th>
-                                <th colspan="4">Kitchen Task</th>
-                                <th colspan="6">Canteen Task</th>
-                            </tr>
-                            <tr>
-                                <th>Pick Bowl</th>
-                                <th>Put Bowl into Microwave</th>
-                                <th>Close Microwave</th>
-                                <th>Total</th>
-                                <th>Pick Fork</th>
-                                <th>Place Fork</th>
-                                <th>Pick Plate</th>
-                                <th>Dump Plate</th>
-                                <th>Place Plate</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
-                            <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
-                            <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                        </tbody>
-                    </table>
+            
+            <div id="accuracy-charts-container">
+                <!-- D435 Dataset Charts -->
+                <div class="accuracy-dataset-group" data-dataset="d435">
+                    <div class="accuracy-charts">
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Split - Absolute Relative Error</h4>
+                            <div class="chart-container">
+                                <canvas id="d435-absrel-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">D435 Split - L1 Error</h4>
+                            <div class="chart-container">
+                                <canvas id="d435-l1-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- L515 Dataset Charts -->
+                <div class="accuracy-dataset-group" data-dataset="l515" style="display: none;">
+                    <div class="accuracy-charts">
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Split - Absolute Relative Error</h4>
+                            <div class="chart-container">
+                                <canvas id="l515-absrel-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">L515 Split - L1 Error</h4>
+                            <div class="chart-container">
+                                <canvas id="l515-l1-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Helios Dataset Charts -->
+                <div class="accuracy-dataset-group" data-dataset="helios" style="display: none;">
+                    <div class="accuracy-charts">
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Split - Absolute Relative Error</h4>
+                            <div class="chart-container">
+                                <canvas id="helios-absrel-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-item">
+                            <h4 style="text-align: center; color: #555; margin-bottom: 10px; font-size: 0.95rem;">Helios Split - L1 Error</h4>
+                            <div class="chart-container">
+                                <canvas id="helios-l1-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accuracy-insights">
+                <h3>Observations</h3>
+                <ul></ul>
+                    <li>Raw depth shows larger errors than manufacturer specifications (may be dataset bias)</li>
+                    <li>CDMs maintain high accuracy within the camera's optimal working range</li>
+                    <li>Performance trends follow the original camera capabilities while significantly reducing noise</li>
+                </ul>
             </div>
         </div>
+    </div>
     </section>
 
     <section class="method">
@@ -1470,7 +1604,7 @@
             // Initialize accuracy display
             updateAccuracyDisplay();
             
-            // ByteDepth Dataset Image Selector
+            // ByteCamDepth Dataset Image Selector
             const cameraDatasetButtons = document.querySelectorAll('#camera-dataset-selector .selector-btn');
             const sceneDatasetButtons = document.querySelectorAll('#scene-dataset-selector .selector-btn');
             const pairDatasetButtons = document.querySelectorAll('#pair-dataset-selector .selector-btn');
@@ -2091,6 +2225,75 @@
                     }
                 }, 100);
             }
+        });
+        
+        // Video autoplay with Intersection Observer
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('.demo-video');
+            
+            const videoObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    
+                    if (entry.isIntersecting) {
+                        // Play video when it comes into view
+                        video.play().catch(err => {
+                            console.log('Video autoplay was blocked:', err);
+                        });
+                    } else {
+                        // Pause video when it goes out of view
+                        video.pause();
+                    }
+                });
+            }, {
+                threshold: 0.5 // Video needs to be 50% visible to start playing
+            });
+            
+            // Observe all demo videos
+            videos.forEach(video => {
+                videoObserver.observe(video);
+            });
+            
+            // Video synchronization for paired videos
+            const syncVideos = document.querySelectorAll('.sync-video');
+            
+            syncVideos.forEach(video => {
+                // Sync play/pause events
+                video.addEventListener('play', function() {
+                    const group = this.dataset.syncGroup;
+                    const pairedVideos = document.querySelectorAll(`[data-sync-group="${group}"]`);
+                    
+                    pairedVideos.forEach(pairedVideo => {
+                        if (pairedVideo !== this && pairedVideo.paused) {
+                            pairedVideo.currentTime = this.currentTime;
+                            pairedVideo.play();
+                        }
+                    });
+                });
+                
+                video.addEventListener('pause', function() {
+                    const group = this.dataset.syncGroup;
+                    const pairedVideos = document.querySelectorAll(`[data-sync-group="${group}"]`);
+                    
+                    pairedVideos.forEach(pairedVideo => {
+                        if (pairedVideo !== this && !pairedVideo.paused) {
+                            pairedVideo.pause();
+                        }
+                    });
+                });
+                
+                // Sync seeking
+                video.addEventListener('seeking', function() {
+                    const group = this.dataset.syncGroup;
+                    const pairedVideos = document.querySelectorAll(`[data-sync-group="${group}"]`);
+                    
+                    pairedVideos.forEach(pairedVideo => {
+                        if (pairedVideo !== this) {
+                            pairedVideo.currentTime = this.currentTime;
+                        }
+                    });
+                });
+            });
         });
     </script>
 </body>
