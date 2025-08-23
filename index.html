@@ -92,7 +92,7 @@
                         <div class="contribution-icon">🚀</div>
                         <div class="contribution-text">
                             <h4>Sim-to-Real Transfer</h4>
-                            <p>CDMs help depth-only policies seamless transfer</p>
+                            <p>CDMs make depth-only policies seamless transfer</p>
                         </div>
                     </div>
                 </a>
@@ -531,142 +531,6 @@
                     <span>Download CDMs</span>
                 </a>
             </div>
-            
-            <div class="table-section">
-                <h3>Depth Evaluation on the <a href="https://github.com/Junggy/HAMMER-dataset" style="color: #103961;" target="_blank">Hammer Dataset</a> (Zero-shot)</h3>
-                <div class="table-container">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">Split</th>
-                                <th rowspan="2">Depth Model</th>
-                                <th>L1 ↓</th>
-                                <th>RMSE ↓</th>
-                                <th>AbsRel ↓</th>
-                                <th>δ₀.₅ ↑</th>
-                                <th>δ₁ ↑</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="header-row">
-                                <td rowspan="7">D435<br>(IR Stereo)</td>
-                                <td class="best-result"><strong>CDM-D435 (Ours)</strong></td>
-                                <td class="best-result"><strong>0.0258</strong></td>
-                                <td class="best-result"><strong>0.0404</strong></td>
-                                <td class="best-result"><strong>0.0312</strong></td>
-                                <td class="best-result"><strong>0.9842</strong></td>
-                                <td class="best-result"><strong>0.9951</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="best-result"><strong>CDM-L515 (Ours)</strong></td>
-                                <td class="best-result"><strong>0.0182</strong></td>
-                                <td class="best-result"><strong>0.0338</strong></td>
-                                <td class="best-result"><strong>0.0217</strong></td>
-                                <td class="best-result"><strong>0.9877</strong></td>
-                                <td class="best-result"><strong>0.9956</strong></td>
-                            </tr>
-                            <tr>
-                                <td>PromptDA*(435)</td>
-                                <td>0.0434</td>
-                                <td>0.0666</td>
-                                <td>0.0599</td>
-                                <td>0.9459</td>
-                                <td>0.9770</td>
-                            </tr>
-                            <tr>
-                                <td>PromptDA*(515)</td>
-                                <td>0.1830</td>
-                                <td>0.2387</td>
-                                <td>0.2750</td>
-                                <td>0.8802</td>
-                                <td>0.9186</td>
-                            </tr>
-                            <tr>
-                                <td>PromptDA</td>
-                                <td>0.0396</td>
-                                <td>0.0691</td>
-                                <td>0.0484</td>
-                                <td>0.9503</td>
-                                <td>0.9772</td>
-                            </tr>
-                            <tr>
-                                <td>PriorDA</td>
-                                <td>0.0388</td>
-                                <td>0.0754</td>
-                                <td>0.0461</td>
-                                <td>0.9632</td>
-                                <td>0.9880</td>
-                            </tr>
-                            <tr>
-                                <td>Raw Depth</td>
-                                <td>0.0550</td>
-                                <td>0.1458</td>
-                                <td>0.0708</td>
-                                <td>0.9179</td>
-                                <td>0.9543</td>
-                            </tr>
-                            
-                            <tr class="header-row">
-                                <td rowspan="7">L515<br>(D-ToF)</td>
-                                <td class="best-result"><strong>CDM-L515 (Ours)</strong></td>
-                                <td class="best-result"><strong>0.0156</strong></td>
-                                <td class="best-result"><strong>0.0297</strong></td>
-                                <td class="best-result"><strong>0.0229</strong></td>
-                                <td class="best-result"><strong>0.9754</strong></td>
-                                <td class="best-result"><strong>0.9919</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="best-result"><strong>CDM-D435 (Ours)</strong></td>
-                                <td class="best-result"><strong>0.0165</strong></td>
-                                <td class="best-result"><strong>0.0349</strong></td>
-                                <td class="best-result"><strong>0.0246</strong></td>
-                                <td class="best-result"><strong>0.9613</strong></td>
-                                <td class="best-result"><strong>0.9855</strong></td>
-                            </tr>
-                            <tr>
-                                <td>PromptDA*(515)</td>
-                                <td>0.0235</td>
-                                <td>0.0666</td>
-                                <td>0.0349</td>
-                                <td>0.9291</td>
-                                <td>0.9730</td>
-                            </tr>
-                            <tr>
-                                <td>PromptDA*(435)</td>
-                                <td>0.0254</td>
-                                <td>0.0438</td>
-                                <td>0.0379</td>
-                                <td>0.9234</td>
-                                <td>0.9640</td>
-                            </tr>
-                            <tr>
-                                <td>PromptDA</td>
-                                <td>0.0207</td>
-                                <td>0.0515</td>
-                                <td>0.0304</td>
-                                <td>0.9480</td>
-                                <td>0.9699</td>
-                            </tr>
-                            <tr>
-                                <td>PriorDA</td>
-                                <td>0.0177</td>
-                                <td>0.0385</td>
-                                <td>0.0274</td>
-                                <td>0.9502</td>
-                                <td>0.9763</td>
-                            </tr>
-                            <tr>
-                                <td>Raw Depth</td>
-                                <td>0.0312</td>
-                                <td>0.0813</td>
-                                <td>0.0475</td>
-                                <td>0.9098</td>
-                                <td>0.9429</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
             <div class="result-section">
                 <h3>Depth Quality Comparison</h3>
                 <div class="comparison-full">
@@ -896,7 +760,7 @@
                             </div>
                             <div class="pcd-item model-b-viewer" data-scene="kitchen" data-camera="515">
                                 <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-microwave-515-model-b" data-ply-path="pcds/microwave_515_model_depth.ply" data-is-l515="true">
-                                    <img class="pcd-placeholder" src="screenshots/microwave_515_model_depth.png" alt="Loading...">
+                                    <img class="pcd-placeholder" src="screenshots/microwave_515_model_515_depth.png" alt="Loading...">
                                     <button class="load-interactive-btn">Interactive View</button>
                                     <div id="pcd-viewer-microwave-515-model-b" class="pcd-viewer-optimized" style="display: none;">
                                         <div class="pcd-loading">Initializing viewer...</div>
@@ -1057,6 +921,144 @@
                 </div> <!-- End of pcd-dynamic-display -->
             </div>
             
+            
+            <div class="table-section">
+                <h3>Depth Evaluation on the <a href="https://github.com/Junggy/HAMMER-dataset" style="color: #103961;" target="_blank">Hammer Dataset</a> (Zero-shot)</h3>
+                <p>* denotes the model fine-tuning on the same synthesized data as CDMs.</p>
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Split</th>
+                                <th rowspan="2">Depth Model</th>
+                                <th>L1 ↓</th>
+                                <th>RMSE ↓</th>
+                                <th>AbsRel ↓</th>
+                                <th>δ₀.₅ ↑</th>
+                                <th>δ₁ ↑</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="header-row">
+                                <td rowspan="7">D435<br>(IR Stereo)</td>
+                                <td class="best-result"><strong>CDM-D435 (Ours)</strong></td>
+                                <td class="best-result"><strong>0.0258</strong></td>
+                                <td class="best-result"><strong>0.0404</strong></td>
+                                <td class="best-result"><strong>0.0312</strong></td>
+                                <td class="best-result"><strong>0.9842</strong></td>
+                                <td class="best-result"><strong>0.9951</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="best-result"><strong>CDM-L515 (Ours)</strong></td>
+                                <td class="best-result"><strong>0.0182</strong></td>
+                                <td class="best-result"><strong>0.0338</strong></td>
+                                <td class="best-result"><strong>0.0217</strong></td>
+                                <td class="best-result"><strong>0.9877</strong></td>
+                                <td class="best-result"><strong>0.9956</strong></td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA*(435)</td>
+                                <td>0.0434</td>
+                                <td>0.0666</td>
+                                <td>0.0599</td>
+                                <td>0.9459</td>
+                                <td>0.9770</td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA*(515)</td>
+                                <td>0.1830</td>
+                                <td>0.2387</td>
+                                <td>0.2750</td>
+                                <td>0.8802</td>
+                                <td>0.9186</td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA</td>
+                                <td>0.0396</td>
+                                <td>0.0691</td>
+                                <td>0.0484</td>
+                                <td>0.9503</td>
+                                <td>0.9772</td>
+                            </tr>
+                            <tr>
+                                <td>PriorDA</td>
+                                <td>0.0388</td>
+                                <td>0.0754</td>
+                                <td>0.0461</td>
+                                <td>0.9632</td>
+                                <td>0.9880</td>
+                            </tr>
+                            <tr>
+                                <td>Raw Depth</td>
+                                <td>0.0550</td>
+                                <td>0.1458</td>
+                                <td>0.0708</td>
+                                <td>0.9179</td>
+                                <td>0.9543</td>
+                            </tr>
+                            
+                            <tr class="header-row">
+                                <td rowspan="7">L515<br>(D-ToF)</td>
+                                <td class="best-result"><strong>CDM-L515 (Ours)</strong></td>
+                                <td class="best-result"><strong>0.0156</strong></td>
+                                <td class="best-result"><strong>0.0297</strong></td>
+                                <td class="best-result"><strong>0.0229</strong></td>
+                                <td class="best-result"><strong>0.9754</strong></td>
+                                <td class="best-result"><strong>0.9919</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="best-result"><strong>CDM-D435 (Ours)</strong></td>
+                                <td class="best-result"><strong>0.0165</strong></td>
+                                <td class="best-result"><strong>0.0349</strong></td>
+                                <td class="best-result"><strong>0.0246</strong></td>
+                                <td class="best-result"><strong>0.9613</strong></td>
+                                <td class="best-result"><strong>0.9855</strong></td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA*(515)</td>
+                                <td>0.0235</td>
+                                <td>0.0666</td>
+                                <td>0.0349</td>
+                                <td>0.9291</td>
+                                <td>0.9730</td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA*(435)</td>
+                                <td>0.0254</td>
+                                <td>0.0438</td>
+                                <td>0.0379</td>
+                                <td>0.9234</td>
+                                <td>0.9640</td>
+                            </tr>
+                            <tr>
+                                <td>PromptDA</td>
+                                <td>0.0207</td>
+                                <td>0.0515</td>
+                                <td>0.0304</td>
+                                <td>0.9480</td>
+                                <td>0.9699</td>
+                            </tr>
+                            <tr>
+                                <td>PriorDA</td>
+                                <td>0.0177</td>
+                                <td>0.0385</td>
+                                <td>0.0274</td>
+                                <td>0.9502</td>
+                                <td>0.9763</td>
+                            </tr>
+                            <tr>
+                                <td>Raw Depth</td>
+                                <td>0.0312</td>
+                                <td>0.0813</td>
+                                <td>0.0475</td>
+                                <td>0.9098</td>
+                                <td>0.9429</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="result-section">
             <h3>Depth Accuracy w.r.t Distance</h3>
             <p style="margin-bottom: 20px; color: #666;">To understand the working range of CDMs and help users effectively use them, we evaluated the depth accuracy of CDMs at various distances on the Hammer dataset. The results show that CDMs achieve high accuracy across different distances, with performance trends following the original camera capabilities while significantly reducing noise and errors.</p>
