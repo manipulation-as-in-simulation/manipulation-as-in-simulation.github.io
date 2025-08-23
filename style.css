@@ -371,7 +371,7 @@ header::before {
 
 .method-item img {
     width: 100%;
-    max-width: 650px;
+    max-width: 700px;
     height: auto;
     border-radius: 12px;
     box-shadow: 
@@ -391,6 +391,11 @@ header::before {
         0 4px 12px rgba(0,0,0,0.12),
         0 12px 32px rgba(0,0,0,0.18),
         inset 0 0 0 1px rgba(0,0,0,0.06);
+}
+
+.scene-depth-img {
+    max-width: 500px !important;
+    margin-top: 30px;
 }
 
 .method-item h3 {
