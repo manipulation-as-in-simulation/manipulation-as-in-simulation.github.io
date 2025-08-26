@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Stage 4: Imitation Learning and Deploy in the Real World - ManipAsInSim's Sim-to-Real Tutorial</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
+<meta name="author" content="ManipAsInSim Team">
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta rel="next" href="" />
+<link href="../css/style.min.css" rel="stylesheet">
+<link href="../assets/_mkdocstrings.css" rel="stylesheet">
+<link href="../custom.css" rel="stylesheet"> 
+</head>
+
+<body>
+<div class="book">
+<div class="book-summary">
+<div id="book-search-input" role="search">
+<input type="text" placeholder="Type to search" />
+</div> <!-- end of book-search-input -->
+
+<nav role="navigation">
+<ul class="summary">
+<li>
+<a href=".."  class="custom-link">ManipAsInSim's Sim-to-Real Tutorial</a>
+</li>
+<li class="divider"></li>
+<li class="header"><a href="../stage1-task-scene-construction/index.html" class="">Stage 1 - Task and Scene Construction</a></li>
+
+<li>
+<a href="../stage1-task-scene-construction#overview" class="">Overview</a>
+</li>
+
+<li>
+<a href="../stage1-task-scene-construction#kitchen-task-example" class="">Kitchen Task Example</a>
+</li>
+
+<li>
+<a href="../stage1-task-scene-construction#canteen-task-example" class="">Canteen Task Example</a>
+</li>
+
+<li>
+<a href="../stage1-task-scene-construction#code-reference" class="">Code Reference</a>
+</li>
+
+<li>
+<a href="../stage1-task-scene-construction#next-steps" class="">Next Steps</a>
+</li>
+
+<li class="header"><a href="../stage2-calibration/index.html" class="">Stage 2 - Camera Calibration</a></li>
+
+<li>
+<a href="../stage2-calibration#overview" class="">Overview</a>
+</li>
+
+<li>
+<a href="../stage2-calibration#calibration-workflow" class="">Calibration Workflow</a>
+</li>
+
+<li>
+<a href="../stage2-calibration#advanced-techniques" class="">Advanced Techniques</a>
+</li>
+
+<li>
+<a href="../stage2-calibration#code-reference" class="">Code Reference</a>
+</li>
+
+<li>
+<a href="../stage2-calibration#calibration-data-management" class="">Calibration Data Management</a>
+</li>
+
+<li>
+<a href="../stage2-calibration#next-steps" class="">Next Steps</a>
+</li>
+
+<li class="header"><a href="../stage3-data-generation/index.html" class="">Stage 3 - Data Generation</a></li>
+
+<li>
+<a href="../stage3-data-generation#overview" class="">Overview</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#data-collection" class="">Data Collection</a>
+</li>
+
+<li class="subheader">
+<a href="../stage3-data-generation#task-decomposition-and-annotation" class="">Task Decomposition and Annotation</a>
+</li>
+
+<li class="subitem">
+<a href="../stage3-data-generation#object-centric-decomposition" class="">Object-Centric Decomposition</a>
+</li>
+
+<li class="subheader">
+<a href="../stage3-data-generation#compare-with-mimicgen" class="">Compare with MimicGen</a>
+</li>
+
+<li class="subitem">
+<a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#large-scale-data-generation" class="">Large-scale Data Generation</a>
+</li>
+
+<li class="subheader">
+<a href="../stage3-data-generation#dataset-management" class="">Dataset Management</a>
+</li>
+
+<li class="subitem">
+<a href="../stage3-data-generation#data-format" class="">Data Format</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#code-reference" class="">Code Reference</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#next-steps" class="">Next Steps</a>
+</li>
+
+<li class="header"><a href="../stage4-imitation-learning-deployment/index.html" class="">Stage 4 - Imitation Learning and Deployment</a></li>
+
+<li>
+<a href="../stage4-imitation-learning-deployment#overview" class="">Overview</a>
+</li>
+
+<li>
+<a href="../stage4-imitation-learning-deployment#policy-training" class="">Policy Training</a>
+</li>
+
+<li class="subheader">
+<a href="../stage4-imitation-learning-deployment#real-world-deployment" class="">Real-World Deployment</a>
+</li>
+
+<li class="subitem">
+<a href="../stage4-imitation-learning-deployment#depth-prediction-via-cdm" class="">Depth Prediction via CDM</a>
+</li>
+
+<li>
+<a href="../stage4-imitation-learning-deployment#code-reference" class="">Code Reference</a>
+</li>
+
+<li class="divider"></li>
+
+
+
+<li><a href="http://www.mkdocs.org">
+Published with MkDocs
+</a></li>
+
+<li><a href="https://github.com/GitbookIO/theme-default">
+Theme by GitBook
+</a></li>
+</ul>
+
+</nav>
+
+</div> <!-- end of book-summary -->
+
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+
+<!-- Title -->
+<h1>
+<i class="fa fa-circle-o-notch fa-spin"></i>
+<a href="." ></a>
+</h1>
+
+</div> <!-- end of book-header -->
+
+<div class="page-wrapper" tabindex="-1" role="main">
+<div class="page-inner">
+<div id="book-search-results">
+<div class="search-noresults">
+
+<section class="normal markdown-section">
+
+
+
+<h1 id="stage-4-imitation-learning-and-deploy-in-the-real-world">Stage 4: Imitation Learning and Deploy in the Real World<a class="headerlink" href="#stage-4-imitation-learning-and-deploy-in-the-real-world" title="Permanent link"></a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+<p>The collected data is used to train control policies through imitation learning, which can then be transferred to the real world using physical cameras and robot sensors as policy observations. In the kitchen and canteen tasks, we adopt the PPT learning framework - a policy structure similar to those used in Hua et al. and Lin et al., but using depth as input.</p>
+<h2 id="policy-training">Policy Training<a class="headerlink" href="#policy-training" title="Permanent link"></a></h2>
+<p>We employ a policy structure similar to the one used in [1] and [2] that encodes the depth image with a pre-trained ResNet. The first layer of the network is replaced with a 1-channel convolutional layer; the proprioceptive states are encoded by a from-scratch MLP; a diffusion head~\citep{chi2023diffusion,ho2020denoising} is adopted to predict the action sequence. The model learns to predict action sequences from the demonstrations collected in Stage 3. After training, model can successfully finish task in simulator: </p>
+<div class="rgb-grid-container">
+  <div class="rgb-grid-item">
+    <!-- <img src="../images/calib/mask/mask_0.png" alt="RGB Frame 0 - Initial Position"> -->
+    <video src="../videos/sim/eval-clean-plate/rgb/camera_0.mp4" alt="RGB Frame 0 - Initial Position" controls autoplay loop muted>
+  </div>
+  <div class="rgb-grid-item">
+    <video src="../videos/sim/eval-microwave/rgb/camera_0.mp4" alt="RGB Frame 4 - Final Position" controls autoplay loop muted>
+  </div>
+  <div class="rgb-grid-item">
+    <video src="../videos/sim/eval-clean-plate/depth/camera_0.mp4" alt="RGB Frame 0 - Initial Position" controls autoplay loop muted>
+  </div>
+  <div class="rgb-grid-item">
+    <video src="../videos/sim/eval-microwave/depth/camera_0.mp4" alt="RGB Frame 3 - Intermediate Position" controls autoplay loop muted>
+  </div>
+</div>
+
+<h2 id="real-world-deployment">Real-World Deployment<a class="headerlink" href="#real-world-deployment" title="Permanent link"></a></h2>
+<p>A asynchronous control framework - ManiUniCon is adopted for less lag caused by model inference time and better smoothness. In the kitchen and canteen tasks, we use ManiUniCon for asynchronous control, which separates perception, inference, and control into different processes. </p>
+<h3 id="depth-prediction-via-cdm">Depth Prediction via CDM<a class="headerlink" href="#depth-prediction-via-cdm" title="Permanent link"></a></h3>
+<p>Real-world depth sensors often produce noisy measurements, leading to a significant domain gap between simulated and real observations, which can severely impact policy performance. To address this challenge, we employ Camera Depth Models (CDMs) - advanced neural networks that predict accurate depth maps from RGB images. CDMs leverage learned priors to generate clean, high-quality depth representations that closely match the quality of simulated depth, effectively bridging the sim-to-real gap and enabling robust policy transfer.</p>
+<p><img alt="Image #1" src="../images/00ffea.png" />
+(comparison with/o maniunicon )</p>
+<h2 id="code-reference">Code Reference<a class="headerlink" href="#code-reference" title="Permanent link"></a></h2>
+<p><strong>Policy Implementation:</strong>
+- PPT model: <code>ManiUniCon/maniunicon/customize/policy_model/ppt_policy_model.py</code>
+- Configuration: <code>ManiUniCon/configs/policy/ppt_rgb.yaml</code></p>
+<p><strong>Asynchronous Control:</strong>
+- Main controller: <code>ManiUniCon/main.py</code>
+- Robot interface: <code>ManiUniCon/maniunicon/robot_interface/ur5_robotiq.py</code></p>
+<p><strong>Depth Prediction via CDM:</strong>
+- Camera Depth Model inference: <code>manip-as-in-sim-suite/cdm/infer.py</code>
+- Depth preprocessing: <code>ManiUniCon/maniunicon/customize/obs_wrapper/ppt_depth_wrapper_cdm.py</code></p>
+<p>[1] Pu Hua, Minghuan Liu, Annabella Macaluso, Yunfeng Lin, Weinan Zhang, Huazhe Xu, and Lirui Wang. Gensim2:
+Scaling robot data generation with multi-modal and reasoning llms. arXiv preprint arXiv:2410.03645, 2024.</p>
+<p>[2] Haotong Lin, Sida Peng, Jingxiao Chen, Songyou Peng, Jiaming Sun, Minghuan Liu, Hujun Bao, Jiashi Feng,
+Xiaowei Zhou, and Bingyi Kang. Prompting depth anything for 4k resolution accurate metric depth estimation.
+In Proceedings of the Computer Vision and Pattern Recognition Conference, pages 17070–17080, 2025.</p>
+
+
+</section>
+</div> <!-- end of search-noresults -->
+<div class="search-results">
+<div class="has-results">
+
+<h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+<ul class="search-results-list"></ul>
+
+</div> <!-- end of has-results -->
+<div class="no-results">
+
+<h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+
+</div> <!-- end of no-results -->
+</div> <!-- end of search-results -->
+</div> <!-- end of book-search-results -->
+
+</div> <!-- end of page-inner -->
+</div> <!-- end of page-wrapper -->
+
+</div> <!-- end of body-inner -->
+
+</div> <!-- end of book-body -->
+<script src="../js/main.js"></script>
+<script src="../search/main.js"></script>
+<script src="../js/gitbook.min.js"></script>
+<script src="../js/theme.min.js"></script>
+<script src="../js/nav-hierarchy.js"></script>
+</body>
+</html>

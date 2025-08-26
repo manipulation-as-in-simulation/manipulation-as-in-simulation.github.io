@@ -1,0 +1,227 @@
+/* Custom styles for video display */
+
+/* Style for side-by-side video containers */
+video {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    background: #f0f0f0; /* Light gray background instead of black */
+}
+
+/* For 640x480 videos with black borders, zoom in slightly to crop them */
+video[src*="sim/"] {
+    object-fit: cover !important; /* This will crop black borders */
+    aspect-ratio: 4/3; /* Maintain 640/480 aspect ratio */
+}
+
+/* Alternative: if you want to see the full video without cropping */
+.video-contain {
+    object-fit: contain !important;
+}
+
+/* Remove default browser video controls background */
+video::-webkit-media-controls-panel {
+    background: transparent;
+}
+
+/* Ensure flex containers work properly */
+div[style*="flex"] {
+    align-items: center;
+}
+
+/* Optional: Add rounded corners and shadow for better appearance */
+video {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* RGB Grid Hover Effects */
+.rgb-grid-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+    max-width: 800px !important;
+    margin: 20px auto !important;
+}
+
+.rgb-grid-item {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+    background: #f8f9fa !important;
+}
+
+.rgb-grid-item:hover {
+    transform: translateY(-5px) scale(1.02) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+    z-index: 10 !important;
+}
+
+.rgb-grid-item img {
+    width: 100% !important;
+    display: block !important;
+    transition: transform 0.3s ease !important;
+}
+
+.rgb-grid-item:hover img {
+    transform: scale(1.05) !important;
+}
+
+/* Hierarchical Navigation Collapse Styles */
+.nav-collapse-toggle {
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+    color: #666;
+    font-size: 12px;
+    transition: color 0.2s ease;
+    user-select: none;
+    padding: 2px 4px;
+}
+
+.nav-collapse-toggle:hover {
+    color: #333;
+}
+
+/* Header styles with text wrapping */
+nav .summary li.header > a {
+    display: block !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    padding-right: 30px !important; /* Space for arrow */
+    position: relative !important;
+}
+
+nav .summary li.header > a .nav-collapse-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Keep existing header styling */
+nav .summary li.header {
+    font-weight: 600;
+    margin: 8px 0 4px 0;
+}
+
+nav .summary li.header > a {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    border-left: 4px solid #e2e8f0;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 40px 10px 12px !important; /* Right padding for arrow */
+    font-size: 14px;
+    color: #2d3748;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    line-height: 1.4;
+}
+
+nav .summary li.header > a:hover {
+    background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
+    border-left-color: #4299e1;
+    transform: translateX(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Subheader (H2) styles */
+nav .summary li.subheader {
+    margin-left: 12px;
+    border-left: 2px solid #f1f5f9;
+}
+
+nav .summary li.subheader > a {
+    display: block !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    padding: 8px 40px 8px 16px !important;
+    color: #4a5568;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 0 4px 4px 0;
+    transition: all 0.15s ease;
+    position: relative !important;
+    background: rgba(226, 232, 240, 0.3);
+}
+
+nav .summary li.subheader > a:hover {
+    background: rgba(66, 153, 225, 0.12);
+    color: #2b6cb0;
+    transform: translateX(2px);
+    border-left: 2px solid #4299e1;
+    margin-left: -2px;
+}
+
+nav .summary li.subheader > a .nav-collapse-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Subitem (H3) styles */
+nav .summary li.subitem {
+    margin-left: 36px;
+    border-left: 1px solid #f8fafc;
+}
+
+nav .summary li.subitem > a {
+    padding: 4px 12px;
+    color: #718096;
+    font-size: 12px;
+    border-radius: 0 3px 3px 0;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+nav .summary li.subitem > a:hover {
+    background: rgba(66, 153, 225, 0.06);
+    color: #2b6cb0;
+    transform: translateX(2px);
+    border-left: 2px solid #63b3ed;
+    margin-left: -2px;
+}
+
+nav .summary li.subitem > a.active {
+    background: linear-gradient(90deg, rgba(66, 153, 225, 0.12) 0%, rgba(66, 153, 225, 0.03) 100%);
+    border-left: 2px solid #63b3ed;
+    margin-left: -2px;
+    color: #2b6cb0;
+    font-weight: 500;
+}
+
+/* Regular items (non-header, non-subheader, non-subitem) */
+nav .summary li:not(.header):not(.subheader):not(.subitem) {
+    margin-left: 12px;
+    border-left: 2px solid #f1f5f9;
+}
+
+nav .summary li:not(.header):not(.subheader):not(.subitem) > a {
+    padding: 6px 16px;
+    color: #4a5568;
+    font-size: 13px;
+    border-radius: 0 4px 4px 0;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+nav .summary li:not(.header):not(.subheader):not(.subitem) > a:hover {
+    background: rgba(66, 153, 225, 0.08);
+    color: #2b6cb0;
+    transform: translateX(3px);
+    border-left: 2px solid #4299e1;
+    margin-left: -2px;
+}
+
+nav .summary li:not(.header):not(.subheader):not(.subitem) > a.active {
+    background: linear-gradient(90deg, rgba(66, 153, 225, 0.15) 0%, rgba(66, 153, 225, 0.05) 100%);
+    border-left: 3px solid #4299e1;
+    margin-left: -2px;
+    color: #2b6cb0;
+    font-weight: 600;
+}

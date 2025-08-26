@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Stage 2: Camera Calibration - ManipAsInSim's Sim-to-Real Tutorial</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-gitbook-1.0.7">
+<meta name="author" content="ManipAsInSim Team">
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta rel="next" href="" />
+<link href="../css/style.min.css" rel="stylesheet">
+<link href="../assets/_mkdocstrings.css" rel="stylesheet">
+<link href="../custom.css" rel="stylesheet"> 
+</head>
+
+<body>
+<div class="book">
+<div class="book-summary">
+<div id="book-search-input" role="search">
+<input type="text" placeholder="Type to search" />
+</div> <!-- end of book-search-input -->
+
+<nav role="navigation">
+<ul class="summary">
+<li>
+<a href=".."  class="custom-link">ManipAsInSim's Sim-to-Real Tutorial</a>
+</li>
+<li class="divider"></li>
+<li class="header"><a href="../stage1-task-scene-construction/index.html" class="">Stage 1 - Task and Scene Construction</a></li>
+
+<li>
+<a href="../stage1-task-scene-construction#overview" class="">Overview</a>
+</li>
+
+<li>
+<a href="../stage1-task-scene-construction#kitchen-task-example" class="">Kitchen Task Example</a>
+</li>
+
+<li>
+<a href="../stage1-task-scene-construction#canteen-task-example" class="">Canteen Task Example</a>
+</li>
+
+<li>
+<a href="../stage1-task-scene-construction#code-reference" class="">Code Reference</a>
+</li>
+
+<li>
+<a href="../stage1-task-scene-construction#next-steps" class="">Next Steps</a>
+</li>
+
+<li class="header"><a href="../stage2-calibration/index.html" class="">Stage 2 - Camera Calibration</a></li>
+
+<li>
+<a href="../stage2-calibration#overview" class="">Overview</a>
+</li>
+
+<li class="subheader">
+<a href="../stage2-calibration#calibration-workflow" class="">Calibration Workflow</a>
+</li>
+
+<li class="subitem">
+<a href="../stage2-calibration#step-1-data-collection" class="">Step 1: Data Collection</a>
+</li>
+
+<li class="subitem">
+<a href="../stage2-calibration#step-2-mask-generation" class="">Step 2: Mask Generation</a>
+</li>
+
+<li class="subitem">
+<a href="../stage2-calibration#step-3-optimization-solving" class="">Step 3: Optimization Solving</a>
+</li>
+
+<li class="subheader">
+<a href="../stage2-calibration#advanced-techniques" class="">Advanced Techniques</a>
+</li>
+
+<li class="subitem">
+<a href="../stage2-calibration#1-improving-calibration-accuracy" class="">1. Improving Calibration Accuracy</a>
+</li>
+
+<li>
+<a href="../stage2-calibration#code-reference" class="">Code Reference</a>
+</li>
+
+<li class="subheader">
+<a href="../stage2-calibration#calibration-data-management" class="">Calibration Data Management</a>
+</li>
+
+<li class="subitem">
+<a href="../stage2-calibration#data-organization-structure" class="">Data Organization Structure</a>
+</li>
+
+<li class="subitem">
+<a href="../stage2-calibration#calibration-result-storage" class="">Calibration Result Storage</a>
+</li>
+
+<li>
+<a href="../stage2-calibration#next-steps" class="">Next Steps</a>
+</li>
+
+<li class="header"><a href="../stage3-data-generation/index.html" class="">Stage 3 - Data Generation</a></li>
+
+<li>
+<a href="../stage3-data-generation#overview" class="">Overview</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#data-collection" class="">Data Collection</a>
+</li>
+
+<li class="subheader">
+<a href="../stage3-data-generation#task-decomposition-and-annotation" class="">Task Decomposition and Annotation</a>
+</li>
+
+<li class="subitem">
+<a href="../stage3-data-generation#object-centric-decomposition" class="">Object-Centric Decomposition</a>
+</li>
+
+<li class="subheader">
+<a href="../stage3-data-generation#compare-with-mimicgen" class="">Compare with MimicGen</a>
+</li>
+
+<li class="subitem">
+<a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#large-scale-data-generation" class="">Large-scale Data Generation</a>
+</li>
+
+<li class="subheader">
+<a href="../stage3-data-generation#dataset-management" class="">Dataset Management</a>
+</li>
+
+<li class="subitem">
+<a href="../stage3-data-generation#data-format" class="">Data Format</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#code-reference" class="">Code Reference</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#next-steps" class="">Next Steps</a>
+</li>
+
+<li class="header"><a href="../stage4-imitation-learning-deployment/index.html" class="">Stage 4 - Imitation Learning and Deployment</a></li>
+
+<li>
+<a href="../stage4-imitation-learning-deployment#overview" class="">Overview</a>
+</li>
+
+<li>
+<a href="../stage4-imitation-learning-deployment#policy-training" class="">Policy Training</a>
+</li>
+
+<li>
+<a href="../stage4-imitation-learning-deployment#real-world-deployment" class="">Real-World Deployment</a>
+</li>
+
+<li>
+<a href="../stage4-imitation-learning-deployment#code-reference" class="">Code Reference</a>
+</li>
+
+<li class="divider"></li>
+
+
+
+<li><a href="http://www.mkdocs.org">
+Published with MkDocs
+</a></li>
+
+<li><a href="https://github.com/GitbookIO/theme-default">
+Theme by GitBook
+</a></li>
+</ul>
+
+</nav>
+
+</div> <!-- end of book-summary -->
+
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+
+<!-- Title -->
+<h1>
+<i class="fa fa-circle-o-notch fa-spin"></i>
+<a href="." ></a>
+</h1>
+
+</div> <!-- end of book-header -->
+
+<div class="page-wrapper" tabindex="-1" role="main">
+<div class="page-inner">
+<div id="book-search-results">
+<div class="search-noresults">
+
+<section class="normal markdown-section">
+
+
+
+<h1 id="stage-2-camera-calibration">Stage 2: Camera Calibration<a class="headerlink" href="#stage-2-camera-calibration" title="Permanent link"></a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+<p>Camera calibration ensures visual consistency between simulation and reality, which is essential for successful vision-based policy transfer. We employ an optimization-based approach that leverages differentiable rendering to automatically find camera parameters that minimize the difference between simulated and real images. The process involves collecting multi-view data pairs of the robot in various configurations, extracting robot masks using Segment Anything Model (SAM), and iteratively optimizing camera extrinsics through gradient-based methods until the rendered masks closely match the real ones.</p>
+<h2 id="calibration-workflow">Calibration Workflow<a class="headerlink" href="#calibration-workflow" title="Permanent link"></a></h2>
+<h3 id="step-1-data-collection">Step 1: Data Collection<a class="headerlink" href="#step-1-data-collection" title="Permanent link"></a></h3>
+<p>Collect calibration data in the real environment:</p>
+<ol>
+<li>
+<p><strong>Design Collection Sequence</strong></p>
+<ul>
+<li>Design joint position sequences covering the workspace</li>
+<li>Collect after stabilizing at each position</li>
+<li>Record precise joint angle values</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Collection</strong></p>
+<p>For each preset joint configuration:</p>
+<ul>
+<li>Control robot to reach specified position</li>
+<li>Wait for robot stabilization (~0.5 seconds)</li>
+<li>
+<p>Synchronously collect:</p>
+<ul>
+<li>Camera images</li>
+<li>Robot joint angles</li>
+<li>Timestamps</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Quality Check</strong></p>
+<ul>
+<li>Ensure images are clear without motion blur</li>
+<li>Verify joint angle recording accuracy</li>
+<li>Check time synchronization of data pairs</li>
+</ul>
+</li>
+</ol>
+<div class="rgb-grid-container">
+  <div class="rgb-grid-item">
+    <img src="../images/calib/rgb/rgb_frame_0.png" alt="RGB Frame 0 - Initial Position">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/rgb/rgb_frame_1.png" alt="RGB Frame 1 - Movement Phase">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/rgb/rgb_frame_3.png" alt="RGB Frame 3 - Intermediate Position">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/rgb/rgb_frame_4.png" alt="RGB Frame 4 - Final Position">
+  </div>
+</div>
+
+<p align="center"><em>Data Collection - RGB Camera Calibration Frames</em></p>
+
+<h3 id="step-2-mask-generation">Step 2: Mask Generation<a class="headerlink" href="#step-2-mask-generation" title="Permanent link"></a></h3>
+<p>Process real images using Segment Anything Model:</p>
+<div class="rgb-grid-container">
+  <div class="rgb-grid-item">
+    <img src="../images/calib/mask/mask_0.png" alt="RGB Frame 0 - Initial Position">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/mask/mask_1.png" alt="RGB Frame 1 - Movement Phase">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/mask/mask_3.png" alt="RGB Frame 3 - Intermediate Position">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/mask/mask_4.png" alt="RGB Frame 4 - Final Position">
+  </div>
+</div>
+
+<p align="center"><em>Data Collection - Masks of real images</em></p>
+
+<h3 id="step-3-optimization-solving">Step 3: Optimization Solving<a class="headerlink" href="#step-3-optimization-solving" title="Permanent link"></a></h3>
+<p>Execute camera parameter optimization:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong></p>
+<p>Initial camera parameters:</p>
+<ul>
+<li>Position: Estimates based on rough measurements</li>
+<li>Orientation: Pointing to robot workspace center</li>
+<li>Intrinsics: Using factory parameters or calibrated values</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterative Optimization Automatically</strong></p>
+<p>Optimization loop:</p>
+<ol>
+<li>Set current camera parameters in simulation</li>
+<li>Render robot masks for all joint configurations</li>
+<li>Compute L1 loss with real masks</li>
+<li>Backpropagate to calculate gradients</li>
+<li>Update camera parameters</li>
+<li>Repeat until convergence</li>
+</ol>
+</li>
+<li>
+<p><strong>Convergence Criteria</strong></p>
+<ul>
+<li>Loss function change below threshold</li>
+<li>Parameter updates approaching zero</li>
+<li>Maximum iterations reached</li>
+</ul>
+</li>
+</ol>
+<div class="rgb-grid-container">
+  <div class="rgb-grid-item">
+    <img src="../images/calib/error/diff_0.png" alt="RGB Frame 0 - Initial Position">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/error/diff_1.png" alt="RGB Frame 1 - Movement Phase">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/error/diff_3.png" alt="RGB Frame 3 - Intermediate Position">
+  </div>
+  <div class="rgb-grid-item">
+    <img src="../images/calib/error/diff_4.png" alt="RGB Frame 4 - Final Position">
+  </div>
+</div>
+
+<p align="center"><em>Data Collection - Error of masks after optimization</em></p>
+
+<h2 id="advanced-techniques">Advanced Techniques<a class="headerlink" href="#advanced-techniques" title="Permanent link"></a></h2>
+<h3 id="1-improving-calibration-accuracy">1. Improving Calibration Accuracy<a class="headerlink" href="#1-improving-calibration-accuracy" title="Permanent link"></a></h3>
+<ul>
+<li><strong>Increase Sampling Density</strong>: Add more sampling points in critical work areas</li>
+<li><strong>Multi-round Iteration</strong>: Use coarse calibration results as initial values for fine calibration</li>
+</ul>
+<h2 id="code-reference">Code Reference<a class="headerlink" href="#code-reference" title="Permanent link"></a></h2>
+<p>Specific camera calibration implementations can be found at:</p>
+<p><strong>Calibration Optimization Script:</strong></p>
+<ul>
+<li>File path: <code>ManiUniCon/tools/diff_optim_camera_params.py</code></li>
+<li>Contains complete differentiable optimization workflow</li>
+</ul>
+<p><strong>Data Collection Tools:</strong></p>
+<ul>
+<li>File path: <code>ManiUniCon/tools/save_diff_optim_data.py</code></li>
+<li>Used for collecting and saving calibration data</li>
+</ul>
+<p><strong>Mask Generation Tools:</strong></p>
+<ul>
+<li>File path: <code>ManiUniCon/tools/generate_sam_mask.py</code></li>
+<li>Automatic segmentation script integrated with SAM model</li>
+</ul>
+<h2 id="calibration-data-management">Calibration Data Management<a class="headerlink" href="#calibration-data-management" title="Permanent link"></a></h2>
+<p>(TODO: check here)</p>
+<h3 id="data-organization-structure">Data Organization Structure<a class="headerlink" href="#data-organization-structure" title="Permanent link"></a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>calibration_data/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── raw_images/          # Raw camera images
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── joint_states/        # Robot joint angles
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── masks/              # SAM-generated masks
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── optimization/       # Optimization process data
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   ├── initial/       # Initial parameters
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├── iterations/    # Iteration history
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   └── final/        # Final results
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>└── validation/        # Validation dataset
+</code></pre></div>
+<h3 id="calibration-result-storage">Calibration Result Storage<a class="headerlink" href="#calibration-result-storage" title="Permanent link"></a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># camera_params.yaml</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">camera_d435</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">position</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.35</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.45</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.2</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">orientation</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">-2.8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">intrinsics</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">fx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">615.0</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">fy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">615.0</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">cx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">320.0</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">cy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">240.0</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="nt">distortion</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.0</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nt">calibration_error</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.8</span><span class="w">  </span><span class="c1"># pixels</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nt">calibration_date</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2024-01-15&quot;</span>
+</code></pre></div>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link"></a></h2>
+<p>After completing camera calibration, we obtain precise visual system parameters, laying the foundation for subsequent data generation. The next stage will utilize the calibrated simulation environment to generate large-scale training data through teleoperation and data augmentation techniques.</p>
+
+
+</section>
+</div> <!-- end of search-noresults -->
+<div class="search-results">
+<div class="has-results">
+
+<h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+<ul class="search-results-list"></ul>
+
+</div> <!-- end of has-results -->
+<div class="no-results">
+
+<h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+
+</div> <!-- end of no-results -->
+</div> <!-- end of search-results -->
+</div> <!-- end of book-search-results -->
+
+</div> <!-- end of page-inner -->
+</div> <!-- end of page-wrapper -->
+
+</div> <!-- end of body-inner -->
+
+</div> <!-- end of book-body -->
+<script src="../js/main.js"></script>
+<script src="../search/main.js"></script>
+<script src="../js/gitbook.min.js"></script>
+<script src="../js/theme.min.js"></script>
+<script src="../js/nav-hierarchy.js"></script>
+</body>
+</html>
