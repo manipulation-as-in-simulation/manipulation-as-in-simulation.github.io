@@ -207,7 +207,15 @@ Theme by GitBook
 
 
 <h1 id="stage-2-camera-calibration">Stage 2: Camera Calibration<a class="headerlink" href="#stage-2-camera-calibration" title="Permanent link"></a></h1>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+<h2 id="overview" style="margin: 10px 0; padding: 0px">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+
+<div style="margin: 0px 0; padding: 0px; background: linear-gradient(to right, #f8f9fa, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+  <div style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+  <img src="../images/stage-pictures/cdm-pipeline-seq-stage-2.png" alt="ManipAsInSim Pipeline Overview" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+  </div>
+</div>
+
+
 <p>Camera calibration ensures visual consistency between simulation and reality, which is essential for successful vision-based policy transfer. We employ an optimization-based approach that leverages differentiable rendering to automatically find camera parameters that minimize the difference between simulated and real images. The process involves collecting multi-view data pairs of the robot in various configurations, extracting robot masks using Segment Anything Model (SAM), and iteratively optimizing camera extrinsics through gradient-based methods until the rendered masks closely match the real ones.</p>
 <h2 id="calibration-workflow">Calibration Workflow<a class="headerlink" href="#calibration-workflow" title="Permanent link"></a></h2>
 <h3 id="step-1-data-collection">Step 1: Data Collection<a class="headerlink" href="#step-1-data-collection" title="Permanent link"></a></h3>

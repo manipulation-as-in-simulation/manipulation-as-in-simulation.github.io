@@ -183,7 +183,14 @@ Theme by GitBook
 
 
 <h1 id="stage-3-data-generation">Stage 3: Data Generation with WBCMimicGen<a class="headerlink" href="#stage-3-data-generation" title="Permanent link"></a></h1>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+<h2 id="overview" style="margin: 10px 0; padding: 0px">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+
+<div style="margin: 0px 0; padding: 0px; background: linear-gradient(to right, #f8f9fa, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+  <div style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+  <img src="../images/stage-pictures/cdm-pipeline-seq-stage-3.png" alt="ManipAsInSim Pipeline Overview" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+  </div>
+</div>
+
 <p>Multiple approaches exist for generating manipulation data, including motion planning, reinforcement learning, MimicGen-based methods and so on. Motion planing is more suitable for atomic tasks implementation and implement the code manually for complex tasks is quite time-consuming, while reinforcement learning is more suitable for quite complex tasks (like extreme finegrained control, high dynamic tasks, etc), but reward shaping is also of difficulty. MimicGen-based methods leverages human intuition for complex contact-rich tasks while achieving the scale needed for effective learning. And we think it's better for long-horizon complex tasks. But we found teleoperating in the simulator easily leads to jerky motions, so we enhanced the MimicGen-based methods with Whole Body Control (WBC) - WBCMimicGen. What's more, WBCMimicGen also enables controlling the multi-arm with a mobile base together.</p>
 <p>WBCMimicGen decomposes trajectories into object-centric subtasks, applies spatial and temporal transformations based on object relationships, and recombines them to generate diverse training scenarios while maintaining task validity and physical plausibility. Taking the canteen cleaning task as an example, from just 3-5 human demonstrations of plate manipulation, we can generate thousands of variants with different plate positions, approach angles, and cleaning sequences.</p>
 <!-- ## Teleoperation System
@@ -372,7 +379,18 @@ As a key advancement over standard MimicGen, WBCMimicGen can also be used to gen
 </div>
 
 <h2 id="large-scale-data-generation">Large-scale Data Generation<a class="headerlink" href="#large-scale-data-generation" title="Permanent link"></a></h2>
-<p><img alt="Image #1" src="../images/00ffea.png" /> (video)</p>
+
+<p>
+With WBCMimicGen, we can generate large-scale data, enabling better policy training:
+
+</p>
+<div style="display: flex; gap: 20px; width: 100%;">
+  <div style="flex: 1;">
+    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
+      <source src="../videos/sim/large-scale-generate.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
 <h2 id="dataset-management">Dataset Management<a class="headerlink" href="#dataset-management" title="Permanent link"></a></h2>
 <h3 id="data-format">Data Format<a class="headerlink" href="#data-format" title="Permanent link"></a></h3>
 <p>Using Zarr format for storage, supporting efficient parallel read/write:</p>

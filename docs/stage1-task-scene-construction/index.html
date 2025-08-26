@@ -200,15 +200,14 @@ Theme by GitBook
 
 <h1 id="stage-1-task-and-scene-construction">Stage 1: Task and Scene Construction<a class="headerlink" href="#stage-1-task-and-scene-construction" title="Permanent link"></a></h1>
 
-<!-- Pipeline Overview Diagram -->
-<div style="margin: 40px 0; padding: 20px; background: linear-gradient(to right, #f8f9fa, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-   <h2 style="text-align: center; color: #2d3748; margin-bottom: 30px; font-size: 1.5em;">Complete Sim-to-Real Pipeline</h2>
-   <div style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
-   <img src="../images/pipeline.png" alt="ManipAsInSim Pipeline Overview" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-   </div>
-   </div>
+<h2 id="overview" style="margin: 10px 0; padding: 0px">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
 
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+<div style="margin: 0px 0; padding: 0px; background: linear-gradient(to right, #f8f9fa, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+   <div style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
+   <img src="../images/stage-pictures/cdm-pipeline-seq-stage-1.png" alt="ManipAsInSim Pipeline Overview" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+   </div>
+</div>
+
 <p>Scene construction is the foundation of sim-to-real transfer, where a high-fidelity simulation environment that accurately represents the real-world workspace needs creating. This involves three key steps: identifying and collecting all necessary assets (robots, objects, and environment elements), precisely measuring their spatial relationships in the real world, and systematically configuring them in the simulator with appropriate physical properties and randomization ranges.</p>
 <ol>
 <li>
