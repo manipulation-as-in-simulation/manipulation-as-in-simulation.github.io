@@ -323,6 +323,62 @@
                         <p>Test distribution following simulation randomization boundaries for real-world experiments</p>
                     </div>
                 </div>
+                
+                
+                <!-- Pipeline Subsection -->
+                <div class="subsection" style="margin-top: 40px;">
+                    <h3>Pipeline</h3>
+                    <p style="text-align: center; margin-bottom: 30px; color: #666;">Leverages CDMs to bridge the geometric gap between simulation and real-world.</p>
+                    <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 15px; margin: 20px auto;">
+                        <!-- Stage 1 -->
+                        <div style="text-align: center;">
+                            <a href="https://manipulation-as-in-simulation.github.io/docs/stage1-task-scene-construction/index.html" target="_blank" style="text-decoration: none;">
+                                <img src="figs/cdm-pipeline-stage-1.png" alt="Stage 1: Task&Scene Construction" style="max-width: 240px; width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            </a>
+                            <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Stage 1: Task&Scene Construction</p>
+                        </div>
+                        
+                        <!-- Arrow 1 -->
+                        <i class="fas fa-arrow-right" style="font-size: 2rem; color: #667eea;"></i>
+                        
+                        <!-- Stage 2 -->
+                        <div style="text-align: center;">
+                            <a href="https://manipulation-as-in-simulation.github.io/docs/stage2-calibration/index" target="_blank" style="text-decoration: none;">
+                                <img src="figs/cdm-pipeline-stage-2.png" alt="Stage 2: Camera Calibration" style="max-width: 240px; width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            </a>
+                            <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Stage 2: Camera Calibration</p>
+                        </div>
+                        
+                        <!-- Arrow 2 -->
+                        <i class="fas fa-arrow-right" style="font-size: 2rem; color: #667eea;"></i>
+                        
+                        <!-- Stage 3 -->
+                        <div style="text-align: center;">
+                            <a href="https://manipulation-as-in-simulation.github.io/docs/stage3-data-generation/index.html" target="_blank" style="text-decoration: none;">
+                                <img src="figs/cdm-pipeline-stage-3.png" alt="Stage 3: Data Generation" style="max-width: 240px; width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            </a>
+                            <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Stage 3: Data Generation</p>
+                        </div>
+                        
+                        <!-- Arrow 3 -->
+                        <i class="fas fa-arrow-right" style="font-size: 2rem; color: #667eea;"></i>
+                        
+                        <!-- Stage 4 -->
+                        <div style="text-align: center;">
+                            <a href="https://manipulation-as-in-simulation.github.io/docs/stage4-imitation-learning-deployment/index.html" target="_blank" style="text-decoration: none;">
+                                <img src="figs/cdm-pipeline-stage-4.png" alt="Stage 4: Real-World Deployment" style="max-width: 240px; width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            </a>
+                            <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Stage 4: Learning&Deployment</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="https://manipulation-as-in-simulation.github.io/docs" target="_blank" class="btn" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                            <i class="fas fa-book" style="margin-right: 8px;"></i>
+                            View Complete Tutorial
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -331,7 +387,7 @@
         <div class="container">
             <h2>Manipulation Results</h2>
             
-            <p style="margin-bottom: 20px; color: #666;">** Note that our goal is not to identify if depth is a better visual modality than color, but to validate whether accurate geometry information contained in a more precise depth image can benefit manipulation. Therefore, the policies designed in our experiments are depth-only to exclude the effect of color information.</p>
+            <p style="margin-bottom: 20px; color: #666;">** Note that our goal is <strong>NOT to identify if depth is a better visual modality than color</strong> , <strong>BUT to validate whether accurate geometry information contained in a more precise depth image can benefit manipulation</strong>. Therefore, the policies designed in our experiments are depth-only to exclude the effect of color information.</p>
             
             <div class="table-section">
                 <h3>A Pilot Study on Imitation Learning with Only Depth</h3>
@@ -923,7 +979,7 @@
             
             
             <div class="table-section">
-                <h3>Depth Evaluation on the <a href="https://github.com/Junggy/HAMMER-dataset" style="color: #103961;" target="_blank">Hammer Dataset</a> (Zero-shot)</h3>
+                <h3>Depth Evaluation on the <a href="https://github.com/Junggy/HAMMER-dataset" style="color: #103961;" target="_blank">Hammer Dataset</a> (Zero-Shot)</h3>
                 <p>* denotes the model fine-tuning on the same synthesized data as CDMs.</p>
                 <div class="table-container">
                     <table class="results-table">
