@@ -34,26 +34,71 @@ function formatResult (location, title, summary) {
 
 function displayResults (results) {
   var search_results = document.getElementById("mkdocs-search-results");
-  while (search_results.firstChild) {
-    search_results.removeChild(search_results.firstChild);
+  var book_search_results = document.getElementById("book-search-results");
+  
+  // Clear previous results
+  var results_list = book_search_results.querySelector('.search-results-list');
+  if (results_list) {
+    while (results_list.firstChild) {
+      results_list.removeChild(results_list.firstChild);
+    }
   }
+  
+  // Update search query display
+  var query_elements = book_search_results.querySelectorAll('.search-query');
+  var search_input = document.querySelector('#book-search-input input') || document.getElementById('mkdocs-search-query');
+  if (query_elements && search_input) {
+    for (var j = 0; j < query_elements.length; j++) {
+      query_elements[j].textContent = search_input.value;
+    }
+  }
+  
   if (results.length > 0){
-    for (var i=0; i < results.length; i++){
-      var result = results[i];
-      var html = formatResult(result.location, result.title, result.summary);
-      search_results.insertAdjacentHTML('beforeend', html);
+    // Show results
+    book_search_results.classList.add('active');
+    
+    // Update result count
+    var count_element = book_search_results.querySelector('.search-results-count');
+    if (count_element) {
+      count_element.textContent = results.length;
+    }
+    
+    // Show has-results, hide no-results
+    var has_results = book_search_results.querySelector('.has-results');
+    var no_results = book_search_results.querySelector('.no-results');
+    if (has_results) has_results.style.display = 'block';
+    if (no_results) no_results.style.display = 'none';
+    
+    // Add results to list
+    if (results_list) {
+      for (var i=0; i < results.length; i++){
+        var result = results[i];
+        var li = document.createElement('li');
+        li.className = 'search-results-item';
+        li.innerHTML = formatResult(result.location, result.title, result.summary);
+        results_list.appendChild(li);
+      }
     }
   } else {
-    var noResultsText = search_results.getAttribute('data-no-results-text');
-    if (!noResultsText) {
-      noResultsText = "No results found";
-    }
-    search_results.insertAdjacentHTML('beforeend', '<p>' + noResultsText + '</p>');
+    // Show no results
+    book_search_results.classList.add('active');
+    
+    // Show no-results, hide has-results
+    var has_results = book_search_results.querySelector('.has-results');
+    var no_results = book_search_results.querySelector('.no-results');
+    if (has_results) has_results.style.display = 'none';
+    if (no_results) no_results.style.display = 'block';
   }
 }
 
 function doSearch () {
-  var query = document.getElementById('mkdocs-search-query').value;
+  var search_input = document.querySelector('#book-search-input input') || document.getElementById('mkdocs-search-query');
+  var book_search_results = document.getElementById("book-search-results");
+  
+  if (!search_input) return;
+  
+  var query = search_input.value;
+  
   if (query.length > min_search_length) {
     if (!window.Worker) {
       displayResults(search(query));
@@ -61,18 +106,21 @@ function doSearch () {
       searchWorker.postMessage({query: query});
     }
   } else {
-    // Clear results for short queries
+    // Clear results and hide search results for short queries
+    if (book_search_results) {
+      book_search_results.classList.remove('active');
+    }
     displayResults([]);
   }
 }
 
 function initSearch () {
-  var search_input = document.getElementById('mkdocs-search-query');
+  var search_input = document.querySelector('#book-search-input input') || document.getElementById('mkdocs-search-query');
   if (search_input) {
     search_input.addEventListener("keyup", doSearch);
   }
   var term = getSearchTermFromLocation();
-  if (term) {
+  if (term && search_input) {
     search_input.value = term;
     doSearch();
   }
