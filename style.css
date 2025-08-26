@@ -1344,6 +1344,7 @@ img:not(.bytedance-seed-logo):not(.pcd-placeholder):hover {
     font-size: 1.4rem;
     margin-bottom: 10px;
     color: #555;
+    text-align: center;
 }
 
 .table-section p {
