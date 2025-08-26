@@ -99,7 +99,7 @@
 </li>
 
 <li class="subheader">
-<a href="../stage3-data-generation#compare-with-mimicgen" class="">Compare with MimicGen</a>
+<a href="../stage3-data-generation#compare-with-mimicgen" class="">Comparison with Mimicgen</a>
 </li>
 
 <li class="subitem">
@@ -185,7 +185,7 @@ Theme by GitBook
 
 <p>The collected data is used to train control policies through imitation learning, which can then be transferred to the real world using physical cameras and robot sensors as policy observations. In the kitchen and canteen tasks, we adopt the PPT learning framework - a policy structure similar to those used in Hua et al. and Lin et al., but using depth as input.</p>
 <h2 id="policy-training">Policy Training<a class="headerlink" href="#policy-training" title="Permanent link"></a></h2>
-<p>We employ a policy structure similar to the one used in [1] and [2] that encodes the depth image with a pre-trained ResNet. The first layer of the network is replaced with a 1-channel convolutional layer; the proprioceptive states are encoded by a from-scratch MLP; a diffusion head~\citep{chi2023diffusion,ho2020denoising} is adopted to predict the action sequence. The model learns to predict action sequences from the demonstrations collected in Stage 3. After training, model can successfully finish task in simulator: </p>
+<p>We employ a policy structure similar to the one used in [1] and [2] that encodes the depth image with a pre-trained ResNet. The first layer of the network is replaced with a 1-channel convolutional layer; the proprioceptive states are encoded by a from-scratch MLP; a diffusion head is adopted to predict the action sequence. The model learns to predict action sequences from the demonstrations collected in Stage 3. After training, model can successfully finish task in simulator: </p>
 <div class="rgb-grid-container">
   <div class="rgb-grid-item">
     <!-- <img src="../images/calib/mask/mask_0.png" alt="RGB Frame 0 - Initial Position"> -->
@@ -203,7 +203,7 @@ Theme by GitBook
 </div>
 
 <h2 id="real-world-deployment">Real-World Deployment<a class="headerlink" href="#real-world-deployment" title="Permanent link"></a></h2>
-<p>A asynchronous control framework - ManiUniCon is adopted for less lag caused by model inference time and better smoothness. In the kitchen and canteen tasks, we use ManiUniCon for asynchronous control, which separates perception, inference, and control into different processes. </p>
+<p>An asynchronous control framework - ManiUniCon is adopted for less lag caused by model inference time and better smoothness. In the kitchen and canteen tasks, we use ManiUniCon for asynchronous control, which separates perception, inference, and control into different processes. </p>
 <h3 id="depth-prediction-via-cdm">Depth Prediction via CDMs<a class="headerlink" href="#depth-prediction-via-cdm" title="Permanent link"></a></h3>
 <p>Real-world depth sensors often produce noisy measurements, leading to a significant domain gap between simulated and real observations, which can severely impact policy performance. To address this challenge, we employ Camera Depth Models (CDMs) - advanced neural networks that predict accurate depth maps from RGB images. CDMs leverage learned priors to generate clean, high-quality depth representations that closely match the quality of simulated depth, effectively bridging the sim-to-real gap and enabling robust policy transfer.</p>
 <p><img alt="Image #1" src="../images/00ffea.png" />
