@@ -39,11 +39,7 @@
 </li>
 
 <li>
-<a href="../stage1-task-scene-construction#kitchen-task-example" class="">Kitchen Task Example</a>
-</li>
-
-<li>
-<a href="../stage1-task-scene-construction#canteen-task-example" class="">Canteen Task Example</a>
+<a href="../stage1-task-scene-construction#task-example" class="">Task Example</a>
 </li>
 
 <li>
@@ -133,7 +129,7 @@
 </li>
 
 <li class="subitem">
-<a href="../stage4-imitation-learning-deployment#depth-prediction-via-cdm" class="">Depth Prediction via CDM</a>
+<a href="../stage4-imitation-learning-deployment#depth-prediction-via-cdm" class="">Depth Prediction via CDMs</a>
 </li>
 
 <li>
@@ -208,7 +204,7 @@ Theme by GitBook
 
 <h2 id="real-world-deployment">Real-World Deployment<a class="headerlink" href="#real-world-deployment" title="Permanent link"></a></h2>
 <p>A asynchronous control framework - ManiUniCon is adopted for less lag caused by model inference time and better smoothness. In the kitchen and canteen tasks, we use ManiUniCon for asynchronous control, which separates perception, inference, and control into different processes. </p>
-<h3 id="depth-prediction-via-cdm">Depth Prediction via CDM<a class="headerlink" href="#depth-prediction-via-cdm" title="Permanent link"></a></h3>
+<h3 id="depth-prediction-via-cdm">Depth Prediction via CDMs<a class="headerlink" href="#depth-prediction-via-cdm" title="Permanent link"></a></h3>
 <p>Real-world depth sensors often produce noisy measurements, leading to a significant domain gap between simulated and real observations, which can severely impact policy performance. To address this challenge, we employ Camera Depth Models (CDMs) - advanced neural networks that predict accurate depth maps from RGB images. CDMs leverage learned priors to generate clean, high-quality depth representations that closely match the quality of simulated depth, effectively bridging the sim-to-real gap and enabling robust policy transfer.</p>
 <p><img alt="Image #1" src="../images/00ffea.png" />
 (comparison with/o maniunicon )</p>
@@ -219,7 +215,7 @@ Theme by GitBook
 <p><strong>Asynchronous Control:</strong>
 - Main controller: <code>ManiUniCon/main.py</code>
 - Robot interface: <code>ManiUniCon/maniunicon/robot_interface/ur5_robotiq.py</code></p>
-<p><strong>Depth Prediction via CDM:</strong>
+<p><strong>Depth Prediction via CDMs:</strong>
 - Camera Depth Model inference: <code>manip-as-in-sim-suite/cdm/infer.py</code>
 - Depth preprocessing: <code>ManiUniCon/maniunicon/customize/obs_wrapper/ppt_depth_wrapper_cdm.py</code></p>
 <p>[1] Pu Hua, Minghuan Liu, Annabella Macaluso, Yunfeng Lin, Weinan Zhang, Huazhe Xu, and Lirui Wang. Gensim2:

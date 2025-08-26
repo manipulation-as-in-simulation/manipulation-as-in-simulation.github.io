@@ -28,7 +28,7 @@
                 { title: 'Step 3: Optimization Solving', anchor: '#step-3-optimization-solving' }
             ]},
             { title: 'Advanced Techniques', anchor: '#advanced-techniques', children: [
-                { title: '1. Improving Calibration Accuracy', anchor: '#1-improving-calibration-accuracy' }
+                { title: 'Improving Calibration Accuracy', anchor: '#improving-calibration-accuracy' }
             ]},
             { title: 'Code Reference', anchor: '#code-reference' },
             { title: 'Calibration Data Management', anchor: '#calibration-data-management', children: [

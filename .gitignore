@@ -26,3 +26,4 @@ ehthumbs.db
 .temp/
 
 CLAUDE.md
+server.py
