@@ -115,29 +115,34 @@
             <p style="margin-bottom: 15px;">We release camera depth models for various widely-used depth cameras.</p>
             <p>Try to plug them into your existing robot pipeline to improve the depth perception accuracy!</p>
             
-            <div class="model-grid">
-                <div class="model-card">
+            <div class="model-grid" style="display: flex; justify-content: center; align-items: stretch; gap: 5px; flex-wrap: wrap;">
+                <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
+                    <h3>CDM-405</h3>
+                    <p>For RealSense D405 camera</p>
+                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                </div>
+                <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
                     <h3>CDM-435</h3>
                     <p>For RealSense D435 camera</p>
                     <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
-                <div class="model-card">
+                <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
                     <h3>CDM-L515</h3>
                     <p>For RealSense L515 camera</p>
                     <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
-                <div class="model-card">
+                <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
                     <h3>CDM-Kinect</h3>
                     <p>For Azure Kinect camera</p>
                     <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
-                <div class="model-card">
-                    <h3>CDM-Zed2i Neural</h3>
+                <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
+                    <h3>CDM-Zed2i N</h3>
                     <p>For Zed2i camera, Neural mode</p>
                     <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
-                <div class="model-card">
-                    <h3>CDM-Zed2i Quality</h3>
+                <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
+                    <h3>CDM-Zed2i Q</h3>
                     <p>For Zed2i camera, Quality mode</p>
                     <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
@@ -188,10 +193,10 @@
                 <div class="selector-group">
                     <span class="selector-label">Camera:</span>
                     <div class="selector-buttons" id="camera-dataset-selector">
-                        <button class="selector-btn active" data-camera="d435">D435</button>
+                        <button class="selector-btn active" data-camera="d405">D405</button>
                         <button class="selector-btn" data-camera="d415">D415</button>
+                        <button class="selector-btn" data-camera="d435">D435</button>
                         <button class="selector-btn" data-camera="d455">D455</button>
-                        <button class="selector-btn" data-camera="d405">D405</button>
                         <button class="selector-btn" data-camera="l515">L515</button>
                         <button class="selector-btn" data-camera="kinect">Kinect</button>
                         <button class="selector-btn" data-camera="zed2i_neural">ZED2i-N.</button>
@@ -204,7 +209,7 @@
                     <span class="selector-label">Scene:</span>
                     <div class="selector-buttons" id="scene-dataset-selector">
                         <button class="selector-btn active" data-scene="living">Living</button>
-                        <button class="selector-btn" data-scene="kichen">Kitchen</button>
+                        <button class="selector-btn" data-scene="kitchen">Kitchen</button>
                         <button class="selector-btn" data-scene="bedroom">Bedroom</button>
                         <button class="selector-btn" data-scene="bathroom">Bathroom</button>
                         <button class="selector-btn" data-scene="office">Office</button>
@@ -250,14 +255,20 @@
                 </div>
             </div>
             
-            <div class="dataset-download">
+            <!-- Dataset Actions - Download and Point Cloud Comparison -->
+            <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 30px;">
                 <a href="#" class="btn-dataset-download">
                     <i class="fas fa-download"></i>
                     <span class="download-text">
                         <strong>Download ByteCamDepth Dataset</strong>
-                        <small>170K+ RGB-Depth Pairs | Multi-Camera | 10 Configurations</small>
                     </span>
                     <i class="fas fa-arrow-right arrow-icon"></i>
+                </a>
+                
+                <a href="#point-cloud-comparison" class="btn" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 25px; font-size: 1.1rem; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                    <i class="fas fa-cube" style="margin-right: 10px;"></i>
+                    Check Point Clouds
+                    <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
                 </a>
             </div>
         </div>
@@ -465,7 +476,8 @@
                 <!-- Simulation Data Generation Subsection -->
                 <div class="subsection" style="margin-bottom: 40px;">
                     <h4>Simulation Data Generation with WBCMimicGen</h4>
-                    <p style="margin-bottom: 20px; color: #666;">Generating high-quality simulation demonstrations in IssacLab for training manipulation policies with proposed WBCMimicGen.</p>
+                    <p style="margin-bottom: 1px; color: #666;">Generating high-quality simulation demonstrations in IssacLab for training manipulation policies with proposed WBCMimicGen.</p>
+                    <p style="margin-bottom: 20px; color: #666;">* All videos are played in 1x speed.</p>
                     <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
                         <div class="video-pair">
                             <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Kitchen Task</h5>
@@ -511,7 +523,8 @@
                 <!-- Zero-Shot Transfer Results Subsection -->
                 <div class="subsection">
                     <h4>Zero-Shot Transfer Results</h4>
-                    <p style="margin-bottom: 20px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
+                    <p style="margin-bottom: 1px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
+                    <p style="margin-bottom: 20px; color: #666;">* The policy is robust to external interruptions during the test.</p>
                     
                     <!-- Real-world demo videos -->
                     <div class="demo-videos" style="margin-top: 30px;">
@@ -573,93 +586,6 @@
                             <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
                         </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ByteCamDepth Dataset Point Cloud Samples -->
-    <section class="results">
-        <div class="container">
-            <div class="result-section">
-                <h3>ByteCamDepth Dataset Point Cloud Samples</h3>
-                <p style="text-align: center; margin-bottom: 20px; color: #666;">Interactive 3D visualization of CDM processed point clouds from ByteCamDepth dataset</p>
-                
-                <!-- Scene and Camera Selection Buttons -->
-                <div class="pcd-selector-container">
-                    <div class="selector-group">
-                        <span class="selector-label">Scene:</span>
-                        <div class="selector-buttons" id="bytecam-scene-selector">
-                            <button class="selector-btn active" data-scene="living">Living</button>
-                            <button class="selector-btn" data-scene="kitchen">Kitchen</button>
-                            <button class="selector-btn" data-scene="bedroom">Bedroom</button>
-                            <button class="selector-btn" data-scene="bathroom">Bathroom</button>
-                            <button class="selector-btn" data-scene="office">Office</button>
-                            <button class="selector-btn" data-scene="market">Market</button>
-                            <button class="selector-btn" data-scene="breakroom">Break Room</button>
-                        </div>
-                    </div>
-                    <div class="selector-group">
-                        <span class="selector-label">Camera:</span>
-                        <div class="selector-buttons" id="bytecam-camera-selector">
-                            <button class="selector-btn active" data-camera="d405">D405</button>
-                            <button class="selector-btn" data-camera="d415">D415</button>
-                            <button class="selector-btn" data-camera="d435">D435</button>
-                            <button class="selector-btn" data-camera="d455">D455</button>
-                            <button class="selector-btn" data-camera="l515">L515</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- ByteCamDepth Debug Info Panel (only visible in debug mode) -->
-                <div id="bytecam-debug-panel" class="debug-panel" style="display: none;">
-                    <h4>ByteCamDepth Camera View Parameters (Debug Mode)</h4>
-                    <div class="debug-content">
-                        <div class="debug-viewer-info">
-                            <h5>Raw Depth Viewer</h5>
-                            <div class="debug-params">
-                                <div>Position: <span id="bytecam-debug-raw-pos">(0, 0, 0)</span></div>
-                                <div>Target: <span id="bytecam-debug-raw-target">(0, 0, 0)</span></div>
-                            </div>
-                        </div>
-                        <div class="debug-viewer-info">
-                            <h5>CDM Predicted Viewer</h5>
-                            <div class="debug-params">
-                                <div>Position: <span id="bytecam-debug-pred-pos">(0, 0, 0)</span></div>
-                                <div>Target: <span id="bytecam-debug-pred-target">(0, 0, 0)</span></div>
-                            </div>
-                        </div>
-                        <div class="debug-scene-info">
-                            <small>Scene: <span id="bytecam-debug-scene">Living</span> | Camera: <span id="bytecam-debug-camera">D405</span></small>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Point Cloud Viewers -->
-                <div class="pcd-grid" style="max-width: 1200px; margin: 30px auto; grid-template-columns: repeat(2, 1fr);">
-                    <!-- Raw Depth Point Cloud -->
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" id="bytecam-raw-container" data-viewer-id="bytecam-raw-viewer" data-ply-path="pcds_dataset/camera_d405/living_depth_0.ply" data-is-l515="false">
-                            <img class="pcd-placeholder" src="screenshots_dataset/d405_living_raw.png" alt="Loading..." style="display: block;">
-                            <button class="load-interactive-btn" data-type="raw">Interactive View</button>
-                            <div id="bytecam-raw-viewer" class="pcd-viewer-optimized" style="height: 400px; display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
-                            </div>
-                        </div>
-                        <p>Raw Depth Point Cloud</p>
-                    </div>
-                    
-                    <!-- CDM Predicted Point Cloud -->
-                    <div class="pcd-item">
-                        <div class="pcd-lazy-container" id="bytecam-pred-container" data-viewer-id="bytecam-pred-viewer" data-ply-path="pcds_dataset/camera_d405/living_depth_0_pred.ply" data-is-l515="false">
-                            <img class="pcd-placeholder" src="screenshots_dataset/d405_living_pred.png" alt="Loading..." style="display: block;">
-                            <button class="load-interactive-btn" data-type="pred">Interactive View</button>
-                            <div id="bytecam-pred-viewer" class="pcd-viewer-optimized" style="height: 400px; display: none;">
-                                <div class="pcd-loading">Initializing viewer...</div>
-                            </div>
-                        </div>
-                        <p id="bytecam-cdm-label">CDM-D405 Point Cloud</p>
                     </div>
                 </div>
             </div>
@@ -1063,8 +989,7 @@
                         </div>
                     </div>
                 </div> <!-- End of pcd-dynamic-display -->
-            </div>
-            
+            </div>  
             
             <div class="table-section">
                 <h3>Depth Evaluation on the <a href="https://github.com/Junggy/HAMMER-dataset" style="color: #103961;" target="_blank">Hammer Dataset</a> (Zero-Shot)</h3>
@@ -1282,7 +1207,102 @@
                     <li>Performance trends follow the original camera capabilities while significantly reducing noise</li>
                 </ul>
             </div>
+            </div>
+
+        <!-- ByteCamDepth Dataset Point Cloud Samples -->
+        <section id="point-cloud-comparison" class="results-section">
+            <div class="container">
+                <div class="result-section">
+                <h3>Point Cloud Quality Comparison on ByteCamDepth Dataset</h3>
+                <p style="text-align: center; margin-bottom: 20px; color: #666;">Interactive 3D visualization of CDM processed point clouds from ByteCamDepth dataset</p>
+                
+                <!-- Scene and Camera Selection Buttons -->
+                <div class="pcd-selector-container">
+                    <div class="selector-group">
+                        <span class="selector-label">Scene:</span>
+                        <div class="selector-buttons" id="bytecam-scene-selector">
+                            <button class="selector-btn active" data-scene="living">Living</button>
+                            <button class="selector-btn" data-scene="kitchen">Kitchen</button>
+                            <button class="selector-btn" data-scene="bedroom">Bedroom</button>
+                            <button class="selector-btn" data-scene="bathroom">Bathroom</button>
+                            <button class="selector-btn" data-scene="office">Office</button>
+                            <button class="selector-btn" data-scene="market">Market</button>
+                            <button class="selector-btn" data-scene="breakroom">Break Room</button>
+                        </div>
+                    </div>
+                    <div class="selector-group">
+                        <span class="selector-label">Camera:</span>
+                        <div class="selector-buttons" id="bytecam-camera-selector">
+                            <button class="selector-btn active" data-camera="d405">D405</button>
+                            <button class="selector-btn" data-camera="d435">D435</button>
+                            <button class="selector-btn" data-camera="l515">L515</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ByteCamDepth Debug Info Panel (only visible in debug mode) -->
+                <div id="bytecam-debug-panel" class="debug-panel" style="display: none;">
+                    <h4>ByteCamDepth Camera View Parameters (Debug Mode)</h4>
+                    <div class="debug-content">
+                        <div class="debug-viewer-info">
+                            <h5>Raw Depth Viewer</h5>
+                            <div class="debug-params">
+                                <div>Position: <span id="bytecam-debug-raw-pos">(0, 0, 0)</span></div>
+                                <div>Target: <span id="bytecam-debug-raw-target">(0, 0, 0)</span></div>
+                            </div>
+                        </div>
+                        <div class="debug-viewer-info">
+                            <h5>CDM Predicted Viewer</h5>
+                            <div class="debug-params">
+                                <div>Position: <span id="bytecam-debug-pred-pos">(0, 0, 0)</span></div>
+                                <div>Target: <span id="bytecam-debug-pred-target">(0, 0, 0)</span></div>
+                            </div>
+                        </div>
+                        <div class="debug-scene-info">
+                            <small>Scene: <span id="bytecam-debug-scene">Living</span> | Camera: <span id="bytecam-debug-camera">D405</span></small>
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="pcd-grid" style="max-width: 1400px; margin: 30px auto; grid-template-columns: repeat(2, 1fr); margin-bottom: 5px;">
+                    <!-- Raw Depth Point Cloud -->
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" id="bytecam-raw-container" data-viewer-id="bytecam-raw-viewer" data-ply-path="pcds_dataset/camera_d405/living_depth_0.ply" data-is-l515="false" style="height: 300px;">
+                            <img class="pcd-placeholder" src="screenshots_dataset/d405_living_raw.png" alt="Loading..." style="display: block;">
+                            <button class="load-interactive-btn" data-type="raw">Interactive View</button>
+                            <div id="bytecam-raw-viewer" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>Raw Depth Point Cloud</p>
+                    </div>
+                    
+                    <!-- CDM Predicted Point Cloud -->
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" id="bytecam-pred-container" data-viewer-id="bytecam-pred-viewer" data-ply-path="pcds_dataset/camera_d405/living_depth_0_pred.ply" data-is-l515="false" style="height: 300px;">
+                            <img class="pcd-placeholder" src="screenshots_dataset/d405_living_pred.png" alt="Loading..." style="display: block;">
+                            <button class="load-interactive-btn" data-type="pred">Interactive View</button>
+                            <div id="bytecam-pred-viewer" class="pcd-viewer-optimized" style="display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p id="bytecam-cdm-label">CDM-D405 Point Cloud</p>
+                    </div>
+                </div>
+                
+                <!-- Point Cloud Viewers and RGB Image -->
+                <div class="pcd-grid" style="max-width: 500px; margin: 30px auto; grid-template-columns: repeat(1, 1fr); margin-top: 0px;">
+                    <!-- RGB Image -->
+                    <div class="pcd-item">
+                        <div style="display: flex; align-items: center; justify-content: center; background: #f5f5f5; border-radius: 8px;">
+                            <img id="bytecam-rgb-image" src="figs/rgb_depth/camera_d405/living_rgb_0.png" alt="RGB Image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
+                        </div>
+                        <p>RGB Image</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
     </div>
     </section>
 
@@ -1759,10 +1779,10 @@
             
             // Camera folder mappings
             const cameraFolderMap = {
-                'd435': 'camera_d435',
-                'd415': 'camera_d415',
-                'd455': 'camera_d455',
                 'd405': 'camera_d405',
+                'd415': 'camera_d415',
+                'd435': 'camera_d435',
+                'd455': 'camera_d455',
                 'l515': 'camera_l515',
                 'kinect': 'camera_kinect',
                 'zed2i_neural': 'camera_zed2i_neural',
@@ -1774,7 +1794,7 @@
             // Scene file mappings
             const sceneFileMap = {
                 'living': 'living',
-                'kichen': 'kichen',
+                'kitchen': 'kitchen',
                 'bedroom': 'bedroom',
                 'bathroom': 'bathroom',
                 'office': 'office',
@@ -2786,12 +2806,24 @@
                 const scene = activeScene.dataset.scene;
                 const camera = activeCamera.dataset.camera;
                 
-                // Handle BreakRoom case - file uses "BreakRoom" with capital B
-                const fileName = scene === 'breakroom' ? 'BreakRoom' : scene;
+                // Handle special cases - file names don't match exactly
+                let fileName;
+                if (scene === 'breakroom') {
+                    fileName = 'BreakRoom';
+                } else {
+                    fileName = scene;
+                }
                 
                 // Build file paths
                 const rawPath = `pcds_dataset/camera_${camera}/${fileName}_depth_0.ply`;
                 const predPath = `pcds_dataset/camera_${camera}/${fileName}_depth_0_pred.ply`;
+                
+                // Update RGB image
+                const rgbImagePath = `figs/rgb_depth/camera_${camera}/${fileName}_rgb_0.png`;
+                const rgbImage = document.getElementById('bytecam-rgb-image');
+                if (rgbImage) {
+                    rgbImage.src = rgbImagePath;
+                }
                 
                 // Update raw container
                 bytecamRawContainer.setAttribute('data-ply-path', rawPath);
