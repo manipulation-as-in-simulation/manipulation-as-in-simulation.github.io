@@ -91,7 +91,11 @@
 </li>
 
 <li class="subitem">
-<a href="../stage3-data-generation#object-centric-decomposition" class="">Object-Centric Decomposition</a>
+<a href="../stage3-data-generation#kitchen-task-subtask" class="">Kitchen task example</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#canteen-task-subtask" class="">Canteen task example</a>
 </li>
 
 <li>
@@ -104,6 +108,10 @@
 
 <li class="subitem">
 <a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#detail-of-wbcmimicgen" class="">Detail of WBCMimicGen</a>
 </li>
 
 <li>
@@ -185,7 +193,7 @@ Theme by GitBook
 
 <p>The collected data is used to train control policies through imitation learning, which can then be transferred to the real world using physical cameras and robot sensors as policy observations. In the kitchen and canteen tasks, we adopt the PPT learning framework - a policy structure similar to those used in Hua et al. and Lin et al., but using depth as input.</p>
 <h2 id="policy-training">Policy Training<a class="headerlink" href="#policy-training" title="Permanent link"></a></h2>
-<p>We employ a policy structure similar to the one used in [1] and [2] that encodes the depth image with a pre-trained ResNet. The first layer of the network is replaced with a 1-channel convolutional layer; the proprioceptive states are encoded by a from-scratch MLP; a diffusion head is adopted to predict the action sequence. The model learns to predict action sequences from the demonstrations collected in Stage 3. After training, model can successfully finish task in simulator: </p>
+<p>We employ a policy structure similar to the one used in <a href="#ref-1">[1]</a> and <a href="#ref-2">[2]</a> that encodes the depth image with a pre-trained ResNet. The first layer of the network is replaced with a 1-channel convolutional layer; the proprioceptive states are encoded by a from-scratch MLP; a diffusion head is adopted to predict the action sequence. The model learns to predict action sequences from the demonstrations collected in Stage 3. After training, model can successfully finish task in simulator: </p>
 <div class="rgb-grid-container">
   <div class="rgb-grid-item">
     <!-- <img src="../images/calib/mask/mask_0.png" alt="RGB Frame 0 - Initial Position"> -->
