@@ -1137,7 +1137,7 @@ img:not(.bytedance-seed-logo):not(.pcd-placeholder):hover {
 
 .model-card {
     background: white;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
