@@ -578,6 +578,93 @@
         </div>
     </section>
 
+    <!-- ByteCamDepth Dataset Point Cloud Samples -->
+    <section class="results">
+        <div class="container">
+            <div class="result-section">
+                <h3>ByteCamDepth Dataset Point Cloud Samples</h3>
+                <p style="text-align: center; margin-bottom: 20px; color: #666;">Interactive 3D visualization of CDM processed point clouds from ByteCamDepth dataset</p>
+                
+                <!-- Scene and Camera Selection Buttons -->
+                <div class="pcd-selector-container">
+                    <div class="selector-group">
+                        <span class="selector-label">Scene:</span>
+                        <div class="selector-buttons" id="bytecam-scene-selector">
+                            <button class="selector-btn active" data-scene="living">Living</button>
+                            <button class="selector-btn" data-scene="kitchen">Kitchen</button>
+                            <button class="selector-btn" data-scene="bedroom">Bedroom</button>
+                            <button class="selector-btn" data-scene="bathroom">Bathroom</button>
+                            <button class="selector-btn" data-scene="office">Office</button>
+                            <button class="selector-btn" data-scene="market">Market</button>
+                            <button class="selector-btn" data-scene="breakroom">Break Room</button>
+                        </div>
+                    </div>
+                    <div class="selector-group">
+                        <span class="selector-label">Camera:</span>
+                        <div class="selector-buttons" id="bytecam-camera-selector">
+                            <button class="selector-btn active" data-camera="d405">D405</button>
+                            <button class="selector-btn" data-camera="d415">D415</button>
+                            <button class="selector-btn" data-camera="d435">D435</button>
+                            <button class="selector-btn" data-camera="d455">D455</button>
+                            <button class="selector-btn" data-camera="l515">L515</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ByteCamDepth Debug Info Panel (only visible in debug mode) -->
+                <div id="bytecam-debug-panel" class="debug-panel" style="display: none;">
+                    <h4>ByteCamDepth Camera View Parameters (Debug Mode)</h4>
+                    <div class="debug-content">
+                        <div class="debug-viewer-info">
+                            <h5>Raw Depth Viewer</h5>
+                            <div class="debug-params">
+                                <div>Position: <span id="bytecam-debug-raw-pos">(0, 0, 0)</span></div>
+                                <div>Target: <span id="bytecam-debug-raw-target">(0, 0, 0)</span></div>
+                            </div>
+                        </div>
+                        <div class="debug-viewer-info">
+                            <h5>CDM Predicted Viewer</h5>
+                            <div class="debug-params">
+                                <div>Position: <span id="bytecam-debug-pred-pos">(0, 0, 0)</span></div>
+                                <div>Target: <span id="bytecam-debug-pred-target">(0, 0, 0)</span></div>
+                            </div>
+                        </div>
+                        <div class="debug-scene-info">
+                            <small>Scene: <span id="bytecam-debug-scene">Living</span> | Camera: <span id="bytecam-debug-camera">D405</span></small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Point Cloud Viewers -->
+                <div class="pcd-grid" style="max-width: 1200px; margin: 30px auto; grid-template-columns: repeat(2, 1fr);">
+                    <!-- Raw Depth Point Cloud -->
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" id="bytecam-raw-container" data-viewer-id="bytecam-raw-viewer" data-ply-path="pcds_dataset/camera_d405/living_depth_0.ply" data-is-l515="false">
+                            <img class="pcd-placeholder" src="screenshots_dataset/d405_living_raw.png" alt="Loading..." style="display: block;">
+                            <button class="load-interactive-btn" data-type="raw">Interactive View</button>
+                            <div id="bytecam-raw-viewer" class="pcd-viewer-optimized" style="height: 400px; display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p>Raw Depth Point Cloud</p>
+                    </div>
+                    
+                    <!-- CDM Predicted Point Cloud -->
+                    <div class="pcd-item">
+                        <div class="pcd-lazy-container" id="bytecam-pred-container" data-viewer-id="bytecam-pred-viewer" data-ply-path="pcds_dataset/camera_d405/living_depth_0_pred.ply" data-is-l515="false">
+                            <img class="pcd-placeholder" src="screenshots_dataset/d405_living_pred.png" alt="Loading..." style="display: block;">
+                            <button class="load-interactive-btn" data-type="pred">Interactive View</button>
+                            <div id="bytecam-pred-viewer" class="pcd-viewer-optimized" style="height: 400px; display: none;">
+                                <div class="pcd-loading">Initializing viewer...</div>
+                            </div>
+                        </div>
+                        <p id="bytecam-cdm-label">CDM-D405 Point Cloud</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="results" id="cdm-results">
         <div class="container">
             <div class="section-header-with-button">
@@ -2113,6 +2200,7 @@
             // Check URL parameters for capture mode and debug mode
             const urlParams = new URLSearchParams(window.location.search);
             const captureMode = urlParams.get('capture') === 'true';
+            const captureDatasetMode = urlParams.get('capture_dataset') === 'true';
             const debugMode = urlParams.get('debug') === 'true';
             
             // Show debug panel if in debug mode
@@ -2164,7 +2252,7 @@
                 window.loadedViewers[viewerId] = new OptimizedPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
                 
                 // Update debug info with current scene and camera
-                if (debugMode) {
+                if (debugMode && typeof updateDebugSceneInfo === 'function') {
                     updateDebugSceneInfo();
                 }
             }
@@ -2282,6 +2370,599 @@
                         initDepthAccuracyCharts();
                     }
                 }, 100);
+            }
+        });
+        
+        // ByteCamDepth Point Cloud Viewer with custom axis orientation
+        class ByteCamDepthPointCloudViewer extends OptimizedPointCloudViewer {
+            constructor(containerId, plyPath, isL515 = false, captureMode = false, debugMode = false) {
+                // Extract scene name from plyPath BEFORE calling super
+                const pathParts = plyPath.split('/');
+                const filename = pathParts[pathParts.length - 1];
+                const sceneName = filename.split('_')[0].toLowerCase(); // e.g., "living", "kitchen", "bedroom"
+                
+                // Call parent constructor - this will call init() but we'll override it
+                super(containerId, plyPath, isL515, captureMode, debugMode);
+                
+                // Now set our properties
+                this.sceneName = sceneName;
+                
+                // Scene-specific configurations
+                this.sceneConfigs = {
+                    living: {
+                        cameraPosition: [-0.068, -0.186, -0.051],
+                        cameraTarget: [0, 0, 0],
+                        pointSize: 0.002,
+                        upVector: [0, 0, 1]
+                    },
+                    kitchen: {
+                        cameraPosition: [-0.012, -0.141, -0.021],
+                        cameraTarget: [0, 0, 0],
+                        pointSize: 0.0015,
+                        upVector: [0, 0, 1]
+                    },
+                    bedroom: {
+                        cameraPosition: [-0.008, -0.368, 0.085],
+                        cameraTarget: [0, 0, 0],
+                        pointSize: 0.005,
+                        upVector: [0, 0, 1]
+                    },
+                    bathroom: {
+                        cameraPosition: [0.053, -0.138, -0.056],
+                        cameraTarget: [0, 0, 0],
+                        pointSize: 0.0015,
+                        upVector: [0, 0, 1]
+                    },
+                    office: {
+                        cameraPosition: [-0.008, -0.238, 0.002],
+                        cameraTarget: [0, 0, 0],
+                        pointSize: 0.0025,
+                        upVector: [0, 0, 1]
+                    },
+                    market: {
+                        cameraPosition: [-0.014, -0.307, -0.001],
+                        cameraTarget: [0, 0, 0],
+                        pointSize: 0.0025,
+                        upVector: [0, 0, 1]
+                    },
+                    breakroom: {
+                        cameraPosition: [-0.023, -0.214, 0.009],
+                        cameraTarget: [0, 0, 0],
+                        pointSize: 0.0025,
+                        upVector: [0, 0, 1]
+                    }
+                };
+                
+                // Get config for current scene or use default
+                this.sceneConfig = this.sceneConfigs[this.sceneName] || this.sceneConfigs.living;
+                this.pointSize = this.sceneConfig.pointSize;
+                
+                // Reinitialize camera position with the correct scene config
+                // This is needed because init() was called before sceneConfig was set
+                if (this.camera && this.controls) {
+                    this.camera.position.set(
+                        this.sceneConfig.cameraPosition[0],
+                        this.sceneConfig.cameraPosition[1],
+                        this.sceneConfig.cameraPosition[2]
+                    );
+                    this.camera.up.set(
+                        this.sceneConfig.upVector[0],
+                        this.sceneConfig.upVector[1],
+                        this.sceneConfig.upVector[2]
+                    );
+                    this.controls.target.set(
+                        this.sceneConfig.cameraTarget[0],
+                        this.sceneConfig.cameraTarget[1],
+                        this.sceneConfig.cameraTarget[2]
+                    );
+                    this.controls.update();
+                }
+            }
+            
+            // Override onGeometryLoaded to preserve original coordinates
+            onGeometryLoaded(geometry) {
+                const loadingDiv = this.container.querySelector('.pcd-loading');
+                if (loadingDiv) {
+                    loadingDiv.style.display = 'none';
+                }
+
+                // For ByteCamDepth, preserve original coordinate system
+                // Apply rotation to swap Y and Z axes, no centering, optional scaling
+                
+                // Rotate -90 degrees around X axis to swap Y and Z
+                geometry.rotateX(-Math.PI / 2);
+                
+                // Optional: compute bounding box for info but don't center
+                geometry.computeBoundingBox();
+                const size = new THREE.Vector3();
+                geometry.boundingBox.getSize(size);
+                console.log('ByteCamDepth Point Cloud Size:', size);
+                
+                // Optional: scale if needed (comment out to use original scale)
+                // const scale = 2 / Math.max(size.x, size.y, size.z);
+                // geometry.scale(scale, scale, scale);
+                
+                // Create point cloud with all points
+                this.currentLOD = this.createPointCloud(geometry, 1.0);
+                this.scene.add(this.currentLOD);
+                
+                this.isLoading = false;
+                
+                // Capture screenshot if in capture mode
+                if (this.captureMode) {
+                    setTimeout(() => {
+                        this.captureScreenshot();
+                        setTimeout(() => {
+                            this.destroy();
+                        }, 100);
+                    }, 500);
+                }
+                
+                // Update debug info if in debug mode
+                if (this.debugMode) {
+                    this.updateDebugInfo();
+                }
+            }
+            
+            init() {
+                if (!this.container) return;
+
+                // Scene setup
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0xf5f5f5);
+
+                // Camera setup
+                this.camera = new THREE.PerspectiveCamera(
+                    45,
+                    this.container.clientWidth / this.container.clientHeight,
+                    0.1,
+                    1000
+                );
+                
+                // Set camera position and orientation based on scene configuration
+                // Use default config if sceneConfig isn't set yet
+                const config = this.sceneConfig || {
+                    cameraPosition: [0, 0, -0.515],
+                    cameraTarget: [0, 0, 0],
+                    pointSize: 0.002,
+                    upVector: [0, 0, 1]
+                };
+                this.camera.position.set(config.cameraPosition[0], config.cameraPosition[1], config.cameraPosition[2]);
+
+                // Set the up vector based on scene configuration
+                this.camera.up.set(config.upVector[0], config.upVector[1], config.upVector[2]);
+                
+                // Optimized renderer
+                this.renderer = new THREE.WebGLRenderer({ 
+                    antialias: false,
+                    powerPreference: "high-performance",
+                    preserveDrawingBuffer: true
+                });
+                this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+                this.container.appendChild(this.renderer.domElement);
+
+                // Controls with adjusted settings for ByteCamDepth
+                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.05;
+                this.controls.screenSpacePanning = true; // Changed to true for better control
+                this.controls.minDistance = 0.01; // Allow very close zoom
+                this.controls.maxDistance = 5; // Allow zooming out more
+                
+                // Set target based on scene configuration (config is already defined above)
+                this.controls.target.set(config.cameraTarget[0], config.cameraTarget[1], config.cameraTarget[2]);
+                
+                // Simple lighting
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+                this.scene.add(ambientLight);
+                
+                // Load point cloud
+                this.loadPointCloud();
+                
+                // Start render loop
+                this.animate();
+                
+                // Handle resize
+                window.addEventListener('resize', () => this.handleResize());
+            }
+            
+            // Inherit loadPointCloud from parent
+            loadPointCloud() {
+                super.loadPointCloud();
+            }
+            
+            // Inherit animate from parent
+            animate() {
+                super.animate();
+            }
+            
+            // Inherit handleResize from parent
+            handleResize() {
+                super.handleResize();
+            }
+            
+            // Implement destroy method that calls dispose
+            destroy() {
+                this.dispose();
+            }
+            
+            // Override updateDebugInfo to avoid calling non-existent function
+            updateDebugInfo() {
+                // ByteCamDepth has its own debug info update in the main script
+                // so we don't need to call updateDebugSceneInfo here
+            }
+            
+            // Override captureScreenshot for dataset-specific naming
+            captureScreenshot() {
+                // Force update controls
+                this.controls.update();
+                
+                // Ensure the scene is rendered one more time
+                this.renderer.render(this.scene, this.camera);
+                
+                // Get the canvas
+                const canvas = this.renderer.domElement;
+                
+                // Check if canvas has content
+                if (canvas.width === 0 || canvas.height === 0) {
+                    console.error('Canvas has no dimensions');
+                    return null;
+                }
+                
+                // Capture the canvas as data URL with preserveDrawingBuffer
+                const dataURL = canvas.toDataURL('image/png', 1.0);
+                
+                // Extract camera and scene info from ply path
+                // Format: pcds_dataset/camera_d435/living_depth_0.ply or living_depth_0_pred.ply
+                const pathParts = this.plyPath.split('/');
+                const cameraFolder = pathParts[1]; // camera_d435
+                const camera = cameraFolder.replace('camera_', ''); // d435
+                const filenameParts = pathParts[2].split('_'); // ['living', 'depth', '0.ply'] or ['living', 'depth', '0', 'pred.ply']
+                const scene = filenameParts[0].toLowerCase(); // living
+                const isPred = this.plyPath.includes('_pred.ply');
+                const type = isPred ? 'pred' : 'raw';
+                
+                // Create filename: d435_living_raw.png or d435_living_pred.png
+                const filename = `${camera}_${scene}_${type}.png`;
+                
+                if (this.captureMode) {
+                    // Check if the image is not empty
+                    if (dataURL && dataURL.length > 100) {
+                        // Auto-download in capture mode
+                        const link = document.createElement('a');
+                        link.download = filename;
+                        link.href = dataURL;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        console.log(`Screenshot captured: ${filename} (${dataURL.length} bytes)`);
+                    } else {
+                        console.error(`Failed to capture screenshot for ${filename}`);
+                    }
+                }
+                
+                return dataURL;
+            }
+        }
+        
+        // ByteCamDepth Dataset Point Cloud Selector
+        document.addEventListener('DOMContentLoaded', function() {
+            const bytecamSceneButtons = document.querySelectorAll('#bytecam-scene-selector .selector-btn');
+            const bytecamCameraButtons = document.querySelectorAll('#bytecam-camera-selector .selector-btn');
+            const bytecamRawContainer = document.getElementById('bytecam-raw-container');
+            const bytecamPredContainer = document.getElementById('bytecam-pred-container');
+            const bytecamCdmLabel = document.getElementById('bytecam-cdm-label');
+            let currentRawViewer = null;
+            let currentPredViewer = null;
+            
+            // Check for debug mode
+            const urlParams = new URLSearchParams(window.location.search);
+            const debugMode = urlParams.get('debug') === 'true';
+            
+            // Show ByteCamDepth debug panel if in debug mode
+            if (debugMode) {
+                const bytecamDebugPanel = document.getElementById('bytecam-debug-panel');
+                if (bytecamDebugPanel) {
+                    bytecamDebugPanel.style.display = 'block';
+                }
+            }
+            
+            // Function to update debug info for ByteCamDepth viewers
+            function updateBytecamDebugInfo() {
+                if (!debugMode) return;
+                
+                // Update scene and camera info
+                const activeScene = document.querySelector('#bytecam-scene-selector .selector-btn.active');
+                const activeCamera = document.querySelector('#bytecam-camera-selector .selector-btn.active');
+                
+                const sceneSpan = document.getElementById('bytecam-debug-scene');
+                const cameraSpan = document.getElementById('bytecam-debug-camera');
+                
+                if (sceneSpan && activeScene) sceneSpan.textContent = activeScene.textContent;
+                if (cameraSpan && activeCamera) cameraSpan.textContent = activeCamera.textContent;
+                
+                // Update camera positions for raw viewer
+                if (currentRawViewer && currentRawViewer.camera && currentRawViewer.controls) {
+                    const rawPosSpan = document.getElementById('bytecam-debug-raw-pos');
+                    const rawTargetSpan = document.getElementById('bytecam-debug-raw-target');
+                    
+                    if (rawPosSpan) {
+                        const pos = currentRawViewer.camera.position;
+                        rawPosSpan.textContent = `(${pos.x.toFixed(3)}, ${pos.y.toFixed(3)}, ${pos.z.toFixed(3)})`;
+                    }
+                    if (rawTargetSpan) {
+                        const target = currentRawViewer.controls.target;
+                        rawTargetSpan.textContent = `(${target.x.toFixed(3)}, ${target.y.toFixed(3)}, ${target.z.toFixed(3)})`;
+                    }
+                }
+                
+                // Update camera positions for pred viewer
+                if (currentPredViewer && currentPredViewer.camera && currentPredViewer.controls) {
+                    const predPosSpan = document.getElementById('bytecam-debug-pred-pos');
+                    const predTargetSpan = document.getElementById('bytecam-debug-pred-target');
+                    
+                    if (predPosSpan) {
+                        const pos = currentPredViewer.camera.position;
+                        predPosSpan.textContent = `(${pos.x.toFixed(3)}, ${pos.y.toFixed(3)}, ${pos.z.toFixed(3)})`;
+                    }
+                    if (predTargetSpan) {
+                        const target = currentPredViewer.controls.target;
+                        predTargetSpan.textContent = `(${target.x.toFixed(3)}, ${target.y.toFixed(3)}, ${target.z.toFixed(3)})`;
+                    }
+                }
+            }
+            
+            // Update debug info periodically if in debug mode
+            if (debugMode) {
+                setInterval(updateBytecamDebugInfo, 100);
+            }
+            
+            function loadBytecamViewer(type) {
+                const container = type === 'raw' ? bytecamRawContainer : bytecamPredContainer;
+                const viewerId = type === 'raw' ? 'bytecam-raw-viewer' : 'bytecam-pred-viewer';
+                const plyPath = container.getAttribute('data-ply-path');
+                const isL515 = container.getAttribute('data-is-l515') === 'true';
+                const loadBtn = container.querySelector('.load-interactive-btn');
+                const viewerDiv = document.getElementById(viewerId);
+                
+                // Clean up existing viewer first (before modifying DOM)
+                if (type === 'raw' && currentRawViewer) {
+                    try {
+                        if (currentRawViewer.destroy) {
+                            currentRawViewer.destroy();
+                        }
+                    } catch (e) {
+                        console.error('Error destroying raw viewer:', e);
+                    }
+                    currentRawViewer = null;
+                } else if (type === 'pred' && currentPredViewer) {
+                    try {
+                        if (currentPredViewer.destroy) {
+                            currentPredViewer.destroy();
+                        }
+                    } catch (e) {
+                        console.error('Error destroying pred viewer:', e);
+                    }
+                    currentPredViewer = null;
+                }
+                
+                // Hide placeholder and button, show viewer div
+                const placeholder = container.querySelector('.pcd-placeholder');
+                if (placeholder) placeholder.style.display = 'none';
+                if (loadBtn) loadBtn.style.display = 'none';
+                if (viewerDiv) {
+                    // Clear and reset the viewer div
+                    viewerDiv.innerHTML = '';
+                    viewerDiv.innerHTML = '<div class="pcd-loading">Initializing viewer...</div>';
+                    viewerDiv.style.display = 'block';
+                }
+                
+                // Create new viewer after a small delay to ensure cleanup
+                setTimeout(() => {
+                    try {
+                        if (type === 'raw') {
+                            currentRawViewer = new ByteCamDepthPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
+                        } else {
+                            currentPredViewer = new ByteCamDepthPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
+                        }
+                    } catch (e) {
+                        console.error('Error creating viewer:', e);
+                        if (viewerDiv) {
+                            viewerDiv.innerHTML = '<div class="pcd-loading">Error loading viewer. Please try again.</div>';
+                        }
+                    }
+                }, 200); // Increased delay slightly
+            }
+            
+            function updateBytecamPointClouds() {
+                // Get selected scene and camera
+                const activeScene = document.querySelector('#bytecam-scene-selector .selector-btn.active');
+                const activeCamera = document.querySelector('#bytecam-camera-selector .selector-btn.active');
+                
+                if (!activeScene || !activeCamera) return;
+                
+                const scene = activeScene.dataset.scene;
+                const camera = activeCamera.dataset.camera;
+                
+                // Handle BreakRoom case - file uses "BreakRoom" with capital B
+                const fileName = scene === 'breakroom' ? 'BreakRoom' : scene;
+                
+                // Build file paths
+                const rawPath = `pcds_dataset/camera_${camera}/${fileName}_depth_0.ply`;
+                const predPath = `pcds_dataset/camera_${camera}/${fileName}_depth_0_pred.ply`;
+                
+                // Update raw container
+                bytecamRawContainer.setAttribute('data-ply-path', rawPath);
+                bytecamRawContainer.setAttribute('data-is-l515', 'false');
+                
+                // Update pred container
+                bytecamPredContainer.setAttribute('data-ply-path', predPath);
+                bytecamPredContainer.setAttribute('data-is-l515', 'false');
+                
+                // Update CDM label
+                const cameraName = activeCamera.textContent;
+                bytecamCdmLabel.textContent = `CDM-${cameraName} Point Cloud`;
+                
+                // Clean up existing viewers
+                if (currentRawViewer) {
+                    if (currentRawViewer.destroy) {
+                        currentRawViewer.destroy();
+                    }
+                    currentRawViewer = null;
+                }
+                if (currentPredViewer) {
+                    if (currentPredViewer.destroy) {
+                        currentPredViewer.destroy();
+                    }
+                    currentPredViewer = null;
+                }
+                
+                // Reset both viewers
+                const rawViewerDiv = document.getElementById('bytecam-raw-viewer');
+                const predViewerDiv = document.getElementById('bytecam-pred-viewer');
+                const rawPlaceholder = bytecamRawContainer.querySelector('.pcd-placeholder');
+                const predPlaceholder = bytecamPredContainer.querySelector('.pcd-placeholder');
+                const rawLoadBtn = bytecamRawContainer.querySelector('.load-interactive-btn');
+                const predLoadBtn = bytecamPredContainer.querySelector('.load-interactive-btn');
+                
+                // Update placeholder images
+                if (rawPlaceholder) {
+                    rawPlaceholder.src = `screenshots_dataset/${camera}_${fileName.toLowerCase()}_raw.png`;
+                    rawPlaceholder.style.display = 'block';
+                }
+                if (predPlaceholder) {
+                    predPlaceholder.src = `screenshots_dataset/${camera}_${fileName.toLowerCase()}_pred.png`;
+                    predPlaceholder.style.display = 'block';
+                }
+                
+                if (rawViewerDiv) {
+                    rawViewerDiv.innerHTML = '<div class="pcd-loading">Initializing viewer...</div>';
+                    rawViewerDiv.style.display = 'none';
+                }
+                if (predViewerDiv) {
+                    predViewerDiv.innerHTML = '<div class="pcd-loading">Initializing viewer...</div>';
+                    predViewerDiv.style.display = 'none';
+                }
+                
+                if (rawLoadBtn) {
+                    rawLoadBtn.style.display = 'block';
+                    rawLoadBtn.textContent = 'Interactive View';
+                    // Remove old event listeners and add new one
+                    const newRawBtn = rawLoadBtn.cloneNode(true);
+                    rawLoadBtn.parentNode.replaceChild(newRawBtn, rawLoadBtn);
+                    newRawBtn.addEventListener('click', () => loadBytecamViewer('raw'));
+                }
+                
+                if (predLoadBtn) {
+                    predLoadBtn.style.display = 'block';
+                    predLoadBtn.textContent = 'Interactive View';
+                    // Remove old event listeners and add new one
+                    const newPredBtn = predLoadBtn.cloneNode(true);
+                    predLoadBtn.parentNode.replaceChild(newPredBtn, predLoadBtn);
+                    newPredBtn.addEventListener('click', () => loadBytecamViewer('pred'));
+                }
+            }
+            
+            // Scene selector event handlers
+            bytecamSceneButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    bytecamSceneButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    updateBytecamPointClouds();
+                });
+            });
+            
+            // Camera selector event handlers
+            bytecamCameraButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    bytecamCameraButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    updateBytecamPointClouds();
+                });
+            });
+            
+            // Initial setup for load buttons
+            const initialRawBtn = bytecamRawContainer.querySelector('.load-interactive-btn');
+            const initialPredBtn = bytecamPredContainer.querySelector('.load-interactive-btn');
+            
+            if (initialRawBtn) {
+                initialRawBtn.addEventListener('click', () => loadBytecamViewer('raw'));
+            }
+            if (initialPredBtn) {
+                initialPredBtn.addEventListener('click', () => loadBytecamViewer('pred'));
+            }
+            
+            // Capture dataset screenshots if in capture_dataset mode
+            const captureDatasetMode = new URLSearchParams(window.location.search).get('capture_dataset') === 'true';
+            if (captureDatasetMode) {
+                console.log('Starting ByteCamDepth dataset screenshot capture...');
+                captureAllDatasetScreenshots();
+            }
+            
+            async function captureAllDatasetScreenshots() {
+                const scenes = ['living', 'kitchen', 'bedroom', 'bathroom', 'office', 'market', 'breakroom'];
+                const cameras = ['d405', 'd415', 'd435', 'd455', 'l515'];
+                
+                // Hide the placeholder images and buttons to prepare for capture
+                const rawContainer = document.getElementById('bytecam-raw-container');
+                const predContainer = document.getElementById('bytecam-pred-container');
+                
+                for (const camera of cameras) {
+                    for (const scene of scenes) {
+                        console.log(`Capturing ${camera}_${scene}...`);
+                        
+                        // Update scene and camera selection
+                        const sceneBtn = document.querySelector(`#bytecam-scene-selector button[data-scene="${scene}"]`);
+                        const cameraBtn = document.querySelector(`#bytecam-camera-selector button[data-camera="${camera}"]`);
+                        
+                        if (sceneBtn && cameraBtn) {
+                            // Trigger click events to update selection
+                            sceneBtn.click();
+                            cameraBtn.click();
+                            
+                            // Wait for DOM update
+                            await new Promise(resolve => setTimeout(resolve, 500));
+                            
+                            // Make sure viewers are visible and properly sized
+                            const rawViewerDiv = document.getElementById('bytecam-raw-viewer');
+                            const predViewerDiv = document.getElementById('bytecam-pred-viewer');
+                            
+                            // Show and size the viewer divs
+                            if (rawViewerDiv) {
+                                rawViewerDiv.style.display = 'block';
+                                rawViewerDiv.style.width = '600px';
+                                rawViewerDiv.style.height = '400px';
+                                rawViewerDiv.innerHTML = '';
+                            }
+                            if (predViewerDiv) {
+                                predViewerDiv.style.display = 'block';
+                                predViewerDiv.style.width = '600px';
+                                predViewerDiv.style.height = '400px';
+                                predViewerDiv.innerHTML = '';
+                            }
+                            
+                            // Capture raw point cloud
+                            const rawPath = `pcds_dataset/camera_${camera}/${scene === 'breakroom' ? 'BreakRoom' : scene}_depth_0.ply`;
+                            console.log(`Loading raw: ${rawPath}`);
+                            const rawViewer = new ByteCamDepthPointCloudViewer('bytecam-raw-viewer', rawPath, camera === 'l515', true, false);
+                            
+                            // Wait for raw capture to complete
+                            await new Promise(resolve => setTimeout(resolve, 3000));
+                            
+                            // Capture predicted point cloud
+                            const predPath = `pcds_dataset/camera_${camera}/${scene === 'breakroom' ? 'BreakRoom' : scene}_depth_0_pred.ply`;
+                            console.log(`Loading pred: ${predPath}`);
+                            const predViewer = new ByteCamDepthPointCloudViewer('bytecam-pred-viewer', predPath, camera === 'l515', true, false);
+                            
+                            // Wait for pred capture to complete
+                            await new Promise(resolve => setTimeout(resolve, 3000));
+                        }
+                    }
+                }
+                
+                console.log('Dataset screenshot capture complete!');
+                alert('Screenshot capture complete! Check your downloads folder.');
             }
         });
         
