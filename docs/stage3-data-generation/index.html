@@ -17,6 +17,8 @@
 <link href="../css/style.min.css" rel="stylesheet">
 <link href="../assets/_mkdocstrings.css" rel="stylesheet">
 <link href="../custom.css" rel="stylesheet"> 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -91,7 +93,11 @@
 </li>
 
 <li class="subitem">
-<a href="../stage3-data-generation#object-centric-decomposition" class="">Object-Centric Decomposition</a>
+<a href="../stage3-data-generation#kitchen-task-subtask" class="">Kitchen task example</a>
+</li>
+
+<li class="subitem">
+<a href="../stage3-data-generation#canteen-task-subtask" class="">Canteen task example</a>
 </li>
 
 <li>
@@ -104,6 +110,10 @@
 
 <li class="subitem">
 <a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
+</li>
+
+<li>
+<a href="../stage3-data-generation#detail-of-wbcmimicgen" class="">Detail of WBCMimicGen</a>
 </li>
 
 <li>
@@ -173,14 +183,14 @@ Theme by GitBook
 <h1 id="stage-3-data-generation">Stage 3: Data Generation with WBCMimicGen<a class="headerlink" href="#stage-3-data-generation" title="Permanent link"></a></h1>
 <h2 id="overview" style="margin: 10px 0; padding: 0px">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
 
-<div style="margin: 0px 0; padding: 0px; background: linear-gradient(to right, #f8f9fa, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+<div style="margin: 0px 0px 20px 0px; padding: 0px 0; background: linear-gradient(to right, #f8f9fa, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
   <div style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; overflow-x: auto;">
   <img src="../images/stage-pictures/cdm-pipeline-seq-stage-3.png" alt="ManipAsInSim Pipeline Overview" style="width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
   </div>
 </div>
 
-<p>Multiple approaches exist for generating manipulation data, including motion planning, reinforcement learning, MimicGen-based methods and so on. Motion planing is more suitable for atomic tasks implementation and implement the code manually for complex tasks is quite time-consuming, while reinforcement learning is more suitable for quite complex tasks (like extreme finegrained control, high dynamic tasks, etc), but reward shaping is also of difficulty. MimicGen-based methods leverages human intuition for complex contact-rich tasks while achieving the scale needed for effective learning. And we think it's better for long-horizon complex tasks. But we found teleoperating in the simulator easily leads to jerky motions, so we enhanced the MimicGen-based methods with Whole Body Control (WBC) - WBCMimicGen. What's more, WBCMimicGen also enables controlling the multi-arm with a mobile base together.</p>
-<p>WBCMimicGen decomposes trajectories into object-centric subtasks, applies spatial transformations to objects to generate diverse training scenarios while maintaining task validity and physical plausibility. Taking the kitchen task and canteen task as an example, from just 3-5 human demonstrations of plate manipulation, we can generate thousands of variants with different objects' positions and orientations.</p>
+<p>Multiple approaches exist for generating manipulation data, including motion planning, reinforcement learning, MimicGen-based methods and so on. Motion planing is more suitable for atomic tasks implementation and implement the code manually for complex tasks is quite time-consuming, while reinforcement learning is more suitable for quite complex tasks (like extreme finegrained control, high dynamic tasks, etc), but reward shaping is also of difficulty. MimicGen-based methods leverages human intuition for complex contact-rich tasks while achieving the scale needed for effective learning. And we think it's better for long-horizon complex tasks. But we found teleoperating in the simulator easily leads to jerky motions, so we enhanced the MimicGen-based methods with Whole Body Control (WBC) - WBCMimicGen. What's more, WBCMimicGen also enables controlling the multi-arm with a mobile base together. We show the details of the implementation of WBCMimicGen <a href="#detail-of-wbcmimicgen">here</a>.</p>
+<p>Just like MimicGen, WBCMimicGen also decomposes trajectories into object-centric subtasks, applies spatial transformations to objects to generate diverse training scenarios while maintaining task validity and physical plausibility. Taking the kitchen task and canteen task as an example, from just 3-5 human demonstrations of plate manipulation, we can generate thousands of variants with different objects' positions and orientations.</p>
 <!-- ## Teleoperation System
 
 ### Hardware Configuration
@@ -237,7 +247,10 @@ Teleoperation system setup:
   </div>
 
 <h2 id="task-decomposition-and-annotation">Task Decomposition and Annotation<a class="headerlink" href="#task-decomposition-and-annotation" title="Permanent link"></a></h2>
-<h3 id="object-centric-decomposition">Object-Centric Decomposition<a class="headerlink" href="#object-centric-decomposition" title="Permanent link"></a></h3>
+
+To gernerate data with WBCMimicGen, we need to decompose the task into object-centric subtasks. This needs to be pre-defined by the user according to the semantic of the tasks. We provide two examples to illustrate the process of task decomposition and annotation.
+
+<h3 id="kitchen-task-subtask">Kitchen task example<a class="headerlink" href="#kitchen-task-subtask" title="Permanent link"></a></h3>
 <p>Decompose complex tasks into object-centric subtasks. The kitchen task's example is as follows:</p>
 <p><strong>Stage 1: grasp bowl</strong></p>
 <ul>
@@ -280,7 +293,8 @@ Teleoperation system setup:
   <button onclick="var el = document.getElementById('microwave-carousel'); var current = parseInt(el.style.transform.replace(/[^\d-]/g, '') || 0); el.style.transform = 'translateX(' + Math.min(0, current + 400) + 'px)'" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px;">❮</button>
   <button onclick="var el = document.getElementById('microwave-carousel'); var current = parseInt(el.style.transform.replace(/[^\d-]/g, '') || 0); el.style.transform = 'translateX(' + Math.max(-400, current - 400) + 'px)'" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px;">❯</button>
 </div>
-
+<h3 id="canteen-task-subtask">Canteen task example<a class="headerlink" href="#canteen-task-subtask" title="Permanent link"></a></h3>
+<p>There is another example -- canteen task -- as follows:</p>
 <p><strong>Stage 1: grasp fork</strong></p>
 <ul>
 <li>Start: Robot initial position</li>
@@ -366,15 +380,77 @@ With WBCMimicGen, we can generate large-scale data, enabling better policy train
 <div style="display: flex; gap: 20px; width: 100%;">
   <div style="flex: 1;">
     <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/sim/arx7/arx.mp4" type="video/mp4">
+      <source src="../videos/sim/arx7/arx-camera-0.mp4" type="video/mp4">
     </video>
     <p style="text-align: center;">Camera on the robot's head.</p>
   </div>
   <div style="flex: 1;">
     <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/sim/arx7/arx_2.mp4" type="video/mp4">
+      <source src="../videos/sim/arx7/arx-camera-top.mp4" type="video/mp4">
     </video>
     <p style="text-align: center;">Camera in the environment.</p>
+  </div>
+</div>
+
+<h2 id="detail-of-wbcmimicgen">Detail of WBCMimicGen<a class="headerlink" href="#detail-of-wbcmimicgen" title="Permanent link"></a></h2>
+<p>We proposed to enhance the MimicGen framework with WBC. Compared to the original MimicGen algorithm, which utilizes linear interpolation of end-effector poses to generate trajectories, WBCMimicGen optimizes target joint velocities with WBC, considering the manipulability, joint limits, joint velocity limits together in the QP problem and thereby generating smoother, high-quality demonstrations. 
+
+Specifically, we regard the data generation problem as solving a trajectory of whole-body joint velocities that enables the end-effector to move with a specific velocity.
+Formally, denote joint velocities as $\boldsymbol x$, this problem can be modeled as a quadratic programming (QP)<a href="#ref-1">[1]</a>:
+
+\begin{equation}
+\min _ { \boldsymbol{x} } \quad f _ { o } ( \boldsymbol{x} ) = \frac { 1 } { 2 } \boldsymbol{x} ^ { \top } Q \boldsymbol{x} + \mathcal { C } ^ { \top } \boldsymbol{x}  
+\end{equation}
+\begin{equation*}
+\begin{aligned}
+\text{subject to } \mathcal { J } \boldsymbol{x} &= { } ^ { b } \nu _ { e }~, \\
+\mathcal { A } \boldsymbol{x} &\leq \mathcal { B }~, \\
+\mathcal { X } ^ { - } &\leq \boldsymbol{x} \leq \mathcal { X } ^ { + }~,
+\end{aligned}
+\end{equation*} 
+</p>
+
+<p>
+  where $x = (a_\text{base}, \dot{q}_\text{active}, \delta_1, \delta_2, \cdots, \delta_i)$ and $\mathcal{X}^{+, -}$ is the limits; $a_\text{base}$ is the velocities of the robot base; $\dot{q}_\text{active}$ is the velocity of the joints related to the end-effectors in the QP (so called the active joints); $\delta_i$ are slack variables that can help construct a solvable QP. Without loss of generality, suppose there are $k$ end-effectors and $n$ joints, these variables can be expressed as:
+  \begin{equation}
+      \begin{aligned}
+          \mathcal Q &= \text{diag}(\lambda_q, \lambda_{\delta_1}, \cdots, \lambda_{\delta_k}) \in \mathbb R^{(n+6k)}~, \\
+  \mathcal { C } &= \left( \begin{array} { c } \hat { \mathbf { J } } _ { m } + \epsilon \\ 0 _ { 6k \times 1 } \end{array} \right) \in \mathbb { R } ^ { ( n + 6k ) }~, \\
+  \mathcal{A} &= (\boldsymbol{1} _{n \times (n+6k)}) \in \mathbb{R}^{n \times (n + 6k)}~, \\
+  \mathcal B &= \left( \begin{array} { c } 0 _ { b } \\ \eta \frac { \rho _ { 0 } - \rho _ { s } } { \rho _ { i } - \rho _ { s } } \\ \vdots \\ \eta \frac { \rho _ { n } - \rho _ { s } } { \rho _ { i } - \rho _ { s } } \end{array} \right) \in \mathbb { R } ^ { n }~.
+      \end{aligned}
+  \end{equation}
+</p>
+
+
+<p><strong> Here are some videos to show the difference between the original MimicGen and WBCMimicGen:</strong></p>
+
+<div style="display: flex; gap: 20px; width: 100%;">
+  <div style="flex: 1;">
+    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
+      <source src="../videos/compare_with_mimicgen/microwave_mimicgen-1.mp4" type="video/mp4">
+    </video>
+    <p style="text-align: center;">Kitchen task's data generated by MimicGen</p>
+  </div>
+  <div style="flex: 1;">
+    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
+      <source src="../videos/compare_with_mimicgen/microwave_wbc-1.mp4" type="video/mp4">
+    </video>
+    <p style="text-align: center;">Kitchen task's data generated by WBCMimicGen</p>
+  </div>
+</div>
+<div style="display: flex; gap: 20px; width: 100%;">
+  <div style="flex: 1;">
+    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
+      <source src="../videos/compare_with_mimicgen/plate_mimicgen-1.mp4" type="video/mp4">
+    </video>
+    <p style="text-align: center;">Canteen task's data generated by MimicGen</p>
+  </div>
+  <div style="flex: 1;">
+    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
+      <source src="../videos/compare_with_mimicgen/plate_wbc-1.mp4" type="video/mp4">
+    </video>
+    <p style="text-align: center;">Canteen task's data generated by WBCMimicGen</p>
   </div>
 </div>
 
@@ -382,24 +458,25 @@ With WBCMimicGen, we can generate large-scale data, enabling better policy train
 <p>Data generation related code:</p>
 <p><strong>Teleoperation System:</strong></p>
 <ul>
-<li>SpaceMouse control: <code>ManiUniCon/maniunicon/policies/spacemouse.py</code></li>
-<li>Quest VR control: <code>ManiUniCon/maniunicon/policies/quest.py</code></li>
+<li>Quest VR control: <code><a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/scripts/basic/record_demos_ur5_quest.py">https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/scripts/basic/record_demos_ur5_quest.py</a></code></li>
+</ul>
+<p><strong>Data Annotation Scripts:</strong></p>
+<ul>
+<li>
+  <code><a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/scripts/mimicgen/annotate_demos.py">https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/scripts/mimicgen/annotate_demos.py</a></code>
+</li>
 </ul>
 <p><strong>Data Generation Scripts:</strong></p>
 <ul>
-<li>Generation configuration: <code>manip-as-in-sim-suite/wbcmimic/config/mimicgen/generate_data.yaml</code></li>
-<li>Parallel generation: <code>manip-as-in-sim-suite/wbcmimic/scripts/mimicgen/generate_dataset_parallel_all.py</code></li>
-<li>Data replay: <code>manip-as-in-sim-suite/wbcmimic/scripts/mimicgen/replay_demos.py</code></li>
-</ul>
-<p><strong>Data Processing Tools:</strong></p>
-<ul>
-<li>Zarr data management: <code>manip-as-in-sim-suite/wbcmimic/source/isaaclab_mimic/isaaclab_mimic/utils/datasets/</code></li>
-<li>Data visualization: <code>manip-as-in-sim-suite/wbcmimic/scripts/data_tools/draw_data_distribution.py</code></li>
+<li>Generation configuration: <code><a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/config/mimicgen/generate_data.yaml">https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/config/mimicgen/generate_data.yaml</a></code></li>
+<li>Generation script: <code><a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/scripts/mimicgen/run_hydra.py">https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/scripts/mimicgen/run_hydra.py</a></code></li>
 </ul>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link"></a></h2>
 <p>After completing large-scale data generation, we have obtained a rich training dataset. The next stage will use this data for imitation learning, training robot control policies, and ultimately deploying them in the real world for validation.</p>
 
-
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link"></a></h2>
+<p id="ref-1"> [1] Jesse Haviland, Niko Sünderhauf, and Peter Corke. A holistic approach to reactive mobile manipulation. IEEE
+  Robotics and Automation Letters, 7(2):3122–3129, 2022. </p>
 </section>
 </div> <!-- end of search-noresults -->
 <div class="search-results">
@@ -444,5 +521,14 @@ var min_search_length = 3;
 <script src="../js/gitbook.min.js"></script>
 <script src="../js/theme.min.js"></script>
 <script src="../js/nav-hierarchy.js"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    }
+  };
+</script>
 </body>
 </html>
