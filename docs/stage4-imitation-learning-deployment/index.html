@@ -102,17 +102,14 @@
 <a href="../stage3-data-generation#large-scale-data-generation" class="">Large-scale Data Generation</a>
 </li>
 
-<li class="subheader">
-<a href="../stage3-data-generation#compare-with-mimicgen" class="">Comparison with Mimicgen</a>
-</li>
-
-<li class="subitem">
-<a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
-</li>
-
 <li>
 <a href="../stage3-data-generation#detail-of-wbcmimicgen" class="">Detail of WBCMimicGen</a>
 </li>
+
+<li class="subitem">
+  <a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
+</li>
+  
 
 <li>
 <a href="../stage3-data-generation#code-reference" class="">Code Reference</a>
@@ -182,7 +179,7 @@ Theme by GitBook
 
 
 
-<h1 id="stage-4-imitation-learning-and-deploy-in-the-real-world">Stage 4: Imitation Learning and Deploy in the Real World<a class="headerlink" href="#stage-4-imitation-learning-and-deploy-in-the-real-world" title="Permanent link"></a></h1>
+<h1 id="stage-4-imitation-learning-and-deploy-in-the-real-world">Stage 4: Imitation Learning and Real-World Deployment<a class="headerlink" href="#stage-4-imitation-learning-and-deploy-in-the-real-world" title="Permanent link"></a></h1>
 <h2 id="overview" style="margin: 10px 0; padding: 0px">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
 
 <div style="margin: 0px 0px 20px 0px; padding: 0px 0; background: linear-gradient(to right, #f8f9fa, #ffffff); border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
@@ -191,9 +188,9 @@ Theme by GitBook
   </div>
 </div>
 
-<p>The collected data is used to train control policies through imitation learning, which can then be transferred to the real world using physical cameras and robot sensors as policy observations. In the kitchen and canteen tasks, we adopt the PPT learning framework - a policy structure similar to those used in Hua et al. and Lin et al., but using depth as input.</p>
+<p>This stage leverages the generated demonstration data to train visuomotor control policies via imitation learning, enabling direct transfer to physical systems. We employ a depth-based variant of the PPT (Perception-Policy-Transfer) framework<a href="#ref-1">[1,2]</a>, utilizing depth representations as the primary visual modality for enhanced sim-to-real transfer.</p>
 <h2 id="policy-training">Policy Training<a class="headerlink" href="#policy-training" title="Permanent link"></a></h2>
-<p>We employ a policy structure similar to the one used in <a href="#ref-1">[1]</a> and <a href="#ref-2">[2]</a> that encodes the depth image with a pre-trained ResNet. The first layer of the network is replaced with a 1-channel convolutional layer; the proprioceptive states are encoded by a from-scratch MLP; a diffusion head is adopted to predict the action sequence. The model learns to predict action sequences from the demonstrations collected in Stage 3. After training, model can successfully finish task in simulator: </p>
+<p>Our architecture adapts a pre-trained ResNet encoder for depth image processing (with modified single-channel input layer), combines proprioceptive state encoding via MLP, and employs a diffusion head for action sequence generation<a href="#ref-1">[1,2]</a>. The policy learns temporal action distributions from Stage 3 demonstrations, achieving robust task completion in simulation:</p>
 <div class="rgb-grid-container">
   <div class="rgb-grid-item">
     <!-- <img src="../images/calib/mask/mask_0.png" alt="RGB Frame 0 - Initial Position"> -->
@@ -211,26 +208,28 @@ Theme by GitBook
 </div>
 
 <h2 id="real-world-deployment">Real-World Deployment<a class="headerlink" href="#real-world-deployment" title="Permanent link"></a></h2>
-<p>An asynchronous control framework - ManiUniCon is adopted for less lag caused by model inference time and better smoothness. In the kitchen and canteen tasks, we use ManiUniCon for asynchronous control, which separates perception, inference, and control into different processes. </p>
+<p>Deployment utilizes ManiUniCon, an asynchronous control framework that decouples perception, inference, and actuation into parallel processes, minimizing latency and ensuring smooth trajectory execution despite computational overhead.</p>
 <h3 id="depth-prediction-via-cdm">Depth Prediction via CDMs<a class="headerlink" href="#depth-prediction-via-cdm" title="Permanent link"></a></h3>
-<p>Real-world depth sensors often produce noisy measurements, leading to a significant domain gap between simulated and real observations, which can severely impact policy performance. To address this challenge, we employ Camera Depth Models (CDMs) - advanced neural networks that predict accurate depth maps from RGB images. CDMs leverage learned priors to generate clean, high-quality depth representations that closely match the quality of simulated depth, effectively bridging the sim-to-real gap and enabling robust policy transfer.</p>
-<p><img alt="Image #1" src="../images/00ffea.png" />
-(comparison with/o maniunicon )</p>
+<p>Physical depth sensors exhibit significant noise characteristics absent in simulation, creating a domain gap that degrades policy performance. We mitigate this through Camera Depth Models (CDMs)—neural architectures that synthesize high-fidelity depth maps from RGB inputs. These models leverage learned geometric priors to produce depth representations comparable to simulated quality, facilitating robust sim-to-real transfer.</p>
+<p><img alt="Image #1" src="../images/00ffea.png" /></p>
 <h2 id="code-reference">Code Reference<a class="headerlink" href="#code-reference" title="Permanent link"></a></h2>
-<p><strong>Policy Implementation:</strong>
-- Configuration: <code><a href="https://github.com/Ericonaldo/ppt_learning/blob/main/configs/config_eval_depth_unified.yaml">https://github.com/Ericonaldo/ppt_learning/blob/main/configs/config_eval_depth_unified.yaml</a></code></p>
-<p><strong>Asynchronous Control:</strong>
-- Main controller: <code><a href="https://github.com/Universal-Control/ManiUniCon/blob/main/main.py">https://github.com/Universal-Control/ManiUniCon/blob/main/main.py</a></code>
-- Robot interface: <code><a href="https://github.com/Universal-Control/ManiUniCon/blob/main/maniunicon/robot_interface/ur5_robotiq.py">https://github.com/Universal-Control/ManiUniCon/blob/main/maniunicon/robot_interface/ur5_robotiq.py</a></code></p>
-<p><strong>Depth Prediction via CDMs:</strong>
-- CDM observarion wrapper: <code><a href="https://github.com/Universal-Control/ManiUniCon/blob/main/maniunicon/customize/obs_wrapper/ppt_depth_wrapper_cdm.py">https://github.com/Universal-Control/ManiUniCon/blob/main/maniunicon/customize/obs_wrapper/ppt_depth_wrapper_cdm.py</a></code>
+<p><strong>Policy Architecture:</strong></p>
+<ul>
+<li>Configuration: <code><a href="https://github.com/Ericonaldo/ppt_learning/blob/main/configs/config_eval_depth_unified.yaml">https://github.com/Ericonaldo/ppt_learning/blob/main/configs/config_eval_depth_unified.yaml</a></code></li>
+</ul>
+<p><strong>ManiUniCon Framework:</strong></p>
+<ul>
+<li>Control pipeline: <code><a href="https://github.com/Universal-Control/ManiUniCon/blob/main/main.py">https://github.com/Universal-Control/ManiUniCon/blob/main/main.py</a></code></li>
+<li>Hardware interface: <code><a href="https://github.com/Universal-Control/ManiUniCon/blob/main/maniunicon/robot_interface/ur5_robotiq.py">https://github.com/Universal-Control/ManiUniCon/blob/main/maniunicon/robot_interface/ur5_robotiq.py</a></code></li>
+</ul>
+<p><strong>CDM Integration:</strong></p>
+<ul>
+<li>Observation processing: <code><a href="https://github.com/Universal-Control/ManiUniCon/blob/main/maniunicon/customize/obs_wrapper/ppt_depth_wrapper_cdm.py">https://github.com/Universal-Control/ManiUniCon/blob/main/maniunicon/customize/obs_wrapper/ppt_depth_wrapper_cdm.py</a></code></li>
+</ul>
 
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link"></a></h2>
-<p>[1] Pu Hua, Minghuan Liu, Annabella Macaluso, Yunfeng Lin, Weinan Zhang, Huazhe Xu, and Lirui Wang. Gensim2:
-Scaling robot data generation with multi-modal and reasoning llms. arXiv preprint arXiv:2410.03645, 2024.</p>
-<p>[2] Haotong Lin, Sida Peng, Jingxiao Chen, Songyou Peng, Jiaming Sun, Minghuan Liu, Hujun Bao, Jiashi Feng,
-Xiaowei Zhou, and Bingyi Kang. Prompting depth anything for 4k resolution accurate metric depth estimation.
-In Proceedings of the Computer Vision and Pattern Recognition Conference, pages 17070–17080, 2025.</p>
+<p id="ref-1">[1] Pu Hua, Minghuan Liu, Annabella Macaluso, Yunfeng Lin, Weinan Zhang, Huazhe Xu, and Lirui Wang. GenSim2: Scaling robot data generation with multi-modal and reasoning LLMs. arXiv preprint arXiv:2410.03645, 2024.</p>
+<p id="ref-2">[2] Haotong Lin, Sida Peng, Jingxiao Chen, Songyou Peng, Jiaming Sun, Minghuan Liu, Hujun Bao, Jiashi Feng, Xiaowei Zhou, and Bingyi Kang. Prompting depth anything for 4k resolution accurate metric depth estimation. In Proceedings of the Computer Vision and Pattern Recognition Conference, pages 17070–17080, 2025.</p>
 
 
 </section>

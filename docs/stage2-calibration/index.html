@@ -88,14 +88,6 @@
 <a href="../stage2-calibration#calibration-data-management" class="">Calibration Data Management</a>
 </li>
 
-<li class="subitem">
-<a href="../stage2-calibration#data-organization-structure" class="">Data Organization Structure</a>
-</li>
-
-<li class="subitem">
-<a href="../stage2-calibration#calibration-result-storage" class="">Calibration Result Storage</a>
-</li>
-
 <li>
 <a href="../stage2-calibration#next-steps" class="">Next Steps</a>
 </li>
@@ -126,17 +118,14 @@
 <a href="../stage3-data-generation#large-scale-data-generation" class="">Large-scale Data Generation</a>
 </li>
 
-<li class="subheader">
-<a href="../stage3-data-generation#compare-with-mimicgen" class="">Comparison with Mimicgen</a>
-</li>
-
-<li class="subitem">
-<a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
-</li>
 
 <li>
 <a href="../stage3-data-generation#detail-of-wbcmimicgen" class="">Detail of WBCMimicGen</a>
 </li>
+
+<li class="subitem">
+  <a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
+  </li>  
 
 <li>
 <a href="../stage3-data-generation#code-reference" class="">Code Reference</a>
@@ -212,41 +201,40 @@ Theme by GitBook
 </div>
 
 
-<p>Camera calibration ensures visual consistency between simulation and reality, which is essential for successful vision-based policy transfer. We employ an optimization-based approach that leverages differentiable rendering to automatically find camera parameters that minimize the difference between simulated and real images. The process involves collecting multi-view data pairs of the robot in various configurations, extracting robot masks using Segment Anything Model (SAM), and iteratively optimizing camera extrinsics through gradient-based methods until the rendered masks closely match the real ones.</p>
+<p>Camera calibration establishes geometric correspondence between simulated and physical visual observations—a prerequisite for vision-based policy transfer. Our approach employs differentiable rendering within an optimization framework to automatically determine camera parameters that minimize simulation-to-reality discrepancies. The methodology encompasses multi-view data acquisition across diverse robot configurations, segmentation via Segment Anything Model (SAM), and gradient-based optimization of camera extrinsics to achieve pixel-level alignment between rendered and observed masks.</p>
 <h2 id="calibration-workflow">Calibration Workflow<a class="headerlink" href="#calibration-workflow" title="Permanent link"></a></h2>
 <h3 id="step-1-data-collection">Step 1: Data Collection<a class="headerlink" href="#step-1-data-collection" title="Permanent link"></a></h3>
-<p>Collect calibration data in the real environment:</p>
+<p>Calibration data acquisition protocol:</p>
 <ol>
 <li>
-<p><strong>Design Collection Sequence</strong></p>
+<p><strong>Trajectory Design</strong></p>
 <ul>
-<li>Design joint position sequences covering the workspace</li>
-<li>Collect after stabilizing at each position</li>
-<li>Record precise joint angle values</li>
+<li>Define joint configurations spanning the operational workspace</li>
+<li>Ensure mechanical equilibrium before data capture</li>
+<li>Log kinematic state with sub-degree precision</li>
 </ul>
 </li>
 <li>
-<p><strong>Data Collection</strong></p>
-<p>For each preset joint configuration:</p>
+<p><strong>Synchronized Acquisition</strong></p>
+<p>Per configuration:</p>
 <ul>
-<li>Control robot to reach specified position</li>
-<li>Wait for robot stabilization (~0.5 seconds)</li>
-<li>
-<p>Synchronously collect:</p>
+<li>Command target joint state</li>
+<li>Allow settling time (≥0.5s)</li>
+<li>Capture synchronized data:
 <ul>
-<li>Camera images</li>
-<li>Robot joint angles</li>
-<li>Timestamps</li>
+<li>Visual observations</li>
+<li>Joint encoders</li>
+<li>Temporal stamps</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Data Quality Check</strong></p>
+<p><strong>Quality Assurance</strong></p>
 <ul>
-<li>Ensure images are clear without motion blur</li>
-<li>Verify joint angle recording accuracy</li>
-<li>Check time synchronization of data pairs</li>
+<li>Validate image sharpness and absence of motion artifacts</li>
+<li>Verify encoder precision</li>
+<li>Confirm temporal alignment</li>
 </ul>
 </li>
 </ol>
@@ -268,7 +256,7 @@ Theme by GitBook
 <p align="center"><em>Data Collection - RGB Camera Calibration Frames</em></p>
 
 <h3 id="step-2-mask-generation">Step 2: Mask Generation<a class="headerlink" href="#step-2-mask-generation" title="Permanent link"></a></h3>
-<p>Process real images using Segment Anything Model:</p>
+<p>Automated segmentation via SAM:</p>
 <div class="rgb-grid-container">
   <div class="rgb-grid-item">
     <img src="../images/calib/mask/mask_0.png" alt="RGB Frame 0 - Initial Position">
@@ -287,35 +275,33 @@ Theme by GitBook
 <p align="center"><em>Data Collection - Masks of real images</em></p>
 
 <h3 id="step-3-optimization-solving">Step 3: Optimization Solving<a class="headerlink" href="#step-3-optimization-solving" title="Permanent link"></a></h3>
-<p>Execute camera parameter optimization:</p>
+<p>Parameter optimization procedure:</p>
 <ol>
 <li>
 <p><strong>Initialization</strong></p>
-<p>Initial camera parameters:</p>
 <ul>
-<li>Position: Estimates based on rough measurements</li>
-<li>Orientation: Pointing to robot workspace center</li>
-<li>Intrinsics: Using factory parameters or calibrated values</li>
+<li>Extrinsic position: Coarse measurements</li>
+<li>Orientation: Workspace-centered</li>
+<li>Intrinsics: Manufacturer specifications or pre-calibrated</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterative Optimization Automatically</strong></p>
-<p>Optimization loop:</p>
+<p><strong>Gradient-Based Optimization</strong></p>
 <ol>
-<li>Set current camera parameters in simulation</li>
-<li>Render robot masks for all joint configurations</li>
-<li>Compute L1 loss with real masks</li>
-<li>Backpropagate to calculate gradients</li>
-<li>Update camera parameters</li>
-<li>Repeat until convergence</li>
+<li>Update simulation camera parameters</li>
+<li>Render masks across all configurations</li>
+<li>Compute L1 norm between rendered and observed masks</li>
+<li>Backpropagate gradients through differentiable renderer</li>
+<li>Update parameters via gradient descent</li>
+<li>Iterate to convergence</li>
 </ol>
 </li>
 <li>
-<p><strong>Convergence Criteria</strong></p>
+<p><strong>Termination Conditions</strong></p>
 <ul>
-<li>Loss function change below threshold</li>
-<li>Parameter updates approaching zero</li>
-<li>Maximum iterations reached</li>
+<li>Loss plateau (Δ < ε)</li>
+<li>Parameter convergence (||∇θ|| → 0)</li>
+<li>Iteration limit</li>
 </ul>
 </li>
 </ol>
@@ -339,31 +325,31 @@ Theme by GitBook
 <h2 id="advanced-techniques">Advanced Techniques<a class="headerlink" href="#advanced-techniques" title="Permanent link"></a></h2>
 <h3 id="improving-calibration-accuracy">Improving Calibration Accuracy<a class="headerlink" href="#improving-calibration-accuracy" title="Permanent link"></a></h3>
 <ul>
-<li><strong>Increase Sampling Density</strong>: Add more sampling points in critical work areas</li>
-<li><strong>Multi-round Iteration</strong>: Use coarse calibration results as initial values for fine calibration</li>
+<li><strong>Dense Sampling</strong>: Increase configuration density in task-critical regions</li>
+<li><strong>Hierarchical Refinement</strong>: Initialize fine-grained optimization with coarse calibration results</li>
 </ul>
 <h2 id="code-reference">Code Reference<a class="headerlink" href="#code-reference" title="Permanent link"></a></h2>
-<p>Specific camera calibration implementations can be found at:</p>
+<p>Implementation references:</p>
 <p><strong>Data Collection Tools:</strong></p>
 <ul>
 <li>File path: <code><a href="https://github.com/Universal-Control/ManiUniCon/blob/main/tools/calibration/save_diff_optim_data.py">https://github.com/Universal-Control/ManiUniCon/blob/main/tools/calibration/save_diff_optim_data.py</a></code></li>
-<li>Used for collecting and saving calibration data</li>
+<li>Calibration data acquisition and persistence</li>
 </ul>
 <p><strong>Calibration Optimization Script:</strong></p>
 <ul>
 <li>File path: <code><a href="https://github.com/Universal-Control/ManiUniCon/blob/main/tools/calibration/diff_optim_camera_params.py">https://github.com/Universal-Control/ManiUniCon/blob/main/tools/calibration/diff_optim_camera_params.py</a></code></li>
-<li>Contains using SAM to create masks and differentiable rendering optimization of camera parameters</li>
+<li>SAM-based segmentation and differentiable optimization pipeline</li>
 </ul>
 <h2 id="calibration-data-management">Calibration Data Management<a class="headerlink" href="#calibration-data-management" title="Permanent link"></a></h2>
-<p>In general, for different robotic arms and camera viewpoints, there are suitable sets of joint angles for collecting calibration data to optimize camera parameters. An ideal set of joint angles should differ from one another as much as possible, while ensuring that the arm's joints cover as much of the camera's field of view as possible.</p>
-<p>After selecting an appropriate set of joint angles, create a subfolder under <code>tools/calibration/calibration_data</code> and save the joint angles in <code>joints.txt</code>. For example, for the <code>ur5_d435</code> setup, we would create the following folder:</p>
+<p>Optimal calibration requires configuration sets that maximize pose diversity while maintaining visibility across the camera's field of view. Joint configurations should exhibit maximal variance to ensure robust parameter estimation.</p>
+<p>Store selected configurations in <code>tools/calibration/calibration_data/{setup_name}/joints.txt</code>. Example structure for <code>ur5_d435</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ManiUniCon/
   <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── tools/
   <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│   └── calibration/
   <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>│       └── ur5_d435/
   <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│           └── joints.txt
 </code></pre></div>
-<p>The content of <code>joints.txt</code> should be a list of joint angles. For example:</p>
+<p>Joint configuration format (radians):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[-3.124601, -1.630071, -1.790162, -1.297886, 1.560076, -0.423495]
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>[-3.258589, -2.106229, -1.353434, 0.375175, 1.814344, -0.502429]
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>[-2.698257, -2.036311, -1.348458, 0.769870, 1.861926, -0.439289]
@@ -374,7 +360,7 @@ Theme by GitBook
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>[-2.450230, -2.012307, -1.765171, 0.477528, 0.984876, 0.714768]
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>[-2.872846, -2.243410, -1.031999, 1.257755, 1.437975, 0.839455]
 </code></pre></div>
-<p>After collecting the data, the data should be organized as follows:</p>
+<p>Post-acquisition data structure:</p>
 <!-- <h3 id="data-organization-structure">Data Organization Structure<a class="headerlink" href="#data-organization-structure" title="Permanent link"></a></h3> -->
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ManiUniCon/
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── tools/
@@ -383,9 +369,9 @@ Theme by GitBook
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│           └── joints.txt
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│           └── multi_frame_calibration_data.npz  # key: "rgb_images", "captured_joint_values", "target_joint_values"
 </code></pre></div>
-<p>After running the <code>diff_optim_camera_params.py</code> script, the optimized camera parameters will be printed in the terminal.</p>
+<p>Optimized parameters are output to terminal upon convergence.</p>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link"></a></h2>
-<p>After completing camera calibration, we obtain precise visual system parameters, laying the foundation for subsequent data generation. The next stage will utilize the calibrated simulation environment to generate large-scale training data through teleoperation and data augmentation techniques.</p>
+<p>Calibrated camera parameters enable accurate visual correspondence for Stage 3: leveraging the aligned simulation environment for large-scale data generation via teleoperation and augmentation strategies.</p>
 
 </section>
 </div> <!-- end of search-noresults -->

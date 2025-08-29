@@ -118,16 +118,12 @@
 <a href="../stage3-data-generation#large-scale-data-generation" class="">Large-scale Data Generation</a>
 </li>
 
-<li class="subheader">
-<a href="../stage3-data-generation#compare-with-mimicgen" class="">Comparison with Mimicgen</a>
+<li>
+<a href="../stage3-data-generation#detail-of-wbcmimicgen" class="">Detail of WBCMimicGen</a>
 </li>
 
 <li class="subitem">
-<a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
-</li>
-
-<li>
-<a href="../stage3-data-generation#detail-of-wbcmimicgen" class="">Detail of WBCMimicGen</a>
+    <a href="../stage3-data-generation#data-generation-of-mobile-manipulator" class="">Data Generation of Mobile Manipulator</a>
 </li>
 
 <li>
@@ -204,51 +200,50 @@ Theme by GitBook
    </div>
 </div>
 
-<p>Scene construction is the foundation of sim-to-real transfer, where a high-fidelity simulation environment that accurately represents the real-world workspace needs creating. This involves three key steps: identifying and collecting all necessary assets (robots, objects, and environment elements), precisely measuring their spatial relationships in the real world, and systematically configuring them in the simulator with appropriate physical properties and randomization ranges.</p>
+<p>Scene construction forms the foundation of sim-to-real transfer by establishing high-fidelity digital representations of physical workspaces. This process encompasses three critical components: asset acquisition and modeling, spatial relationship measurement, and simulation configuration with stochastic variations to enhance robustness.</p>
 <ol>
 <li>
-<p>Asset Identification and Collection: Analyze and collect all physical elements involved in the task, including the robot system, work surfaces, target objects, and environmental fixtures. Assets can be sourced from simple geometric primitives, open-source libraries like PartNet-Mobility and YCB Dataset, or custom models created for specific requirements.</p>
+<p>Asset Acquisition: Comprehensive identification and modeling of task-relevant physical elements including robotic systems, environmental fixtures, and manipulable objects. Assets are sourced through geometric primitives, established repositories (PartNet-Mobility, YCB Dataset), or custom CAD models tailored to specific operational requirements.</p>
 </li>
 <li>
-<p>Spatial Measurement and Positioning: Measure the precise positions and orientations of all components in the real environment using laser rangefinders or calibration boards. Document fixed positions (robot base, equipment placement), randomization ranges for dynamic objects, and operational boundaries to ensure accurate spatial relationships in simulation.</p>
+<p>Spatial Quantification: Precise measurement of component positions and orientations using metrology tools (laser rangefinders, calibration boards). Documentation encompasses static configurations (robot base frames, fixture locations), stochastic object placement distributions, and workspace boundaries to ensure geometric fidelity.</p>
 </li>
 <li>
-<p>Simulation Environment Setup: Configure the simulation scene based on measured data, setting up static elements at their exact positions, defining randomization ranges for dynamic objects, and assigning appropriate physical properties (mass, friction, collision models) to ensure realistic interactions during task execution. </p>
+<p>Randomization Configuration: Implementation of measured spatial relationships within the simulation framework, incorporating controlled randomization to promote policy generalization.</p>
 </li>
 </ol>
 <h2 id="task-example">Task Example<a class="headerlink" href="#task-example" title="Permanent link"></a></h2>
-<p>Using the kitchen microwave task and the canteen task as the examples to demonstrate the complete scene construction process.</p>
+<p>We demonstrate the scene construction methodology through two representative manipulation scenarios: kitchen and canteen tasks.</p>
 <h3 id="task-description">Task Description<a class="headerlink" href="#task-description" title="Permanent link"></a></h3>
-<p>Kitchen task: The robot needs to grasp a bowl, place it in the microwave, and close the microwave door.</p>
-<p>Canteen task: The robot needs to grasp a fork, place it in the blanket, and then grasp a plate.</p>
+<p>Kitchen task: Sequential manipulation involving bowl grasping, microwave placement, and door closure.</p>
+<p>Canteen task: Multi-object manipulation sequence: fork grasping, placement in designated area, followed by plate manipulation.</p>
 <h3 id="asset-collection">Asset Collection<a class="headerlink" href="#asset-collection" title="Permanent link"></a></h3>
-<p>Main assets involved in the Kitchen task include:</p>
+<p>Kitchen task assets:</p>
 <ul>
-<li>UR5 robot and its fixed base</li>
-<li>Work surface</li>
-<li>Microwave (articulated model with openable door)</li>
-<li>Bowl (graspable rigid body object)</li>
+<li>UR5 manipulator with fixed base frame</li>
+<li>Work surface geometry</li>
+<li>Articulated microwave model (kinematic door joint)</li>
+<li>Bowl (rigid body with grasp affordances)</li>
 </ul>
-<p>Main assets involved in the Canteen task include:</p>
+<p>Canteen task assets:</p>
 <ul>
-<li>UR5 robot and its fixed base</li>
-<li>Work surface</li>
-<li>Blankets</li>
-<li>Fork (graspable rigid body object)</li>
-<li>Plate (graspable rigid body object)</li>
+<li>UR5 manipulator with fixed base frame</li>
+<li>Work surface geometry</li>
+<li>Deformable placement areas</li>
+<li>Fork (rigid body with grasp affordances)</li>
+<li>Plate (rigid body with grasp affordances)</li>
 </ul>
 <p><img alt="Image #1" src="../images/assets.jpg" /></p>
 <h3 id="position-measurement">Position Measurement<a class="headerlink" href="#position-measurement" title="Permanent link"></a></h3>
-<p>Precise measurements in the real environment:</p>
+<p>Spatial configuration from physical workspace measurements:</p>
 <p><img alt="Image #1" src="../images/00ffea.png" /> 
-<img alt="Image #1" src="../images/00ffea.png" />
-(The image of real-world measure)</p>
+<img alt="Image #1" src="../images/00ffea.png" /></p>
 <h3 id="simulation-implementation">Simulation Implementation<a class="headerlink" href="#simulation-implementation" title="Permanent link"></a></h3>
-<p>Configure the scene in IsaacLab based on measurement results:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Scene Configuration Key Points:
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>- Use fixed relative coordinate system
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>- Set reasonable physical parameters
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>- Configure collision detection and grasping constraints
+<p>IsaacLab scene configuration based on empirical measurements:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Configuration Requirements:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>- Consistent coordinate frame transformations
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>- Physically-plausible material properties
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>- Robust collision geometry and contact dynamics
 </code></pre></div>
 <!-- 
 ## Canteen Task Example
@@ -285,19 +280,19 @@ Measure and set up complex multi-object scene:
 ![Image #1](images/00ffea.png) -->
 
 <h2 id="code-reference">Code Reference<a class="headerlink" href="#code-reference" title="Permanent link"></a></h2>
-<p>Specific scene configuration implementations can be found in the following codebases:</p>
+<p>Implementation references:</p>
 <p><strong>Kitchen Task Scene Configuration:</strong></p>
 <ul>
 <li>File path: <code><a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/source/isaaclab_mimic/isaaclab_mimic/tasks/manager_based/ur5_sim/ur5_put_bowl_in_microwave_and_close.py">https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/source/isaaclab_mimic/isaaclab_mimic/tasks/manager_based/ur5_sim/ur5_put_bowl_in_microwave_and_close.py</a></code></li>
-<li>Contains position settings and physical property configurations for microwave, bowl, and other assets</li>
+<li>Defines spatial configurations and physical properties for task-relevant assets</li>
 </ul>
 <p><strong>Canteen Task Scene Configuration:</strong></p>
 <ul>
 <li>File path: <code><a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/source/isaaclab_mimic/isaaclab_mimic/tasks/manager_based/ur5_sim/ur5_clean_plate.py">https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/source/isaaclab_mimic/isaaclab_mimic/tasks/manager_based/ur5_sim/ur5_clean_plate.py</a></code></li>
-<li>Demonstrates multi-object scene construction methods</li>
+<li>Implements multi-object scene composition and interaction dynamics</li>
 </ul>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link"></a></h2>
-<p>After completing scene construction, the next stage involves camera calibration to ensure visual observations in simulation are consistent with the real environment. This is crucial for vision-based policy learning.</p>
+<p>Following scene construction, Stage 2 addresses camera calibration to establish correspondence between simulated and physical visual observations—a prerequisite for vision-based control policies.</p>
 
 
 </section>
