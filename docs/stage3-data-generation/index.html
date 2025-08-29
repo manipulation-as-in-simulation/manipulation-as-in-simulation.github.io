@@ -189,8 +189,8 @@ Theme by GitBook
   </div>
 </div>
 
-<p>Multiple approaches exist for generating manipulation data, including motion planning, reinforcement learning, MimicGen-based methods and so on. Motion planing is more suitable for atomic tasks implementation and implement the code manually for complex tasks is quite time-consuming, while reinforcement learning is more suitable for quite complex tasks (like extreme finegrained control, high dynamic tasks, etc), but reward shaping is also of difficulty. MimicGen-based methods leverages human intuition for complex contact-rich tasks while achieving the scale needed for effective learning. And we think it's better for long-horizon complex tasks. But we found teleoperating in the simulator easily leads to jerky motions, so we enhanced the MimicGen-based methods with Whole Body Control (WBC) - WBCMimicGen. What's more, WBCMimicGen also enables controlling the multi-arm with a mobile base together. We show the details of the implementation of WBCMimicGen <a href="#detail-of-wbcmimicgen">here</a>.</p>
-<p>Taking the kitchen task and canteen task as an example, from just 3-5 human demonstrations of plate manipulation, we can generate thousands of variants with different objects' positions and orientations.</p>
+<p>Data generation for robotic manipulation encompasses multiple approaches, each with distinct advantages and limitations. Motion planning excels at atomic task execution but requires extensive manual implementation for complex sequences. Reinforcement learning addresses highly dynamic tasks with fine-grained control requirements, though reward engineering remains challenging. MimicGen-based methods bridge this gap by leveraging human demonstrations for contact-rich manipulation while achieving the requisite scale for effective learning, particularly in long-horizon tasks. However, direct teleoperation in simulation often produces discontinuous trajectories. To address this limitation, we integrate Whole Body Control (WBC) into the MimicGen framework, yielding WBCMimicGen—a method that generates smooth trajectories while enabling coordinated control of multi-arm mobile manipulators. Implementation details are provided <a href="#detail-of-wbcmimicgen">below</a>.</p>
+<p>Our approach demonstrates significant data amplification: from 3-5 human demonstrations per task, we generate thousands of trajectory variants with diverse object configurations, as exemplified in the kitchen and canteen scenarios.</p>
 <!-- ## Teleoperation System
 
 ### Hardware Configuration
@@ -211,9 +211,9 @@ Teleoperation system setup:
 
 <h2 id="data-collection">Data Collection<a class="headerlink" href="#data-collection" title="Permanent link"></a></h2>
 
-<p>The first step to generate data with WBCMimicGen is to collect data from human demonstrations. We use a VR-based teleoperation system to collect data. The system is shown in the following figure:</p>
+<p>WBCMimicGen begins with human demonstration collection via a VR-based teleoperation system, as illustrated below:</p>
 <p><img alt="Image #1" src="../images/00ffea.png" /></p>
-<p>And here is the demo of collected data of the two tasks:</p>
+<p>Representative demonstrations from both task domains:</p>
 <div style="display: flex; gap: 20px; width: 100%;">
     <div style="flex: 1;">
       <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
@@ -228,12 +228,12 @@ Teleoperation system setup:
   </div>
 
 <h2 id="task-decomposition-and-annotation">Task Decomposition and Annotation<a class="headerlink" href="#task-decomposition-and-annotation" title="Permanent link"></a></h2>
-<p>Just like MimicGen, WBCMimicGen also needs to decompose trajectories into object-centric subtasks, applies spatial transformations to objects to generate diverse training scenarios for each subtasks. The decomposition of subtasks needs to be pre-defined by the user according to the semantic of the tasks. With the semantic decomposition, we can then annotate the original trajectories to add information of the subtasks, either by hand or automatically.</p>
+<p>WBCMimicGen decomposes trajectories into object-centric subtasks and applies spatial transformations to generate diverse training scenarios. This hierarchical decomposition follows task semantics and requires either manual or automated annotation of trajectory segments to encode subtask boundaries and objectives.</p>
 
-<p>Here we provide two examples to illustrate task decomposition.</p>
+<p>We illustrate the decomposition strategy through two representative examples:</p>
 
 <h3 id="kitchen-task-subtask">Kitchen task example<a class="headerlink" href="#kitchen-task-subtask" title="Permanent link"></a></h3>
-<p>The kitchen task's example is as follows:</p>
+<p>Kitchen task decomposition:</p>
 <p><strong>Stage 1: grasp bowl</strong></p>
 <ul>
 <li>Start: Robot initial position</li>
@@ -276,7 +276,7 @@ Teleoperation system setup:
   <button onclick="var el = document.getElementById('microwave-carousel'); var current = parseInt(el.style.transform.replace(/[^\d-]/g, '') || 0); el.style.transform = 'translateX(' + Math.max(-400, current - 400) + 'px)'" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px;">❯</button>
 </div>
 <h3 id="canteen-task-subtask">Canteen task example<a class="headerlink" href="#canteen-task-subtask" title="Permanent link"></a></h3>
-<p>There is another example -- canteen task -- as follows:</p>
+<p>Canteen task decomposition:</p>
 <p><strong>Stage 1: grasp fork</strong></p>
 <ul>
 <li>Start: Robot initial position</li>
@@ -342,10 +342,7 @@ Teleoperation system setup:
 </div>
 <h2 id="large-scale-data-generation">Large-scale Data Generation<a class="headerlink" href="#large-scale-data-generation" title="Permanent link"></a></h2>
 
-<p>
-After the task decomposition and annotation, we can generate large-scale data with WBCMimicGen, enabling better policy training:
-
-</p>
+<p>Following task decomposition and annotation, WBCMimicGen generates large-scale training data with systematic variations:</p>
 <div style="display: flex; gap: 20px; width: 100%;">
   <div style="flex: 1;">
     <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
@@ -355,12 +352,11 @@ After the task decomposition and annotation, we can generate large-scale data wi
 </div>
 
 <h2 id="detail-of-wbcmimicgen">Detail of WBCMimicGen<a class="headerlink" href="#detail-of-wbcmimicgen" title="Permanent link"></a></h2>
-<p>Here we illustrate the implementation of WBCMimicGen in detail.</p>
+<p>WBCMimicGen extends the MimicGen framework through whole-body control optimization:</p>
 
-<p>We proposed to enhance the MimicGen framework with WBC. Compared to the original MimicGen algorithm, which utilizes linear interpolation of end-effector poses to generate trajectories, WBCMimicGen optimizes target joint velocities with WBC, considering the manipulability, joint limits, joint velocity limits together in the QP problem and thereby generating smoother, high-quality demonstrations. 
+<p>Unlike standard MimicGen's linear interpolation of end-effector poses, WBCMimicGen formulates trajectory generation as a quadratic programming (QP) problem that optimizes joint velocities while respecting manipulability constraints, joint limits, and velocity bounds. This approach yields smoother, dynamically feasible demonstrations.
 
-Specifically, we regard the data generation problem as solving a trajectory of whole-body joint velocities that enables the end-effector to move with a specific velocity.
-Formally, denote joint velocities as $\boldsymbol x$, this problem can be modeled as a quadratic programming (QP)<a href="#ref-1">[1]</a>:
+Formally, the trajectory generation problem seeks joint velocities $\boldsymbol x$ that track desired end-effector velocities, formulated as<a href="#ref-1">[1]</a>:
 
 \begin{equation}
 \min _ { \boldsymbol{x} } \quad f _ { o } ( \boldsymbol{x} ) = \frac { 1 } { 2 } \boldsymbol{x} ^ { \top } Q \boldsymbol{x} + \mathcal { C } ^ { \top } \boldsymbol{x}  
@@ -387,7 +383,7 @@ Formally, denote joint velocities as $\boldsymbol x$, this problem can be modele
 </p>
 
 
-<p> Here are some videos to show the difference between the original MimicGen and WBCMimicGen. Data generated by MimicGen is shown on the left, and data generated by WBCMimicGen is shown on the right, which is more smooth.</p>
+<p>Comparative analysis demonstrates WBCMimicGen's superior trajectory smoothness (right) versus standard MimicGen (left):</p>
 
 <div style="display: flex; gap: 20px; width: 100%;">
   <div style="flex: 1;">
@@ -419,7 +415,7 @@ Formally, denote joint velocities as $\boldsymbol x$, this problem can be modele
 </div>
 
 <h3 id="data-generation-of-mobile-manipulator">Data Generation of Mobile Manipulator<a class="headerlink" href="#data-generation-of-mobile-manipulator" title="Permanent link"></a></h3>
-<p>As a key advancement over standard MimicGen, WBCMimicGen can also be used to generate data for mobile manipulator. The following video shows the data generation of a mobile manipulator. In this task, we use ARX7 to pick up the toothpaste and put it in the cup and then put the cup near the wall:</p>
+<p>A key innovation of WBCMimicGen is its extension to mobile manipulation. The following demonstration shows coordinated base-arm control on the ARX7 platform executing a multi-stage task: grasping toothpaste, placing it in a cup, and repositioning the cup:</p>
 
 <div style="display: flex; gap: 20px; width: 100%;">
   <div style="flex: 1;">
@@ -454,7 +450,7 @@ Formally, denote joint velocities as $\boldsymbol x$, this problem can be modele
 <li>Generation script: <code><a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/scripts/mimicgen/run_hydra.py">https://github.com/ByteDance-Seed/manip-as-in-sim-suite/blob/main/wbcmimic/scripts/mimicgen/run_hydra.py</a></code></li>
 </ul>
 <h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link"></a></h2>
-<p>After completing large-scale data generation, we have obtained a rich training dataset. The next stage will use this data for imitation learning, training robot control policies, and ultimately deploying them in the real world for validation.</p>
+<p>The generated dataset enables subsequent imitation learning for policy training and real-world deployment, detailed in Stage 4.</p>
 
 <h2 id="references">References<a class="headerlink" href="#references" title="Permanent link"></a></h2>
 <p id="ref-1"> [1] Jesse Haviland, Niko Sünderhauf, and Peter Corke. A holistic approach to reactive mobile manipulation. IEEE
