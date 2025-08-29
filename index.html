@@ -289,7 +289,7 @@
                         <h4>Toothpaste-and-Cup Task</h4>
                     </div>
                     <div class="setup-item-large">
-                        <img src="figs/stackbowl_setup.jpg" alt="Stack Bowl Task Setup">
+                        <img src="figs/stackbowl_setup.jpg" alt="Stack Bowls Task Setup">
                         <h4>Stack-Bowls Task</h4>
                     </div>
                 </div>
@@ -417,7 +417,7 @@
                                         <th>Pick Toothpaste</th>
                                         <th>Put Toothpaste into Cup</th>
                                         <th>Pick Bowl</th>
-                                        <th>Stack Bowl</th>
+                                        <th>Stack Bowls</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -662,7 +662,7 @@
                     
                     <div class="image-row-6">
                         <div style="grid-column: 1 / 4;">
-                            <h4>Stack Bowl Scene</h4>
+                            <h4>Stack Bowls Scene</h4>
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                                 <div class="image-item">
                                     <img src="figs/compare_depths/stackbowl_435/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
@@ -710,7 +710,7 @@
                         <div class="selector-buttons" id="scene-selector">
                             <button class="selector-btn active" data-scene="kitchen">Kitchen</button>
                             <button class="selector-btn" data-scene="canteen">Canteen</button>
-                            <button class="selector-btn" data-scene="stackbowl">Stack Bowl</button>
+                            <button class="selector-btn" data-scene="stackbowl">Stack Bowls</button>
                             <button class="selector-btn" data-scene="toothpaste">Place Toothpaste</button>
                         </div>
                     </div>
@@ -915,9 +915,9 @@
                         </div>
                     </div>
                     
-                    <!-- Stack Bowl D435 -->
+                    <!-- Stack Bowls D435 -->
                     <div class="pcd-scene-camera-group" data-scene="stackbowl" data-camera="435" style="display: none;">
-                        <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Stack Bowl Scene - D435 Camera</h4>
+                        <h4 style="font-size: 1.2rem; margin: 30px 0 20px 0; color: #666; text-align: center;">Stack Bowls Scene - D435 Camera</h4>
                         <div class="pcd-grid" id="pcd-grid-stackbowl-435">
                             <div class="pcd-item">
                                 <div class="pcd-lazy-container" data-viewer-id="pcd-viewer-stackbowl-435-raw" data-ply-path="pcds/stackbowl_435_raw_depth.ply" data-is-l515="false">
@@ -1568,7 +1568,7 @@
                 const l515Button = document.querySelector('#camera-selector .selector-btn[data-camera="515"]');
                 const d435Button = document.querySelector('#camera-selector .selector-btn[data-camera="435"]');
                 
-                // Disable L515 for Stack Bowl and Place Toothpaste scenes
+                // Disable L515 for Stack Bowls and Place Toothpaste scenes
                 if (activeScene === 'stackbowl' || activeScene === 'toothpaste') {
                     l515Button.disabled = true;
                     l515Button.style.opacity = '0.5';
@@ -1593,7 +1593,7 @@
                 const kitchenButton = document.querySelector('#scene-selector .selector-btn[data-scene="kitchen"]');
                 const canteenButton = document.querySelector('#scene-selector .selector-btn[data-scene="canteen"]');
                 
-                // Disable Stack Bowl and Place Toothpaste scenes when L515 is selected
+                // Disable Stack Bowls and Place Toothpaste scenes when L515 is selected
                 if (activeCamera === '515') {
                     stackBowlButton.disabled = true;
                     stackBowlButton.style.opacity = '0.5';
@@ -1603,7 +1603,7 @@
                     toothpasteButton.style.opacity = '0.5';
                     toothpasteButton.style.cursor = 'not-allowed';
                     
-                    // If Stack Bowl or Toothpaste is currently selected, switch to Kitchen
+                    // If Stack Bowls or Toothpaste is currently selected, switch to Kitchen
                     const activeScene = document.querySelector('#scene-selector .selector-btn.active').dataset.scene;
                     if (activeScene === 'stackbowl' || activeScene === 'toothpaste') {
                         document.querySelector('#scene-selector .selector-btn.active').classList.remove('active');
@@ -2028,7 +2028,6 @@
                 }
 
                 const loader = new THREE.PLYLoader();
-                
                 loader.load(
                     this.plyPath,
                     (geometry) => this.onGeometryLoaded(geometry),
@@ -2253,6 +2252,11 @@
             
             // Function to load a viewer on demand
             function loadViewer(container) {
+                if (container.dataset.plyPath.includes("dataset")) {
+                    // Handled below
+                    return
+                }
+                
                 const viewerId = container.dataset.viewerId;
                 const plyPath = container.dataset.plyPath;
                 const isL515 = container.dataset.isL515 === 'true';
@@ -2345,7 +2349,7 @@
                     { id: 'capture-canteen-515-model-priorda', path: 'pcds/canteen_515_model_priorda_depth.ply', isL515: true },
                     { id: 'capture-canteen-515-model-promptda', path: 'pcds/canteen_515_model_promptda_depth.ply', isL515: true },
                     
-                    // Stack Bowl scenes
+                    // Stack Bowls scenes
                     { id: 'capture-stackbowl-435-raw', path: 'pcds/stackbowl_435_raw_depth.ply', isL515: false },
                     { id: 'capture-stackbowl-435-model-435', path: 'pcds/stackbowl_435_model_435_depth.ply', isL515: false },
                     { id: 'capture-stackbowl-435-model-515', path: 'pcds/stackbowl_435_model_515_depth.ply', isL515: false },
@@ -2688,6 +2692,10 @@
                     bytecamDebugPanel.style.display = 'block';
                 }
             }
+            const loadBtnRaw = bytecamRawContainer.querySelector('.load-interactive-btn');
+            const loadBtnPred = bytecamPredContainer.querySelector('.load-interactive-btn');
+            loadBtnRaw.addEventListener('click', () => loadBytecamViewer('raw'));
+            loadBtnPred.addEventListener('click', () => loadBytecamViewer('pred'));
             
             // Function to update debug info for ByteCamDepth viewers
             function updateBytecamDebugInfo() {
@@ -2896,6 +2904,9 @@
                     newPredBtn.addEventListener('click', () => loadBytecamViewer('pred'));
                 }
             }
+            
+            // Initialize the point cloud data and RGB image for default selection
+            updateBytecamPointClouds();
             
             // Scene selector event handlers
             bytecamSceneButtons.forEach(button => {
