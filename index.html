@@ -498,86 +498,153 @@
                         </div>
                     </div>
 
-                    
-                    <!-- Sim-to-Real Transfer Videos -->
-                    <div class="demo-videos" style="margin-top: 10px;">
-                        <h4 style="text-align: center; margin-bottom: 20px;">Sim-Real Comparisons</h4>
-                        <div class="video-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;">
-                            <div class="video-item">
-                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                    <source src="vids/sim-real/Sim-Real-Kitchen-435.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - D435 Camera</p>
+                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto;">
+                        <div class="video-pair">
+                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Kitchen Task</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="video-item">
+                                    <div id="kitchen-comparison" class="bal-container-small">
+                                        <div class="bal-after">
+                                            <video muted autoplay playsinline loop style="width: 100%; display: block;">
+                                                <source src="vids/kitchen-real/output_ep000_camera_0_rgb.mp4" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        <div class="bal-before" style="width:50%;">
+                                            <div class="bal-before-inset">
+                                                <video muted autoplay playsinline loop style="width: 100%; display: block;">
+                                                    <source src="vids/kitchen-real/output_ep000_camera_0_depth.mp4" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+                                        <div class="bal-handle" style="left:50%;">
+                                            <span class="handle-left-arrow"></span>
+                                            <span class="handle-right-arrow"></span>
+                                        </div>
+                                    </div>
+                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Camera RGB/Depth</p>
+                                </div>
+                                <div class="video-item">
+                                    <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/kitchen-real/output_ep000_camera_0_model_depth.mp4" type="video/mp4">
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM Depth</p>
+                                </div>
                             </div>
-                            <div class="video-item">
-                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                    <source src="vids/sim-real/Sim-Real-Kitchen-515.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - L515 Camera</p>
-                            </div>
-                            <div class="video-item">
-                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                    <source src="vids/sim-real/Sim-Real-Canteen-435.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - D435 Camera</p>
-                            </div>
-                            <div class="video-item">
-                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                    <source src="vids/sim-real/Sim-Real-Canteen-515.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - L515 Camera</p>
+                        </div>
+                        <div class="video-pair">
+                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Canteen Task</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="video-item">
+                                    <div id="canteen-comparison" class="bal-container-small">
+                                        <div class="bal-after">
+                                            <video muted autoplay playsinline loop style="width: 100%; display: block;">
+                                                <source src="vids/canteen-real/h264_output_ep000_camera_0_rgb.mp4" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        <div class="bal-before" style="width:50%;">
+                                            <div class="bal-before-inset" style="width: 100%;">
+                                                <video muted autoplay playsinline loop style="width: 100%; display: block;">
+                                                    <source src="vids/canteen-real/h264_output_ep000_camera_0_depth.mp4" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+                                        <div class="bal-handle" style="left:50%;">
+                                            <span class="handle-left-arrow"></span>
+                                            <span class="handle-right-arrow"></span>
+                                        </div>
+                                    </div>
+                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Camera RGB/Depth</p>
+                                </div>
+                                <div class="video-item">
+                                    <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                        <source src="vids/canteen-real/h264_output_ep000_camera_0_model_depth.mp4" type="video/mp4">
+                                    </video>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM Depth</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="table-container">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="3">Camera</th>
-                                <th rowspan="3">Depth Model</th>
-                                <th colspan="4">Kitchen Task</th>
-                                <th colspan="6">Canteen Task</th>
-                            </tr>
-                            <tr>
-                                <th>Pick Bowl</th>
-                                <th>Put Bowl into Microwave</th>
-                                <th>Close Microwave</th>
-                                <th>Total</th>
-                                <th>Pick Fork</th>
-                                <th>Place Fork</th>
-                                <th>Pick Plate</th>
-                                <th>Dump Plate</th>
-                                <th>Place Plate</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Sim (D435-View)</td><td>None</td><td>43/50</td><td>33/50</td><td>32/50</td><td>30/50</td><td>40/50</td><td>28/50</td><td>47/50</td><td>45/50</td><td>33/50</td><td>21/50</td></tr>
-                            <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
-                            <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
-                            <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                        </tbody>
-                        <tbody>
-                            <tr><td>Sim (L515-View)</td><td>None</td><td>43/50</td><td>34/50</td><td>37/50</td><td>32/50</td><td>40/50</td><td>26/50</td><td>46/50</td><td>43/50</td><td>31/50</td><td>20/50</td></tr>
-                            <tr><td rowspan="5">L515</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr><td>PromptDA</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr><td>PriorDA</td><td>17/30</td><td>3/30</td><td>2/30</td><td>2/30</td><td>10/30</td><td>8/30</td><td>3/30</td><td>3/30</td><td>3/30</td><td>3/30</td></tr>
-                            <tr class="best-result"><td>CDM-D435</td><td>22/30</td><td>11/30</td><td>9/30</td><td>9/30</td><td>13/30</td><td>11/30</td><td>11/30</td><td>10/30</td><td>9/30</td><td>9/30</td></tr>
-                            <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
-                        </tbody>
-                        </table>
+                <div class="table-container">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="3">Camera</th>
+                            <th rowspan="3">Depth Model</th>
+                            <th colspan="4">Kitchen Task</th>
+                            <th colspan="6">Canteen Task</th>
+                        </tr>
+                        <tr>
+                            <th>Pick Bowl</th>
+                            <th>Put Bowl into Microwave</th>
+                            <th>Close Microwave</th>
+                            <th>Total</th>
+                            <th>Pick Fork</th>
+                            <th>Place Fork</th>
+                            <th>Pick Plate</th>
+                            <th>Dump Plate</th>
+                            <th>Place Plate</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sim (D435-View)</td><td>None</td><td>43/50</td><td>33/50</td><td>32/50</td><td>30/50</td><td>40/50</td><td>28/50</td><td>47/50</td><td>45/50</td><td>33/50</td><td>21/50</td></tr>
+                        <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
+                        <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
+                        <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                    </tbody>
+                    <tbody>
+                        <tr><td>Sim (L515-View)</td><td>None</td><td>43/50</td><td>34/50</td><td>37/50</td><td>32/50</td><td>40/50</td><td>26/50</td><td>46/50</td><td>43/50</td><td>31/50</td><td>20/50</td></tr>
+                        <tr><td rowspan="5">L515</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        <tr><td>PromptDA</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        <tr><td>PriorDA</td><td>17/30</td><td>3/30</td><td>2/30</td><td>2/30</td><td>10/30</td><td>8/30</td><td>3/30</td><td>3/30</td><td>3/30</td><td>3/30</td></tr>
+                        <tr class="best-result"><td>CDM-D435</td><td>22/30</td><td>11/30</td><td>9/30</td><td>9/30</td><td>13/30</td><td>11/30</td><td>11/30</td><td>10/30</td><td>9/30</td><td>9/30</td></tr>
+                        <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
+                    </tbody>
+                    </table>
+                </div>
+
+                <!-- Sim-to-Real Transfer Videos -->
+                <div class="demo-videos" style="margin-top: 10px;">
+                    <h4 style="text-align: center; margin-bottom: 20px;">Sim-Real Comparisons</h4>
+                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;">
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/sim-real/Sim-Real-Kitchen-435.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - D435 Camera</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/sim-real/Sim-Real-Kitchen-515.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - L515 Camera</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/sim-real/Sim-Real-Canteen-435.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - D435 Camera</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/sim-real/Sim-Real-Canteen-515.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - L515 Camera</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="results" id="cdm-results">
         <div class="container">
@@ -1333,6 +1400,123 @@
         </div>
     </footer>
 
+    <style>
+        /* Video comparison styles */
+        .bal-container-small {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .bal-after {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .bal-after video {
+            width: 100%;
+            display: block;
+        }
+        
+        .bal-before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 15;
+            overflow: hidden;
+        }
+        
+        .bal-container-small .bal-before-inset {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            /* Width will be set by JS to match container */
+        }
+        
+        .bal-container-small .bal-before-inset video {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .bal-handle {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: white;
+            cursor: ew-resize;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 20;
+        }
+        
+        .bal-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        
+        .handle-left-arrow,
+        .handle-right-arrow {
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            z-index: 21;
+        }
+        
+        .handle-left-arrow {
+            left: -8px;
+            transform: translateY(-50%);
+            border-width: 6px 6px 6px 0;
+            border-color: transparent #333 transparent transparent;
+        }
+        
+        .handle-right-arrow {
+            right: -8px;
+            transform: translateY(-50%);
+            border-width: 6px 0 6px 6px;
+            border-color: transparent transparent transparent #333;
+        }
+        
+        .bal-beforePosition,
+        .bal-afterPosition {
+            background: #121212;
+            color: #fff;
+            pointer-events: none;
+            border-radius: 0.2rem;
+            padding: 2px 10px;
+            position: absolute;
+            top: 10px;
+            z-index: 10;
+        }
+        
+        .bal-beforePosition {
+            left: 10px;
+        }
+        
+        .bal-afterPosition {
+            right: 10px;
+        }
+    </style>
+    
     <script>
         // Point Cloud Scene and Camera Selector
         document.addEventListener('DOMContentLoaded', function() {
@@ -3064,6 +3248,150 @@
                     });
                 });
             });
+        });
+
+        // Video comparison BeforeAfter class
+        class VideoBeforeAfter {
+            constructor(config) {
+                const container = document.querySelector(config.id);
+                if (!container) return;
+                
+                const before = container.querySelector('.bal-before');
+                const beforeInset = container.querySelector('.bal-before-inset');
+                const beforeVideo = container.querySelector('.bal-before-video');
+                const afterVideo = container.querySelector('.bal-after-video');
+                const handle = container.querySelector('.bal-handle');
+                
+                // Initialize video sync
+                this.syncVideos(beforeVideo, afterVideo);
+                
+                // Set initial width for before-inset to match container
+                beforeInset.style.width = container.offsetWidth + 'px';
+                
+                // Update on window resize
+                window.addEventListener('resize', () => {
+                    beforeInset.style.width = container.offsetWidth + 'px';
+                });
+                
+                // Set initial position
+                before.style.width = '50%';
+                handle.style.left = '50%';
+                
+                // Mouse move event - slider follows mouse directly
+                container.addEventListener('mousemove', (e) => {
+                    const containerWidth = container.offsetWidth;
+                    const rect = container.getBoundingClientRect();
+                    const offsetX = e.clientX - rect.left;
+                    const percentage = (offsetX / containerWidth) * 100;
+                    
+                    if (percentage > 2 && percentage < 98) {
+                        before.style.width = percentage + '%';
+                        handle.style.left = percentage + '%';
+                    }
+                });
+                
+                // Touch events for mobile
+                container.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    const containerWidth = container.offsetWidth;
+                    const rect = container.getBoundingClientRect();
+                    const offsetX = e.touches[0].clientX - rect.left;
+                    const percentage = (offsetX / containerWidth) * 100;
+                    
+                    if (percentage > 2 && percentage < 98) {
+                        before.style.width = percentage + '%';
+                        handle.style.left = percentage + '%';
+                    }
+                });
+            }
+            
+            syncVideos(video1, video2) {
+                if (!video1 || !video2) return;
+                
+                // Function to sync the videos
+                const sync = () => {
+                    if (Math.abs(video1.currentTime - video2.currentTime) > 0.1) {
+                        video1.currentTime = video2.currentTime;
+                    }
+                };
+                
+                // Sync events from after (bottom) video to before (top) video
+                video2.addEventListener('play', () => video1.play());
+                video2.addEventListener('pause', () => video1.pause());
+                video2.addEventListener('seeked', sync);
+                video2.addEventListener('timeupdate', sync);
+                
+                // Start both videos
+                Promise.all([
+                    video1.play().catch(e => console.log('Video 1 autoplay failed')),
+                    video2.play().catch(e => console.log('Video 2 autoplay failed'))
+                ]);
+            }
+        }
+        
+        // BeforeAfter class for slider functionality
+        class BeforeAfter {
+            constructor(enteryObject) {
+                const beforeAfterContainer = document.querySelector(enteryObject.id);
+                const before = beforeAfterContainer.querySelector('.bal-before');
+                const beforeText = beforeAfterContainer.querySelector('.bal-beforePosition');
+                const afterText = beforeAfterContainer.querySelector('.bal-afterPosition');
+                const handle = beforeAfterContainer.querySelector('.bal-handle');
+                let widthChange = 0;
+
+                // Set width on before-inset to match container width
+                const beforeInset = beforeAfterContainer.querySelector('.bal-before-inset');
+                if (beforeInset) {
+                    beforeInset.style.width = beforeAfterContainer.offsetWidth + "px";
+                    window.addEventListener('resize', function () {
+                        beforeInset.style.width = beforeAfterContainer.offsetWidth + "px";
+                    });
+                }
+                before.setAttribute('style', "width: 50%;");
+                handle.setAttribute('style', "left: 50%;");
+
+                // Update handle position
+                function updateHandlePosition(newWidth) {
+                    handle.style.left = `${newWidth}%`;
+                }
+
+                //touch screen event listener
+                beforeAfterContainer.addEventListener("touchstart", (e) => {
+                    beforeAfterContainer.addEventListener("touchmove", (e2) => {
+                        let containerWidth = beforeAfterContainer.offsetWidth;
+                        const rect = beforeAfterContainer.getBoundingClientRect();
+                        let currentPoint = e2.changedTouches[0].clientX;
+                        let offsetX = currentPoint - rect.left;
+
+                        if (offsetX > 10 && offsetX < containerWidth - 10) {
+                            let newWidth = offsetX * 100 / containerWidth;
+                            before.style.width = newWidth + "%";
+                            handle.style.left = newWidth + "%";
+                        }
+                    });
+                });
+
+                //mouse move event listener
+                beforeAfterContainer.addEventListener('mousemove', (e) => {
+                    let containerWidth = beforeAfterContainer.offsetWidth;
+                    const rect = beforeAfterContainer.getBoundingClientRect();
+                    const offsetX = e.clientX - rect.left;
+                    let newWidth = offsetX * 100 / containerWidth;
+
+                    if (offsetX > 10 && offsetX < containerWidth - 10) {
+                        before.style.width = newWidth + "%";
+                        handle.style.left = newWidth + "%";
+                    }
+                });
+            }
+        }
+        
+        // Initialize the before/after slider
+        new BeforeAfter({
+            id: '#kitchen-comparison'
+        });
+        new BeforeAfter({
+            id: '#canteen-comparison'
         });
     </script>
 </body>
