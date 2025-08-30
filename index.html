@@ -1289,6 +1289,9 @@
                             <button class="selector-btn active" data-camera="d405">D405</button>
                             <button class="selector-btn" data-camera="d435">D435</button>
                             <button class="selector-btn" data-camera="l515">L515</button>
+                            <button class="selector-btn" data-camera="kinect">Kinect</button>
+                            <button class="selector-btn" data-camera="zed2i_neural">ZED2i-N.</button>
+                            <button class="selector-btn" data-camera="zed2i_quality">ZED2i-Q.</button>
                         </div>
                     </div>
                 </div>
@@ -1348,7 +1351,7 @@
                     <!-- RGB Image -->
                     <div class="pcd-item">
                         <div style="display: flex; align-items: center; justify-content: center; background: #f5f5f5; border-radius: 8px;">
-                            <img id="bytecam-rgb-image" src="figs/rgb_depth/camera_d405/living_rgb_0.png" alt="RGB Image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
+                            <img id="bytecam-rgb-image" src="pcds_dataset/camera_d405/living_rgb_0.png" alt="RGB Image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
                         </div>
                         <p>RGB Image</p>
                     </div>
@@ -2585,44 +2588,44 @@
                 // Scene-specific configurations
                 this.sceneConfigs = {
                     living: {
-                        cameraPosition: [-0.068, -0.186, -0.051],
-                        cameraTarget: [0, 0, 0],
+                        cameraPosition: [-0.036, -0.313, -0.066],
+                        cameraTarget: [-0.034, 0.027, -0.033],
                         pointSize: 0.002,
                         upVector: [0, 0, 1]
                     },
                     kitchen: {
-                        cameraPosition: [-0.012, -0.141, -0.021],
-                        cameraTarget: [0, 0, 0],
+                        cameraPosition: [-0.013, -0.139, -0.035],
+                        cameraTarget: [-0.001, 0.002, -0.014],
                         pointSize: 0.0015,
                         upVector: [0, 0, 1]
                     },
                     bedroom: {
-                        cameraPosition: [-0.008, -0.368, 0.085],
-                        cameraTarget: [0, 0, 0],
-                        pointSize: 0.005,
+                        cameraPosition: [-0.016, -0.349, -0.036],
+                        cameraTarget: [0.001, 0.029, -0.027],
+                        pointSize: 0.004,
                         upVector: [0, 0, 1]
                     },
                     bathroom: {
-                        cameraPosition: [0.053, -0.138, -0.056],
-                        cameraTarget: [0, 0, 0],
+                        cameraPosition: [-0.029, -0.178, -0.007],
+                        cameraTarget: [-0.046, -0.021, -0.017],
                         pointSize: 0.0015,
                         upVector: [0, 0, 1]
                     },
                     office: {
-                        cameraPosition: [-0.008, -0.238, 0.002],
-                        cameraTarget: [0, 0, 0],
+                        cameraPosition: [-0.007, -0.238, -0.004],
+                        cameraTarget: [0.003, -0.002, -0.041],
                         pointSize: 0.0025,
                         upVector: [0, 0, 1]
                     },
                     market: {
-                        cameraPosition: [-0.014, -0.307, -0.001],
-                        cameraTarget: [0, 0, 0],
+                        cameraPosition: [0.011, -0.183, -0.005],
+                        cameraTarget: [0.010, -0.000, -0.025],
                         pointSize: 0.0025,
                         upVector: [0, 0, 1]
                     },
                     breakroom: {
-                        cameraPosition: [-0.023, -0.214, 0.009],
-                        cameraTarget: [0, 0, 0],
+                        cameraPosition: [-0.020, -0.213, 0.006],
+                        cameraTarget: [-0.006, 0.000, -0.022],
                         pointSize: 0.0025,
                         upVector: [0, 0, 1]
                     }
@@ -2997,7 +3000,7 @@
                 const predPath = `pcds_dataset/camera_${camera}/${fileName}_depth_0_pred.ply`;
                 
                 // Update RGB image
-                const rgbImagePath = `figs/rgb_depth/camera_${camera}/${fileName}_rgb_0.png`;
+                const rgbImagePath = `pcds_dataset/camera_${camera}/${fileName}_rgb_0.png`;
                 const rgbImage = document.getElementById('bytecam-rgb-image');
                 if (rgbImage) {
                     rgbImage.src = rgbImagePath;
@@ -3116,7 +3119,7 @@
             
             async function captureAllDatasetScreenshots() {
                 const scenes = ['living', 'kitchen', 'bedroom', 'bathroom', 'office', 'market', 'breakroom'];
-                const cameras = ['d405', 'd415', 'd435', 'd455', 'l515'];
+                const cameras = ['d405', 'd435', 'l515', 'kinect', 'zed2i_neural', 'zed2i_quality'];
                 
                 // Hide the placeholder images and buttons to prepare for capture
                 const rawContainer = document.getElementById('bytecam-raw-container');
