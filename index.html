@@ -100,7 +100,7 @@
             
             <div class="links">
                 <a href="#" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
-                <a href="https://github.com/manipulation-as-in-simulation" class="btn"><i class="fab fa-github"></i> Code</a>
+                <a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite" class="btn"><i class="fab fa-github"></i> Code</a>
                 <a href="#dataset" class="btn"><i class="fas fa-database"></i> Dataset</a>
                 <a href="#models" class="btn"><i class="fas fa-cube"></i> Models</a>
                 <a href="https://manipulation-as-in-simulation.github.io/docs" target="_blank" class="btn""><i class="fas fa-book"></i> S2R Docs</a>
@@ -471,61 +471,35 @@
             </div>
 
             <div class="table-section">
-                <h3>Sim-to-Real Transfer Results</h3>
-                
-                <!-- Simulation Data Generation Subsection -->
-                <div class="subsection" style="margin-bottom: 40px;">
-                    <h4>Simulation Data Generation with WBCMimicGen</h4>
-                    <p style="margin-bottom: 1px; color: #666;">Generating high-quality simulation demonstrations in IssacLab for training manipulation policies with proposed WBCMimicGen.</p>
-                    <p style="margin-bottom: 20px; color: #666;">* All videos are played in 1x speed.</p>
-                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
-                        <div class="video-pair">
-                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Kitchen Task</h5>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                <div class="video-item">
-                                    <video class="demo-video sync-video" data-sync-group="microwave" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <source src="vids/wbcmimicgen/rgb/microwave_wbc.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">RGB</p>
-                                </div>
-                                <div class="video-item">
-                                    <video class="demo-video sync-video" data-sync-group="microwave" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <source src="vids/wbcmimicgen/depth/microwave_wbc.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">Depth</p>
-                                </div>
+                <h3>Zero-Shot Sim-to-Real Transfer Results</h3>
+                <!-- Zero-Shot Transfer Results Subsection -->
+                <div class="subsection">
+                    <p style="margin-bottom: 1px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
+                    <p style="margin-bottom: 20px; color: #666;">* The policy is robust to external interruptions during the test.</p>
+                    
+                    <!-- Real-world demo videos -->
+                    <div class="demo-videos" style="margin-top: 30px;">
+                        <h4 style="text-align: center; margin-bottom: 20px;">Demo Videos</h4>
+                        <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/iphone-demos/kitchen_demo_iphone.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - Real Robot</p>
                             </div>
-                        </div>
-                        <div class="video-pair">
-                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Canteen Task</h5>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                <div class="video-item">
-                                    <video class="demo-video sync-video" data-sync-group="plate" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <source src="vids/wbcmimicgen/rgb/plate_wbc.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">RGB</p>
-                                </div>
-                                <div class="video-item">
-                                    <video class="demo-video sync-video" data-sync-group="plate" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <source src="vids/wbcmimicgen/depth/plate_wbc.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">Depth</p>
-                                </div>
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/iphone-demos/canteen_demo_iphone.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - Real Robot</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="subsection" style="margin-bottom: 40px;">
-
-                    <p style="margin-bottom: 20px; color: #666;">* All videos are played in 1x speed.</p>
                     <div class="video-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px; margin: 0 auto;">
                         <div class="video-pair">
-                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Kitchen Task</h5>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                                 <div class="video-item">
                                     <div id="kitchen-comparison" class="bal-container-small">
@@ -545,10 +519,6 @@
                                             <span class="handle-left-arrow"></span>
                                             <span class="handle-right-arrow"></span>
                                         </div>
-                                        <div class="bal-labels">
-                                            <span class="bal-beforePosition">render</span>
-                                            <span class="bal-afterPosition">real</span>
-                                        </div>
                                     </div>
                                     <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Camera RGB/Depth</p>
                                 </div>
@@ -561,29 +531,24 @@
                             </div>
                         </div>
                         <div class="video-pair">
-                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Canteen Task</h5>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                                 <div class="video-item">
                                     <div id="canteen-comparison" class="bal-container-small">
                                         <div class="bal-after">
                                             <video muted autoplay playsinline loop style="width: 100%; display: block;">
-                                                <source src="vids/canteen-real/h264_output_ep000_camera_0_depth.mp4" type="video/mp4">
+                                                <source src="vids/canteen-real/h264_output_ep000_camera_0_rgb.mp4" type="video/mp4">
                                             </video>
                                         </div>
                                         <div class="bal-before" style="width:50%;">
                                             <div class="bal-before-inset" style="width: 100%;">
                                                 <video muted autoplay playsinline loop style="width: 100%; display: block;">
-                                                    <source src="vids/canteen-real/h264_output_ep000_camera_0_rgb.mp4" type="video/mp4">
+                                                    <source src="vids/canteen-real/h264_output_ep000_camera_0_depth.mp4" type="video/mp4">
                                                 </video>
                                             </div>
                                         </div>
                                         <div class="bal-handle" style="left:50%;">
                                             <span class="handle-left-arrow"></span>
                                             <span class="handle-right-arrow"></span>
-                                        </div>
-                                        <div class="bal-labels">
-                                            <span class="bal-beforePosition">render</span>
-                                            <span class="bal-afterPosition">real</span>
                                         </div>
                                     </div>
                                     <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Camera RGB/Depth</p>
@@ -598,78 +563,87 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Zero-Shot Transfer Results Subsection -->
-                <div class="subsection">
-                    <h4>Zero-Shot Transfer Results</h4>
-                    <p style="margin-bottom: 1px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
-                    <p style="margin-bottom: 20px; color: #666;">* The policy is robust to external interruptions during the test.</p>
-                    
-                    <!-- Real-world demo videos -->
-                    <div class="demo-videos" style="margin-top: 30px;">
-                        <h5 style="text-align: center; margin-bottom: 20px;">Real-World Execution</h5>
-                        <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
-                            <div class="video-item">
-                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                    <source src="vids/iphone-demos/kitchen_demo_iphone.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - Real Robot</p>
-                            </div>
-                            <div class="video-item">
-                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                    <source src="vids/iphone-demos/canteen_demo_iphone.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - Real Robot</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="table-container">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="3">Camera</th>
-                                <th rowspan="3">Depth Model</th>
-                                <th colspan="4">Kitchen Task</th>
-                                <th colspan="6">Canteen Task</th>
-                            </tr>
-                            <tr>
-                                <th>Pick Bowl</th>
-                                <th>Put Bowl into Microwave</th>
-                                <th>Close Microwave</th>
-                                <th>Total</th>
-                                <th>Pick Fork</th>
-                                <th>Place Fork</th>
-                                <th>Pick Plate</th>
-                                <th>Dump Plate</th>
-                                <th>Place Plate</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Sim (D435-View)</td><td>None</td><td>43/50</td><td>33/50</td><td>32/50</td><td>30/50</td><td>40/50</td><td>28/50</td><td>47/50</td><td>45/50</td><td>33/50</td><td>21/50</td></tr>
-                            <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
-                            <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
-                            <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                        </tbody>
-                        <tbody>
-                            <tr><td>Sim (L515-View)</td><td>None</td><td>43/50</td><td>34/50</td><td>37/50</td><td>32/50</td><td>40/50</td><td>26/50</td><td>46/50</td><td>43/50</td><td>31/50</td><td>20/50</td></tr>
-                            <tr><td rowspan="5">L515</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr><td>PromptDA</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
-                            <tr><td>PriorDA</td><td>17/30</td><td>3/30</td><td>2/30</td><td>2/30</td><td>10/30</td><td>8/30</td><td>3/30</td><td>3/30</td><td>3/30</td><td>3/30</td></tr>
-                            <tr class="best-result"><td>CDM-D435</td><td>22/30</td><td>11/30</td><td>9/30</td><td>9/30</td><td>13/30</td><td>11/30</td><td>11/30</td><td>10/30</td><td>9/30</td><td>9/30</td></tr>
-                            <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
-                        </tbody>
-                        </table>
+                <div class="table-container">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="3">Camera</th>
+                            <th rowspan="3">Depth Model</th>
+                            <th colspan="4">Kitchen Task</th>
+                            <th colspan="6">Canteen Task</th>
+                        </tr>
+                        <tr>
+                            <th>Pick Bowl</th>
+                            <th>Put Bowl into Microwave</th>
+                            <th>Close Microwave</th>
+                            <th>Total</th>
+                            <th>Pick Fork</th>
+                            <th>Place Fork</th>
+                            <th>Pick Plate</th>
+                            <th>Dump Plate</th>
+                            <th>Place Plate</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sim (D435-View)</td><td>None</td><td>43/50</td><td>33/50</td><td>32/50</td><td>30/50</td><td>40/50</td><td>28/50</td><td>47/50</td><td>45/50</td><td>33/50</td><td>21/50</td></tr>
+                        <tr><td rowspan="5">D435</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        <tr><td>PromptDA</td><td>11/30</td><td>5/30</td><td>0/30</td><td>0/30</td><td>17/30</td><td>16/30</td><td>7/30</td><td>2/30</td><td>6/30</td><td>1/30</td></tr>
+                        <tr><td>PriorDA</td><td>16/30</td><td>8/30</td><td>7/30</td><td>7/30</td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td>1/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        <tr class="best-result"><td><strong>CDM-D435</strong></td><td><strong>29/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>26/30</strong></td><td><strong>30/30</strong></td><td><strong>30/30</strong></td><td><strong>15/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td><td><strong>14/30</strong></td></tr>
+                        <tr class="best-result"><td>CDM-L515</td><td><strong>29/30</strong></td><td>22/30</td><td>16/30</td><td>14/30</td><td><strong>30/30</strong></td><td>29/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                    </tbody>
+                    <tbody>
+                        <tr><td>Sim (L515-View)</td><td>None</td><td>43/50</td><td>34/50</td><td>37/50</td><td>32/50</td><td>40/50</td><td>26/50</td><td>46/50</td><td>43/50</td><td>31/50</td><td>20/50</td></tr>
+                        <tr><td rowspan="5">L515</td><td>None</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        <tr><td>PromptDA</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>3/30</td><td>0/30</td><td>0/30</td><td>0/30</td></tr>
+                        <tr><td>PriorDA</td><td>17/30</td><td>3/30</td><td>2/30</td><td>2/30</td><td>10/30</td><td>8/30</td><td>3/30</td><td>3/30</td><td>3/30</td><td>3/30</td></tr>
+                        <tr class="best-result"><td>CDM-D435</td><td>22/30</td><td>11/30</td><td>9/30</td><td>9/30</td><td>13/30</td><td>11/30</td><td>11/30</td><td>10/30</td><td>9/30</td><td>9/30</td></tr>
+                        <tr class="best-result"><td><strong>CDM-L515</strong></td><td><strong>25/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>18/30</strong></td><td><strong>24/30</strong></td><td><strong>24/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td><td><strong>22/30</strong></td></tr>
+                    </tbody>
+                    </table>
+                </div>
+
+                <!-- Sim-to-Real Transfer Videos -->
+                <div class="demo-videos" style="margin-top: 10px;">
+                    <h4 style="text-align: center; margin-bottom: 20px;">Sim-Real Comparisons</h4>
+                    <p style="margin-bottom: 20px; color: #666;">* Real-world videos are slightly speed up for alignment (~1.4x)</p>
+                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 1200px; margin: 0 auto;">
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/sim-real/Sim-Real-Kitchen-435.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - D435 Camera</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/sim-real/Sim-Real-Kitchen-515.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - L515 Camera</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/sim-real/Sim-Real-Canteen-435.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - D435 Camera</p>
+                        </div>
+                        <div class="video-item">
+                            <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                <source src="vids/sim-real/Sim-Real-Canteen-515.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - L515 Camera</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section class="results" id="cdm-results">
         <div class="container">
