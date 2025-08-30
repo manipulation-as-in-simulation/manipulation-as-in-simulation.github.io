@@ -211,7 +211,32 @@ Theme by GitBook
 <p>Deployment utilizes ManiUniCon, an asynchronous control framework that decouples perception, inference, and actuation into parallel processes, minimizing latency and ensuring smooth trajectory execution despite computational overhead.</p>
 <h3 id="depth-prediction-via-cdm">Depth Prediction via CDMs<a class="headerlink" href="#depth-prediction-via-cdm" title="Permanent link"></a></h3>
 <p>Physical depth sensors exhibit significant noise characteristics absent in simulation, creating a domain gap that degrades policy performance. We mitigate this through Camera Depth Models (CDMs)—neural architectures that synthesize high-fidelity depth maps from RGB inputs. These models leverage learned geometric priors to produce depth representations comparable to simulated quality, facilitating robust sim-to-real transfer.</p>
-<p><img alt="Image #1" src="../images/00ffea.png" /></p>
+<div class="rgb-grid-container">
+  <div class="rgb-grid-item">
+    <div class="video-caption">Canteen Scene - RGB</div>
+    <video src="../videos/real/canteen/output_ep000_camera_0_rgb.mp4" alt="RGB Frame 0 - Initial Position" controls autoplay loop muted>
+  </div>
+  <div class="rgb-grid-item">
+    <div class="video-caption">Kitchen Scene - RGB</div>
+    <video src="../videos/real/kitchen/output_ep000_camera_0_rgb.mp4" alt="RGB Frame 4 - Final Position" controls autoplay loop muted>
+  </div>
+  <div class="rgb-grid-item">
+    <div class="video-caption">Canteen - Raw Depth</div>
+    <video src="../videos/real/canteen/output_ep000_camera_0_depth.mp4" alt="RGB Frame 0 - Initial Position" controls autoplay loop muted>
+  </div>
+  <div class="rgb-grid-item">
+    <div class="video-caption">Kitchen - Raw Depth</div>
+    <video src="../videos/real/kitchen/output_ep000_camera_0_depth.mp4" alt="RGB Frame 3 - Intermediate Position" controls autoplay loop muted>
+  </div>
+  <div class="rgb-grid-item">
+    <div class="video-caption">Canteen - CDM Depth</div>
+    <video src="../videos/real/canteen/output_ep000_camera_0_model_depth.mp4" alt="RGB Frame 0 - Initial Position" controls autoplay loop muted>
+  </div>
+  <div class="rgb-grid-item">
+    <div class="video-caption">Kitchen - CDM Depth</div>
+    <video src="../videos/real/kitchen/output_ep000_camera_0_model_depth.mp4" alt="RGB Frame 3 - Intermediate Position" controls autoplay loop muted>
+  </div>
+</div>
 <h2 id="code-reference">Code Reference<a class="headerlink" href="#code-reference" title="Permanent link"></a></h2>
 <p><strong>Policy Architecture:</strong></p>
 <ul>

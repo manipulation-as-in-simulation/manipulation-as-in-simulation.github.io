@@ -80,6 +80,20 @@ video {
     background: #f8f9fa !important;
 }
 
+/* Video caption styles */
+.video-caption {
+    padding: 8px 12px !important;
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%) !important;
+    color: #ffffff !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    letter-spacing: 0.3px !important;
+    border-radius: 8px 8px 0 0 !important;
+    margin: 0 !important;
+    text-transform: uppercase !important;
+}
+
 .rgb-grid-item:hover {
     transform: translateY(-5px) scale(1.02) !important;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
