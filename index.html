@@ -100,7 +100,7 @@
             
             <div class="links">
                 <a href="#" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
-                <a href="https://github.com/manipulation-as-in-simulation" class="btn"><i class="fab fa-github"></i> Code</a>
+                <a href="https://github.com/ByteDance-Seed/manip-as-in-sim-suite" class="btn"><i class="fab fa-github"></i> Code</a>
                 <a href="#dataset" class="btn"><i class="fas fa-database"></i> Dataset</a>
                 <a href="#models" class="btn"><i class="fas fa-cube"></i> Models</a>
                 <a href="https://manipulation-as-in-simulation.github.io/docs" target="_blank" class="btn""><i class="fas fa-book"></i> S2R Docs</a>
@@ -471,64 +471,15 @@
             </div>
 
             <div class="table-section">
-                <h3>Sim-to-Real Transfer Results</h3>
-                
-                <!-- Simulation Data Generation Subsection -->
-                <div class="subsection" style="margin-bottom: 40px;">
-                    <h4>Simulation Data Generation with WBCMimicGen</h4>
-                    <p style="margin-bottom: 1px; color: #666;">Generating high-quality simulation demonstrations in IssacLab for training manipulation policies with proposed WBCMimicGen.</p>
-                    <p style="margin-bottom: 20px; color: #666;">* All videos are played in 1x speed.</p>
-                    <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
-                        <div class="video-pair">
-                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Kitchen Task</h5>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                <div class="video-item">
-                                    <video class="demo-video sync-video" data-sync-group="microwave" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <source src="vids/wbcmimicgen/rgb/microwave_wbc.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">RGB</p>
-                                </div>
-                                <div class="video-item">
-                                    <video class="demo-video sync-video" data-sync-group="microwave" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <source src="vids/wbcmimicgen/depth/microwave_wbc.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">Depth</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="video-pair">
-                            <h5 style="text-align: center; margin-bottom: 15px; color: #333;">Canteen Task</h5>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                                <div class="video-item">
-                                    <video class="demo-video sync-video" data-sync-group="plate" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <source src="vids/wbcmimicgen/rgb/plate_wbc.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">RGB</p>
-                                </div>
-                                <div class="video-item">
-                                    <video class="demo-video sync-video" data-sync-group="plate" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                                        <source src="vids/wbcmimicgen/depth/plate_wbc.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">Depth</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                <h3>Zero-Shot Sim-to-Real Transfer Results</h3>
                 <!-- Zero-Shot Transfer Results Subsection -->
                 <div class="subsection">
-                    <h4>Zero-Shot Transfer Results</h4>
                     <p style="margin-bottom: 1px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
                     <p style="margin-bottom: 20px; color: #666;">* The policy is robust to external interruptions during the test.</p>
                     
                     <!-- Real-world demo videos -->
                     <div class="demo-videos" style="margin-top: 30px;">
-                        <h5 style="text-align: center; margin-bottom: 20px;">Real-World Execution</h5>
+                        <h4 style="text-align: center; margin-bottom: 20px;">Demo Videos</h4>
                         <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
                             <div class="video-item">
                                 <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -543,6 +494,42 @@
                                     Your browser does not support the video tag.
                                 </video>
                                 <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - Real Robot</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Sim-to-Real Transfer Videos -->
+                    <div class="demo-videos" style="margin-top: 10px;">
+                        <h4 style="text-align: center; margin-bottom: 20px;">Sim-Real Comparisons</h4>
+                        <div class="video-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;">
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/sim-real/Sim-Real-Kitchen-435.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - D435 Camera</p>
+                            </div>
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/sim-real/Sim-Real-Kitchen-515.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Kitchen Task - L515 Camera</p>
+                            </div>
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/sim-real/Sim-Real-Canteen-435.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - D435 Camera</p>
+                            </div>
+                            <div class="video-item">
+                                <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                    <source src="vids/sim-real/Sim-Real-Canteen-515.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <p style="text-align: center; margin-top: 10px; color: #666;">Canteen Task - L515 Camera</p>
                             </div>
                         </div>
                     </div>
