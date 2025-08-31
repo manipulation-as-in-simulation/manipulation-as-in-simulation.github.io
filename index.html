@@ -117,8 +117,8 @@
                         </a>
                     </div>
                 </div>
-                <a href="#dataset" class="btn"><i class="fas fa-database"></i> Dataset</a>
-                <a href="#models" class="btn"><i class="fas fa-cube"></i> Models</a>
+                <a href="https://huggingface.co/datasets/ByteDance-Seed/ByteCameraDepth" class="btn"><i class="fas fa-database"></i> Dataset</a>
+                <a href="https://huggingface.co/Avada11/CDM-Depth-Model" class="btn"><i class="fas fa-cube"></i> Models</a>
                 <a href="https://manipulation-as-in-simulation.github.io/docs" target="_blank" class="btn"><i class="fas fa-book"></i> S2R Docs</a>
             </div>
             </div>
@@ -133,34 +133,34 @@
             
             <div class="model-grid" style="display: flex; justify-content: center; align-items: stretch; gap: 5px; flex-wrap: wrap;">
                 <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
-                    <h3>CDM-405</h3>
+                    <h3>CDM-D405</h3>
                     <p>For RealSense D405 camera</p>
-                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                    <a href="https://huggingface.co/Avada11/CDM-Depth-Model/resolve/main/cdm_d405.ckpt?download=true" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
                 <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
-                    <h3>CDM-435</h3>
+                    <h3>CDM-D435</h3>
                     <p>For RealSense D435 camera</p>
-                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                    <a href="https://huggingface.co/Avada11/CDM-Depth-Model/resolve/main/cdm_d435.ckpt?download=true" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
                 <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
                     <h3>CDM-L515</h3>
                     <p>For RealSense L515 camera</p>
-                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                    <a href="https://huggingface.co/Avada11/CDM-Depth-Model/resolve/main/cdm_l515.ckpt?download=true" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
                 <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
                     <h3>CDM-Kinect</h3>
                     <p>For Azure Kinect camera</p>
-                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                    <a href="https://huggingface.co/Avada11/CDM-Depth-Model/resolve/main/cdm_kinect.ckpt?download=true" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
                 <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
                     <h3>CDM-Zed2i N</h3>
                     <p>For Zed2i camera, Neural mode</p>
-                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                    <a href="https://huggingface.co/Avada11/CDM-Depth-Model/resolve/main/cdm_zed2i_neural.ckpt?download=true" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
                 <div class="model-card" style="flex: 0 0 180px; padding: 20px;">
                     <h3>CDM-Zed2i Q</h3>
                     <p>For Zed2i camera, Quality mode</p>
-                    <a href="#" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                    <a href="https://huggingface.co/Avada11/CDM-Depth-Model/resolve/main/cdm_zed2i_quality.ckpt?download=true" class="btn-download"><i class="fas fa-download"></i> Download</a>
                 </div>
             </div>
         </div>
@@ -491,10 +491,10 @@
                 <!-- Zero-Shot Transfer Results Subsection -->
                 <div class="subsection">
                     <p style="margin-bottom: 1px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
-                    <p style="margin-bottom: 20px; color: #666;">* The policy is robust to external interruptions during the test.</p>
+                    <p style="margin-bottom: 10px; color: #666;">* The policy is robust to external interruptions during the test.</p>
                     
                     <!-- Real-world demo videos -->
-                    <div class="demo-videos" style="margin-top: 30px;">
+                    <div class="demo-videos" style="margin-top: 20px;">
                         <h4 style="text-align: center; margin-bottom: 20px;">Demo Videos</h4>
                         <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
                             <div class="video-item">
@@ -536,13 +536,13 @@
                                             <span class="handle-right-arrow"></span>
                                         </div>
                                     </div>
-                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Camera RGB/Depth</p>
+                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Cam RGB/Depth (D435, 30FPS)</p>
                                 </div>
                                 <div class="video-item">
                                     <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                                         <source src="vids/kitchen-real/output_ep000_camera_0_model_depth.mp4" type="video/mp4">
                                     </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM Depth</p>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM-D435 Depth (~6FPS)</p>
                                 </div>
                             </div>
                         </div>
@@ -567,13 +567,13 @@
                                             <span class="handle-right-arrow"></span>
                                         </div>
                                     </div>
-                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Camera RGB/Depth</p>
+                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Cam RGB/Depth (L515, 30FPS)</p>
                                 </div>
                                 <div class="video-item">
                                     <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                                         <source src="vids/canteen-real/h264_output_ep000_camera_0_model_depth.mp4" type="video/mp4">
                                     </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM Depth</p>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM-L515 Depth (~6FPS)</p>
                                 </div>
                             </div>
                         </div>
@@ -731,7 +731,7 @@
                     
                     <div class="image-row-6">
                         <div style="grid-column: 1 / 4;">
-                            <h4>Stack Bowls Scene</h4>
+                            <h4 style="margin-top: 0px;">Stack Bowls Scene</h4>
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                                 <div class="image-item">
                                     <img src="figs/compare_depths/stackbowl_435/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
@@ -748,7 +748,7 @@
                             </div>
                         </div>
                         <div style="grid-column: 4 / 7;">
-                            <h4>Place Toothpaste Scene</h4>
+                            <h4 style="margin-top: 0px;">Place Toothpaste Scene</h4>
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                                 <div class="image-item">
                                     <img src="figs/compare_depths/placetoothpaste_435/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
@@ -1363,7 +1363,7 @@
                 </div>
                 
                 <!-- Point Cloud Viewers and RGB Image -->
-                <div class="pcd-grid" style="max-width: 500px; margin: 30px auto; grid-template-columns: repeat(1, 1fr); margin-top: 0px;">
+                <div class="pcd-grid" style="max-width: 500px; margin: 30px auto; grid-template-columns: repeat(1, 1fr); margin-top: 10px;">
                     <!-- RGB Image -->
                     <div class="pcd-item">
                         <div style="display: flex; align-items: center; justify-content: center; background: #f5f5f5; border-radius: 8px;">
@@ -1400,13 +1400,13 @@
     <section class="citation">
         <div class="container">
             <h2>Citation</h2>
-            <pre><code>@article{liu2024manipulation,
+            <pre><code>@article{liu2025manipulation,
   title={Manipulation as in Simulation: Enabling Accurate Geometry Perception in Robots},
   author={Liu, Minghuan and Zhu, Zhengbang and Han, Xiaoshen and Hu, Peng and Lin, Haotong and 
           Li, Xinyao and Chen, Jingxiao and Xu, Jiafeng and Yang, Yichu and Lin, Yunfeng and 
           Li, Xinghang and Yu, Yong and Zhang, Weinan and Kong, Tao and Kang, Bingyi},
   journal={arXiv preprint},
-  year={2024}
+  year={2025}
 }</code></pre>
         </div>
     </section>
