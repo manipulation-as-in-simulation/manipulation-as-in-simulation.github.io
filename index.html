@@ -491,10 +491,10 @@
                 <!-- Zero-Shot Transfer Results Subsection -->
                 <div class="subsection">
                     <p style="margin-bottom: 1px; color: #666;">Zero-shot sim-to-real results using CDMs as plugin in real-world robot pipeline.</p>
-                    <p style="margin-bottom: 20px; color: #666;">* The policy is robust to external interruptions during the test.</p>
+                    <p style="margin-bottom: 10px; color: #666;">* The policy is robust to external interruptions during the test.</p>
                     
                     <!-- Real-world demo videos -->
-                    <div class="demo-videos" style="margin-top: 30px;">
+                    <div class="demo-videos" style="margin-top: 20px;">
                         <h4 style="text-align: center; margin-bottom: 20px;">Demo Videos</h4>
                         <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto;">
                             <div class="video-item">
@@ -536,13 +536,13 @@
                                             <span class="handle-right-arrow"></span>
                                         </div>
                                     </div>
-                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Camera RGB/Depth (30FPS)</p>
+                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Cam RGB/Depth (D435, 30FPS)</p>
                                 </div>
                                 <div class="video-item">
                                     <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                                         <source src="vids/kitchen-real/output_ep000_camera_0_model_depth.mp4" type="video/mp4">
                                     </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM Depth (~6FPS)</p>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM-D435 Depth (~6FPS)</p>
                                 </div>
                             </div>
                         </div>
@@ -567,13 +567,13 @@
                                             <span class="handle-right-arrow"></span>
                                         </div>
                                     </div>
-                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Camera RGB/Depth (30FPS)</p>
+                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Cam RGB/Depth (L515, 30FPS)</p>
                                 </div>
                                 <div class="video-item">
                                     <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                                         <source src="vids/canteen-real/h264_output_ep000_camera_0_model_depth.mp4" type="video/mp4">
                                     </video>
-                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM Depth (~6FPS)</p>
+                                    <p style="text-align: center; margin-top: 10px; color: #666; font-size: 0.9rem;">CDM-L515 Depth (~6FPS)</p>
                                 </div>
                             </div>
                         </div>
@@ -731,7 +731,7 @@
                     
                     <div class="image-row-6">
                         <div style="grid-column: 1 / 4;">
-                            <h4>Stack Bowls Scene</h4>
+                            <h4 style="margin-top: 0px;">Stack Bowls Scene</h4>
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                                 <div class="image-item">
                                     <img src="figs/compare_depths/stackbowl_435/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
@@ -748,7 +748,7 @@
                             </div>
                         </div>
                         <div style="grid-column: 4 / 7;">
-                            <h4>Place Toothpaste Scene</h4>
+                            <h4 style="margin-top: 0px;">Place Toothpaste Scene</h4>
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                                 <div class="image-item">
                                     <img src="figs/compare_depths/placetoothpaste_435/output_ep000_camera_0_rgb_frame10.png" alt="RGB">
