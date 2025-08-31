@@ -273,7 +273,7 @@
             
             <!-- Dataset Actions - Download and Point Cloud Comparison -->
             <div style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; margin-top: 30px;">
-                <a href="#" class="btn-dataset-download">
+                <a href="https://huggingface.co/datasets/ByteDance-Seed/ByteCameraDepth" class="btn-dataset-download" target="_blank">
                     <i class="fas fa-download"></i>
                     <span class="download-text">
                         <strong>Download ByteCamDepth Dataset</strong>
@@ -536,7 +536,7 @@
                                             <span class="handle-right-arrow"></span>
                                         </div>
                                     </div>
-                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Cam RGB/Depth (D435, 30FPS)</p>
+                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Cam RGB/Depth (D435,30FPS)</p>
                                 </div>
                                 <div class="video-item">
                                     <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -567,7 +567,7 @@
                                             <span class="handle-right-arrow"></span>
                                         </div>
                                     </div>
-                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Cam RGB/Depth (L515, 30FPS)</p>
+                                    <p style="text-align: center; margin-top: 18px; color: #666; font-size: 0.9rem;">Cam RGB/Depth (L515,30FPS)</p>
                                 </div>
                                 <div class="video-item">
                                     <video class="demo-video" controls muted loop playsinline style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
@@ -1362,14 +1362,33 @@
                     </div>
                 </div>
                 
-                <!-- Point Cloud Viewers and RGB Image -->
-                <div class="pcd-grid" style="max-width: 500px; margin: 30px auto; grid-template-columns: repeat(1, 1fr); margin-top: 10px;">
+                <!-- RGB Image and Depth Comparison -->
+                <div class="pcd-grid" style="max-width: 1000px; margin: 30px auto; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 10px;">
                     <!-- RGB Image -->
                     <div class="pcd-item">
-                        <div style="display: flex; align-items: center; justify-content: center; background: #f5f5f5; border-radius: 8px;">
+                        <div style="height: 300px; display: flex; align-items: center; justify-content: center; background: #f5f5f5; border-radius: 8px;">
                             <img id="bytecam-rgb-image" src="pcds_dataset/camera_d405/living_rgb_0.png" alt="RGB Image" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
                         </div>
                         <p>RGB Image</p>
+                    </div>
+                    
+                    <!-- Before-After Depth Comparison -->
+                    <div class="pcd-item">
+                        <div class="bal-container" id="bytecam-depth-comparison" style="height: 300px;">
+                            <div class="bal-after">
+                                <img id="bytecam-cdm-depth-image" src="pcds_dataset/camera_d405/living_depth_0_pred.png" alt="CDM Depth">
+                            </div>
+                            <div class="bal-before" style="width:50%;">
+                                <div class="bal-before-inset" style="width: 100%;">
+                                    <img id="bytecam-raw-depth-image" src="pcds_dataset/camera_d405/living_depth_0.png" alt="Camera Depth">
+                                </div>
+                            </div>
+                            <div class="bal-handle" id="bytecam-bal-handle" style="left:50%;">
+                                <span class="handle-left-arrow"></span>
+                                <span class="handle-right-arrow"></span>
+                            </div>
+                        </div>
+                        <p>Camera Depth / CDM Depth</p>
                     </div>
                 </div>
             </div>
@@ -3022,6 +3041,18 @@
                     rgbImage.src = rgbImagePath;
                 }
                 
+                // Update depth comparison images
+                const rawDepthPath = `pcds_dataset/camera_${camera}/${fileName}_depth_0.png`;
+                const cdmDepthPath = `pcds_dataset/camera_${camera}/${fileName}_depth_0_pred.png`;
+                const rawDepthImage = document.getElementById('bytecam-raw-depth-image');
+                const cdmDepthImage = document.getElementById('bytecam-cdm-depth-image');
+                if (rawDepthImage) {
+                    rawDepthImage.src = rawDepthPath;
+                }
+                if (cdmDepthImage) {
+                    cdmDepthImage.src = cdmDepthPath;
+                }
+                
                 // Update raw container
                 bytecamRawContainer.setAttribute('data-ply-path', rawPath);
                 bytecamRawContainer.setAttribute('data-is-l515', 'false');
@@ -3096,6 +3127,51 @@
             
             // Initialize the point cloud data and RGB image for default selection
             updateBytecamPointClouds();
+            
+            // Initialize before-after slider for depth comparison using BeforeAfter pattern
+            const balContainer = document.getElementById('bytecam-depth-comparison');
+            const balHandle = document.getElementById('bytecam-bal-handle');
+            const balBefore = balContainer.querySelector('.bal-before');
+            const beforeInset = balContainer.querySelector('.bal-before-inset');
+
+            // Set initial width for before-inset to match container
+            beforeInset.style.width = balContainer.offsetWidth + 'px';
+                
+            // Update on window resize
+            window.addEventListener('resize', () => {
+                beforeInset.style.width = balContainer.offsetWidth + 'px';
+            });
+            
+            // Set initial position
+            balBefore.style.width = '50%';
+            balHandle.style.left = '50%';
+            
+            // Mouse move event - slider follows mouse directly
+            balContainer.addEventListener('mousemove', (e) => {
+                const containerWidth = balContainer.offsetWidth;
+                const rect = balContainer.getBoundingClientRect();
+                const offsetX = e.clientX - rect.left;
+                const percentage = (offsetX / containerWidth) * 100;
+                
+                if (percentage > 2 && percentage < 98) {
+                    balBefore.style.width = percentage + '%';
+                    balHandle.style.left = percentage + '%';
+                }
+            });
+            
+            // Touch events for mobile
+            balContainer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const containerWidth = balContainer.offsetWidth;
+                const rect = balContainer.getBoundingClientRect();
+                const offsetX = e.touches[0].clientX - rect.left;
+                const percentage = (offsetX / containerWidth) * 100;
+                
+                if (percentage > 2 && percentage < 98) {
+                    balBefore.style.width = percentage + '%';
+                    balHandle.style.left = percentage + '%';
+                }
+            });
             
             // Scene selector event handlers
             bytecamSceneButtons.forEach(button => {
