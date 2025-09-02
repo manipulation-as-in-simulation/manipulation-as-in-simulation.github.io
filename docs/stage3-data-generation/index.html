@@ -420,7 +420,7 @@ Teleoperation system setup:
 
 Formally, the trajectory generation problem seeks joint velocities $\boldsymbol x$ that track desired end-effector velocities, formulated as<a href="#ref-1">[1]</a>:
 
-\begin{equation}
+<!-- \begin{equation}
 \min _ { \boldsymbol{x} } \quad f _ { o } ( \boldsymbol{x} ) = \frac { 1 } { 2 } \boldsymbol{x} ^ { \top } Q \boldsymbol{x} + \mathcal { C } ^ { \top } \boldsymbol{x}  
 \end{equation}
 \begin{equation*}
@@ -429,19 +429,20 @@ Formally, the trajectory generation problem seeks joint velocities $\boldsymbol 
 \mathcal { A } \boldsymbol{x} &\leq \mathcal { B }~, \\
 \mathcal { X } ^ { - } &\leq \boldsymbol{x} \leq \mathcal { X } ^ { + }~,
 \end{aligned}
-\end{equation*} 
+\end{equation*}  -->
+<div style="text-align: center; margin: 20px 0;">
+  <img src="../images/equation1.svg" alt="WBC optimization problem formulation" style="max-width: 100%; height: auto;">
+</div> 
+<div style="text-align: center; margin: 20px 0;">
+  <img src="../images/equation2.svg" alt="WBC optimization problem formulation" style="max-width: 100%; height: auto;">
+</div> 
 </p>
 
 <p>
   where $x = (a_\text{base}, \dot{q}_\text{active}, \delta_1, \delta_2, \cdots, \delta_i)$ and $\mathcal{X}^{+, -}$ is the limits; $a_\text{base}$ is the velocities of the robot base; $\dot{q}_\text{active}$ is the velocity of the joints related to the end-effectors in the QP (so called the active joints); $\delta_i$ are slack variables that can help construct a solvable QP. Without loss of generality, suppose there are $k$ end-effectors and $n$ joints, these variables can be expressed as:
-  \begin{equation}
-      \begin{aligned}
-          \mathcal Q &= \text{diag}(\lambda_q, \lambda_{\delta_1}, \cdots, \lambda_{\delta_k}) \in \mathbb R^{(n+6k)}~, \\
-  \mathcal { C } &= \left( \begin{array} { c } \hat { \mathbf { J } } _ { m } + \epsilon \\ 0 _ { 6k \times 1 } \end{array} \right) \in \mathbb { R } ^ { ( n + 6k ) }~, \\
-  \mathcal{A} &= (\boldsymbol{1} _{n \times (n+6k)}) \in \mathbb{R}^{n \times (n + 6k)}~, \\
-  \mathcal B &= \left( \begin{array} { c } 0 _ { b } \\ \eta \frac { \rho _ { 0 } - \rho _ { s } } { \rho _ { i } - \rho _ { s } } \\ \vdots \\ \eta \frac { \rho _ { n } - \rho _ { s } } { \rho _ { i } - \rho _ { s } } \end{array} \right) \in \mathbb { R } ^ { n }~.
-      \end{aligned}
-  \end{equation}
+  <div style="text-align: center; margin: 20px 0;">
+    <img src="../images/equation3.svg" alt="WBC optimization problem formulation" style="max-width: 100%; height: auto;">
+  </div> 
 </p>
 
 
