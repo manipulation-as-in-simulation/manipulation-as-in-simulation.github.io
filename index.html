@@ -73,7 +73,7 @@
                     <div class="contribution-compact">
                         <div class="contribution-icon">📊</div>
                         <div class="contribution-text">
-                            <h4>ByteCamDepth Dataset</h4>
+                            <h4>ByteCameraDepth Dataset</h4>
                             <p>170K+ RGB-depth pairs from 7 cameras</p>
                         </div>
                     </div>
@@ -193,8 +193,8 @@
 
     <section id="dataset" class="dataset">
         <div class="container">
-            <h2>ByteCamDepth Dataset</h2>
-            <p>We introduce ByteCamDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
+            <h2>ByteCameraDepth Dataset</h2>
+            <p>We introduce ByteCameraDepth, a real-world multi-camera depth dataset comprising over <strong>170,000 RGB-depth pairs</strong> from ten distinct configurations captured by seven depth cameras.</p>
             <div class="dataset-stats">
                 <div class="stat-item">
                     <h3>170K+</h3>
@@ -282,7 +282,7 @@
                 <a href="https://huggingface.co/datasets/ByteDance-Seed/ByteCameraDepth" class="btn-dataset-download" target="_blank">
                     <i class="fas fa-download"></i>
                     <span class="download-text">
-                        <strong>Download ByteCamDepth Dataset</strong>
+                        <strong>Download ByteCameraDepth Dataset</strong>
                     </span>
                     <i class="fas fa-arrow-right arrow-icon"></i>
                 </a>
@@ -1285,12 +1285,12 @@
             </div>
             </div>
 
-        <!-- ByteCamDepth Dataset Point Cloud Samples -->
+        <!-- ByteCameraDepth Dataset Point Cloud Samples -->
         <section id="point-cloud-comparison" class="results-section">
             <div class="container">
                 <div class="result-section">
-                <h3>Point Cloud Quality Comparison on ByteCamDepth Dataset</h3>
-                <p style="text-align: center; margin-bottom: 20px; color: #666;">Interactive 3D visualization of CDM processed point clouds from ByteCamDepth dataset</p>
+                <h3>Point Cloud Quality Comparison on ByteCameraDepth Dataset</h3>
+                <p style="text-align: center; margin-bottom: 20px; color: #666;">Interactive 3D visualization of CDM processed point clouds from ByteCameraDepth dataset</p>
                 
                 <!-- Scene and Camera Selection Buttons -->
                 <div class="pcd-selector-container">
@@ -1319,9 +1319,9 @@
                     </div>
                 </div>
                 
-                <!-- ByteCamDepth Debug Info Panel (only visible in debug mode) -->
+                <!-- ByteCameraDepth Debug Info Panel (only visible in debug mode) -->
                 <div id="bytecam-debug-panel" class="debug-panel" style="display: none;">
-                    <h4>ByteCamDepth Camera View Parameters (Debug Mode)</h4>
+                    <h4>ByteCameraDepth Camera View Parameters (Debug Mode)</h4>
                     <div class="debug-content">
                         <div class="debug-viewer-info">
                             <h5>Raw Depth Viewer</h5>
@@ -1985,7 +1985,7 @@
             // Initialize accuracy display
             updateAccuracyDisplay();
             
-            // ByteCamDepth Dataset Image Selector
+            // ByteCameraDepth Dataset Image Selector
             const cameraDatasetButtons = document.querySelectorAll('#camera-dataset-selector .selector-btn');
             const sceneDatasetButtons = document.querySelectorAll('#scene-dataset-selector .selector-btn');
             const pairDatasetButtons = document.querySelectorAll('#pair-dataset-selector .selector-btn');
@@ -2613,8 +2613,8 @@
             }
         });
         
-        // ByteCamDepth Point Cloud Viewer with custom axis orientation
-        class ByteCamDepthPointCloudViewer extends OptimizedPointCloudViewer {
+        // ByteCameraDepth Point Cloud Viewer with custom axis orientation
+        class ByteCameraDepthPointCloudViewer extends OptimizedPointCloudViewer {
             constructor(containerId, plyPath, isL515 = false, captureMode = false, debugMode = false) {
                 // Extract scene name from plyPath BEFORE calling super
                 const pathParts = plyPath.split('/');
@@ -2706,7 +2706,7 @@
                     loadingDiv.style.display = 'none';
                 }
 
-                // For ByteCamDepth, preserve original coordinate system
+                // For ByteCameraDepth, preserve original coordinate system
                 // Apply rotation to swap Y and Z axes, no centering, optional scaling
                 
                 // Rotate -90 degrees around X axis to swap Y and Z
@@ -2716,7 +2716,7 @@
                 geometry.computeBoundingBox();
                 const size = new THREE.Vector3();
                 geometry.boundingBox.getSize(size);
-                console.log('ByteCamDepth Point Cloud Size:', size);
+                console.log('ByteCameraDepth Point Cloud Size:', size);
                 
                 // Optional: scale if needed (comment out to use original scale)
                 // const scale = 2 / Math.max(size.x, size.y, size.z);
@@ -2782,7 +2782,7 @@
                 this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
                 this.container.appendChild(this.renderer.domElement);
 
-                // Controls with adjusted settings for ByteCamDepth
+                // Controls with adjusted settings for ByteCameraDepth
                 this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
                 this.controls.enableDamping = true;
                 this.controls.dampingFactor = 0.05;
@@ -2829,7 +2829,7 @@
             
             // Override updateDebugInfo to avoid calling non-existent function
             updateDebugInfo() {
-                // ByteCamDepth has its own debug info update in the main script
+                // ByteCameraDepth has its own debug info update in the main script
                 // so we don't need to call updateDebugSceneInfo here
             }
             
@@ -2886,7 +2886,7 @@
             }
         }
         
-        // ByteCamDepth Dataset Point Cloud Selector
+        // ByteCameraDepth Dataset Point Cloud Selector
         document.addEventListener('DOMContentLoaded', function() {
             const bytecamSceneButtons = document.querySelectorAll('#bytecam-scene-selector .selector-btn');
             const bytecamCameraButtons = document.querySelectorAll('#bytecam-camera-selector .selector-btn');
@@ -2900,7 +2900,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const debugMode = urlParams.get('debug') === 'true';
             
-            // Show ByteCamDepth debug panel if in debug mode
+            // Show ByteCameraDepth debug panel if in debug mode
             if (debugMode) {
                 const bytecamDebugPanel = document.getElementById('bytecam-debug-panel');
                 if (bytecamDebugPanel) {
@@ -2912,7 +2912,7 @@
             loadBtnRaw.addEventListener('click', () => loadBytecamViewer('raw'));
             loadBtnPred.addEventListener('click', () => loadBytecamViewer('pred'));
             
-            // Function to update debug info for ByteCamDepth viewers
+            // Function to update debug info for ByteCameraDepth viewers
             function updateBytecamDebugInfo() {
                 if (!debugMode) return;
                 
@@ -3006,9 +3006,9 @@
                 setTimeout(() => {
                     try {
                         if (type === 'raw') {
-                            currentRawViewer = new ByteCamDepthPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
+                            currentRawViewer = new ByteCameraDepthPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
                         } else {
-                            currentPredViewer = new ByteCamDepthPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
+                            currentPredViewer = new ByteCameraDepthPointCloudViewer(viewerId, plyPath, isL515, false, debugMode);
                         }
                     } catch (e) {
                         console.error('Error creating viewer:', e);
@@ -3212,7 +3212,7 @@
             // Capture dataset screenshots if in capture_dataset mode
             const captureDatasetMode = new URLSearchParams(window.location.search).get('capture_dataset') === 'true';
             if (captureDatasetMode) {
-                console.log('Starting ByteCamDepth dataset screenshot capture...');
+                console.log('Starting ByteCameraDepth dataset screenshot capture...');
                 captureAllDatasetScreenshots();
             }
             
@@ -3261,7 +3261,7 @@
                             // Capture raw point cloud
                             const rawPath = `pcds_dataset/camera_${camera}/${scene === 'breakroom' ? 'BreakRoom' : scene}_depth_0.ply`;
                             console.log(`Loading raw: ${rawPath}`);
-                            const rawViewer = new ByteCamDepthPointCloudViewer('bytecam-raw-viewer', rawPath, camera === 'l515', true, false);
+                            const rawViewer = new ByteCameraDepthPointCloudViewer('bytecam-raw-viewer', rawPath, camera === 'l515', true, false);
                             
                             // Wait for raw capture to complete
                             await new Promise(resolve => setTimeout(resolve, 3000));
@@ -3269,7 +3269,7 @@
                             // Capture predicted point cloud
                             const predPath = `pcds_dataset/camera_${camera}/${scene === 'breakroom' ? 'BreakRoom' : scene}_depth_0_pred.ply`;
                             console.log(`Loading pred: ${predPath}`);
-                            const predViewer = new ByteCamDepthPointCloudViewer('bytecam-pred-viewer', predPath, camera === 'l515', true, false);
+                            const predViewer = new ByteCameraDepthPointCloudViewer('bytecam-pred-viewer', predPath, camera === 'l515', true, false);
                             
                             // Wait for pred capture to complete
                             await new Promise(resolve => setTimeout(resolve, 3000));
