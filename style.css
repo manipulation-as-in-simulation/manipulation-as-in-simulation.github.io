@@ -2035,9 +2035,16 @@ footer a:hover {
         align-items: center;
     }
     
+    .contribution-link {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 320px;
+    }
+    
     .contribution-compact {
-        max-width: 100%;
-        width: 90%;
+        width: 100%;
+        max-width: none;
     }
     
     .image-row {
@@ -2045,8 +2052,17 @@ footer a:hover {
     }
     
     .image-row-6 {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .image-row-6 > div {
+        grid-column: 1 !important;
+    }
+    
+    .image-row-6 > div > div {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
     }
     
     .dataset-stats {
@@ -2098,17 +2114,21 @@ footer a:hover {
     .selector-group {
         width: 100%;
         justify-content: center;
+        flex-wrap: wrap;
     }
     
     .selector-buttons {
-        flex: 1;
-        max-width: 250px;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 100%;
+        width: 100%;
     }
     
     .selector-btn {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-        min-width: 70px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        min-width: auto;
+        flex: 0 1 auto;
     }
     
     .accuracy-selector-container {
