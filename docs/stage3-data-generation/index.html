@@ -210,22 +210,37 @@ Teleoperation system setup:
 <p>WBCMimicGen begins with human demonstration collection via a VR-based teleoperation system, as illustrated below:</p>
 <div style="display: flex; gap: 20px; width: 100%;">
 <div style="flex: 1;">
-  <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-    <source src="../videos/teleop.mp4" type="video/mp4">
-  </video>
+  <div class="lazy-video-container" style="position: relative;">
+    <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+      <source src="../videos/teleop.mp4" type="video/mp4">
+    </video>
+    <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+      <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+    </div>
+  </div>
 </div>
 </div>
 <p>Representative demonstrations from both task domains:</p>
 <div style="display: flex; gap: 20px; width: 100%;">
     <div style="flex: 1;">
-      <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-        <source src="../videos/sim/clean_plate/episode_0_camera_0.mp4" type="video/mp4">
-      </video>
+      <div class="lazy-video-container" style="position: relative;">
+        <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+          <source src="../videos/sim/clean_plate/episode_0_camera_0.mp4" type="video/mp4">
+        </video>
+        <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+        </div>
+      </div>
     </div>
     <div style="flex: 1;">
-      <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-        <source src="../videos/sim/microwave_source_demo/episode_0_camera_0.mp4" type="video/mp4">
-      </video>
+      <div class="lazy-video-container" style="position: relative;">
+        <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+          <source src="../videos/sim/microwave_source_demo/episode_0_camera_0.mp4" type="video/mp4">
+        </video>
+        <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -255,21 +270,36 @@ Teleoperation system setup:
   <div style="overflow: hidden; width: 100%;">
     <div id="microwave-carousel" style="display: flex !important; gap: 20px; transition: transform 0.3s ease; width: max-content;">
       <div style="width: 380px; flex-shrink: 0;">
-        <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-          <source src="../videos/sim/microwave_source_demo_subtask/pick_bowl.mp4" type="video/mp4">
-        </video>
+        <div class="lazy-video-container" style="position: relative;">
+          <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+            <source src="../videos/sim/microwave_source_demo_subtask/pick_bowl.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+          </div>
+        </div>
         <p style="text-align: center;">Grasp bowl</p>
       </div>
       <div style="width: 380px; flex-shrink: 0;">
-        <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-          <source src="../videos/sim/microwave_source_demo_subtask/place_bowl.mp4" type="video/mp4">
-        </video>
+        <div class="lazy-video-container" style="position: relative;">
+          <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+            <source src="../videos/sim/microwave_source_demo_subtask/place_bowl.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+          </div>
+        </div>
         <p style="text-align: center;">Place in microwave</p>
       </div>
       <div style="width: 380px; flex-shrink: 0;">
-        <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-          <source src="../videos/sim/microwave_source_demo_subtask/close_door.mp4" type="video/mp4">
-        </video>
+        <div class="lazy-video-container" style="position: relative;">
+          <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+            <source src="../videos/sim/microwave_source_demo_subtask/close_door.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+          </div>
+        </div>
         <p style="text-align: center;">Close microwave door</p>
       </div>
     </div>
@@ -308,33 +338,58 @@ Teleoperation system setup:
   <div style="overflow: hidden; width: 100%;">
     <div id="clean-plate-carousel" style="display: flex !important; gap: 20px; transition: transform 0.3s ease; width: max-content;">
       <div style="width: 380px; flex-shrink: 0;">
-        <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-          <source src="../videos/sim/clean_plate_subtask/pick_fork.mp4" type="video/mp4">
-        </video>
+        <div class="lazy-video-container" style="position: relative;">
+          <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+            <source src="../videos/sim/clean_plate_subtask/pick_fork.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+          </div>
+        </div>
         <p style="text-align: center;">Grasp fork</p>
       </div>
       <div style="width: 380px; flex-shrink: 0;">
-        <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-          <source src="../videos/sim/clean_plate_subtask/place_fork.mp4" type="video/mp4">
-        </video>
+        <div class="lazy-video-container" style="position: relative;">
+          <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+            <source src="../videos/sim/clean_plate_subtask/place_fork.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+          </div>
+        </div>
         <p style="text-align: center;">Place fork</p>
       </div>
       <div style="width: 380px; flex-shrink: 0;">
-        <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-          <source src="../videos/sim/clean_plate_subtask/pick_plate.mp4" type="video/mp4">
-        </video>
+        <div class="lazy-video-container" style="position: relative;">
+          <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+            <source src="../videos/sim/clean_plate_subtask/pick_plate.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+          </div>
+        </div>
         <p style="text-align: center;">Grasp plate</p>
       </div>
       <div style="width: 380px; flex-shrink: 0;">
-        <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-          <source src="../videos/sim/clean_plate_subtask/drop_plate.mp4" type="video/mp4">
-        </video>
+        <div class="lazy-video-container" style="position: relative;">
+          <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+            <source src="../videos/sim/clean_plate_subtask/drop_plate.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+          </div>
+        </div>
         <p style="text-align: center;">Drop plate</p>
       </div>
       <div style="width: 380px; flex-shrink: 0;">
-        <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-          <source src="../videos/sim/clean_plate_subtask/place_plate.mp4" type="video/mp4">
-        </video>
+        <div class="lazy-video-container" style="position: relative;">
+          <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+            <source src="../videos/sim/clean_plate_subtask/place_plate.mp4" type="video/mp4">
+          </video>
+          <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+          </div>
+        </div>
         <p style="text-align: center;">Place plate</p>
       </div>
     </div>
@@ -347,9 +402,14 @@ Teleoperation system setup:
 <p>Following task decomposition and annotation, WBCMimicGen generates large-scale training data with systematic variations:</p>
 <div style="display: flex; gap: 20px; width: 100%;">
   <div style="flex: 1;">
-    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/sim/large-scale-generate.mp4" type="video/mp4">
-    </video>
+    <div class="lazy-video-container" style="position: relative;">
+      <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+        <source src="../videos/sim/large-scale-generate.mp4" type="video/mp4">
+      </video>
+      <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -389,29 +449,49 @@ Formally, the trajectory generation problem seeks joint velocities $\boldsymbol 
 
 <div style="display: flex; gap: 20px; width: 100%;">
   <div style="flex: 1;">
-    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/compare_with_mimicgen/microwave_mimicgen-1.mp4" type="video/mp4">
-    </video>
+    <div class="lazy-video-container" style="position: relative;">
+      <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+        <source src="../videos/compare_with_mimicgen/microwave_mimicgen-1.mp4" type="video/mp4">
+      </video>
+      <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+      </div>
+    </div>
     <p style="text-align: center;">Kitchen task's data generated by MimicGen</p>
   </div>
   <div style="flex: 1;">
-    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/compare_with_mimicgen/microwave_wbc-1.mp4" type="video/mp4">
-    </video>
+    <div class="lazy-video-container" style="position: relative;">
+      <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+        <source src="../videos/compare_with_mimicgen/microwave_wbc-1.mp4" type="video/mp4">
+      </video>
+      <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+      </div>
+    </div>
     <p style="text-align: center;">Kitchen task's data generated by WBCMimicGen</p>
   </div>
 </div>
 <div style="display: flex; gap: 20px; width: 100%;">
   <div style="flex: 1;">
-    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/compare_with_mimicgen/plate_mimicgen-1.mp4" type="video/mp4">
-    </video>
+    <div class="lazy-video-container" style="position: relative;">
+      <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+        <source src="../videos/compare_with_mimicgen/plate_mimicgen-1.mp4" type="video/mp4">
+      </video>
+      <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+      </div>
+    </div>
     <p style="text-align: center;">Canteen task's data generated by MimicGen</p>
   </div>
   <div style="flex: 1;">
-    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/compare_with_mimicgen/plate_wbc-1.mp4" type="video/mp4">
-    </video>
+    <div class="lazy-video-container" style="position: relative;">
+      <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+        <source src="../videos/compare_with_mimicgen/plate_wbc-1.mp4" type="video/mp4">
+      </video>
+      <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+      </div>
+    </div>
     <p style="text-align: center;">Canteen task's data generated by WBCMimicGen</p>
   </div>
 </div>
@@ -421,15 +501,25 @@ Formally, the trajectory generation problem seeks joint velocities $\boldsymbol 
 
 <div style="display: flex; gap: 20px; width: 100%;">
   <div style="flex: 1;">
-    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/sim/arx7/arx-camera-0.mp4" type="video/mp4">
-    </video>
+    <div class="lazy-video-container" style="position: relative;">
+      <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+        <source src="../videos/sim/arx7/arx-camera-0.mp4" type="video/mp4">
+      </video>
+      <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+      </div>
+    </div>
     <p style="text-align: center;">Camera on the robot's head.</p>
   </div>
   <div style="flex: 1;">
-    <video controls autoplay loop muted style="width: 100%; height: auto; object-fit: cover;">
-      <source src="../videos/sim/arx7/arx-camera-top.mp4" type="video/mp4">
-    </video>
+    <div class="lazy-video-container" style="position: relative;">
+      <video controls loop muted preload="none" style="width: 100%; height: auto; object-fit: cover;">
+        <source src="../videos/sim/arx7/arx-camera-top.mp4" type="video/mp4">
+      </video>
+      <div class="play-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+        <div style="width: 0; height: 0; border-left: 20px solid white; border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 5px;"></div>
+      </div>
+    </div>
     <p style="text-align: center;">Camera in the environment.</p>
   </div>
 </div>
@@ -509,6 +599,75 @@ var min_search_length = 3;
       processEscapes: true
     }
   };
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const playOverlays = document.querySelectorAll('.play-overlay');
+  const videoContainers = document.querySelectorAll('.lazy-video-container');
+  
+  // Intersection Observer for auto-loading and auto-playing videos when scrolled into view
+  const observerOptions = {
+    root: null,
+    rootMargin: '50px',
+    threshold: 0.3
+  };
+  
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const video = entry.target.querySelector('video');
+        const overlay = entry.target.querySelector('.play-overlay');
+        
+        if (video && !video.dataset.loaded) {
+          video.load();
+          video.dataset.loaded = 'true';
+          
+          // Auto-play when loaded
+          video.addEventListener('loadeddata', () => {
+            video.play().then(() => {
+              if (overlay) overlay.style.display = 'none';
+            }).catch(e => {
+              console.log('Auto-play prevented:', e);
+              // Keep overlay visible if autoplay fails
+            });
+          });
+          
+          // Re-show overlay when video pauses or ends
+          video.addEventListener('pause', () => {
+            if (overlay) overlay.style.display = 'flex';
+          });
+          
+          video.addEventListener('ended', () => {
+            if (overlay) overlay.style.display = 'flex';
+          });
+        }
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all video containers
+  videoContainers.forEach(container => {
+    videoObserver.observe(container);
+  });
+  
+  // Manual play button click handlers (as fallback)
+  playOverlays.forEach(overlay => {
+    overlay.addEventListener('click', function() {
+      const container = this.parentElement;
+      const video = container.querySelector('video');
+      
+      if (video) {
+        if (!video.dataset.loaded) {
+          video.load();
+          video.dataset.loaded = 'true';
+        }
+        video.play().then(() => {
+          this.style.display = 'none';
+        });
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
