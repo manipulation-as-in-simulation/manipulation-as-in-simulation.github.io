@@ -1991,8 +1991,40 @@ footer a:hover {
     text-decoration: underline;
 }
 
+/* Video Grid Responsive Styles */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.demo-video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Video Grid Mobile Styles */
+    .video-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 10px;
+    }
+    
+    .video-item {
+        width: 100%;
+    }
+    
+    .demo-video {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
     .logo-container {
         position: relative;
         top: 0;
