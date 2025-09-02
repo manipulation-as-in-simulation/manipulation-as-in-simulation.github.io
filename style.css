@@ -2025,6 +2025,17 @@ footer a:hover {
         max-width: 100% !important;
     }
     
+    /* ByteCameraDepth Grid Mobile Styles - only affect dataset section */
+    #bytecam-pcd-grid,
+    #bytecam-images-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 10px;
+    }
+    
+    .pcd-item {
+        width: 100%;
+    }
+    
     .logo-container {
         position: relative;
         top: 0;
