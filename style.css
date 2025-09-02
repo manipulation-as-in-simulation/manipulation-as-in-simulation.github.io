@@ -2008,6 +2008,15 @@ footer a:hover {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+/* Point Cloud Grid Styles */
+.pcd-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     /* Video Grid Mobile Styles */
@@ -2023,6 +2032,16 @@ footer a:hover {
     .demo-video {
         width: 100% !important;
         max-width: 100% !important;
+    }
+    
+    /* Point Cloud Grid Mobile Styles */
+    .pcd-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 10px;
+    }
+    
+    .pcd-item {
+        width: 100%;
     }
     
     .logo-container {
